@@ -41,6 +41,19 @@ jobs:
             experiments/stochasticity_probe.py \
             experiments/summarize_batch.py
 
+      - name: Start local simulation server
+        run: |
+          python -m http.server 8876 --bind 127.0.0.1 --directory . >/tmp/ant_colony_sim_server.log 2>&1 &
+          echo $! > /tmp/ant_colony_sim_server.pid
+          for attempt in {1..20}; do
+            if curl -fsS http://127.0.0.1:8876/ >/dev/null; then
+              exit 0
+            fi
+            sleep 0.5
+          done
+          cat /tmp/ant_colony_sim_server.log
+          exit 1
+
       - name: Script API and UI QA
         run: python experiments/qa_report_probe.py
 
