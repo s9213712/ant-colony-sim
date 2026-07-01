@@ -36,6 +36,7 @@ jobs:
             experiments/double_bridge_probe.py \
             experiments/generate_validation_report.py \
             experiments/literature_alignment_probe.py \
+            experiments/paper_conditions_probe.py \
             experiments/performance_probe.py \
             experiments/qa_report_probe.py \
             experiments/stochasticity_probe.py \
@@ -59,6 +60,15 @@ jobs:
 
       - name: Literature alignment probe
         run: python experiments/literature_alignment_probe.py
+
+      - name: Paper-condition smoke probe
+        run: |
+          python experiments/paper_conditions_probe.py \
+            --quick \
+            --seeds 1-2 \
+            --output outputs/ci_paper_conditions_smoke.csv \
+            --json-output outputs/ci_paper_conditions_smoke.json \
+            --report-output outputs/ci_paper_conditions_smoke.md
 
       - name: Stochasticity smoke probe
         run: |
@@ -85,5 +95,8 @@ jobs:
             outputs/ci_stochasticity_smoke.csv
             outputs/ci_stochasticity_smoke.json
             outputs/ci_stochasticity_smoke_summary.csv
+            outputs/ci_paper_conditions_smoke.csv
+            outputs/ci_paper_conditions_smoke.json
+            outputs/ci_paper_conditions_smoke.md
             outputs/ci_biological_validation_report.md
             outputs/ci_biological_validation_report.json

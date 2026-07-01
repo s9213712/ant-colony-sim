@@ -186,3 +186,27 @@ python3 ant_colony_sim/experiments/generate_validation_report.py \
 ```
 
 Interpretation: the model partially aligns with Shiraishi et al. when measuring adaptation relative to each profile's own baseline after food relocation. Diverse stochasticity exceeds low-noise early relocation adaptation, but medium is not clearly separated and low-noise colonies still win on raw total trips. Treat this probe as a qualitative adaptation check, not a fitted reproduction of the published optimum curve.
+
+## Paper-Condition Validation Matrix
+
+Run a multi-paper validation pass that maps literature claims to explicit simulation conditions:
+
+```bash
+python3 ant_colony_sim/experiments/paper_conditions_probe.py \
+  --seeds 1-3 \
+  --output ant_colony_sim/outputs/paper_conditions_v1.csv \
+  --json-output ant_colony_sim/outputs/paper_conditions_v1.json \
+  --report-output ant_colony_sim/outputs/paper_conditions_report_v1.md
+```
+
+The current `v1` matrix covers:
+
+- Perna et al. 2012: local pheromone trail formation and the missing Weber-law turning export;
+- Amorim 2014: trail formation plus food-removal/rain washout;
+- Deneubourg/Goss/Beckers double bridge: branch bias and positive-feedback sensitivity;
+- Dussutour et al. 2004: crowded traffic and alternate route use;
+- John et al. 2009: no hard jammed phase using a displacement proxy;
+- Shiraishi et al. 2018: diverse stochasticity after food relocation;
+- Malickova/Yates/Bodova 2015: random motion plus pheromone signalling under external change.
+
+`outputs/paper_conditions_report_v1.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
