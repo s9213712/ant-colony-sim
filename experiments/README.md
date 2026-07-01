@@ -194,12 +194,12 @@ Run a multi-paper validation pass that maps literature claims to explicit simula
 ```bash
 python3 ant_colony_sim/experiments/paper_conditions_probe.py \
   --seeds 1-3 \
-  --output ant_colony_sim/outputs/paper_conditions_v1.csv \
-  --json-output ant_colony_sim/outputs/paper_conditions_v1.json \
-  --report-output ant_colony_sim/outputs/paper_conditions_report_v1.md
+  --output ant_colony_sim/outputs/paper_conditions_v2.csv \
+  --json-output ant_colony_sim/outputs/paper_conditions_v2.json \
+  --report-output ant_colony_sim/outputs/paper_conditions_report_v2.md
 ```
 
-The current `v1` matrix covers:
+The current `v2` matrix covers:
 
 - Perna et al. 2012: local pheromone trail formation and the missing Weber-law turning export;
 - Amorim 2014: trail formation plus food-removal/rain washout;
@@ -208,5 +208,14 @@ The current `v1` matrix covers:
 - John et al. 2009: no hard jammed phase using a displacement proxy;
 - Shiraishi et al. 2018: diverse stochasticity after food relocation;
 - Malickova/Yates/Bodova 2015: random motion plus pheromone signalling under external change.
+- Kang & Theraulaz 2015: external task-demand changes and task reallocation;
+- Afek/Kecher/Sulamy 2015: fail-stop foraging resilience after mass worker loss;
+- Jimenez-Romero et al. 2015: negative pheromone as a forbidden-path signal.
 
-`outputs/paper_conditions_report_v1.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
+`outputs/paper_conditions_report_v2.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
+
+Current `v2` additions show:
+
+- task-demand reallocation aligns qualitatively with response-threshold task organization;
+- fail-stop foraging is only partial because food trips continue after mass death but drop to a low resilience ratio;
+- negative pheromone is only partial because it reduces hazard-region occupancy weakly and lacks individual learning.

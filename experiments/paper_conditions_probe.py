@@ -50,6 +50,21 @@ SOURCES = [
         "paper": "Malickova, Yates & Bodova 2015, A stochastic model of ant trail following with two pheromones",
         "url": "https://arxiv.org/abs/1508.06816",
     },
+    {
+        "id": "kang_theraulaz_2015",
+        "paper": "Kang & Theraulaz 2015, Dynamical models of task organization in social insect colonies",
+        "url": "https://arxiv.org/abs/1511.04769",
+    },
+    {
+        "id": "afek_2015",
+        "paper": "Afek, Kecher & Sulamy 2015, Optimal and Resilient Pheromone Utilization in Ant Foraging",
+        "url": "https://arxiv.org/abs/1507.00772",
+    },
+    {
+        "id": "jimenez_romero_2015",
+        "paper": "Jimenez-Romero et al. 2015, A Model for Foraging Ants, Controlled by Spiking Neural Networks and Double Pheromones",
+        "url": "https://arxiv.org/abs/1507.08467",
+    },
 ]
 
 
@@ -256,6 +271,105 @@ PAPER_CONDITIONS_JS = """
       ant.explorationDrive = 0;
     }
   };
+  const runTaskDemand = (seed, mode) => {
+    baseMature(seed, config.ants);
+    if (mode === 'brood') {
+      antSim.setParam('broodDemand', 95);
+      antSim.setParam('hunger', 20);
+      antSim.world.eggs = 190;
+      antSim.world.larvae = 140;
+      antSim.world.pupae = 90;
+      antSim.world.foodStore = 260;
+      antSim.world.waterStore = 260;
+    } else {
+      antSim.setParam('broodDemand', 0);
+      antSim.setParam('hunger', 95);
+      antSim.world.eggs = 0;
+      antSim.world.larvae = 0;
+      antSim.world.pupae = 0;
+      antSim.world.foodStore = 0;
+      antSim.world.waterStore = 0;
+      antSim.addFood(970, 300, config.foodAmount);
+      antSim.addWater(970, 520, config.foodAmount);
+    }
+    antSim.runDays(config.taskDemandDays, config.dt);
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: mode === 'brood' ? 'task_demand_brood' : 'task_demand_resource',
+      seed,
+      ants: snap.ants,
+      task_brood: snap.task_brood || 0,
+      task_food: snap.task_food || 0,
+      task_water: snap.task_water || 0,
+      task_corpse: snap.task_corpse || 0,
+      state_brood_care: snap.state_brood_care || 0,
+      state_following_food_trail: snap.state_following_food_trail || 0,
+      state_following_water_trail: snap.state_following_water_trail || 0,
+      food_trips: snap.food_trips,
+      water_trips: snap.water_trips,
+      brood_total: snap.brood_total,
+      food_store: snap.food_store,
+      water_store: snap.water_store,
+    };
+  };
+  const runFailStopForaging = (seed, kill) => {
+    baseMature(seed, config.failStopAnts);
+    antSim.addFood(980, 390, config.foodAmount);
+    antSim.addWater(320, 180, 5000);
+    if (kill) {
+      antSim.triggerMassDeath();
+      antSim.runDays(0.1, config.dt);
+    }
+    const afterShock = antSim.collectStatsSnapshot();
+    const startTrips = antSim.world.stats.foodTrips;
+    const startCollected = antSim.world.stats.foodCollected;
+    antSim.runDays(config.failStopDays, config.dt);
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: kill ? 'fail_stop_mass_death' : 'fail_stop_control',
+      seed,
+      ants_after_shock: afterShock.ants,
+      dead_after_shock: afterShock.dead,
+      final_ants: snap.ants,
+      final_dead: snap.dead,
+      phase_food_trips: snap.food_trips - startTrips,
+      phase_food_collected: Math.round(snap.food_collected - startCollected),
+      corpse_moves: snap.corpse_moves,
+      nest_corpses: snap.nest_corpses,
+      disposed_corpses: snap.disposed_corpses,
+      death_pheromone: snap.death_pheromone,
+    };
+  };
+  const runAvoidSignal = (seed, enabled) => {
+    baseMature(seed, config.ants);
+    antSim.world.water = [];
+    antSim.addFood(980, 390, config.foodAmount);
+    if (enabled) {
+      for (let y = 210; y <= 570; y += 16) {
+        antSim.world.pheromones.avoid.add(620, y, 360);
+      }
+    }
+    let hazardOccupancy = 0;
+    let samples = 0;
+    const chunks = Math.max(1, Math.round(config.avoidDays / config.sampleDays));
+    for (let i = 0; i < chunks; i++) {
+      antSim.runDays(config.sampleDays, config.dt);
+      hazardOccupancy += antSim.world.ants.filter(ant => Math.abs(ant.x - 620) < 45 && ant.y > 205 && ant.y < 575).length;
+      samples += 1;
+    }
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: enabled ? 'negative_pheromone_avoid' : 'negative_pheromone_control',
+      seed,
+      ants: snap.ants,
+      mean_hazard_occupancy: samples ? hazardOccupancy / samples : 0,
+      food_trips: snap.food_trips,
+      food_collected: snap.food_collected,
+      avoid_pheromone: snap.avoid_pheromone,
+      food_pheromone: snap.food_pheromone,
+      avg_traffic_load: snap.avg_traffic_load,
+    };
+  };
 
   const rows = [];
 
@@ -364,6 +478,13 @@ PAPER_CONDITIONS_JS = """
         ants_with_food_memory: early.ants_with_food_memory,
       });
     }
+
+    rows.push(runTaskDemand(seed, 'brood'));
+    rows.push(runTaskDemand(seed, 'resource'));
+    rows.push(runFailStopForaging(seed, false));
+    rows.push(runFailStopForaging(seed, true));
+    rows.push(runAvoidSignal(seed, false));
+    rows.push(runAvoidSignal(seed, true));
   }
   return rows;
 }
@@ -519,12 +640,86 @@ def aggregate(raw_rows):
         "gap": "The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics.",
     })
 
+    brood_rows = by_condition["task_demand_brood"]
+    resource_rows = by_condition["task_demand_resource"]
+    brood_task = mean(float(r["task_brood"]) for r in brood_rows)
+    resource_brood_task = mean(float(r["task_brood"]) for r in resource_rows)
+    resource_foraging_task = mean(float(r["task_food"]) + float(r["task_water"]) for r in resource_rows)
+    brood_foraging_task = mean(float(r["task_food"]) + float(r["task_water"]) for r in brood_rows)
+    task_metrics = {
+        "brood_condition_mean_task_brood": round(brood_task, 3),
+        "resource_condition_mean_task_brood": round(resource_brood_task, 3),
+        "brood_condition_mean_food_water_tasks": round(brood_foraging_task, 3),
+        "resource_condition_mean_food_water_tasks": round(resource_foraging_task, 3),
+        "brood_condition_mean_brood_total": round(mean(float(r["brood_total"]) for r in brood_rows), 3),
+        "resource_condition_mean_food_trips": round(mean(float(r["food_trips"]) for r in resource_rows), 3),
+        "resource_condition_mean_water_trips": round(mean(float(r["water_trips"]) for r in resource_rows), 3),
+    }
+    task_status = "pass" if brood_task > resource_brood_task and resource_foraging_task > brood_foraging_task else "fail"
+    summaries.append({
+        "paper_id": "kang_theraulaz_2015",
+        "paper": "Kang & Theraulaz 2015",
+        "condition": "task_demand_reallocation",
+        "expected": "Task allocation should shift with external task demand: brood demand should recruit brood work, resource shortage should recruit food/water work.",
+        "status": task_status,
+        "observed": json.dumps(task_metrics, ensure_ascii=False),
+        "gap": "The model has response-threshold-like task switching, but does not yet estimate worker-worker contact matrices or explicit task-switching rates.",
+    })
+
+    control_rows = by_condition["fail_stop_control"]
+    death_rows = by_condition["fail_stop_mass_death"]
+    control_trips = mean(float(r["phase_food_trips"]) for r in control_rows)
+    death_trips = mean(float(r["phase_food_trips"]) for r in death_rows)
+    resilience_ratio = death_trips / control_trips if control_trips else 0
+    fail_stop_metrics = {
+        "control_mean_food_trips": round(control_trips, 3),
+        "mass_death_mean_food_trips": round(death_trips, 3),
+        "trip_resilience_ratio": round(resilience_ratio, 4),
+        "mass_death_mean_dead_after_shock": round(mean(float(r["dead_after_shock"]) for r in death_rows), 3),
+        "mass_death_mean_corpse_moves": round(mean(float(r["corpse_moves"]) for r in death_rows), 3),
+        "mass_death_mean_disposed_corpses": round(mean(float(r["disposed_corpses"]) for r in death_rows), 3),
+    }
+    fail_stop_status = "pass" if resilience_ratio >= 0.25 and death_trips > 0 else "partial" if death_trips > 0 else "fail"
+    summaries.append({
+        "paper_id": "afek_2015",
+        "paper": "Afek, Kecher & Sulamy 2015",
+        "condition": "fail_stop_foraging_resilience",
+        "expected": "After a fraction of ants fail-stop, remaining ants should still be able to forage, with reduced but nonzero throughput.",
+        "status": fail_stop_status,
+        "observed": json.dumps(fail_stop_metrics, ensure_ascii=False),
+        "gap": "Afek et al. is an algorithmic pheromone model; this ABM only tests biological-style degradation, not asymptotic pheromone lower bounds or proof-level optimality.",
+    })
+
+    avoid_control_rows = by_condition["negative_pheromone_control"]
+    avoid_rows = by_condition["negative_pheromone_avoid"]
+    control_occupancy = mean(float(r["mean_hazard_occupancy"]) for r in avoid_control_rows)
+    avoid_occupancy = mean(float(r["mean_hazard_occupancy"]) for r in avoid_rows)
+    occupancy_ratio = avoid_occupancy / control_occupancy if control_occupancy else 0
+    avoid_metrics = {
+        "control_mean_hazard_occupancy": round(control_occupancy, 3),
+        "avoid_mean_hazard_occupancy": round(avoid_occupancy, 3),
+        "avoid_vs_control_occupancy_ratio": round(occupancy_ratio, 4),
+        "control_mean_food_trips": round(mean(float(r["food_trips"]) for r in avoid_control_rows), 3),
+        "avoid_mean_food_trips": round(mean(float(r["food_trips"]) for r in avoid_rows), 3),
+        "avoid_mean_avoid_pheromone": round(mean(float(r["avoid_pheromone"]) for r in avoid_rows), 3),
+    }
+    avoid_status = "pass" if occupancy_ratio <= 0.8 else "partial" if occupancy_ratio <= 1.0 else "fail"
+    summaries.append({
+        "paper_id": "jimenez_romero_2015",
+        "paper": "Jimenez-Romero et al. 2015",
+        "condition": "negative_pheromone_forbidden_path",
+        "expected": "A second negative pheromone should reduce use of forbidden or unrewarding path regions without permanently blocking foraging.",
+        "status": avoid_status,
+        "observed": json.dumps(avoid_metrics, ensure_ascii=False),
+        "gap": "The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper.",
+    })
+
     return summaries
 
 
 def write_markdown(path, summaries, raw_output, json_output):
     lines = [
-        "# Paper Condition Validation v1",
+        "# Paper Condition Validation v2",
         "",
         "This report maps published ant-behaviour findings to reproducible simulation conditions. Status values mean:",
         "",
@@ -559,9 +754,9 @@ def write_markdown(path, summaries, raw_output, json_output):
 def main():
     parser = argparse.ArgumentParser(description="Validate ant simulator conditions against multiple ant-behaviour papers.")
     parser.add_argument("--seeds", default="1-3")
-    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v1.csv"))
-    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v1.json"))
-    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v1.md"))
+    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v2.csv"))
+    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v2.json"))
+    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v2.md"))
     parser.add_argument("--quick", action="store_true")
     args = parser.parse_args()
 
@@ -588,6 +783,10 @@ def main():
         "relocatedFoodY": 540,
         "stochasticPreDays": 2.5 if args.quick else 3.5,
         "adaptationDays": 0.6,
+        "taskDemandDays": 0.9 if args.quick else 1.2,
+        "failStopAnts": 240 if args.quick else 320,
+        "failStopDays": 1.1 if args.quick else 1.6,
+        "avoidDays": 1.2 if args.quick else 1.8,
     }
 
     server = None
