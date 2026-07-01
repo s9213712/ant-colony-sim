@@ -1,0 +1,511 @@
+{
+  "target": {
+    "name": "Deneubourg-style reinforced random walk reference",
+    "status": "model-reference-not-raw-experiment",
+    "source": {
+      "primary_model": "Deneubourg et al. 1990, The self-organizing exploratory pattern of the Argentine ant",
+      "statistical_reference": "Le Goff & Soulier 2014/2016, Parameter estimation of a two-colored urn model class, arXiv:1405.2322",
+      "choice_function": "P(R) = (c + N_R)^alpha / ((c + N_R)^alpha + (c + N_L)^alpha)"
+    },
+    "notes": [
+      "This target encodes a literature model curve, not digitized raw ant counts.",
+      "Use it to tune qualitative symmetry breaking and branch-choice sensitivity.",
+      "Do not claim quantitative biological calibration until raw published or lab branch-choice data are supplied."
+    ],
+    "reference_parameters": {
+      "alpha": 2.0,
+      "c": 20.0
+    },
+    "metrics": {
+      "equal_branch_selected_balance": {
+        "target": 0.5,
+        "sd": 0.2,
+        "weight": 0.8,
+        "description": "Fraction of runs selecting upper branch under symmetric conditions should remain near 0.5 across many seeds."
+      },
+      "equal_branch_mean_dominance": {
+        "target": 0.28,
+        "sd": 0.16,
+        "weight": 1.2,
+        "description": "Symmetric double bridge should show nonzero but variable dominance from self-reinforcement."
+      },
+      "upper_bias_selection_rate": {
+        "target": 0.85,
+        "sd": 0.18,
+        "weight": 1.4,
+        "description": "A connected initial upper-branch trail should strongly increase upper-branch selection."
+      },
+      "upper_bias_mean_dominance": {
+        "target": 0.55,
+        "sd": 0.2,
+        "weight": 1.0,
+        "description": "Biased runs should show stronger branch dominance than symmetric runs."
+      },
+      "biased_vs_equal_dominance_gain": {
+        "target": 0.25,
+        "sd": 0.18,
+        "weight": 1.0,
+        "description": "Connected trail bias should increase dominance over equal-branch baseline."
+      }
+    }
+  },
+  "grid": {
+    "pheromoneStrength": [
+      95,
+      120
+    ],
+    "senseThreshold": [
+      10,
+      14
+    ],
+    "evaporationRate": [
+      80,
+      100
+    ]
+  },
+  "seeds": "1-8",
+  "days": 8.0,
+  "sample_days": 0.1,
+  "best": {
+    "run_index": 5,
+    "pheromoneStrength": 120,
+    "senseThreshold": 10,
+    "evaporationRate": 80,
+    "equal_branch_selected_balance": 0.5,
+    "equal_branch_upper_selection_rate": 0.25,
+    "equal_branch_mean_dominance": 0.1992,
+    "upper_bias_selection_rate": 1.0,
+    "upper_bias_mean_dominance": 0.5292,
+    "biased_vs_equal_dominance_gain": 0.33,
+    "equal_mean_food_trips": 267.5,
+    "upper_bias_mean_food_trips": 360.625,
+    "equal_branch_selected_balance_value": 0.5,
+    "equal_branch_selected_balance_target": 0.5,
+    "equal_branch_selected_balance_loss": 0.0,
+    "equal_branch_mean_dominance_value": 0.1992,
+    "equal_branch_mean_dominance_target": 0.28,
+    "equal_branch_mean_dominance_loss": 0.30603,
+    "upper_bias_selection_rate_value": 1.0,
+    "upper_bias_selection_rate_target": 0.85,
+    "upper_bias_selection_rate_loss": 0.972222,
+    "upper_bias_mean_dominance_value": 0.5292,
+    "upper_bias_mean_dominance_target": 0.55,
+    "upper_bias_mean_dominance_loss": 0.010816,
+    "biased_vs_equal_dominance_gain_value": 0.33,
+    "biased_vs_equal_dominance_gain_target": 0.25,
+    "biased_vs_equal_dominance_gain_loss": 0.197531,
+    "loss": 1.486599,
+    "equal_output": "/home/s92137/ant_colony_sim/calibration_results/double_bridge_runs/005_pheromoneStrength-120_senseThreshold-10_evaporationRate-80_equal.csv",
+    "upper_bias_output": "/home/s92137/ant_colony_sim/calibration_results/double_bridge_runs/005_pheromoneStrength-120_senseThreshold-10_evaporationRate-80_upper_bias.csv"
+  },
+  "runs": [
+    {
+      "params": {
+        "pheromoneStrength": 95,
+        "senseThreshold": 10,
+        "evaporationRate": 80
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 1,
+        "lower_selected": 7,
+        "ties": 0,
+        "mean_dominance": 0.2852,
+        "mean_food_trips": 256.375
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 7,
+        "lower_selected": 1,
+        "ties": 0,
+        "mean_dominance": 0.4686,
+        "mean_food_trips": 362.0
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 0.25,
+        "equal_branch_upper_selection_rate": 0.125,
+        "equal_branch_mean_dominance": 0.2852,
+        "upper_bias_selection_rate": 0.875,
+        "upper_bias_mean_dominance": 0.4686,
+        "biased_vs_equal_dominance_gain": 0.1834,
+        "equal_mean_food_trips": 256.375,
+        "upper_bias_mean_food_trips": 362.0
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 0.25,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 1.25,
+        "equal_branch_mean_dominance_value": 0.2852,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 0.001267,
+        "upper_bias_selection_rate_value": 0.875,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.027006,
+        "upper_bias_mean_dominance_value": 0.4686,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.165649,
+        "biased_vs_equal_dominance_gain_value": 0.1834,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 0.1369,
+        "loss": 1.580823
+      }
+    },
+    {
+      "params": {
+        "pheromoneStrength": 95,
+        "senseThreshold": 10,
+        "evaporationRate": 100
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 5,
+        "lower_selected": 3,
+        "ties": 0,
+        "mean_dominance": 0.111,
+        "mean_food_trips": 150.875
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 8,
+        "lower_selected": 0,
+        "ties": 0,
+        "mean_dominance": 0.3807,
+        "mean_food_trips": 342.5
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 0.75,
+        "equal_branch_upper_selection_rate": 0.625,
+        "equal_branch_mean_dominance": 0.111,
+        "upper_bias_selection_rate": 1.0,
+        "upper_bias_mean_dominance": 0.3807,
+        "biased_vs_equal_dominance_gain": 0.2697,
+        "equal_mean_food_trips": 150.875,
+        "upper_bias_mean_food_trips": 342.5
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 0.75,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 1.25,
+        "equal_branch_mean_dominance_value": 0.111,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 1.338797,
+        "upper_bias_selection_rate_value": 1.0,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.972222,
+        "upper_bias_mean_dominance_value": 0.3807,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.716562,
+        "biased_vs_equal_dominance_gain_value": 0.2697,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 0.011978,
+        "loss": 4.289559
+      }
+    },
+    {
+      "params": {
+        "pheromoneStrength": 95,
+        "senseThreshold": 14,
+        "evaporationRate": 80
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 2,
+        "lower_selected": 6,
+        "ties": 0,
+        "mean_dominance": 0.1239,
+        "mean_food_trips": 213.125
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 8,
+        "lower_selected": 0,
+        "ties": 0,
+        "mean_dominance": 0.4604,
+        "mean_food_trips": 356.875
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 0.5,
+        "equal_branch_upper_selection_rate": 0.25,
+        "equal_branch_mean_dominance": 0.1239,
+        "upper_bias_selection_rate": 1.0,
+        "upper_bias_mean_dominance": 0.4604,
+        "biased_vs_equal_dominance_gain": 0.33649999999999997,
+        "equal_mean_food_trips": 213.125,
+        "upper_bias_mean_food_trips": 356.875
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 0.5,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 0.0,
+        "equal_branch_mean_dominance_value": 0.1239,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 1.142213,
+        "upper_bias_selection_rate_value": 1.0,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.972222,
+        "upper_bias_mean_dominance_value": 0.4604,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.200704,
+        "biased_vs_equal_dominance_gain_value": 0.3365,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 0.230934,
+        "loss": 2.546073
+      }
+    },
+    {
+      "params": {
+        "pheromoneStrength": 95,
+        "senseThreshold": 14,
+        "evaporationRate": 100
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 6,
+        "lower_selected": 2,
+        "ties": 0,
+        "mean_dominance": 0.1696,
+        "mean_food_trips": 191.875
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 8,
+        "lower_selected": 0,
+        "ties": 0,
+        "mean_dominance": 0.3513,
+        "mean_food_trips": 303.375
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 0.5,
+        "equal_branch_upper_selection_rate": 0.75,
+        "equal_branch_mean_dominance": 0.1696,
+        "upper_bias_selection_rate": 1.0,
+        "upper_bias_mean_dominance": 0.3513,
+        "biased_vs_equal_dominance_gain": 0.1817,
+        "equal_mean_food_trips": 191.875,
+        "upper_bias_mean_food_trips": 303.375
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 0.5,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 0.0,
+        "equal_branch_mean_dominance_value": 0.1696,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 0.57132,
+        "upper_bias_selection_rate_value": 1.0,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.972222,
+        "upper_bias_mean_dominance_value": 0.3513,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.987042,
+        "biased_vs_equal_dominance_gain_value": 0.1817,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 0.143978,
+        "loss": 2.674563
+      }
+    },
+    {
+      "params": {
+        "pheromoneStrength": 120,
+        "senseThreshold": 10,
+        "evaporationRate": 80
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 2,
+        "lower_selected": 6,
+        "ties": 0,
+        "mean_dominance": 0.1992,
+        "mean_food_trips": 267.5
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 8,
+        "lower_selected": 0,
+        "ties": 0,
+        "mean_dominance": 0.5292,
+        "mean_food_trips": 360.625
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 0.5,
+        "equal_branch_upper_selection_rate": 0.25,
+        "equal_branch_mean_dominance": 0.1992,
+        "upper_bias_selection_rate": 1.0,
+        "upper_bias_mean_dominance": 0.5292,
+        "biased_vs_equal_dominance_gain": 0.33,
+        "equal_mean_food_trips": 267.5,
+        "upper_bias_mean_food_trips": 360.625
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 0.5,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 0.0,
+        "equal_branch_mean_dominance_value": 0.1992,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 0.30603,
+        "upper_bias_selection_rate_value": 1.0,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.972222,
+        "upper_bias_mean_dominance_value": 0.5292,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.010816,
+        "biased_vs_equal_dominance_gain_value": 0.33,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 0.197531,
+        "loss": 1.486599
+      }
+    },
+    {
+      "params": {
+        "pheromoneStrength": 120,
+        "senseThreshold": 10,
+        "evaporationRate": 100
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 3,
+        "lower_selected": 5,
+        "ties": 0,
+        "mean_dominance": 0.2577,
+        "mean_food_trips": 275.5
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 7,
+        "lower_selected": 1,
+        "ties": 0,
+        "mean_dominance": 0.4101,
+        "mean_food_trips": 358.0
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 0.75,
+        "equal_branch_upper_selection_rate": 0.375,
+        "equal_branch_mean_dominance": 0.2577,
+        "upper_bias_selection_rate": 0.875,
+        "upper_bias_mean_dominance": 0.4101,
+        "biased_vs_equal_dominance_gain": 0.15240000000000004,
+        "equal_mean_food_trips": 275.5,
+        "upper_bias_mean_food_trips": 358.0
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 0.75,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 1.25,
+        "equal_branch_mean_dominance_value": 0.2577,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 0.02331,
+        "upper_bias_selection_rate_value": 0.875,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.027006,
+        "upper_bias_mean_dominance_value": 0.4101,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.4893,
+        "biased_vs_equal_dominance_gain_value": 0.1524,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 0.294005,
+        "loss": 2.083622
+      }
+    },
+    {
+      "params": {
+        "pheromoneStrength": 120,
+        "senseThreshold": 14,
+        "evaporationRate": 80
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 5,
+        "lower_selected": 3,
+        "ties": 0,
+        "mean_dominance": 0.0644,
+        "mean_food_trips": 196.75
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 8,
+        "lower_selected": 0,
+        "ties": 0,
+        "mean_dominance": 0.5851,
+        "mean_food_trips": 359.625
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 0.75,
+        "equal_branch_upper_selection_rate": 0.625,
+        "equal_branch_mean_dominance": 0.0644,
+        "upper_bias_selection_rate": 1.0,
+        "upper_bias_mean_dominance": 0.5851,
+        "biased_vs_equal_dominance_gain": 0.5206999999999999,
+        "equal_mean_food_trips": 196.75,
+        "upper_bias_mean_food_trips": 359.625
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 0.75,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 1.25,
+        "equal_branch_mean_dominance_value": 0.0644,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 2.178908,
+        "upper_bias_selection_rate_value": 1.0,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.972222,
+        "upper_bias_mean_dominance_value": 0.5851,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.0308,
+        "biased_vs_equal_dominance_gain_value": 0.5207,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 2.261682,
+        "loss": 6.693612
+      }
+    },
+    {
+      "params": {
+        "pheromoneStrength": 120,
+        "senseThreshold": 14,
+        "evaporationRate": 100
+      },
+      "equal": {
+        "runs": 8,
+        "upper_selected": 4,
+        "lower_selected": 4,
+        "ties": 0,
+        "mean_dominance": 0.2347,
+        "mean_food_trips": 238.875
+      },
+      "upper_bias": {
+        "runs": 8,
+        "upper_selected": 7,
+        "lower_selected": 1,
+        "ties": 0,
+        "mean_dominance": 0.4123,
+        "mean_food_trips": 340.0
+      },
+      "metrics": {
+        "equal_branch_selected_balance": 1.0,
+        "equal_branch_upper_selection_rate": 0.5,
+        "equal_branch_mean_dominance": 0.2347,
+        "upper_bias_selection_rate": 0.875,
+        "upper_bias_mean_dominance": 0.4123,
+        "biased_vs_equal_dominance_gain": 0.1776,
+        "equal_mean_food_trips": 238.875,
+        "upper_bias_mean_food_trips": 340.0
+      },
+      "score": {
+        "equal_branch_selected_balance_value": 1.0,
+        "equal_branch_selected_balance_target": 0.5,
+        "equal_branch_selected_balance_loss": 5.0,
+        "equal_branch_mean_dominance_value": 0.2347,
+        "equal_branch_mean_dominance_target": 0.28,
+        "equal_branch_mean_dominance_loss": 0.096192,
+        "upper_bias_selection_rate_value": 0.875,
+        "upper_bias_selection_rate_target": 0.85,
+        "upper_bias_selection_rate_loss": 0.027006,
+        "upper_bias_mean_dominance_value": 0.4123,
+        "upper_bias_mean_dominance_target": 0.55,
+        "upper_bias_mean_dominance_loss": 0.474032,
+        "biased_vs_equal_dominance_gain_value": 0.1776,
+        "biased_vs_equal_dominance_gain_target": 0.25,
+        "biased_vs_equal_dominance_gain_loss": 0.161783,
+        "loss": 5.759013
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "name": "Diverse stochasticity adaptive foraging reference",
+  "status": "model-reference-not-raw-experiment",
+  "source": {
+    "paper": "Shiraishi et al. 2018/2019, Diverse Stochasticity Leads a Colony of Ants to Optimal Foraging",
+    "url": "https://arxiv.org/abs/1805.05598"
+  },
+  "notes": [
+    "The paper reports that the best stochasticity distribution can shift with feeding environment.",
+    "Use this target to test whether heterogeneous trail-following noise helps adaptation after food relocation.",
+    "Raw trip totals and normalized adaptation ratios must be interpreted separately: low-noise colonies can have higher absolute exploitation, while mixed or medium-noise colonies can retain more of their own baseline efficiency after relocation."
+  ],
+  "metrics": {
+    "relocated_early_trips_vs_initial": {
+      "target_relation": "diverse and medium > low and high",
+      "description": "After food relocation, heterogeneous or intermediate stochasticity should retain more of its initial foraging efficiency than low-noise trail lock-in or high-noise wandering."
+    },
+    "raw_relocated_total_trips": {
+      "target_relation": "reported, not forced",
+      "description": "Raw total trips may remain highest for low-noise colonies because stable trail exploitation is efficient once a new route is found."
+    }
+  },
+  "current_v1_result": {
+    "seeds": "1-8",
+    "profiles": ["low", "medium", "high", "diverse"],
+    "relocated_food_trips": {
+      "low": 311.75,
+      "medium": 236.375,
+      "high": 175.375,
+      "diverse": 207.625
+    },
+    "interpretation": "Mismatch: low-noise ants outperform diverse stochasticity in the current model."
+  },
+  "current_v2_result": {
+    "seeds": "1-8",
+    "pre_days": 4,
+    "post_days": 4,
+    "adaptation_days": 0.5,
+    "profiles": ["low", "medium", "high", "diverse"],
+    "relocated_early_food_trips": {
+      "low": 49.25,
+      "medium": 25.5,
+      "high": 4.375,
+      "diverse": 18.875
+    },
+    "relocated_early_trips_vs_initial": {
+      "low": 0.375,
+      "medium": 0.671,
+      "high": 0.25,
+      "diverse": 0.689
+    },
+    "relocated_total_food_trips": {
+      "low": 200.375,
+      "medium": 81.875,
+      "high": 47.75,
+      "diverse": 86.875
+    },
+    "interpretation": "Partial alignment: diverse and medium profiles retain more of their own baseline efficiency immediately after relocation, consistent with adaptive flexibility. The model still predicts low-noise colonies have the highest absolute trip totals because route exploitation dominates after discovery."
+  },
+  "current_v3_result": {
+    "model_version": "0.4-traffic-memory",
+    "seeds": "1-8",
+    "pre_days": 4,
+    "post_days": 4,
+    "adaptation_days": 0.5,
+    "profiles": ["low", "medium", "high", "diverse"],
+    "changes": [
+      "Added coarse traffic-density cost to movement, pheromone deposition and resource pickup throughput.",
+      "Added food-memory strength and decay so obsolete food memories fade with time, stochasticity and congestion."
+    ],
+    "relocated_early_food_trips": {
+      "low": 32.875,
+      "medium": 15.75,
+      "high": 2.875,
+      "diverse": 13.5
+    },
+    "relocated_early_trips_vs_initial": {
+      "low": 0.426,
+      "medium": 0.502,
+      "high": 0.17,
+      "diverse": 0.532
+    },
+    "relocated_total_food_trips": {
+      "low": 129.875,
+      "medium": 101.625,
+      "high": 48.375,
+      "diverse": 89.375
+    },
+    "relocated_total_avg_traffic_load": {
+      "low": 0.3432,
+      "medium": 0.1378,
+      "high": 0.003,
+      "diverse": 0.1291
+    },
+    "interpretation": "Improved partial alignment: low-noise colonies still have the highest absolute total trips, but their advantage is reduced by crowding costs, and diverse/medium profiles retain more early post-relocation efficiency relative to their own baseline."
+  },
+  "current_v4_result": {
+    "model_version": "0.5-adaptive-stochasticity",
+    "seeds": "1-8",
+    "pre_days": 4,
+    "post_days": 4,
+    "adaptation_days": 0.5,
+    "profiles": ["low", "medium", "high", "diverse"],
+    "changes": [
+      "Added state-dependent exploration drive while preserving each ant's base stochasticity profile.",
+      "Exploration drive rises under congestion, stale food memory and resource stress, and falls in exploitation contexts."
+    ],
+    "relocated_early_trips_vs_initial": {
+      "low": 0.368,
+      "medium": 0.372,
+      "high": 0.249,
+      "diverse": 0.522
+    },
+    "relocated_total_food_trips": {
+      "low": 113.375,
+      "medium": 36.375,
+      "high": 49.125,
+      "diverse": 79.75
+    },
+    "relocated_total_avg_traffic_load": {
+      "low": 0.3241,
+      "medium": 0.1364,
+      "high": 0.0036,
+      "diverse": 0.098
+    },
+    "validation_report": "outputs/biological_validation_report_v4.md",
+    "interpretation": "Partial alignment: diverse exceeds low on early relocation adaptation ratio, while medium is not clearly separated. Raw total exploitation remains highest for low-noise colonies."
+  }
+}

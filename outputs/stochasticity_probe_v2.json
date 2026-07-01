@@ -1,0 +1,201 @@
+{
+  "literature_target": "Shiraishi et al. 2018 diverse stochasticity and adaptive foraging",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "profiles": [
+    "low",
+    "medium",
+    "high",
+    "diverse"
+  ],
+  "clear_old_trails": false,
+  "rows": 128,
+  "summary": [
+    {
+      "profile": "diverse",
+      "phase": "initial_food",
+      "n": 8,
+      "mean_phase_food_trips": 27.375,
+      "mean_phase_food_collected": 135.875,
+      "mean_avg_turn_noise": 0.0604,
+      "mean_food_pheromone": 56259.25,
+      "trips_vs_initial": 1.0,
+      "collected_vs_initial": 1.0
+    },
+    {
+      "profile": "diverse",
+      "phase": "relocated_early",
+      "n": 8,
+      "mean_phase_food_trips": 18.875,
+      "mean_phase_food_collected": 94.5,
+      "mean_avg_turn_noise": 0.0604,
+      "mean_food_pheromone": 53833.75,
+      "trips_vs_initial": 0.689,
+      "collected_vs_initial": 0.695
+    },
+    {
+      "profile": "diverse",
+      "phase": "relocated_late",
+      "n": 8,
+      "mean_phase_food_trips": 68.0,
+      "mean_phase_food_collected": 337.0,
+      "mean_avg_turn_noise": 0.06036,
+      "mean_food_pheromone": 27622.875,
+      "trips_vs_initial": 2.484,
+      "collected_vs_initial": 2.48
+    },
+    {
+      "profile": "diverse",
+      "phase": "relocated_total",
+      "n": 8,
+      "mean_phase_food_trips": 86.875,
+      "mean_phase_food_collected": 431.5,
+      "mean_avg_turn_noise": 0.06036,
+      "mean_food_pheromone": 27622.875,
+      "trips_vs_initial": 3.174,
+      "collected_vs_initial": 3.176
+    },
+    {
+      "profile": "high",
+      "phase": "initial_food",
+      "n": 8,
+      "mean_phase_food_trips": 17.5,
+      "mean_phase_food_collected": 87.875,
+      "mean_avg_turn_noise": 0.105,
+      "mean_food_pheromone": 20411.625,
+      "trips_vs_initial": 1.0,
+      "collected_vs_initial": 1.0
+    },
+    {
+      "profile": "high",
+      "phase": "relocated_early",
+      "n": 8,
+      "mean_phase_food_trips": 4.375,
+      "mean_phase_food_collected": 22.5,
+      "mean_avg_turn_noise": 0.105,
+      "mean_food_pheromone": 26247.625,
+      "trips_vs_initial": 0.25,
+      "collected_vs_initial": 0.256
+    },
+    {
+      "profile": "high",
+      "phase": "relocated_late",
+      "n": 8,
+      "mean_phase_food_trips": 43.375,
+      "mean_phase_food_collected": 219.75,
+      "mean_avg_turn_noise": 0.10491,
+      "mean_food_pheromone": 31212.5,
+      "trips_vs_initial": 2.479,
+      "collected_vs_initial": 2.501
+    },
+    {
+      "profile": "high",
+      "phase": "relocated_total",
+      "n": 8,
+      "mean_phase_food_trips": 47.75,
+      "mean_phase_food_collected": 242.25,
+      "mean_avg_turn_noise": 0.10491,
+      "mean_food_pheromone": 31212.5,
+      "trips_vs_initial": 2.729,
+      "collected_vs_initial": 2.757
+    },
+    {
+      "profile": "low",
+      "phase": "initial_food",
+      "n": 8,
+      "mean_phase_food_trips": 131.375,
+      "mean_phase_food_collected": 651.25,
+      "mean_avg_turn_noise": 0.018,
+      "mean_food_pheromone": 52488.875,
+      "trips_vs_initial": 1.0,
+      "collected_vs_initial": 1.0
+    },
+    {
+      "profile": "low",
+      "phase": "relocated_early",
+      "n": 8,
+      "mean_phase_food_trips": 49.25,
+      "mean_phase_food_collected": 248.25,
+      "mean_avg_turn_noise": 0.018,
+      "mean_food_pheromone": 41221.25,
+      "trips_vs_initial": 0.375,
+      "collected_vs_initial": 0.381
+    },
+    {
+      "profile": "low",
+      "phase": "relocated_late",
+      "n": 8,
+      "mean_phase_food_trips": 151.125,
+      "mean_phase_food_collected": 759.875,
+      "mean_avg_turn_noise": 0.01811,
+      "mean_food_pheromone": 39450.25,
+      "trips_vs_initial": 1.15,
+      "collected_vs_initial": 1.167
+    },
+    {
+      "profile": "low",
+      "phase": "relocated_total",
+      "n": 8,
+      "mean_phase_food_trips": 200.375,
+      "mean_phase_food_collected": 1008.125,
+      "mean_avg_turn_noise": 0.01811,
+      "mean_food_pheromone": 39450.25,
+      "trips_vs_initial": 1.525,
+      "collected_vs_initial": 1.548
+    },
+    {
+      "profile": "medium",
+      "phase": "initial_food",
+      "n": 8,
+      "mean_phase_food_trips": 38.0,
+      "mean_phase_food_collected": 190.125,
+      "mean_avg_turn_noise": 0.055,
+      "mean_food_pheromone": 57874.125,
+      "trips_vs_initial": 1.0,
+      "collected_vs_initial": 1.0
+    },
+    {
+      "profile": "medium",
+      "phase": "relocated_early",
+      "n": 8,
+      "mean_phase_food_trips": 25.5,
+      "mean_phase_food_collected": 131.125,
+      "mean_avg_turn_noise": 0.055,
+      "mean_food_pheromone": 54023.125,
+      "trips_vs_initial": 0.671,
+      "collected_vs_initial": 0.69
+    },
+    {
+      "profile": "medium",
+      "phase": "relocated_late",
+      "n": 8,
+      "mean_phase_food_trips": 56.375,
+      "mean_phase_food_collected": 281.5,
+      "mean_avg_turn_noise": 0.05502,
+      "mean_food_pheromone": 15925.875,
+      "trips_vs_initial": 1.484,
+      "collected_vs_initial": 1.481
+    },
+    {
+      "profile": "medium",
+      "phase": "relocated_total",
+      "n": 8,
+      "mean_phase_food_trips": 81.875,
+      "mean_phase_food_collected": 412.625,
+      "mean_avg_turn_noise": 0.05502,
+      "mean_food_pheromone": 15925.875,
+      "trips_vs_initial": 2.155,
+      "collected_vs_initial": 2.17
+    }
+  ],
+  "output": "ant_colony_sim/outputs/stochasticity_probe_v2.csv",
+  "summary_output": "ant_colony_sim/outputs/stochasticity_probe_v2_summary.csv"
+}

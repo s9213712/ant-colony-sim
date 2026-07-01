@@ -1,0 +1,5 @@
+combo_id,diffusionRate,evaporationRate,senseThreshold,pheromoneStrength,first_food_day_mean,first_food_day_loss,food_trips_before_removal_mean,food_trips_before_removal_loss,trail_decay_fraction_after_1d_mean,trail_decay_fraction_after_1d_loss,food_task_count_before_removal_mean,food_task_count_before_removal_loss,brood_total_after_3d_mean,brood_total_after_3d_loss,avg_energy_after_3d_mean,avg_energy_after_3d_loss,loss
+3,120,80,18,80,1.9,2.159184,2.0,0.512,0.464316,0.081677,240.4,0.236254,66.6,0.000284,84.6,0.00036,2.989758
+1,80,80,18,80,1.85,1.97551,1.6,0.53792,0.543169,0.233215,260.8,0.342015,67.4,0.00064,84.6,0.00036,3.08966
+4,120,120,18,80,1.95,2.35102,1.2,0.56448,0.25222,0.059756,270.4,0.398535,66.2,0.00016,84.4,0.00016,3.374112
+2,80,120,18,80,2.3,3.922449,0.8,0.59168,0.490001,0.122503,274.6,0.424621,66.0,0.000111,84.0,0.0,5.061364

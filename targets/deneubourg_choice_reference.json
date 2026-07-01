@@ -1,0 +1,50 @@
+{
+  "name": "Deneubourg-style reinforced random walk reference",
+  "status": "model-reference-not-raw-experiment",
+  "source": {
+    "primary_model": "Deneubourg et al. 1990, The self-organizing exploratory pattern of the Argentine ant",
+    "statistical_reference": "Le Goff & Soulier 2014/2016, Parameter estimation of a two-colored urn model class, arXiv:1405.2322",
+    "choice_function": "P(R) = (c + N_R)^alpha / ((c + N_R)^alpha + (c + N_L)^alpha)"
+  },
+  "notes": [
+    "This target encodes a literature model curve, not digitized raw ant counts.",
+    "Use it to tune qualitative symmetry breaking and branch-choice sensitivity.",
+    "Do not claim quantitative biological calibration until raw published or lab branch-choice data are supplied."
+  ],
+  "reference_parameters": {
+    "alpha": 2.0,
+    "c": 20.0
+  },
+  "metrics": {
+    "equal_branch_selected_balance": {
+      "target": 0.5,
+      "sd": 0.2,
+      "weight": 0.8,
+      "description": "Fraction of runs selecting upper branch under symmetric conditions should remain near 0.5 across many seeds."
+    },
+    "equal_branch_mean_dominance": {
+      "target": 0.28,
+      "sd": 0.16,
+      "weight": 1.2,
+      "description": "Symmetric double bridge should show nonzero but variable dominance from self-reinforcement."
+    },
+    "upper_bias_selection_rate": {
+      "target": 0.85,
+      "sd": 0.18,
+      "weight": 1.4,
+      "description": "A connected initial upper-branch trail should strongly increase upper-branch selection."
+    },
+    "upper_bias_mean_dominance": {
+      "target": 0.55,
+      "sd": 0.2,
+      "weight": 1.0,
+      "description": "Biased runs should show stronger branch dominance than symmetric runs."
+    },
+    "biased_vs_equal_dominance_gain": {
+      "target": 0.25,
+      "sd": 0.18,
+      "weight": 1.0,
+      "description": "Connected trail bias should increase dominance over equal-branch baseline."
+    }
+  }
+}

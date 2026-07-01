@@ -1,0 +1,51 @@
+{
+  "target_id": "provisional_lasius_foraging",
+  "target_status": "provisional_not_literature_calibrated",
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "grid": {
+    "diffusionRate": [
+      80,
+      120
+    ],
+    "evaporationRate": [
+      80,
+      120
+    ],
+    "senseThreshold": [
+      18
+    ],
+    "pheromoneStrength": [
+      80
+    ]
+  },
+  "pre_days": 2.0,
+  "post_days": 1.0,
+  "trial_rows": 20,
+  "score_rows": 4,
+  "best": {
+    "combo_id": 3,
+    "diffusionRate": 120,
+    "evaporationRate": 80,
+    "senseThreshold": 18,
+    "pheromoneStrength": 80,
+    "first_food_day_mean": 1.9,
+    "first_food_day_loss": 2.159184,
+    "food_trips_before_removal_mean": 2.0,
+    "food_trips_before_removal_loss": 0.512,
+    "trail_decay_fraction_after_1d_mean": 0.464316,
+    "trail_decay_fraction_after_1d_loss": 0.081677,
+    "food_task_count_before_removal_mean": 240.4,
+    "food_task_count_before_removal_loss": 0.236254,
+    "brood_total_after_3d_mean": 66.6,
+    "brood_total_after_3d_loss": 0.000284,
+    "avg_energy_after_3d_mean": 84.6,
+    "avg_energy_after_3d_loss": 0.00036,
+    "loss": 2.989758
+  }
+}

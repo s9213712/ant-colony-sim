@@ -1,0 +1,56 @@
+{
+  "scenario": "double_bridge",
+  "literature_target": "Deneubourg-style equal-branch symmetry breaking",
+  "parameters": {
+    "seeds": "4",
+    "days": 8.0,
+    "sample_days": 0.1,
+    "dt": 9,
+    "ants": 240,
+    "species": "lasius",
+    "food_amount": 1800,
+    "pheromone_strength": 130.0,
+    "diffusion_rate": 100,
+    "evaporation_rate": 70.0,
+    "sense_threshold": 8.0,
+    "bias_branch": "none",
+    "bias_strength": 0,
+    "output": "ant_colony_sim/outputs/double_bridge_sensitive_smoke.csv",
+    "metadata": null
+  },
+  "summary": {
+    "runs": 1,
+    "upper_selected": 1,
+    "lower_selected": 0,
+    "ties": 0,
+    "mean_dominance": 0.051,
+    "mean_food_trips": 112.0
+  },
+  "rows": [
+    {
+      "seed": 4,
+      "species": "lasius",
+      "ants": 240,
+      "days": 8,
+      "bias_branch": "none",
+      "bias_strength": 0,
+      "upper_crossings": 443,
+      "lower_crossings": 400,
+      "total_crossings": 843,
+      "upper_return_crossings": 103,
+      "lower_return_crossings": 89,
+      "return_crossings": 192,
+      "selected_branch": "upper",
+      "return_selected_branch": "upper",
+      "dominance": 0.051,
+      "return_dominance": 0.0729,
+      "food_trips": 112,
+      "food_collected": 553,
+      "food_pheromone": 56739,
+      "upper_food_pheromone": 1573,
+      "lower_food_pheromone": 1075,
+      "final_ants": 240,
+      "dead": 0
+    }
+  ]
+}

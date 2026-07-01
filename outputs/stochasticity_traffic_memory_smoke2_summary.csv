@@ -1,0 +1,17 @@
+profile,phase,n,mean_phase_food_trips,mean_phase_food_collected,mean_avg_turn_noise,mean_food_pheromone,trips_vs_initial,collected_vs_initial
+diverse,initial_food,3,2.0,11.333,0.0604,24443.0,1.0,1.0
+diverse,relocated_early,3,4.0,22.333,0.0604,37057.0,2.0,1.971
+diverse,relocated_late,3,12.667,59.667,0.0604,45336.0,6.333,5.265
+diverse,relocated_total,3,16.667,82.0,0.0604,45336.0,8.334,7.236
+high,initial_food,3,2.333,10.667,0.105,6810.333,1.0,1.0
+high,relocated_early,3,2.0,11.0,0.105,14540.667,0.857,1.031
+high,relocated_late,3,14.333,71.333,0.105,28930.667,6.144,6.687
+high,relocated_total,3,16.333,82.333,0.105,28930.667,7.001,7.718
+low,initial_food,3,2.667,13.0,0.018,34794.0,1.0,1.0
+low,relocated_early,3,11.0,57.667,0.018,44539.333,4.124,4.436
+low,relocated_late,3,33.333,172.0,0.018,35854.333,12.498,13.231
+low,relocated_total,3,44.333,229.667,0.018,35854.333,16.623,17.667
+medium,initial_food,3,6.667,30.333,0.055,22285.333,1.0,1.0
+medium,relocated_early,3,5.667,26.333,0.055,34647.0,0.85,0.868
+medium,relocated_late,3,18.0,91.0,0.055,60061.0,2.7,3.0
+medium,relocated_total,3,23.667,117.333,0.055,60061.0,3.55,3.868

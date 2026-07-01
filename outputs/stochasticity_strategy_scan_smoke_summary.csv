@@ -1,0 +1,9 @@
+profile,phase,n,mean_phase_food_trips,mean_phase_food_collected,mean_avg_turn_noise,mean_food_pheromone
+diverse,initial_food,3,6.667,33.333,0.0604,24884.667
+diverse,relocated_food,3,33.333,169.667,0.0604,51603.667
+high,initial_food,3,3.667,20.667,0.105,12272.333
+high,relocated_food,3,22.333,111.0,0.105,31622.333
+low,initial_food,3,5.0,25.0,0.018,35268.333
+low,relocated_food,3,88.0,443.667,0.018,33532.333
+medium,initial_food,3,9.667,44.333,0.055,24422.333
+medium,relocated_food,3,24.667,120.0,0.055,55083.667

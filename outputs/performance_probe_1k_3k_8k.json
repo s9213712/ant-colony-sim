@@ -1,0 +1,67 @@
+{
+  "counts": [
+    1000,
+    3000,
+    8000
+  ],
+  "dt": 1.4,
+  "results": [
+    {
+      "ants": 1000,
+      "create_ms": 1.3,
+      "create_ms_per_ant": 0.001,
+      "update_mean_ms": 1.845,
+      "update_p95_ms": 3.7,
+      "update_max_ms": 6.7,
+      "render_mean_ms": 3.948,
+      "render_p95_ms": 29.7,
+      "render_max_ms": 32.9,
+      "frame_mean_ms": 5.175,
+      "frame_p95_ms": 31.9,
+      "frame_max_ms": 36.3,
+      "approx_fps_from_frame_mean": 193.237,
+      "food_trips": 0,
+      "water_trips": 0,
+      "food_pheromone": 0,
+      "water_pheromone": 0
+    },
+    {
+      "ants": 3000,
+      "create_ms": 1.6,
+      "create_ms_per_ant": 0.001,
+      "update_mean_ms": 2.155,
+      "update_p95_ms": 2.8,
+      "update_max_ms": 3.4,
+      "render_mean_ms": 8.727,
+      "render_p95_ms": 26.4,
+      "render_max_ms": 33.7,
+      "frame_mean_ms": 11.272,
+      "frame_p95_ms": 29.4,
+      "frame_max_ms": 36.6,
+      "approx_fps_from_frame_mean": 88.715,
+      "food_trips": 0,
+      "water_trips": 0,
+      "food_pheromone": 0,
+      "water_pheromone": 0
+    },
+    {
+      "ants": 8000,
+      "create_ms": 2.1,
+      "create_ms_per_ant": 0,
+      "update_mean_ms": 5.075,
+      "update_p95_ms": 6.9,
+      "update_max_ms": 8.2,
+      "render_mean_ms": 34.82,
+      "render_p95_ms": 134.8,
+      "render_max_ms": 258.9,
+      "frame_mean_ms": 26.593,
+      "frame_p95_ms": 36.3,
+      "frame_max_ms": 87,
+      "approx_fps_from_frame_mean": 37.604,
+      "food_trips": 0,
+      "water_trips": 0,
+      "food_pheromone": 0,
+      "water_pheromone": 0
+    }
+  ]
+}

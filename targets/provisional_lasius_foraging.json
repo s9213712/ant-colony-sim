@@ -1,0 +1,51 @@
+{
+  "id": "provisional_lasius_foraging",
+  "species": "lasius",
+  "status": "provisional_not_literature_calibrated",
+  "description": "A temporary calibration target for validating the calibration pipeline. Replace these targets with digitized literature or lab measurements before making biological claims.",
+  "scenario": "single_food_source_then_removed",
+  "notes": [
+    "Model days are not yet mapped to real time.",
+    "Pheromone values are model units, not chemical concentration.",
+    "Targets encode desired qualitative behavior: discover food, recruit foragers, then lose trail after resource removal."
+  ],
+  "metrics": {
+    "first_food_day": {
+      "target": 0.75,
+      "sd": 0.35,
+      "weight": 0.2,
+      "meaning": "First simulated day when at least one food trip is completed."
+    },
+    "food_trips_before_removal": {
+      "target": 18,
+      "sd": 10,
+      "weight": 0.2,
+      "meaning": "Completed food trips before food source is removed."
+    },
+    "trail_decay_fraction_after_1d": {
+      "target": 0.35,
+      "sd": 0.2,
+      "weight": 0.25,
+      "meaning": "Food pheromone one day after food removal divided by peak food pheromone."
+    },
+    "food_task_count_before_removal": {
+      "target": 140,
+      "sd": 80,
+      "weight": 0.15,
+      "meaning": "Number of ants assigned to food task before food removal."
+    },
+    "brood_total_after_3d": {
+      "target": 65,
+      "sd": 30,
+      "weight": 0.1,
+      "meaning": "Brood should remain viable during the short foraging calibration."
+    },
+    "avg_energy_after_3d": {
+      "target": 84,
+      "sd": 10,
+      "weight": 0.1,
+      "meaning": "Short calibration should not create unrealistic worker exhaustion."
+    }
+  }
+}
+

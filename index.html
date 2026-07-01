@@ -1,0 +1,3305 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ant Colony Sim</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101214;
+      --panel: #181b1f;
+      --panel-2: #20242a;
+      --line: #343a42;
+      --text: #edf1f4;
+      --muted: #9aa5af;
+      --green: #67c587;
+      --amber: #e9b65f;
+      --red: #e86d6d;
+      --blue: #65a7e8;
+      --violet: #b990ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .stage {
+      position: relative;
+      min-width: 0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(103, 197, 135, 0.08), transparent 26%),
+        linear-gradient(135deg, #121619, #0f1114 58%, #151719);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      background: rgba(16, 18, 20, 0.76);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.26);
+    }
+
+    .icon-btn {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .icon-btn:hover,
+    .tool-btn.active {
+      border-color: rgba(103, 197, 135, 0.85);
+      background: rgba(103, 197, 135, 0.16);
+    }
+
+    .tool-btn {
+      min-width: 38px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      height: 100vh;
+      border-left: 1px solid var(--line);
+      background: var(--panel);
+      overflow-y: auto;
+    }
+
+    .header {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .section {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .control {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--green);
+    }
+
+    input[type="number"] {
+      width: 100%;
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .inline-control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 72px;
+      gap: 8px;
+    }
+
+    select {
+      width: 100%;
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 8px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chip.active {
+      border-color: rgba(101, 167, 232, 0.95);
+      background: rgba(101, 167, 232, 0.16);
+    }
+
+    .action {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--panel-2);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .action:hover {
+      border-color: rgba(233, 182, 95, 0.82);
+      background: rgba(233, 182, 95, 0.12);
+    }
+
+    .inline-control .action {
+      min-height: 34px;
+    }
+
+    .toggles {
+      display: grid;
+      gap: 10px;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 26px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .toggle input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--green);
+    }
+
+    .swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex: 0 0 auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-2);
+    }
+
+    .stat .value {
+      margin-top: 4px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .stat .name {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .timebar {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      min-width: 170px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      background: rgba(16, 18, 20, 0.76);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+    }
+
+    .time-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .time-main strong {
+      font-size: 18px;
+    }
+
+    .time-track {
+      height: 5px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .time-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #65a7e8, #e9b65f);
+    }
+
+    .inspector {
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 7px;
+    }
+
+    .row strong {
+      color: var(--text);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .legend {
+      display: grid;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .hint {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      max-width: min(620px, calc(100% - 28px));
+      padding: 9px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      background: rgba(16, 18, 20, 0.72);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      backdrop-filter: blur(12px);
+    }
+
+    @media (max-width: 880px) {
+      body {
+        overflow: auto;
+      }
+
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(420px, 58vh) auto;
+        height: auto;
+        min-height: 100vh;
+      }
+
+      .stage {
+        min-height: 420px;
+      }
+
+      .topbar {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        overflow-x: auto;
+        padding: 7px;
+        gap: 7px;
+        scrollbar-width: none;
+      }
+
+      .topbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .icon-btn,
+      .tool-btn {
+        flex: 0 0 auto;
+        width: 36px;
+        min-width: 36px;
+        height: 36px;
+      }
+
+      .hint {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        max-width: none;
+        font-size: 11px;
+        padding: 8px 9px;
+      }
+
+      .timebar {
+        top: 66px;
+        left: 10px;
+        right: auto;
+        min-width: 146px;
+        padding: 8px 10px;
+      }
+
+      .time-main strong {
+        font-size: 16px;
+      }
+
+      .sidebar {
+        height: auto;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .header {
+        padding: 16px 18px 12px;
+      }
+
+      .section {
+        padding: 14px 18px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .app {
+        grid-template-rows: minmax(390px, 54vh) auto;
+      }
+
+      .stage {
+        min-height: 390px;
+      }
+
+      .segmented {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .button-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat {
+        min-width: 0;
+      }
+
+      .stat .value {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="stage" aria-label="Ant colony simulation">
+      <canvas id="world"></canvas>
+      <div class="topbar" aria-label="Simulation tools">
+        <button class="icon-btn" id="playPause" title="暫停/播放" aria-label="暫停/播放">⏸</button>
+        <button class="icon-btn" id="reset" title="重置" aria-label="重置">↻</button>
+        <button class="tool-btn active" data-tool="inspect" title="選取螞蟻">⌖</button>
+        <button class="tool-btn" data-tool="ant" title="放置螞蟻">A</button>
+        <button class="tool-btn" data-tool="food" title="放置食物">F</button>
+        <button class="tool-btn" data-tool="water" title="放置飲水">W</button>
+        <button class="tool-btn" data-tool="enemy" title="放置敵人">!</button>
+        <button class="tool-btn" data-tool="rock" title="放置障礙">■</button>
+        <button class="tool-btn" data-tool="pheromone" title="灑假費洛蒙">◌</button>
+        <button class="tool-btn" data-tool="erase" title="刪除物件">⌫</button>
+      </div>
+      <div class="timebar" aria-label="Simulation time">
+        <div class="time-main"><span id="dayLabel">Day 0</span><strong id="clockLabel">06:00</strong></div>
+        <div class="time-track"><div class="time-fill" id="timeFill"></div></div>
+      </div>
+      <div class="hint">點擊螞蟻可檢視個體狀態。切換工具後點擊地圖可新增螞蟻、食物、敵人或障礙；刪除工具可移除障礙、敵人或食物。費洛蒙會擴散、蒸發，螞蟻只根據附近訊號行動。</div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="header">
+        <h1>Ant Colony Sim</h1>
+        <div class="subtitle">行為級螞蟻群落模擬，展示探索、覓食、搬運、防衛與費洛蒙路徑。</div>
+      </div>
+
+      <section class="section">
+        <h2>Simulation</h2>
+        <div class="control">
+          <div class="label-row"><span>速度</span><strong id="speedLabel">1.4x</strong></div>
+          <input id="speed" type="range" min="0.2" max="4" value="1.4" step="0.1">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>螞蟻數量</span><strong id="antsLabel">420</strong></div>
+          <input id="antCount" type="range" min="0" max="900" value="0" step="1">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>費洛蒙強度</span><strong id="pheromoneLabel">120%</strong></div>
+          <input id="pheromoneStrength" type="range" min="20" max="140" value="120" step="5">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>擴散速率</span><strong id="diffusionLabel">100%</strong></div>
+          <input id="diffusionRate" type="range" min="40" max="180" value="100" step="5">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>蒸發速率</span><strong id="evaporationLabel">80%</strong></div>
+          <input id="evaporationRate" type="range" min="40" max="180" value="80" step="5">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>感知閾值</span><strong id="senseThresholdLabel">10</strong></div>
+          <input id="senseThreshold" type="range" min="4" max="60" value="10" step="1">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>隨機種子</span><strong id="seedLabel">12345</strong></div>
+          <div class="inline-control">
+            <input id="randomSeed" type="number" min="1" max="4294967295" value="12345" step="1">
+            <button class="action" id="applySeed">套用</button>
+          </div>
+        </div>
+        <div class="segmented" aria-label="Place tool">
+          <button class="chip active" data-tool="inspect">檢視</button>
+          <button class="chip" data-tool="ant">螞蟻</button>
+          <button class="chip" data-tool="food">食物</button>
+          <button class="chip" data-tool="water">飲水</button>
+          <button class="chip" data-tool="enemy">敵人</button>
+          <button class="chip" data-tool="rock">障礙</button>
+          <button class="chip" data-tool="pheromone">費洛蒙</button>
+          <button class="chip" data-tool="erase">刪除</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Environment</h2>
+        <div class="control">
+          <div class="label-row"><span>溫度</span><strong id="tempLabel">26°C</strong></div>
+          <input id="temperature" type="range" min="10" max="42" value="26" step="1">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>濕度</span><strong id="humidityLabel">58%</strong></div>
+          <input id="humidity" type="range" min="15" max="95" value="58" step="1">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>資源壓力</span><strong id="foodSpawnLabel">45%</strong></div>
+          <input id="foodSpawn" type="range" min="0" max="100" value="45" step="5">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>威脅壓力</span><strong id="threatLabel">25%</strong></div>
+          <input id="threatPressure" type="range" min="0" max="100" value="25" step="5">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>物種模型</span><strong id="speciesLabel">Lasius niger</strong></div>
+          <select id="species">
+            <option value="lasius">Lasius niger 黑棕家蟻</option>
+            <option value="eciton">Eciton burchellii 軍蟻</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Colony Control</h2>
+        <div class="control">
+          <div class="label-row"><span>飢餓壓力</span><strong id="hungerLabel">35%</strong></div>
+          <input id="hunger" type="range" min="0" max="100" value="35" step="5">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>育幼需求</span><strong id="broodDemandLabel">50%</strong></div>
+          <input id="broodDemand" type="range" min="0" max="100" value="50" step="5">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>兵蟻比例</span><strong id="soldierRatioLabel">12%</strong></div>
+          <input id="soldierRatio" type="range" min="0" max="35" value="12" step="1">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>放置階級</span><strong id="placeCasteLabel">worker</strong></div>
+          <select id="placeCaste">
+            <option value="worker">worker 工蟻</option>
+            <option value="soldier">soldier 兵蟻</option>
+            <option value="nurse">nurse 護幼工蟻</option>
+            <option value="queen">queen 蟻后</option>
+            <option value="larva">larva 幼蟲</option>
+          </select>
+        </div>
+        <div class="control">
+          <div class="label-row"><span>假費洛蒙</span><strong id="fakePheromoneLabel">food</strong></div>
+          <select id="fakePheromone">
+            <option value="food">food 食物路徑</option>
+            <option value="water">water 飲水路徑</option>
+            <option value="nest">nest 回巢線索</option>
+            <option value="alarm">alarm 警戒訊號</option>
+            <option value="death">death 死亡線索</option>
+            <option value="avoid">avoid 避開訊號</option>
+            <option value="mill">mill 閉合漩渦</option>
+          </select>
+        </div>
+        <div class="control">
+          <div class="label-row"><span>筆刷大小</span><strong id="brushSizeLabel">42</strong></div>
+          <input id="brushSize" type="range" min="12" max="130" value="42" step="2">
+        </div>
+        <div class="control">
+          <div class="label-row"><span>筆刷強度</span><strong id="brushStrengthLabel">70%</strong></div>
+          <input id="brushStrength" type="range" min="10" max="180" value="70" step="5">
+        </div>
+        <div class="button-grid">
+          <button class="action" id="foundingMode">創群模式</button>
+          <button class="action" id="matureColony">成熟蟻群</button>
+          <button class="action" id="spawnWorkers">增加工蟻</button>
+          <button class="action" id="spawnSoldiers">增加兵蟻</button>
+          <button class="action" id="induceAlarm">觸發警戒</button>
+          <button class="action" id="clearPheromones">清空費洛蒙</button>
+          <button class="action" id="induceMill">觸發漩渦</button>
+          <button class="action" id="breakMills">打散漩渦</button>
+          <button class="action" id="healColony">恢復群體</button>
+          <button class="action" id="removeDead">移除屍體</button>
+          <button class="action" id="exportCsv">匯出 CSV</button>
+          <button class="action" id="humanDisturbance">人為干擾</button>
+          <button class="action" id="rainEvent">降雨沖刷</button>
+          <button class="action" id="heatwaveEvent">熱浪乾旱</button>
+          <button class="action" id="floodEvent">巢穴進水</button>
+          <button class="action" id="massDeathEvent">大量死亡</button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>View Layers</h2>
+        <div class="toggles">
+          <label class="toggle"><input id="layerAnts" type="checkbox" checked><span class="swatch" style="background:#edf1f4"></span>螞蟻</label>
+          <label class="toggle"><input id="layerFood" type="checkbox" checked><span class="swatch" style="background:#67c587"></span>食物費洛蒙</label>
+          <label class="toggle"><input id="layerWater" type="checkbox" checked><span class="swatch" style="background:#55c7df"></span>飲水費洛蒙</label>
+          <label class="toggle"><input id="layerNest" type="checkbox" checked><span class="swatch" style="background:#65a7e8"></span>回巢費洛蒙</label>
+          <label class="toggle"><input id="layerAlarm" type="checkbox" checked><span class="swatch" style="background:#e86d6d"></span>警戒費洛蒙</label>
+          <label class="toggle"><input id="layerDeath" type="checkbox" checked><span class="swatch" style="background:#9b8c7a"></span>死亡化學場</label>
+          <label class="toggle"><input id="layerAvoid" type="checkbox" checked><span class="swatch" style="background:#d88bbd"></span>避開訊號</label>
+          <label class="toggle"><input id="layerNestRooms" type="checkbox" checked><span class="swatch" style="background:#e9b65f"></span>巢穴房間</label>
+          <label class="toggle"><input id="layerHeatmap" type="checkbox"><span class="swatch" style="background:linear-gradient(135deg,#1f4ed8,#f5d547)"></span>濃度熱圖</label>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Colony Stats</h2>
+        <div class="stats">
+          <div class="stat"><div class="name">food store</div><div class="value" id="foodStore">0</div></div>
+          <div class="stat"><div class="name">water store</div><div class="value" id="waterStore">0</div></div>
+          <div class="stat"><div class="name">eggs</div><div class="value" id="eggs">20</div></div>
+          <div class="stat"><div class="name">larvae</div><div class="value" id="larvae">42</div></div>
+          <div class="stat"><div class="name">pupae</div><div class="value" id="pupae">8</div></div>
+          <div class="stat"><div class="name">carrying</div><div class="value" id="carrying">0</div></div>
+          <div class="stat"><div class="name">dead</div><div class="value" id="dead">0</div></div>
+          <div class="stat"><div class="name">food/water trips</div><div class="value" id="forageTrips">0/0</div></div>
+          <div class="stat"><div class="name">corpse moves</div><div class="value" id="corpseMoves">0</div></div>
+          <div class="stat"><div class="name">brood climate</div><div class="value" id="broodClimate">--</div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Selected Ant</h2>
+        <div class="inspector" id="inspector">
+          <div class="row"><span>id</span><strong>-</strong></div>
+          <div class="row"><span>role</span><strong>-</strong></div>
+          <div class="row"><span>task</span><strong>-</strong></div>
+          <div class="row"><span>state</span><strong>-</strong></div>
+          <div class="row"><span>age</span><strong>-</strong></div>
+          <div class="row"><span>energy</span><strong>-</strong></div>
+          <div class="row"><span>health</span><strong>-</strong></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Legend</h2>
+        <div class="legend">
+          <div class="legend-item"><span class="swatch" style="background:#edf1f4"></span>空手工蟻 / 探索</div>
+          <div class="legend-item"><span class="swatch" style="background:#67c587"></span>搬運食物</div>
+          <div class="legend-item"><span class="swatch" style="background:#55c7df"></span>取水 / 飲水路徑</div>
+          <div class="legend-item"><span class="swatch" style="background:#65a7e8"></span>照顧幼蟲</div>
+          <div class="legend-item"><span class="swatch" style="background:#e86d6d"></span>警戒或戰鬥</div>
+          <div class="legend-item"><span class="swatch" style="background:#9b8c7a"></span>屍體 / 死亡化學線索</div>
+          <div class="legend-item"><span class="swatch" style="background:#d88bbd"></span>避開訊號 / 人造屏障</div>
+          <div class="legend-item"><span class="swatch" style="background:#e9b65f"></span>巢穴 / 食物庫</div>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('world');
+    const ctx = canvas.getContext('2d', { alpha: false });
+
+    const ui = {
+      playPause: document.getElementById('playPause'),
+      reset: document.getElementById('reset'),
+      speed: document.getElementById('speed'),
+      antCount: document.getElementById('antCount'),
+      pheromoneStrength: document.getElementById('pheromoneStrength'),
+      diffusionRate: document.getElementById('diffusionRate'),
+      evaporationRate: document.getElementById('evaporationRate'),
+      senseThreshold: document.getElementById('senseThreshold'),
+      randomSeed: document.getElementById('randomSeed'),
+      temperature: document.getElementById('temperature'),
+      humidity: document.getElementById('humidity'),
+      foodSpawn: document.getElementById('foodSpawn'),
+      threatPressure: document.getElementById('threatPressure'),
+      species: document.getElementById('species'),
+      hunger: document.getElementById('hunger'),
+      broodDemand: document.getElementById('broodDemand'),
+      soldierRatio: document.getElementById('soldierRatio'),
+      placeCaste: document.getElementById('placeCaste'),
+      fakePheromone: document.getElementById('fakePheromone'),
+      brushSize: document.getElementById('brushSize'),
+      brushStrength: document.getElementById('brushStrength'),
+      speedLabel: document.getElementById('speedLabel'),
+      antsLabel: document.getElementById('antsLabel'),
+      pheromoneLabel: document.getElementById('pheromoneLabel'),
+      diffusionLabel: document.getElementById('diffusionLabel'),
+      evaporationLabel: document.getElementById('evaporationLabel'),
+      senseThresholdLabel: document.getElementById('senseThresholdLabel'),
+      seedLabel: document.getElementById('seedLabel'),
+      tempLabel: document.getElementById('tempLabel'),
+      humidityLabel: document.getElementById('humidityLabel'),
+      foodSpawnLabel: document.getElementById('foodSpawnLabel'),
+      threatLabel: document.getElementById('threatLabel'),
+      speciesLabel: document.getElementById('speciesLabel'),
+      hungerLabel: document.getElementById('hungerLabel'),
+      broodDemandLabel: document.getElementById('broodDemandLabel'),
+      soldierRatioLabel: document.getElementById('soldierRatioLabel'),
+      placeCasteLabel: document.getElementById('placeCasteLabel'),
+      fakePheromoneLabel: document.getElementById('fakePheromoneLabel'),
+      brushSizeLabel: document.getElementById('brushSizeLabel'),
+      brushStrengthLabel: document.getElementById('brushStrengthLabel'),
+      dayLabel: document.getElementById('dayLabel'),
+      clockLabel: document.getElementById('clockLabel'),
+      timeFill: document.getElementById('timeFill'),
+      foodStore: document.getElementById('foodStore'),
+      waterStore: document.getElementById('waterStore'),
+      eggs: document.getElementById('eggs'),
+      larvae: document.getElementById('larvae'),
+      pupae: document.getElementById('pupae'),
+      carrying: document.getElementById('carrying'),
+      dead: document.getElementById('dead'),
+      forageTrips: document.getElementById('forageTrips'),
+      corpseMoves: document.getElementById('corpseMoves'),
+      broodClimate: document.getElementById('broodClimate'),
+      inspector: document.getElementById('inspector'),
+      spawnWorkers: document.getElementById('spawnWorkers'),
+      spawnSoldiers: document.getElementById('spawnSoldiers'),
+      foundingMode: document.getElementById('foundingMode'),
+      matureColony: document.getElementById('matureColony'),
+      induceAlarm: document.getElementById('induceAlarm'),
+      clearPheromones: document.getElementById('clearPheromones'),
+      applySeed: document.getElementById('applySeed'),
+      induceMill: document.getElementById('induceMill'),
+      breakMills: document.getElementById('breakMills'),
+      healColony: document.getElementById('healColony'),
+      removeDead: document.getElementById('removeDead'),
+      exportCsv: document.getElementById('exportCsv'),
+      humanDisturbance: document.getElementById('humanDisturbance'),
+      rainEvent: document.getElementById('rainEvent'),
+      heatwaveEvent: document.getElementById('heatwaveEvent'),
+      floodEvent: document.getElementById('floodEvent'),
+      massDeathEvent: document.getElementById('massDeathEvent'),
+      layers: {
+        ants: document.getElementById('layerAnts'),
+        food: document.getElementById('layerFood'),
+        water: document.getElementById('layerWater'),
+        nest: document.getElementById('layerNest'),
+        alarm: document.getElementById('layerAlarm'),
+        death: document.getElementById('layerDeath'),
+        avoid: document.getElementById('layerAvoid'),
+        rooms: document.getElementById('layerNestRooms'),
+        heatmap: document.getElementById('layerHeatmap')
+      }
+    };
+
+    const world = {
+      width: 1200,
+      height: 760,
+      grid: 22,
+      ants: [],
+      queens: [],
+      corpses: [],
+      mills: [],
+      food: [],
+      water: [],
+      enemies: [],
+      rocks: [],
+      selected: null,
+      running: true,
+      tool: 'inspect',
+      seed: 12345,
+      randomState: 12345,
+      foodStore: 0,
+      waterStore: 0,
+      eggs: 20,
+      larvae: 42,
+      pupae: 8,
+      day: 0,
+      rainTimer: 0,
+      disturbanceTimer: 0,
+      broodCareBoost: 0,
+      broodClimate: {
+        temp: 26,
+        humidity: 58,
+        stress: 0
+      },
+      statsHistory: [],
+      lastStatsDay: 0,
+      stats: {
+        foodTrips: 0,
+        foodCollected: 0,
+        waterTrips: 0,
+        waterCollected: 0,
+        corpseMoves: 0
+      },
+      traffic: {
+        cell: 34,
+        cols: 0,
+        rows: 0,
+        counts: [],
+        max: 0,
+        meanOccupied: 0,
+        congestedCells: 0
+      },
+      nest: { x: 600, y: 390, radius: 72 },
+      rooms: [],
+      pheromones: {
+        food: null,
+        water: null,
+        nest: null,
+        alarm: null,
+        death: null,
+        avoid: null
+      }
+    };
+
+    const MODEL_UNITS = {
+      modelVersion: '0.5-adaptive-stochasticity',
+      calibrationStatus: 'provisional_behavioral_units',
+      pxPerCm: 20,
+      simDaySeconds: 86400
+    };
+
+    const SPECIES_PRESETS = {
+      lasius: {
+        label: 'Lasius niger',
+        foundingFood: 8,
+        foundingWater: 8,
+        foundingEggs: 8,
+        queenReserve: 120,
+        matureFood: 35,
+        matureWater: 28,
+        matureEggs: 20,
+        matureLarvae: 42,
+        maturePupae: 8,
+        matureQueenReserve: 240,
+        soldierRatioDefault: 12,
+        activity: 1,
+        speed: 1,
+        turnNoise: 1,
+        metabolism: 1,
+        hydrationLoss: 1,
+        pheromoneDeposit: 1,
+        pheromonePersistence: 1,
+        diffusion: 1,
+        broodRate: 1,
+        broodTemp: 25,
+        broodHumidity: 68,
+        broodTempTolerance: 8,
+        broodHumidityTolerance: 24,
+        eggRate: 1.1,
+        eggInterval: 820,
+        forageBias: 1,
+        broodBias: 1,
+        raidingBias: 0,
+        corpseBias: 1,
+        defenseBias: 1,
+        millSusceptibility: 1
+      },
+      eciton: {
+        label: 'Eciton burchellii',
+        foundingFood: 18,
+        foundingWater: 18,
+        foundingEggs: 2,
+        queenReserve: 180,
+        matureFood: 60,
+        matureWater: 45,
+        matureEggs: 6,
+        matureLarvae: 72,
+        maturePupae: 12,
+        matureQueenReserve: 320,
+        soldierRatioDefault: 22,
+        activity: 1.18,
+        speed: 1.15,
+        turnNoise: 0.78,
+        metabolism: 1.14,
+        hydrationLoss: 1.1,
+        pheromoneDeposit: 1.34,
+        pheromonePersistence: 0.94,
+        diffusion: 1.22,
+        broodRate: 1.18,
+        broodTemp: 27,
+        broodHumidity: 76,
+        broodTempTolerance: 7,
+        broodHumidityTolerance: 20,
+        eggRate: 1.45,
+        eggInterval: 760,
+        forageBias: 1.62,
+        broodBias: 0.62,
+        raidingBias: 0.42,
+        corpseBias: 0.82,
+        defenseBias: 1.35,
+        millSusceptibility: 2.45
+      }
+    };
+
+    function speciesConfig() {
+      return SPECIES_PRESETS[ui.species?.value] || SPECIES_PRESETS.lasius;
+    }
+
+    function applySpeciesDefaults() {
+      const species = speciesConfig();
+      ui.soldierRatio.value = species.soldierRatioDefault;
+      syncLabels();
+    }
+
+    function normalizeSeed(seed) {
+      const value = Number(seed);
+      if (!Number.isFinite(value)) return 12345;
+      return Math.max(1, Math.floor(value)) >>> 0 || 12345;
+    }
+
+    function setSeed(seed, resetState = true) {
+      const normalized = normalizeSeed(seed);
+      world.seed = normalized;
+      if (resetState) world.randomState = normalized;
+      ui.randomSeed.value = normalized;
+      syncLabels();
+      return normalized;
+    }
+
+    function random() {
+      world.randomState = (1664525 * world.randomState + 1013904223) >>> 0;
+      return world.randomState / 4294967296;
+    }
+
+    const rand = (min, max) => min + random() * (max - min);
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+    const dist = (a, b, x, y) => Math.hypot(a - x, b - y);
+    const angleTo = (x1, y1, x2, y2) => Math.atan2(y2 - y1, x2 - x1);
+    const normAngle = angle => {
+      while (angle > Math.PI) angle -= Math.PI * 2;
+      while (angle < -Math.PI) angle += Math.PI * 2;
+      return angle;
+    };
+
+    function taskThresholds(role, age) {
+      const species = speciesConfig();
+      const old = age > 26 ? -0.14 : 0;
+      const young = age < 14 ? -0.16 : 0;
+      const turnNoise = rand(0.02, 0.08) * species.turnNoise;
+      return {
+        brood: clamp(((role === 'nurse' ? 0.18 : 0.62) + old - young + rand(-0.08, 0.08)) / species.broodBias, 0.08, 0.95),
+        food: clamp(((role === 'nurse' ? 0.58 : 0.36) + young + rand(-0.08, 0.08)) / species.forageBias, 0.12, 0.95),
+        water: clamp(((role === 'nurse' ? 0.52 : 0.34) + young + rand(-0.08, 0.08)) / species.forageBias, 0.12, 0.95),
+        corpse: clamp(((role === 'nurse' ? 0.58 : 0.42) + young + rand(-0.1, 0.1)) / species.corpseBias, 0.16, 0.95),
+        defense: clamp((role === 'soldier' ? 0.12 : 0.78) / species.defenseBias, 0.1, 0.95)
+      };
+    }
+
+    function taskActivation(stimulus, threshold) {
+      const s = clamp(stimulus, 0, 1.8);
+      const t = clamp(threshold, 0.05, 1.2);
+      return (s * s) / (s * s + t * t);
+    }
+
+    function chooseAntTask(ant, stimuli) {
+      if (ant.role === 'soldier') return stimuli.defense > ant.thresholds.defense ? 'defense' : 'patrol';
+      const scores = {
+        brood: taskActivation(stimuli.brood, ant.thresholds.brood),
+        water: taskActivation(stimuli.water, ant.thresholds.water),
+        food: taskActivation(stimuli.food, ant.thresholds.food),
+        corpse: taskActivation(stimuli.corpse, ant.thresholds.corpse)
+      };
+      const fatigue = clamp((70 - ant.energy) / 100, 0, 0.3);
+      const species = speciesConfig();
+      scores.brood += ant.role === 'nurse' ? 0.12 : 0;
+      scores.food += ant.age > 26 ? 0.08 : 0;
+      scores.water += ant.hydration < 55 ? 0.12 : 0;
+      scores.food += species.raidingBias;
+      scores.water += species.raidingBias * 0.75;
+      scores.brood -= species.raidingBias * 0.55;
+      scores.food -= fatigue;
+      scores.water -= fatigue * 0.7;
+      let best = 'explore';
+      let bestScore = 0.18;
+      for (const [task, score] of Object.entries(scores)) {
+        if (score > bestScore) {
+          best = task;
+          bestScore = score;
+        }
+      }
+      return best;
+    }
+
+    function environmentActivity() {
+      const species = speciesConfig();
+      const temp = Number(ui.temperature.value);
+      const coldPenalty = temp < 18 ? 0.45 + (temp - 10) * 0.055 : 1;
+      const heatPenalty = temp > 34 ? 1 - (temp - 34) * 0.045 : 1;
+      return clamp(Math.min(coldPenalty, heatPenalty) * species.activity, 0.35, 1.32);
+    }
+
+    function pheromoneEvaporation(base) {
+      const species = speciesConfig();
+      const humidity = Number(ui.humidity.value) / 100;
+      const temp = Number(ui.temperature.value);
+      const humidityRetention = 0.006 * humidity;
+      const heatLoss = temp > 30 ? (temp - 30) * 0.00055 : 0;
+      const retention = clamp((base + humidityRetention - heatLoss) * species.pheromonePersistence, 0.86, 0.998);
+      const evaporationScale = Number(ui.evaporationRate.value) / 100;
+      const loss = (1 - retention) * evaporationScale;
+      return clamp(1 - loss, 0.88, 0.998);
+    }
+
+    function colonyPressure() {
+      return {
+        hunger: Number(ui.hunger.value) / 100,
+        brood: Number(ui.broodDemand.value) / 100,
+        threat: Number(ui.threatPressure.value) / 100
+      };
+    }
+
+    function updateBroodClimate(dt) {
+      const species = speciesConfig();
+      const ambientTemp = Number(ui.temperature.value);
+      const ambientHumidity = Number(ui.humidity.value);
+      const broodWorkers = world.ants.filter(ant =>
+        ant.task === 'brood'
+        && ant.health > 0
+        && dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius + 110
+      ).length;
+      const care = clamp(broodWorkers / 95 + world.broodCareBoost * 0.55, 0, 1.75);
+      const nestBuffer = world.rainTimer > 0 ? 1.25 : 1;
+      const ambientPull = 0.00058 * dt * nestBuffer;
+      const carePull = 0.00082 * dt * care;
+      const waterSupport = world.waterStore > 0 ? clamp(world.waterStore / 80, 0.15, 1.2) : 0.05;
+
+      world.broodClimate.temp += (ambientTemp - world.broodClimate.temp) * ambientPull;
+      world.broodClimate.humidity += (ambientHumidity - world.broodClimate.humidity) * ambientPull;
+      world.broodClimate.temp += (species.broodTemp - world.broodClimate.temp) * carePull;
+      world.broodClimate.humidity += (species.broodHumidity - world.broodClimate.humidity) * carePull * waterSupport;
+
+      const tempStress = Math.abs(world.broodClimate.temp - species.broodTemp) / species.broodTempTolerance;
+      const humidityStress = Math.abs(world.broodClimate.humidity - species.broodHumidity) / species.broodHumidityTolerance;
+      world.broodClimate.humidity = clamp(world.broodClimate.humidity, 5, 98);
+      world.broodClimate.stress = clamp((tempStress + humidityStress) * 0.5, 0, 1.8);
+    }
+
+    class Field {
+      constructor(size) {
+        this.size = size;
+        this.cols = Math.ceil(world.width / size);
+        this.rows = Math.ceil(world.height / size);
+        this.data = new Float32Array(this.cols * this.rows);
+        this.scratch = new Float32Array(this.cols * this.rows);
+      }
+
+      index(cx, cy) {
+        return cy * this.cols + cx;
+      }
+
+      add(x, y, amount) {
+        const cx = Math.floor(x / this.size);
+        const cy = Math.floor(y / this.size);
+        if (cx < 0 || cy < 0 || cx >= this.cols || cy >= this.rows) return;
+        const idx = this.index(cx, cy);
+        this.data[idx] = clamp(this.data[idx] + amount, 0, 255);
+      }
+
+      sample(x, y) {
+        const cx = Math.floor(x / this.size);
+        const cy = Math.floor(y / this.size);
+        if (cx < 0 || cy < 0 || cx >= this.cols || cy >= this.rows) return 0;
+        return this.data[this.index(cx, cy)];
+      }
+
+      sense(x, y, angle, distance) {
+        return this.sample(x + Math.cos(angle) * distance, y + Math.sin(angle) * distance);
+      }
+
+      update(evaporation, diffusion) {
+        const cols = this.cols;
+        const rows = this.rows;
+        const centerWeight = Math.max(0.2, 1 - diffusion);
+        const axialWeight = diffusion * 0.17;
+        const diagonalWeight = diffusion * 0.08;
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            const i = this.index(x, y);
+            let total = this.data[i] * centerWeight;
+            let count = centerWeight;
+            if (x > 0) {
+              total += this.data[i - 1] * axialWeight;
+              count += axialWeight;
+            }
+            if (x < cols - 1) {
+              total += this.data[i + 1] * axialWeight;
+              count += axialWeight;
+            }
+            if (y > 0) {
+              total += this.data[i - cols] * axialWeight;
+              count += axialWeight;
+            }
+            if (y < rows - 1) {
+              total += this.data[i + cols] * axialWeight;
+              count += axialWeight;
+            }
+            if (x > 0 && y > 0) {
+              total += this.data[i - cols - 1] * diagonalWeight;
+              count += diagonalWeight;
+            }
+            if (x < cols - 1 && y > 0) {
+              total += this.data[i - cols + 1] * diagonalWeight;
+              count += diagonalWeight;
+            }
+            if (x > 0 && y < rows - 1) {
+              total += this.data[i + cols - 1] * diagonalWeight;
+              count += diagonalWeight;
+            }
+            if (x < cols - 1 && y < rows - 1) {
+              total += this.data[i + cols + 1] * diagonalWeight;
+              count += diagonalWeight;
+            }
+            this.scratch[i] = total / count * evaporation;
+          }
+        }
+        const temp = this.data;
+        this.data = this.scratch;
+        this.scratch = temp;
+      }
+
+      render(color, alphaScale) {
+        const size = this.size;
+        const [r, g, b] = color;
+        const heatmap = ui.layers.heatmap.checked;
+        for (let y = 0; y < this.rows; y++) {
+          for (let x = 0; x < this.cols; x++) {
+            const value = this.data[this.index(x, y)];
+            if (value < 7) continue;
+            const alpha = clamp(value / 255 * alphaScale, 0, 0.48);
+            if (heatmap) {
+              const t = clamp(value / 180, 0, 1);
+              const hr = Math.round(31 + t * 224);
+              const hg = Math.round(78 + t * 175);
+              const hb = Math.round(216 - t * 150);
+              ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${clamp(alpha * 1.18, 0, 0.58)})`;
+            } else {
+              ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            }
+            roundRect(x * size + 1, y * size + 1, size - 1, size - 1, 6);
+            ctx.fill();
+          }
+        }
+      }
+    }
+
+    function createAnt(id) {
+      const species = speciesConfig();
+      const angle = rand(0, Math.PI * 2);
+      const radius = Math.sqrt(random()) * world.nest.radius * 0.72;
+      const roleRoll = random();
+      const soldierRatio = Number(ui.soldierRatio.value) / 100;
+      const role = roleRoll > 1 - soldierRatio ? 'soldier' : roleRoll < 0.22 ? 'nurse' : 'worker';
+      const age = Math.floor(rand(1, 39));
+      const turnNoise = rand(0.02, 0.08) * species.turnNoise;
+      return {
+        id,
+        x: world.nest.x + Math.cos(angle) * radius,
+        y: world.nest.y + Math.sin(angle) * radius,
+        angle: rand(0, Math.PI * 2),
+        speed: (role === 'soldier' ? rand(0.55, 0.85) : rand(0.75, 1.15)) * species.speed,
+        role,
+        task: role === 'soldier' ? 'patrol' : role === 'nurse' ? 'brood' : 'explore',
+        thresholds: taskThresholds(role, age),
+        state: role === 'nurse' ? 'brood care' : 'exploring',
+        carrying: 0,
+        carryingWater: 0,
+        carryingCorpse: null,
+        age,
+        energy: rand(72, 100),
+        hydration: rand(72, 100),
+        health: rand(82, 100),
+        turnNoise,
+        baseTurnNoise: turnNoise,
+        explorationDrive: 0,
+        life: 1,
+        cooldown: rand(0, 120),
+        mill: null,
+        alarmTimer: 0,
+        retreatTimer: 0,
+        recruitTimer: 0,
+        taskLock: rand(0, 160),
+        memory: {
+          foodX: null,
+          foodY: null,
+          foodStrength: 0,
+          foodAge: 0,
+          enemyX: null,
+          enemyY: null
+        }
+      };
+    }
+
+    function createQueen(id, x = world.nest.x, y = world.nest.y - 18, age = 260, reserves = 160) {
+      return {
+        id,
+        role: 'queen',
+        x,
+        y,
+        homeX: x,
+        homeY: y,
+        angle: rand(0, Math.PI * 2),
+        age,
+        health: 100,
+        energy: 96,
+        hydration: 96,
+        eggTimer: 0,
+        reserves,
+        state: 'founding',
+        pulse: rand(0, Math.PI * 2)
+      };
+    }
+
+    function setAntCaste(ant, role) {
+      const species = speciesConfig();
+      ant.role = role;
+      ant.speed = (role === 'soldier' ? rand(0.55, 0.85) : rand(0.75, 1.15)) * species.speed;
+      ant.thresholds = taskThresholds(role, ant.age);
+      ant.task = role === 'soldier' ? 'patrol' : role === 'nurse' ? 'brood' : 'explore';
+      ant.state = role === 'nurse' ? 'brood care' : 'exploring';
+    }
+
+    function setupFields() {
+      world.pheromones.food = new Field(world.grid);
+      world.pheromones.water = new Field(world.grid);
+      world.pheromones.nest = new Field(world.grid);
+      world.pheromones.alarm = new Field(world.grid);
+      world.pheromones.death = new Field(world.grid);
+      world.pheromones.avoid = new Field(world.grid);
+    }
+
+    function setupRooms() {
+      world.rooms = [
+        { name: 'queen', x: world.nest.x - 45, y: world.nest.y - 34, w: 90, h: 42, color: '#b990ff' },
+        { name: 'brood', x: world.nest.x - 70, y: world.nest.y + 10, w: 72, h: 48, color: '#65a7e8' },
+        { name: 'store', x: world.nest.x + 8, y: world.nest.y + 10, w: 68, h: 48, color: '#e9b65f' }
+      ];
+    }
+
+    function clearWorldState() {
+      setupFields();
+      setupRooms();
+      world.ants = [];
+      world.queens = [];
+      world.corpses = [];
+      world.mills = [];
+      world.food = [];
+      world.water = [];
+      world.enemies = [];
+      world.rocks = [];
+      world.selected = null;
+      world.foodStore = 0;
+      world.waterStore = 0;
+      world.eggs = 0;
+      world.larvae = 0;
+      world.pupae = 0;
+      world.day = 0;
+      world.randomState = world.seed;
+      world.rainTimer = 0;
+      world.disturbanceTimer = 0;
+      world.broodCareBoost = 0;
+      const species = speciesConfig();
+      world.broodClimate = {
+        temp: species.broodTemp,
+        humidity: species.broodHumidity,
+        stress: 0
+      };
+      world.statsHistory = [];
+      world.lastStatsDay = 0;
+      world.traffic.counts = [];
+      world.traffic.max = 0;
+      world.traffic.meanOccupied = 0;
+      world.traffic.congestedCells = 0;
+      world.stats = {
+        foodTrips: 0,
+        foodCollected: 0,
+        waterTrips: 0,
+        waterCollected: 0,
+        corpseMoves: 0
+      };
+    }
+
+    function setupFoundingColony() {
+      clearWorldState();
+      const species = speciesConfig();
+      ui.antCount.value = 0;
+      world.foodStore = species.foundingFood;
+      world.waterStore = species.foundingWater;
+      world.eggs = species.foundingEggs;
+      world.larvae = 0;
+      world.pupae = 0;
+      world.queens.push(createQueen(1, world.nest.x, world.nest.y - 18, 260, species.queenReserve));
+      addFood(250, 185, 80);
+      world.rocks.push({ x: 390, y: 250, r: 38 });
+      world.rocks.push({ x: 765, y: 330, r: 44 });
+      syncLabels();
+      syncStats();
+    }
+
+    function setupMatureColony() {
+      clearWorldState();
+      const species = speciesConfig();
+      ui.antCount.value = 420;
+      ui.soldierRatio.value = species.soldierRatioDefault;
+      world.foodStore = species.matureFood;
+      world.waterStore = species.matureWater;
+      world.eggs = species.matureEggs;
+      world.larvae = species.matureLarvae;
+      world.pupae = species.maturePupae;
+      world.queens.push(createQueen(1, world.nest.x, world.nest.y - 18, 620, species.matureQueenReserve));
+      for (let i = 0; i < Number(ui.antCount.value); i++) world.ants.push(createAnt(i + 1));
+      seedMatureEnvironment();
+      syncLabels();
+      syncStats();
+    }
+
+    function resetWorld() {
+      setupFoundingColony();
+    }
+
+    function syncAntCountControl() {
+      ui.antCount.value = clamp(world.ants.length, Number(ui.antCount.min), Number(ui.antCount.max));
+      syncLabels();
+    }
+
+    function seedMatureEnvironment() {
+      addFood(210, 170, 135);
+      addWater(315, 140, 110);
+      addFood(960, 160, 105);
+      addFood(900, 610, 90);
+      world.rocks.push({ x: 390, y: 250, r: 38 });
+      world.rocks.push({ x: 765, y: 330, r: 44 });
+      world.rocks.push({ x: 480, y: 610, r: 32 });
+    }
+
+    function addFood(x, y, amount = 70) {
+      world.food.push({ x, y, amount, max: amount, r: clamp(10 + amount * 0.045, 12, 22) });
+    }
+
+    function addWater(x, y, amount = 70) {
+      world.water.push({ x, y, amount, max: amount, r: clamp(10 + amount * 0.05, 12, 24) });
+    }
+
+    function addEnemy(x, y) {
+      world.enemies.push({ x, y, r: 18, health: 100, pulse: random() * 10 });
+    }
+
+    function isInsideNestArea(x, y, padding = 36) {
+      return dist(x, y, world.nest.x, world.nest.y) < world.nest.radius + padding;
+    }
+
+    function addCorpse(x, y, role = 'worker') {
+      world.corpses.push({
+        id: world.corpses.length + 1,
+        x,
+        y,
+        role,
+        age: 0,
+        carriedBy: null,
+        disposed: false,
+        chemical: rand(80, 130)
+      });
+    }
+
+    function spawnAnts(count, role = null, newborn = false) {
+      const start = world.ants.length + 1;
+      for (let i = 0; i < count; i++) {
+        const ant = createAnt(start + i);
+        if (role) {
+          setAntCaste(ant, role);
+        }
+        if (newborn) {
+          ant.age = rand(0, 2);
+          ant.energy = rand(86, 100);
+          ant.hydration = rand(86, 100);
+          ant.health = 100;
+          if (world.ants.length < 30) setAntCaste(ant, 'nurse');
+          else setAntCaste(ant, ant.role);
+        }
+        world.ants.push(ant);
+      }
+      syncAntCountControl();
+    }
+
+    function addAntAt(x, y, caste) {
+      if (caste === 'larva') {
+        world.larvae += 1;
+        syncStats();
+        return null;
+      }
+      if (caste === 'queen') {
+        const queen = createQueen(world.queens.length + 1, clamp(x, 10, world.width - 10), clamp(y, 10, world.height - 10), rand(120, 900), 160);
+        world.queens.push(queen);
+        world.selected = queen;
+        syncStats();
+        return null;
+      }
+      const ant = createAnt(world.ants.length + 1);
+      ant.x = clamp(x, 10, world.width - 10);
+      ant.y = clamp(y, 10, world.height - 10);
+      setAntCaste(ant, caste);
+      ant.angle = rand(0, Math.PI * 2);
+      world.ants.push(ant);
+      world.selected = ant;
+      syncAntCountControl();
+      return ant;
+    }
+
+    function nearestCorpse(ant) {
+      let best = null;
+      let bestD = Infinity;
+      for (const corpse of world.corpses) {
+        if (corpse.disposed) continue;
+        if (corpse.carriedBy && corpse.carriedBy !== ant.id) continue;
+        const d = dist(ant.x, ant.y, corpse.x, corpse.y);
+        if (d < bestD) {
+          bestD = d;
+          best = corpse;
+        }
+      }
+      return [best, bestD];
+    }
+
+    function clearPheromones() {
+      for (const field of Object.values(world.pheromones)) field.data.fill(0);
+    }
+
+    function induceAlarmAt(x = world.nest.x + 190, y = world.nest.y) {
+      for (let i = 0; i < 28; i++) {
+        const a = rand(0, Math.PI * 2);
+        const r = rand(0, 90);
+        world.pheromones.alarm.add(x + Math.cos(a) * r, y + Math.sin(a) * r, 50);
+      }
+      addEnemy(x, y);
+      for (const ant of world.ants) {
+        if (dist(ant.x, ant.y, x, y) < 180) {
+          ant.memory.enemyX = x;
+          ant.memory.enemyY = y;
+          ant.alarmTimer = ant.role === 'soldier' ? rand(220, 420) : rand(120, 260);
+          ant.retreatTimer = ant.role === 'soldier' ? 0 : rand(120, 260);
+          ant.recruitTimer = ant.role === 'soldier' ? rand(180, 360) : 0;
+        }
+      }
+    }
+
+    function triggerAlert(x, y) {
+      induceAlarmAt(x, y);
+      syncStats();
+      return {
+        enemies: world.enemies.length,
+        ants: world.ants.length,
+        alarmPheromone: pheromoneSum('alarm')
+      };
+    }
+
+    function createAntMill(x = world.nest.x - 210, y = world.nest.y + 95, radius = 72) {
+      const species = speciesConfig();
+      const effectiveRadius = radius * clamp(species.millSusceptibility, 0.9, 1.45);
+      const mill = { id: world.mills.length + 1, x, y, radius: effectiveRadius, dir: random() < 0.5 ? -1 : 1, age: 0 };
+      world.mills.push(mill);
+
+      for (let i = 0; i < 120; i++) {
+        const a = i / 120 * Math.PI * 2;
+        world.pheromones.food.add(x + Math.cos(a) * effectiveRadius, y + Math.sin(a) * effectiveRadius, 90 * species.pheromoneDeposit);
+      }
+
+      let assigned = 0;
+      for (const ant of world.ants) {
+        if (ant.role === 'soldier' || ant.health <= 0) continue;
+        const d = dist(ant.x, ant.y, x, y);
+        if (d < effectiveRadius + 180 * species.millSusceptibility && assigned < 130 * species.millSusceptibility) {
+          const a = assigned / 130 * Math.PI * 2 + rand(-0.12, 0.12);
+          ant.x = x + Math.cos(a) * (effectiveRadius + rand(-7, 7));
+          ant.y = y + Math.sin(a) * (effectiveRadius + rand(-7, 7));
+          ant.angle = a + mill.dir * Math.PI / 2;
+          ant.mill = mill;
+          ant.carrying = 0;
+          ant.carryingCorpse = null;
+          ant.retreatTimer = 0;
+          ant.recruitTimer = 0;
+          assigned += 1;
+        }
+      }
+    }
+
+    function breakAntMills() {
+      world.mills = [];
+      for (const ant of world.ants) {
+        if (ant.mill) {
+          ant.mill = null;
+          ant.state = 'disoriented';
+          ant.angle += rand(-1.4, 1.4);
+        }
+      }
+    }
+
+    function dilutePheromones(multiplier) {
+      for (const field of Object.values(world.pheromones)) {
+        for (let i = 0; i < field.data.length; i++) field.data[i] *= multiplier;
+      }
+    }
+
+    function triggerHumanDisturbance() {
+      world.disturbanceTimer = Math.max(world.disturbanceTimer, 0.45);
+      breakAntMills();
+      for (const ant of world.ants) {
+        if (dist(ant.x, ant.y, world.nest.x, world.nest.y) < 260) {
+          ant.angle += rand(-Math.PI, Math.PI);
+          ant.retreatTimer = Math.max(ant.retreatTimer, rand(80, 180));
+          ant.energy = Math.max(0, ant.energy - rand(2, 8));
+        }
+      }
+      for (let i = 0; i < 35; i++) {
+        const a = rand(0, Math.PI * 2);
+        const r = rand(60, 260);
+        world.pheromones.avoid.add(world.nest.x + Math.cos(a) * r, world.nest.y + Math.sin(a) * r, 95);
+      }
+      dilutePheromones(0.45);
+    }
+
+    function triggerRain() {
+      world.rainTimer = Math.max(world.rainTimer, 1.1);
+      for (const name of ['food', 'water', 'nest', 'alarm', 'death', 'avoid']) {
+        const field = world.pheromones[name];
+        for (let i = 0; i < field.data.length; i++) field.data[i] *= name === 'water' ? 0.5 : 0.18;
+      }
+      ui.humidity.value = 90;
+      ui.temperature.value = Math.min(Number(ui.temperature.value), 24);
+      syncLabels();
+    }
+
+    function applyActiveRainWash(dt) {
+      if (world.rainTimer <= 0) return;
+      const drydown = Math.pow(0.986, dt / 9);
+      const waterDrydown = Math.pow(0.992, dt / 9);
+      for (const name of ['food', 'nest', 'alarm', 'death', 'avoid']) {
+        const field = world.pheromones[name];
+        for (let i = 0; i < field.data.length; i++) field.data[i] *= drydown;
+      }
+      const waterField = world.pheromones.water;
+      for (let i = 0; i < waterField.data.length; i++) waterField.data[i] *= waterDrydown;
+    }
+
+    function triggerHeatwave() {
+      ui.temperature.value = 40;
+      ui.humidity.value = 20;
+      for (const ant of world.ants) ant.hydration = Math.max(0, ant.hydration - rand(8, 18));
+      syncLabels();
+    }
+
+    function triggerFlood() {
+      triggerRain();
+      for (const ant of world.ants) {
+        if (isInsideNestArea(ant.x, ant.y, 25) && random() < 0.18) ant.health = 0;
+        else if (isInsideNestArea(ant.x, ant.y, 50)) ant.retreatTimer = Math.max(ant.retreatTimer, rand(160, 320));
+      }
+      world.eggs = Math.floor(world.eggs * 0.55);
+      world.larvae = Math.floor(world.larvae * 0.72);
+      world.pupae = Math.floor(world.pupae * 0.82);
+    }
+
+    function triggerMassDeath() {
+      const victims = [];
+      for (const ant of world.ants) {
+        const nearNest = dist(ant.x, ant.y, world.nest.x, world.nest.y) < 310;
+        if (nearNest && random() < 0.32) victims.push(ant);
+      }
+      for (const ant of victims) ant.health = 0;
+      for (let i = 0; i < 45; i++) {
+        const a = rand(0, Math.PI * 2);
+        const r = rand(0, 260);
+        world.pheromones.death.add(world.nest.x + Math.cos(a) * r, world.nest.y + Math.sin(a) * r, 120);
+      }
+    }
+
+    function paintPheromone(x, y) {
+      const type = ui.fakePheromone.value;
+      const radius = Number(ui.brushSize.value);
+      const strength = Number(ui.brushStrength.value) / 100;
+      if (type === 'mill') {
+        for (let i = 0; i < 96; i++) {
+          const a = i / 96 * Math.PI * 2;
+          world.pheromones.food.add(x + Math.cos(a) * radius, y + Math.sin(a) * radius, 80 * strength);
+        }
+        return;
+      }
+
+      const field = world.pheromones[type];
+      if (!field) return;
+      const steps = Math.max(18, Math.floor(radius / 2));
+      for (let i = 0; i < steps; i++) {
+        const a = rand(0, Math.PI * 2);
+        const r = Math.sqrt(random()) * radius;
+        field.add(x + Math.cos(a) * r, y + Math.sin(a) * r, 45 * strength);
+      }
+      field.add(x, y, 130 * strength);
+    }
+
+    function eraseAt(x, y) {
+      let removed = false;
+      const antIndex = world.ants.findIndex(ant => dist(x, y, ant.x, ant.y) <= 14);
+      if (antIndex >= 0) {
+        const [removedAnt] = world.ants.splice(antIndex, 1);
+        if (world.selected === removedAnt) world.selected = null;
+        removed = true;
+      }
+
+      const corpseIndex = world.corpses.findIndex(corpse => dist(x, y, corpse.x, corpse.y) <= 16);
+      if (!removed && corpseIndex >= 0) {
+        world.corpses.splice(corpseIndex, 1);
+        removed = true;
+      }
+
+      const queenIndex = world.queens.findIndex(queen => dist(x, y, queen.x, queen.y) <= 18);
+      if (!removed && queenIndex >= 0) {
+        if (world.selected === world.queens[queenIndex]) world.selected = null;
+        world.queens.splice(queenIndex, 1);
+        removed = true;
+      }
+
+      const rockIndex = world.rocks.findIndex(rock => dist(x, y, rock.x, rock.y) <= rock.r + 12);
+      if (!removed && rockIndex >= 0) {
+        world.rocks.splice(rockIndex, 1);
+        removed = true;
+      }
+
+      const enemyIndex = world.enemies.findIndex(enemy => dist(x, y, enemy.x, enemy.y) <= enemy.r + 22);
+      if (!removed && enemyIndex >= 0) {
+        world.enemies.splice(enemyIndex, 1);
+        removed = true;
+      }
+
+      const foodIndex = world.food.findIndex(food => dist(x, y, food.x, food.y) <= food.r + 18);
+      if (!removed && foodIndex >= 0) {
+        world.food.splice(foodIndex, 1);
+        removed = true;
+      }
+
+      const waterIndex = world.water.findIndex(water => dist(x, y, water.x, water.y) <= water.r + 18);
+      if (!removed && waterIndex >= 0) {
+        world.water.splice(waterIndex, 1);
+        removed = true;
+      }
+
+      if (!removed) {
+        const radius = 42;
+        for (const field of Object.values(world.pheromones)) {
+          for (let gy = 0; gy < field.rows; gy++) {
+            for (let gx = 0; gx < field.cols; gx++) {
+              const cx = gx * field.size + field.size / 2;
+              const cy = gy * field.size + field.size / 2;
+              if (dist(x, y, cx, cy) < radius) field.data[field.index(gx, gy)] *= 0.18;
+            }
+          }
+        }
+      }
+    }
+
+    function nearestFood(ant) {
+      let best = null;
+      let bestD = Infinity;
+      for (const food of world.food) {
+        if (food.amount <= 0) continue;
+        const d = dist(ant.x, ant.y, food.x, food.y);
+        if (d < bestD) {
+          bestD = d;
+          best = food;
+        }
+      }
+      return [best, bestD];
+    }
+
+    function nearestWater(ant) {
+      let best = null;
+      let bestD = Infinity;
+      for (const water of world.water) {
+        if (water.amount <= 0) continue;
+        const d = dist(ant.x, ant.y, water.x, water.y);
+        if (d < bestD) {
+          bestD = d;
+          best = water;
+        }
+      }
+      return [best, bestD];
+    }
+
+    function nearestEnemy(ant) {
+      let best = null;
+      let bestD = Infinity;
+      for (const enemy of world.enemies) {
+        if (enemy.health <= 0) continue;
+        const d = dist(ant.x, ant.y, enemy.x, enemy.y);
+        if (d < bestD) {
+          bestD = d;
+          best = enemy;
+        }
+      }
+      return [best, bestD];
+    }
+
+    function isInNest(ant) {
+      return dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius;
+    }
+
+    function rebuildTrafficMap() {
+      const traffic = world.traffic;
+      traffic.cols = Math.ceil(world.width / traffic.cell);
+      traffic.rows = Math.ceil(world.height / traffic.cell);
+      const totalCells = traffic.cols * traffic.rows;
+      if (traffic.counts.length !== totalCells) traffic.counts = new Uint16Array(totalCells);
+      else traffic.counts.fill(0);
+      for (const ant of world.ants) {
+        if (ant.health <= 0) continue;
+        const gx = clamp(Math.floor(ant.x / traffic.cell), 0, traffic.cols - 1);
+        const gy = clamp(Math.floor(ant.y / traffic.cell), 0, traffic.rows - 1);
+        traffic.counts[gy * traffic.cols + gx] += 1;
+      }
+      let occupied = 0;
+      let sumOccupied = 0;
+      let congestedCells = 0;
+      let max = 0;
+      for (const count of traffic.counts) {
+        if (!count) continue;
+        occupied += 1;
+        sumOccupied += count;
+        if (count > max) max = count;
+        if (count >= 7) congestedCells += 1;
+      }
+      traffic.max = max;
+      traffic.meanOccupied = occupied ? sumOccupied / occupied : 0;
+      traffic.congestedCells = congestedCells;
+    }
+
+    function trafficAt(x, y) {
+      const traffic = world.traffic;
+      if (!traffic.counts.length) return 0;
+      const gx = clamp(Math.floor(x / traffic.cell), 0, traffic.cols - 1);
+      const gy = clamp(Math.floor(y / traffic.cell), 0, traffic.rows - 1);
+      return traffic.counts[gy * traffic.cols + gx] || 0;
+    }
+
+    function trafficPressure(ant) {
+      const aheadDistance = 30;
+      const here = trafficAt(ant.x, ant.y);
+      const ahead = trafficAt(
+        ant.x + Math.cos(ant.angle) * aheadDistance,
+        ant.y + Math.sin(ant.angle) * aheadDistance
+      );
+      const lateralLeft = trafficAt(
+        ant.x + Math.cos(ant.angle - Math.PI / 2) * 22,
+        ant.y + Math.sin(ant.angle - Math.PI / 2) * 22
+      );
+      const lateralRight = trafficAt(
+        ant.x + Math.cos(ant.angle + Math.PI / 2) * 22,
+        ant.y + Math.sin(ant.angle + Math.PI / 2) * 22
+      );
+      const pressure = clamp((here * 0.58 + ahead * 0.85 + Math.max(lateralLeft, lateralRight) * 0.3 - 3) / 10, 0, 1);
+      return { pressure, here, ahead, left: lateralLeft, right: lateralRight };
+    }
+
+    function avoidRocks(ant) {
+      for (const rock of world.rocks) {
+        const d = dist(ant.x, ant.y, rock.x, rock.y);
+        if (d < rock.r + 10) {
+          ant.angle = angleTo(rock.x, rock.y, ant.x, ant.y) + rand(-0.45, 0.45);
+          ant.x += Math.cos(ant.angle) * 3;
+          ant.y += Math.sin(ant.angle) * 3;
+        }
+      }
+    }
+
+    function steerByField(ant, field, invert = false) {
+      const senseDistance = ant.role === 'soldier' ? 38 : 48;
+      const side = 0.62;
+      const forward = field.sense(ant.x, ant.y, ant.angle, senseDistance);
+      const left = field.sense(ant.x, ant.y, ant.angle - side, senseDistance);
+      const right = field.sense(ant.x, ant.y, ant.angle + side, senseDistance);
+      const total = left + right + forward;
+      const detectionThreshold = Number(ui.senseThreshold.value);
+      if (total < detectionThreshold) return Math.max(forward, left, right);
+      const responseExponent = 1 + clamp((total - detectionThreshold) / (detectionThreshold * 8 + 260), 0, 0.7);
+      const contrastFloor = detectionThreshold * 0.35;
+      const leftSignal = Math.pow(left + contrastFloor, responseExponent);
+      const rightSignal = Math.pow(right + contrastFloor, responseExponent);
+      const sideContrast = (rightSignal - leftSignal) / (leftSignal + rightSignal + detectionThreshold);
+      const aheadBias = forward < Math.max(left, right) ? 1.35 : 0.82;
+      const trailFocus = clamp((total - detectionThreshold) / (detectionThreshold * 4 + 120), 0, 1);
+      let turn = clamp(sideContrast * (0.26 + trailFocus * 0.18) * aheadBias, -0.3, 0.3);
+      ant.angle += invert ? -turn : turn;
+      ant.trailFocus = Math.max(ant.trailFocus || 0, trailFocus);
+      return Math.max(forward, left, right);
+    }
+
+    function updateAnt(ant, dt) {
+      const species = speciesConfig();
+      if (ant.health <= 0) {
+        ant.state = 'dead';
+        ant.life = Math.max(0, ant.life - 0.003 * dt);
+        return;
+      }
+
+      ant.cooldown -= dt;
+      ant.alarmTimer = Math.max(0, ant.alarmTimer - dt);
+      ant.retreatTimer = Math.max(0, ant.retreatTimer - dt);
+      ant.recruitTimer = Math.max(0, ant.recruitTimer - dt);
+      ant.taskLock = Math.max(0, ant.taskLock - dt);
+      ant.trailFocus = 0;
+      const resourcePressure = Number(ui.foodSpawn.value) / 100;
+      const heatStress = Number(ui.temperature.value) > 32 ? 1 + (Number(ui.temperature.value) - 32) * 0.045 : 1;
+      const dryStress = Number(ui.humidity.value) < 45 ? 1 + (45 - Number(ui.humidity.value)) * 0.012 : 1;
+      const waterStress = heatStress * dryStress;
+      const pressureMultiplier = 0.75 + resourcePressure * 0.8;
+      const foodShortage = world.foodStore <= 0 ? 1.75 : world.foodStore < 12 ? 1.18 : 1;
+      const waterShortage = world.waterStore <= 0 ? 1.95 : world.waterStore < 10 ? 1.22 : 1;
+      ant.energy -= 0.0014 * dt * foodShortage * pressureMultiplier * species.metabolism;
+      ant.hydration -= 0.00125 * dt * waterShortage * pressureMultiplier * waterStress * species.hydrationLoss;
+      ant.age += 0.0008 * dt;
+      if (ant.energy < 0) ant.health -= 0.004 * dt;
+      if (ant.hydration < 0) ant.health -= 0.007 * dt;
+      if (ant.age > 180 && random() < 0.00014 * dt) ant.health = 0;
+      ant.energy = clamp(ant.energy, 0, 100);
+      ant.hydration = clamp(ant.hydration, 0, 100);
+
+      const strength = Number(ui.pheromoneStrength.value) / 80;
+      const pressure = colonyPressure();
+      const activity = environmentActivity();
+      const [enemy, enemyD] = nearestEnemy(ant);
+      const alarmHere = world.pheromones.alarm.sample(ant.x, ant.y);
+      const avoidHere = world.pheromones.avoid.sample(ant.x, ant.y);
+      const rainActive = world.rainTimer > 0;
+      const traffic = trafficPressure(ant);
+      const trafficLoad = traffic.pressure;
+      ant.trafficLoad = trafficLoad;
+      ant.energy = Math.max(0, ant.energy - 0.0005 * dt * trafficLoad * (ant.carrying || ant.carryingWater ? 1.55 : 1));
+      const pheromoneDeposit = (rainActive ? 0.03 : 1) * (1 - trafficLoad * 0.38);
+      if (ant.baseTurnNoise == null) ant.baseTurnNoise = ant.turnNoise;
+      const foodMemoryStrength = ant.memory?.foodStrength || 0;
+      const staleFoodMemory = ant.memory?.foodX != null
+        && foodMemoryStrength > 0.01
+        && !world.food.some(item => dist(item.x, item.y, ant.memory.foodX, ant.memory.foodY) < 55);
+      const adaptiveNeed = clamp(
+        trafficLoad * 0.75
+        + (staleFoodMemory ? 0.35 + foodMemoryStrength * 0.35 : 0)
+        + (ant.energy < 48 || ant.hydration < 48 ? 0.18 : 0),
+        0,
+        1
+      );
+      const exploitContext = ant.carrying || ant.carryingWater || ant.carryingCorpse || ant.trailFocus > 0.35;
+      const targetDrive = exploitContext ? adaptiveNeed * 0.45 : adaptiveNeed;
+      ant.explorationDrive = ant.explorationDrive == null
+        ? targetDrive
+        : ant.explorationDrive + (targetDrive - ant.explorationDrive) * clamp(0.018 * dt, 0, 0.32);
+      const roleNoiseLimit = ant.role === 'soldier' ? 0.095 : 0.14;
+      const adaptiveNoise = ant.baseTurnNoise * (1 + ant.explorationDrive * 1.05)
+        + ant.explorationDrive * 0.018
+        - (exploitContext ? 0.006 : 0);
+      ant.turnNoise = clamp(adaptiveNoise, ant.baseTurnNoise * 0.72, roleNoiseLimit);
+
+      const nearNest = dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius + 80;
+      if (nearNest) {
+        if (ant.energy < 92 && world.foodStore > 0) {
+          const feeding = Math.min(world.foodStore, 0.00018 * dt);
+          world.foodStore -= feeding;
+          ant.energy = Math.min(100, ant.energy + feeding * 36);
+        }
+        if (ant.hydration < 94 && world.waterStore > 0) {
+          const drinking = Math.min(world.waterStore, 0.00032 * dt);
+          world.waterStore -= drinking;
+          ant.hydration = Math.min(100, ant.hydration + drinking * 46);
+        }
+        if (ant.energy > 70 && ant.hydration > 70 && ant.health < 100) {
+          ant.health = Math.min(100, ant.health + 0.002 * dt);
+        }
+      }
+
+      if (ant.energy < -25 || ant.hydration < -25) {
+        ant.state = ant.hydration < ant.energy ? 'desiccation stress' : 'starvation stress';
+      }
+
+      if (avoidHere > 16) {
+        steerByField(ant, world.pheromones.avoid, true);
+        ant.angle += rand(-0.08, 0.08);
+      }
+
+      const recoveryNeeded = ant.role !== 'soldier'
+        && !ant.carrying
+        && !ant.carryingWater
+        && !ant.carryingCorpse
+        && !ant.mill
+        && !isInNest(ant)
+        && (ant.energy < 30 || ant.hydration < 30);
+
+      if (recoveryNeeded) {
+        ant.task = ant.hydration < ant.energy ? 'water' : 'food';
+        ant.state = 'returning to recover';
+        const homeAngle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+        ant.angle += normAngle(homeAngle - ant.angle) * 0.13;
+        world.pheromones.nest.add(ant.x, ant.y, 2.4 * strength * species.pheromoneDeposit * pheromoneDeposit);
+        if (random() < 0.012 * dt) ant.angle += rand(-0.22, 0.22);
+      } else
+
+      if (rainActive && ant.role !== 'soldier' && !isInNest(ant)) {
+        ant.state = 'sheltering from rain';
+        const homeAngle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+        ant.angle += normAngle(homeAngle - ant.angle) * 0.11;
+        if (random() < 0.018 * dt) ant.angle += rand(-0.25, 0.25);
+      } else
+
+      if (ant.mill && world.mills.includes(ant.mill)) {
+        ant.state = 'death spiral';
+        const radial = angleTo(ant.mill.x, ant.mill.y, ant.x, ant.y);
+        const distanceError = dist(ant.x, ant.y, ant.mill.x, ant.mill.y) - ant.mill.radius;
+        const tangent = radial + ant.mill.dir * Math.PI / 2 - distanceError * 0.012;
+        ant.angle += normAngle(tangent - ant.angle) * 0.18;
+        world.pheromones.food.add(ant.x, ant.y, 10.5 * strength * species.pheromoneDeposit * species.millSusceptibility * pheromoneDeposit);
+        ant.energy -= 0.026 * dt * species.millSusceptibility;
+        if (ant.energy <= 0) ant.health -= 0.045 * dt * species.millSusceptibility;
+      } else
+
+      if (enemy && enemyD < 130) {
+        ant.memory.enemyX = enemy.x;
+        ant.memory.enemyY = enemy.y;
+        ant.alarmTimer = Math.max(ant.alarmTimer, ant.role === 'soldier' ? 220 : 120);
+        if (ant.role === 'soldier') ant.recruitTimer = Math.max(ant.recruitTimer, 260);
+        else ant.retreatTimer = Math.max(ant.retreatTimer, 150);
+        world.pheromones.alarm.add(ant.x, ant.y, 5.2 * strength * species.pheromoneDeposit * (0.8 + pressure.threat) * pheromoneDeposit);
+      } else if (alarmHere > 28 && ant.role !== 'soldier') {
+        ant.retreatTimer = Math.max(ant.retreatTimer, 80 + alarmHere * 0.9);
+      } else if (alarmHere > 22 && ant.role === 'soldier') {
+        ant.recruitTimer = Math.max(ant.recruitTimer, 100 + alarmHere * 0.55);
+      }
+
+      if (ant.recruitTimer > 0 && ant.role === 'soldier') {
+        ant.task = 'defense';
+        ant.state = 'recruited defense';
+        world.pheromones.alarm.add(ant.x, ant.y, 3.6 * strength * species.pheromoneDeposit * pheromoneDeposit);
+        const targetX = ant.memory.enemyX ?? world.nest.x;
+        const targetY = ant.memory.enemyY ?? world.nest.y;
+        const targetD = dist(ant.x, ant.y, targetX, targetY);
+        if (targetD > 34) {
+          ant.angle += normAngle(angleTo(ant.x, ant.y, targetX, targetY) - ant.angle) * 0.045;
+          steerByField(ant, world.pheromones.alarm);
+        } else {
+          ant.angle += rand(-0.12, 0.12);
+        }
+        if (enemy && enemyD < enemy.r + 10 && ant.cooldown <= 0) {
+          enemy.health -= 8;
+          ant.health -= 0.4;
+          ant.cooldown = 34;
+        }
+      } else if (ant.retreatTimer > 0 && ant.role !== 'soldier') {
+        ant.state = 'retreating';
+        const homeAngle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+        const dangerAngle = ant.memory.enemyX == null ? homeAngle : angleTo(ant.memory.enemyX, ant.memory.enemyY, ant.x, ant.y);
+        const desired = isInNest(ant) ? dangerAngle : homeAngle;
+        ant.angle += normAngle(desired - ant.angle) * 0.12;
+        steerByField(ant, world.pheromones.alarm, true);
+        world.pheromones.nest.add(ant.x, ant.y, 1.4 * strength * species.pheromoneDeposit * pheromoneDeposit);
+      } else {
+        if (ant.carryingCorpse) {
+          ant.state = 'carrying corpse';
+          const dumpX = world.nest.x + 160;
+          const dumpY = world.nest.y + 130;
+          ant.angle += normAngle(angleTo(ant.x, ant.y, dumpX, dumpY) - ant.angle) * 0.08;
+          ant.carryingCorpse.x = ant.x - Math.cos(ant.angle) * 7;
+          ant.carryingCorpse.y = ant.y - Math.sin(ant.angle) * 7;
+          if (dist(ant.x, ant.y, dumpX, dumpY) < 30) {
+            ant.carryingCorpse.disposed = true;
+            ant.carryingCorpse.carriedBy = null;
+            ant.carryingCorpse = null;
+            world.stats.corpseMoves += 1;
+            ant.energy = Math.max(0, ant.energy - 7);
+          }
+        } else {
+          const deathCue = world.pheromones.death.sample(ant.x, ant.y);
+          const [corpse, corpseD] = nearestCorpse(ant);
+          const broodStimulus = clamp((world.larvae / 75 + world.eggs / 120 + world.pupae / 140) * (0.45 + pressure.brood), 0, 1.6);
+          const foodStimulus = clamp((68 - ant.energy) / 58 + (34 - world.foodStore) / 42 + pressure.hunger * 0.65, 0, 1.7);
+          const waterStimulus = clamp((68 - ant.hydration) / 52 + (28 - world.waterStore) / 38 + (waterStress - 1) * 0.78, 0, 1.8);
+          const corpseStimulus = clamp(deathCue / 82 + (corpseD < 130 ? (130 - corpseD) / 120 : 0), 0, 1.7);
+          const defenseStimulus = clamp(alarmHere / 82 + (enemyD < 160 ? (160 - enemyD) / 150 : 0) + pressure.threat * 0.24, 0, 1.8);
+          const urgentTask = corpseStimulus > 0.95 || waterStimulus > 1.15 || foodStimulus > 1.2;
+          if ((ant.taskLock <= 0 || urgentTask) && !ant.carrying && !ant.carryingWater && ant.role !== 'soldier') {
+            const oldTask = ant.task;
+            ant.task = chooseAntTask(ant, {
+              brood: broodStimulus,
+              food: foodStimulus,
+              water: waterStimulus,
+              corpse: corpseStimulus,
+              defense: defenseStimulus
+            });
+            ant.taskLock = ant.task === oldTask ? rand(130, 300) : rand(240, 520);
+          }
+          const canClean = ant.role !== 'soldier' && !ant.carrying && ant.task === 'corpse' && (deathCue > 8 || corpseD < 95);
+          if (corpse && canClean) {
+            ant.state = corpseD < 12 ? 'lifting corpse' : 'corpse cleanup';
+            ant.angle += normAngle(angleTo(ant.x, ant.y, corpse.x, corpse.y) - ant.angle) * 0.07;
+            steerByField(ant, world.pheromones.death);
+            if (corpseD < 12 && !corpse.carriedBy) {
+              corpse.carriedBy = ant.id;
+              ant.carryingCorpse = corpse;
+            }
+          }
+        }
+
+        if (ant.carryingCorpse) {
+          // Corpse transport has priority over normal task allocation.
+        } else if (ant.state === 'corpse cleanup' || ant.state === 'lifting corpse') {
+          // Keep following the death cue this frame.
+        }
+
+        if (ant.carryingCorpse || ant.state === 'corpse cleanup' || ant.state === 'lifting corpse') {
+          // Already handled above.
+        } else if (ant.role === 'soldier' && !ant.carrying && !ant.carryingWater) {
+          ant.task = 'patrol';
+          ant.state = 'patrolling';
+          const patrolRadius = world.nest.radius + 55;
+          const radial = angleTo(world.nest.x, world.nest.y, ant.x, ant.y);
+          const distanceError = dist(ant.x, ant.y, world.nest.x, world.nest.y) - patrolRadius;
+          const desired = radial + Math.PI / 2 - distanceError * 0.01;
+          ant.angle += normAngle(desired - ant.angle) * 0.035;
+        } else if (ant.task === 'brood' && !ant.carrying && !ant.carryingWater && dist(ant.x, ant.y, world.nest.x, world.nest.y) >= world.nest.radius + 95) {
+          ant.state = 'returning to brood';
+          const target = world.rooms[1];
+          ant.angle += normAngle(angleTo(ant.x, ant.y, target.x + target.w / 2, target.y + target.h / 2) - ant.angle) * 0.06;
+          steerByField(ant, world.pheromones.nest);
+        } else if (ant.task === 'brood' && !ant.carrying && !ant.carryingWater && dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius + 95) {
+          ant.state = 'brood care';
+          const target = world.rooms[1];
+          ant.angle += normAngle(angleTo(ant.x, ant.y, target.x + target.w / 2, target.y + target.h / 2) - ant.angle) * 0.018;
+          ant.energy = Math.max(0, ant.energy - 0.00035 * dt);
+          if (random() < 0.0009 * dt * (0.5 + pressure.brood) && world.foodStore > 0 && world.waterStore > 0) {
+            world.foodStore = Math.max(0, world.foodStore - 0.12);
+            world.waterStore = Math.max(0, world.waterStore - 0.08);
+            world.broodCareBoost += 0.018 * dt;
+          }
+          if (world.waterStore > 0 && world.broodClimate.humidity < speciesConfig().broodHumidity - 4 && random() < 0.0012 * dt) {
+            const humidify = Math.min(world.waterStore, 0.05);
+            world.waterStore -= humidify;
+            world.broodClimate.humidity = Math.min(98, world.broodClimate.humidity + humidify * 1.9);
+          }
+        } else if (ant.carryingWater) {
+          ant.state = 'carrying water';
+          const waterRecruitment = 1 + clamp((waterStress - 1) * 0.75, 0, 0.9);
+          const waterTrailReinforcement = 1 + clamp(world.pheromones.water.sample(ant.x, ant.y) / 130, 0, 0.75);
+          world.pheromones.water.add(ant.x, ant.y, 7.5 * strength * species.pheromoneDeposit * waterRecruitment * waterTrailReinforcement * pheromoneDeposit);
+          const nestAngle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+          ant.angle += normAngle(nestAngle - ant.angle) * 0.05;
+          steerByField(ant, world.pheromones.nest);
+          if (isInNest(ant)) {
+            world.stats.waterTrips += 1;
+            world.stats.waterCollected += ant.carryingWater;
+            world.waterStore += ant.carryingWater;
+            ant.carryingWater = 0;
+            ant.hydration = Math.min(100, ant.hydration + 24);
+            ant.angle += Math.PI + rand(-0.45, 0.45);
+            ant.state = 'leaving nest';
+          }
+        } else if (ant.carrying) {
+          ant.state = 'carrying food';
+          const foodTrailReinforcement = 1 + clamp(world.pheromones.food.sample(ant.x, ant.y) / 130, 0, 0.85);
+          world.pheromones.food.add(ant.x, ant.y, 7.5 * strength * species.pheromoneDeposit * (0.7 + pressure.hunger) * foodTrailReinforcement * pheromoneDeposit);
+          const nestAngle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+          ant.angle += normAngle(nestAngle - ant.angle) * 0.045;
+          steerByField(ant, world.pheromones.nest);
+          if (isInNest(ant)) {
+            world.stats.foodTrips += 1;
+            world.stats.foodCollected += ant.carrying;
+            world.foodStore += ant.carrying;
+            ant.carrying = 0;
+            ant.energy = Math.min(100, ant.energy + 18);
+            ant.angle += Math.PI + rand(-0.45, 0.45);
+            ant.state = 'leaving nest';
+          }
+        } else {
+          if (!isInNest(ant)) world.pheromones.nest.add(ant.x, ant.y, 2.1 * strength * species.pheromoneDeposit * pheromoneDeposit);
+          const environmentalWaterPressure = clamp((waterStress - 1) * 1.4, 0, 1.25);
+          const waterDeficit = clamp((62 - ant.hydration) / 35, 0, 1.5);
+          const colonyWaterNeed = clamp((24 - world.waterStore) / 36, 0, 1.1);
+          const foodDeficit = clamp((58 - ant.energy) / 38, 0, 1.3);
+          const colonyFoodNeed = clamp((24 - world.foodStore) / 36, 0, 1.1);
+          const waterTaskBias = ant.task === 'water' ? 0.55 : ant.task === 'food' ? -0.18 : 0;
+          const foodTaskBias = ant.task === 'food' ? 0.42 : ant.task === 'water' ? -0.12 : 0;
+          const waterPriority = waterDeficit + colonyWaterNeed + environmentalWaterPressure + waterTaskBias + (world.foodStore > world.waterStore * 1.4 ? 0.3 : 0);
+          const foodPriority = foodDeficit + colonyFoodNeed + foodTaskBias + pressure.hunger * 0.4;
+          const waterRatio = ant.task === 'water' ? 0.58 : ant.task === 'food' ? 1.12 : 0.78;
+          const needWater = ant.hydration < 48 || world.waterStore < 7 || waterPriority >= foodPriority * waterRatio;
+          const [water, waterD] = nearestWater(ant);
+          const [food, foodD] = nearestFood(ant);
+          const scoutBias = clamp((ant.turnNoise - 0.05) / 0.06, 0, 1);
+          const exploitBias = clamp((0.07 - ant.turnNoise) / 0.055, 0, 1);
+          if (ant.memory.foodStrength > 0) {
+            const decay = (0.0018 + scoutBias * 0.0065 + trafficLoad * 0.0035) * dt;
+            ant.memory.foodStrength = Math.max(0, ant.memory.foodStrength - decay);
+            ant.memory.foodAge = (ant.memory.foodAge || 0) + dt / 900;
+          }
+          if (ant.memory.foodStrength <= 0.01) {
+            ant.memory.foodX = null;
+            ant.memory.foodY = null;
+            ant.memory.foodStrength = 0;
+            ant.memory.foodAge = 0;
+          }
+          const resourceScanRange = 62 + scoutBias * 58 - exploitBias * 8;
+          if (needWater && water && waterD < water.r + 8) {
+            const siteCrowding = clamp((trafficAt(water.x, water.y) - 3) / 10, 0, 0.75);
+            const taken = Math.min(water.amount, rand(3, 7) * (1 - siteCrowding * 0.48));
+            water.amount -= taken;
+            ant.carryingWater = Math.round(taken);
+            ant.state = 'carrying water';
+            ant.angle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+          } else if (needWater && water && waterD < resourceScanRange + 10) {
+            ant.state = 'water found';
+            ant.angle += normAngle(angleTo(ant.x, ant.y, water.x, water.y) - ant.angle) * 0.08;
+          } else if (food && foodD < food.r + 8) {
+            const siteCrowding = clamp((trafficAt(food.x, food.y) - 3) / 10, 0, 0.75);
+            const taken = Math.min(food.amount, rand(3, 7) * (1 - siteCrowding * 0.5));
+            food.amount -= taken;
+            ant.carrying = Math.round(taken);
+            ant.memory.foodX = food.x;
+            ant.memory.foodY = food.y;
+            ant.memory.foodStrength = Math.min(1, (ant.memory.foodStrength || 0) + 0.48 + exploitBias * 0.2);
+            ant.memory.foodAge = 0;
+            ant.state = 'carrying food';
+            ant.angle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+          } else if (food && foodD < resourceScanRange) {
+            ant.state = 'food found';
+            ant.angle += normAngle(angleTo(ant.x, ant.y, food.x, food.y) - ant.angle) * 0.08;
+          } else {
+            const hasFoodMemory = ant.memory.foodX != null && ant.memory.foodY != null;
+            const rememberedFoodD = hasFoodMemory ? dist(ant.x, ant.y, ant.memory.foodX, ant.memory.foodY) : Infinity;
+            const rememberedFoodExists = hasFoodMemory && world.food.some(item => dist(item.x, item.y, ant.memory.foodX, ant.memory.foodY) < 55);
+            if (hasFoodMemory && !rememberedFoodExists && rememberedFoodD < 42 && random() < (0.035 + scoutBias * 0.32) * dt) {
+              ant.memory.foodX = null;
+              ant.memory.foodY = null;
+              ant.memory.foodStrength = 0;
+              ant.memory.foodAge = 0;
+            }
+            const memoryPull = hasFoodMemory
+              && ant.memory.foodX != null
+              && !rememberedFoodExists
+              && rememberedFoodD > 42
+              && random() < (0.01 + exploitBias * 0.09) * (ant.memory.foodStrength || 0.35) * dt;
+            if (memoryPull) {
+              ant.state = 'checking known food site';
+              ant.angle += normAngle(angleTo(ant.x, ant.y, ant.memory.foodX, ant.memory.foodY) - ant.angle) * (0.06 + exploitBias * 0.04);
+            }
+            const foodTrail = world.pheromones.food.sample(ant.x, ant.y);
+            const waterTrail = world.pheromones.water.sample(ant.x, ant.y);
+            const waterTrailThreshold = waterPriority > foodPriority + 0.25 ? 0.35 : 0.7;
+            const targetField = needWater && waterTrail >= foodTrail * waterTrailThreshold ? world.pheromones.water : world.pheromones.food;
+            const trailStrength = Math.max(foodTrail, waterTrail);
+            const leavesTrail = trailStrength > 14 && random() < (scoutBias * 0.22 + trafficLoad * (0.015 + scoutBias * 0.18)) * dt;
+            ant.state = memoryPull ? ant.state : trailStrength > 14 && !leavesTrail
+              ? (targetField === world.pheromones.water ? 'following water trail' : 'following food trail')
+              : scoutBias > 0.55 ? 'scouting' : 'exploring';
+            if (!memoryPull && !leavesTrail && (trailStrength > 14 || random() < 0.02 + pressure.hunger * 0.05)) {
+              steerByField(ant, targetField);
+            }
+            const explorationJitter = 0.018 + scoutBias * 0.065 + clamp((100 - ant.energy) / 120, 0, 0.035) - exploitBias * 0.008;
+            if (leavesTrail) ant.angle += rand(-0.9 - trafficLoad * 0.5, 0.9 + trafficLoad * 0.5);
+            if (trafficLoad > 0.25 && random() < (0.006 + scoutBias * 0.022) * trafficLoad * dt) {
+              ant.angle += (traffic.left > traffic.right ? 1 : -1) * rand(0.18, 0.42);
+              ant.state = scoutBias > 0.55 ? 'traffic detour' : ant.state;
+            }
+            if (random() < explorationJitter * dt) ant.angle += rand(-0.45 - scoutBias * 0.25, 0.45 + scoutBias * 0.25);
+          }
+        }
+      }
+
+      const onTrailState = ant.state === 'following food trail'
+        || ant.state === 'following water trail'
+        || ant.state === 'carrying food'
+        || ant.state === 'carrying water'
+        || ant.state === 'returning to recover'
+        || ant.state === 'returning to brood';
+      const trailNoiseDamping = onTrailState ? 0.58 : 0.28;
+      const effectiveTurnNoise = ant.turnNoise * (1 - clamp(ant.trailFocus || 0, 0, 1) * trailNoiseDamping);
+      ant.angle += rand(-effectiveTurnNoise, effectiveTurnNoise) * dt;
+      const base = ant.speed * (ant.role === 'soldier' ? 0.92 : 1);
+      const energyFactor = clamp(ant.energy / 50, 0.45, 1.18);
+      const alarmBoost = ant.retreatTimer > 0 || ant.recruitTimer > 0 ? 1.18 : 1;
+      const trafficFactor = 1 - (ant.trafficLoad || 0) * 0.54;
+      const move = base * energyFactor * activity * alarmBoost * trafficFactor * dt;
+      ant.x += Math.cos(ant.angle) * move;
+      ant.y += Math.sin(ant.angle) * move;
+
+      avoidRocks(ant);
+
+      if (ant.x < 10 || ant.x > world.width - 10) {
+        ant.angle = Math.PI - ant.angle + rand(-0.3, 0.3);
+        ant.x = clamp(ant.x, 10, world.width - 10);
+      }
+      if (ant.y < 10 || ant.y > world.height - 10) {
+        ant.angle = -ant.angle + rand(-0.3, 0.3);
+        ant.y = clamp(ant.y, 10, world.height - 10);
+      }
+    }
+
+    function updateCorpses(dt) {
+      const dumpX = world.nest.x + 160;
+      const dumpY = world.nest.y + 130;
+      for (const corpse of world.corpses) {
+        corpse.age += dt;
+        const inDump = dist(corpse.x, corpse.y, dumpX, dumpY) < 48;
+        const strength = corpse.disposed ? 0.28 : inDump ? 0.6 : 3.2;
+        world.pheromones.death.add(corpse.x, corpse.y, strength * clamp(corpse.chemical / 100, 0.4, 1.4));
+        if (corpse.disposed) {
+          corpse.chemical = Math.max(35, corpse.chemical - 0.008 * dt);
+        } else if (!corpse.carriedBy) {
+          corpse.chemical = Math.min(155, corpse.chemical + 0.015 * dt);
+        }
+      }
+    }
+
+    function updateQueens(dt) {
+      const pressure = colonyPressure();
+      const species = speciesConfig();
+      for (const queen of world.queens) {
+        queen.age += 0.00035 * dt;
+        queen.pulse += 0.018 * dt;
+        const founding = world.ants.length < 8;
+        const heatStress = Number(ui.temperature.value) > 33 ? 1 + (Number(ui.temperature.value) - 33) * 0.035 : 1;
+        const dryStress = Number(ui.humidity.value) < 40 ? 1 + (40 - Number(ui.humidity.value)) * 0.01 : 1;
+        queen.energy -= 0.00022 * dt;
+        queen.hydration -= 0.0002 * dt * heatStress * dryStress;
+        if (queen.reserves > 0 && founding) {
+          const reserveUse = 0.0022 * dt;
+          queen.reserves = Math.max(0, queen.reserves - reserveUse);
+          queen.energy = Math.min(100, queen.energy + reserveUse * 7);
+          queen.hydration = Math.min(100, queen.hydration + reserveUse * 5);
+        }
+        if (world.foodStore > 0 && queen.energy < 96) {
+          const feeding = Math.min(world.foodStore, 0.00028 * dt);
+          world.foodStore -= feeding;
+          queen.energy = Math.min(100, queen.energy + feeding * 34);
+        }
+        if (world.waterStore > 0 && queen.hydration < 96) {
+          const drinking = Math.min(world.waterStore, 0.00036 * dt);
+          world.waterStore -= drinking;
+          queen.hydration = Math.min(100, queen.hydration + drinking * 42);
+        }
+        if (queen.energy <= 0) queen.health -= 0.004 * dt;
+        if (queen.hydration <= 0) queen.health -= 0.006 * dt;
+        if (queen.energy > 55 && queen.hydration > 55 && queen.health < 100) queen.health = Math.min(100, queen.health + 0.0012 * dt);
+        queen.energy = clamp(queen.energy, 0, 100);
+        queen.hydration = clamp(queen.hydration, 0, 100);
+        queen.health = clamp(queen.health, 0, 100);
+
+        const hasExternalResources = world.foodStore > 0 && world.waterStore > 0;
+        const foundingSupport = founding && queen.reserves > 0;
+        const canLay = queen.health > 35 && queen.energy > 35 && queen.hydration > 35 && (hasExternalResources || foundingSupport);
+        queen.state = canLay ? 'laying eggs' : queen.health < 35 ? 'queen stress' : founding ? 'founding reserves' : 'resting';
+        if (canLay) queen.eggTimer += dt * species.eggRate * (0.16 + pressure.brood * 0.42) * clamp(queen.health / 75, 0.25, 1.2);
+        else queen.eggTimer = Math.max(0, queen.eggTimer - 0.12 * dt);
+        if (queen.eggTimer > species.eggInterval && canLay) {
+          queen.eggTimer = 0;
+          if (hasExternalResources) {
+            world.foodStore -= 1;
+            world.waterStore -= 1;
+            queen.energy = Math.max(0, queen.energy - 0.8);
+            queen.hydration = Math.max(0, queen.hydration - 0.6);
+          } else {
+            queen.reserves = Math.max(0, queen.reserves - 4);
+          }
+          world.eggs += 1;
+        }
+
+        const queenRoom = world.rooms[0];
+        const targetX = queen.homeX || (queenRoom.x + queenRoom.w / 2);
+        const targetY = queen.homeY || (queenRoom.y + queenRoom.h / 2);
+        const drift = angleTo(queen.x, queen.y, targetX, targetY);
+        queen.angle += normAngle(drift - queen.angle) * 0.01 + rand(-0.015, 0.015) * dt;
+        queen.x += Math.cos(queen.angle) * 0.018 * dt;
+        queen.y += Math.sin(queen.angle) * 0.018 * dt;
+        queen.x = clamp(queen.x, queenRoom.x + 15, queenRoom.x + queenRoom.w - 15);
+        queen.y = clamp(queen.y, queenRoom.y + 14, queenRoom.y + queenRoom.h - 14);
+      }
+    }
+
+    function updateBrood(dt) {
+      const pressure = colonyPressure();
+      const species = speciesConfig();
+      const careFactor = clamp(world.ants.filter(ant => ant.role === 'nurse').length / 80 + world.broodCareBoost, 0.25, 1.6);
+      world.broodCareBoost *= 0.92;
+      const queenReserve = world.queens.reduce((sum, queen) => sum + (queen.reserves || 0), 0);
+      const foundingSupport = world.ants.length < 8 && queenReserve > 0;
+      const foodFactor = world.foodStore > 0 || foundingSupport ? 1 : 0.38;
+      const waterFactor = world.waterStore > 0 || foundingSupport ? 1 : 0.34;
+      const climateFactor = clamp(1.08 - world.broodClimate.stress * 0.48, 0.22, 1.12);
+      if (world.eggs > 0 && random() < 0.0018 * dt * careFactor * species.broodRate * climateFactor) {
+        world.eggs -= 1;
+        world.larvae += 1;
+      }
+      if (world.larvae > 0 && random() < 0.0012 * dt * careFactor * foodFactor * waterFactor * species.broodRate * climateFactor * (0.6 + pressure.brood)) {
+        world.larvae -= 1;
+        world.pupae += 1;
+        if (world.foodStore > 0 && world.waterStore > 0) {
+          world.foodStore -= 1;
+          world.waterStore -= 1;
+        } else if (foundingSupport) {
+          const queen = world.queens.find(q => q.reserves > 0);
+          if (queen) queen.reserves = Math.max(0, queen.reserves - 3);
+        }
+      }
+      if (world.pupae > 0 && random() < 0.0009 * dt * careFactor * species.broodRate * climateFactor) {
+        world.pupae -= 1;
+        const firstCohort = world.ants.length < 30;
+        const role = firstCohort ? 'nurse' : random() < Number(ui.soldierRatio.value) / 100 ? 'soldier' : 'worker';
+        spawnAnts(1, role, true);
+      }
+      if (world.broodClimate.stress > 1.05 && world.eggs + world.larvae > 0 && random() < 0.00022 * dt * (world.broodClimate.stress - 0.85)) {
+        if (world.eggs > 0 && random() < 0.58) world.eggs = Math.max(0, world.eggs - 1);
+        else if (world.larvae > 0) world.larvae = Math.max(0, world.larvae - 1);
+      }
+    }
+
+    function update(dt) {
+      world.day += dt / 900;
+      world.rainTimer = Math.max(0, world.rainTimer - dt / 900);
+      world.disturbanceTimer = Math.max(0, world.disturbanceTimer - dt / 900);
+      applyActiveRainWash(dt);
+      rebuildTrafficMap();
+      for (const ant of world.ants) updateAnt(ant, dt);
+      for (let i = world.ants.length - 1; i >= 0; i--) {
+        const ant = world.ants[i];
+        if (ant.health <= 0) {
+          addCorpse(ant.x, ant.y, ant.role);
+          if (world.selected === ant) world.selected = null;
+          world.ants.splice(i, 1);
+        }
+      }
+      updateCorpses(dt);
+      updateQueens(dt);
+      updateBroodClimate(dt);
+      for (let i = world.queens.length - 1; i >= 0; i--) {
+        const queen = world.queens[i];
+        if (queen.health <= 0) {
+          addCorpse(queen.x, queen.y, 'queen');
+          if (world.selected === queen) world.selected = null;
+          world.queens.splice(i, 1);
+        }
+      }
+      updateBrood(dt);
+      world.foodStore = Math.max(0, world.foodStore);
+      world.waterStore = Math.max(0, world.waterStore);
+      world.food = world.food.filter(food => food.amount > 0.5);
+      world.water = world.water.filter(water => water.amount > 0.5);
+      world.enemies = world.enemies.filter(enemy => enemy.health > 0);
+      const species = speciesConfig();
+      const diffusionScale = Number(ui.diffusionRate.value) / 100;
+      const rainWashActive = world.rainTimer > 0;
+      const foodRetentionBase = rainWashActive ? 0.82 : world.food.length > 0 ? 0.978 : 0.948;
+      world.pheromones.food.update(pheromoneEvaporation(foodRetentionBase), 0.2 * species.diffusion * diffusionScale);
+      world.pheromones.water.update(pheromoneEvaporation(rainWashActive ? 0.9 : 0.98), 0.18 * species.diffusion * diffusionScale);
+      world.pheromones.nest.update(pheromoneEvaporation(rainWashActive ? 0.78 : 0.974), 0.14 * species.diffusion * diffusionScale);
+      world.pheromones.alarm.update(pheromoneEvaporation(rainWashActive ? 0.8 : 0.958), 0.2 * species.diffusion * diffusionScale);
+      world.pheromones.death.update(pheromoneEvaporation(rainWashActive ? 0.84 : 0.968), 0.18 * species.diffusion * diffusionScale);
+      world.pheromones.avoid.update(pheromoneEvaporation(rainWashActive ? 0.84 : 0.962), 0.12 * species.diffusion * diffusionScale);
+      applyActiveRainWash(dt);
+      if (world.day - world.lastStatsDay >= 0.25) recordStatsSnapshot();
+    }
+
+    function drawBackground() {
+      ctx.fillStyle = '#111416';
+      ctx.fillRect(0, 0, world.width, world.height);
+      const phase = world.day % 1;
+      const daylight = clamp(Math.sin(phase * Math.PI * 2 - Math.PI / 2) * 0.5 + 0.5, 0, 1);
+      ctx.fillStyle = `rgba(233, 182, 95, ${daylight * 0.035})`;
+      ctx.fillRect(0, 0, world.width, world.height);
+      ctx.fillStyle = `rgba(30, 45, 70, ${(1 - daylight) * 0.12})`;
+      ctx.fillRect(0, 0, world.width, world.height);
+      ctx.strokeStyle = 'rgba(255,255,255,0.035)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < world.width; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, world.height);
+        ctx.stroke();
+      }
+      for (let y = 0; y < world.height; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(world.width, y);
+        ctx.stroke();
+      }
+    }
+
+    function drawNest() {
+      const nest = world.nest;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(nest.x, nest.y, nest.radius + 14, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(233, 182, 95, 0.08)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(233, 182, 95, 0.42)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      if (ui.layers.rooms.checked) {
+        for (const room of world.rooms) {
+          const stressTint = room.name === 'brood' ? clamp(world.broodClimate.stress, 0, 1) : 0;
+          ctx.fillStyle = room.name === 'brood'
+            ? `rgba(${Math.round(101 + stressTint * 120)}, ${Math.round(167 - stressTint * 55)}, ${Math.round(232 - stressTint * 110)}, 0.2)`
+            : room.color + '33';
+          ctx.strokeStyle = room.color + 'aa';
+          ctx.lineWidth = 1.5;
+          roundRect(room.x, room.y, room.w, room.h, 8);
+          ctx.fill();
+          ctx.stroke();
+          ctx.fillStyle = 'rgba(237,241,244,0.74)';
+          ctx.font = '11px system-ui, sans-serif';
+          ctx.fillText(room.name, room.x + 9, room.y + 17);
+        }
+        ctx.fillStyle = '#b990ff';
+        ctx.beginPath();
+        ctx.arc(nest.x, nest.y - 18, 8, 0, Math.PI * 2);
+        ctx.fill();
+        for (let i = 0; i < Math.min(world.eggs, 36); i++) {
+          const x = world.rooms[1].x + 9 + (i % 12) * 4.4;
+          const y = world.rooms[1].y + 18 + Math.floor(i / 12) * 4.5;
+          ctx.fillStyle = 'rgba(237,241,244,0.92)';
+          ctx.beginPath();
+          ctx.ellipse(x, y, 1.4, 2.1, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        for (let i = 0; i < Math.min(world.larvae, 54); i++) {
+          const x = world.rooms[1].x + 10 + (i % 9) * 6;
+          const y = world.rooms[1].y + 28 + Math.floor(i / 9) * 5;
+          ctx.fillStyle = 'rgba(101,167,232,0.82)';
+          ctx.beginPath();
+          ctx.arc(x, y, 1.9, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        for (let i = 0; i < Math.min(world.pupae, 24); i++) {
+          const x = world.rooms[1].x + 13 + (i % 8) * 6.5;
+          const y = world.rooms[1].y + 43 + Math.floor(i / 8) * 4.2;
+          ctx.fillStyle = 'rgba(233,182,95,0.72)';
+          ctx.fillRect(x - 2, y - 1.4, 4, 2.8);
+        }
+      }
+      ctx.restore();
+    }
+
+    function roundRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function drawFood() {
+      for (const food of world.food) {
+        const ratio = food.amount / food.max;
+        ctx.fillStyle = 'rgba(103,197,135,0.22)';
+        ctx.beginPath();
+        ctx.arc(food.x, food.y, food.r + 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#67c587';
+        for (let i = 0; i < Math.ceil(ratio * 12); i++) {
+          const a = i * 2.399;
+          const d = 2 + Math.sqrt(i) * 4.3;
+          ctx.fillRect(food.x + Math.cos(a) * d - 2, food.y + Math.sin(a) * d - 2, 5, 5);
+        }
+      }
+    }
+
+    function drawWater() {
+      for (const water of world.water) {
+        const ratio = water.amount / water.max;
+        ctx.fillStyle = 'rgba(85,199,223,0.2)';
+        ctx.beginPath();
+        ctx.arc(water.x, water.y, water.r + 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = 'rgba(85,199,223,0.82)';
+        ctx.beginPath();
+        ctx.ellipse(water.x, water.y, water.r * 0.8 * ratio + 5, water.r * 0.5 * ratio + 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(210,246,255,0.65)';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+      }
+    }
+
+    function drawEnemies() {
+      for (const enemy of world.enemies) {
+        enemy.pulse += 0.04;
+        ctx.strokeStyle = `rgba(232,109,109,${0.25 + Math.sin(enemy.pulse) * 0.08})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(enemy.x, enemy.y, 52 + Math.sin(enemy.pulse) * 4, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = '#e86d6d';
+        ctx.beginPath();
+        ctx.arc(enemy.x, enemy.y, enemy.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#101214';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(enemy.x - 8, enemy.y - 8);
+        ctx.lineTo(enemy.x + 8, enemy.y + 8);
+        ctx.moveTo(enemy.x + 8, enemy.y - 8);
+        ctx.lineTo(enemy.x - 8, enemy.y + 8);
+        ctx.stroke();
+      }
+    }
+
+    function drawRocks() {
+      for (const rock of world.rocks) {
+        ctx.fillStyle = '#30363d';
+        ctx.strokeStyle = '#49515c';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(rock.x, rock.y, rock.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+    }
+
+    function drawQueens() {
+      for (const queen of world.queens) {
+        const selected = world.selected === queen;
+        const healthAlpha = clamp(queen.health / 100, 0.25, 1);
+        ctx.fillStyle = `rgba(185,144,255,${0.12 + 0.12 * healthAlpha + Math.sin(queen.pulse) * 0.025})`;
+        ctx.beginPath();
+        ctx.arc(queen.x, queen.y, 16 + Math.sin(queen.pulse) * 1.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = queen.health < 35 ? '#c78c8c' : '#b990ff';
+        ctx.beginPath();
+        ctx.ellipse(queen.x, queen.y, 9, 14, queen.angle * 0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(237,241,244,0.65)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.fillStyle = queen.state === 'laying eggs' ? '#f6e7b2' : 'rgba(237,241,244,0.55)';
+        ctx.beginPath();
+        ctx.arc(queen.x + 11, queen.y - 8, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        if (selected) {
+          ctx.strokeStyle = 'rgba(237,241,244,0.95)';
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.arc(queen.x, queen.y, 21, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+    }
+
+    function drawCorpses() {
+      const dumpX = world.nest.x + 160;
+      const dumpY = world.nest.y + 130;
+      ctx.strokeStyle = 'rgba(155,140,122,0.45)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(dumpX, dumpY, 48, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(155,140,122,0.18)';
+      ctx.fill();
+      ctx.fillStyle = 'rgba(237,241,244,0.5)';
+      ctx.font = '11px system-ui, sans-serif';
+      ctx.fillText('refuse', dumpX - 16, dumpY + 4);
+
+      for (const corpse of world.corpses) {
+        ctx.save();
+        ctx.translate(corpse.x, corpse.y);
+        ctx.rotate((corpse.id * 1.7) % Math.PI);
+        ctx.strokeStyle = corpse.disposed ? 'rgba(155,140,122,0.48)' : corpse.carriedBy ? '#c8b8a0' : '#9b8c7a';
+        ctx.lineWidth = corpse.disposed ? 1.6 : 2.2;
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0.25 * Math.PI, 1.7 * Math.PI);
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(155,140,122,0.55)';
+        ctx.beginPath();
+        ctx.arc(-4, 2, 2, 0, Math.PI * 2);
+        ctx.arc(3, -2, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function antDisplayColor(ant) {
+      if (ant.health <= 0) return '#8b9299';
+      if (ant.state === 'alarm' || ant.state === 'retreating') return '#e86d6d';
+      if (ant.carryingCorpse || ant.state === 'corpse cleanup' || ant.state === 'lifting corpse') return '#c8b8a0';
+      if (ant.carrying) return '#67c587';
+      if (ant.carryingWater) return '#55c7df';
+      if (ant.role === 'nurse' || ant.state === 'brood care') return '#65a7e8';
+      if (ant.role === 'soldier') return '#e9b65f';
+      return '#edf1f4';
+    }
+
+    function drawAntCloud() {
+      const groups = new Map();
+      for (const ant of world.ants) {
+        if (ant.life <= 0) continue;
+        const color = antDisplayColor(ant);
+        if (!groups.has(color)) groups.set(color, []);
+        groups.get(color).push(ant);
+      }
+      for (const [color, ants] of groups) {
+        ctx.fillStyle = color;
+        for (const ant of ants) {
+          const size = ant.role === 'soldier' ? 3.2 : ant.carrying || ant.carryingWater || ant.carryingCorpse ? 3 : 2.2;
+          ctx.fillRect(ant.x - size * 0.5, ant.y - size * 0.5, size, size);
+        }
+      }
+      if (world.selected && world.selected.role !== 'queen') {
+        ctx.strokeStyle = 'rgba(237,241,244,0.92)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(world.selected.x, world.selected.y, 13, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    function drawAnt(ant) {
+      if (ant.life <= 0) return;
+      const selected = world.selected === ant;
+      const color = antDisplayColor(ant);
+
+      ctx.save();
+      ctx.translate(ant.x, ant.y);
+      ctx.rotate(ant.angle);
+      ctx.globalAlpha = ant.health <= 0 ? 0.45 * ant.life : 1;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      const size = ant.role === 'soldier' ? 5.4 : 4.2;
+      ctx.moveTo(size + 2, 0);
+      ctx.lineTo(-size, -size * 0.68);
+      ctx.lineTo(-size * 0.55, 0);
+      ctx.lineTo(-size, size * 0.68);
+      ctx.closePath();
+      ctx.fill();
+      if (ant.carrying) {
+        ctx.fillStyle = '#d9f2a3';
+        ctx.fillRect(-2, -2, 3, 3);
+      }
+      if (ant.carryingCorpse) {
+        ctx.strokeStyle = '#9b8c7a';
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.arc(-6, 0, 3.2, 0, Math.PI * 1.65);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      if (selected) {
+        ctx.strokeStyle = 'rgba(237,241,244,0.92)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(ant.x, ant.y, 13, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    function render() {
+      drawBackground();
+      if (ui.layers.food.checked) world.pheromones.food.render([103, 197, 135], 0.72);
+      if (ui.layers.water.checked) world.pheromones.water.render([85, 199, 223], 0.58);
+      if (ui.layers.nest.checked) world.pheromones.nest.render([101, 167, 232], 0.42);
+      if (ui.layers.alarm.checked) world.pheromones.alarm.render([232, 109, 109], 0.62);
+      if (ui.layers.death.checked) world.pheromones.death.render([155, 140, 122], 0.5);
+      if (ui.layers.avoid.checked) world.pheromones.avoid.render([216, 139, 189], 0.48);
+      drawNest();
+      drawRocks();
+      drawFood();
+      drawWater();
+      drawEnemies();
+      drawQueens();
+      drawCorpses();
+      if (ui.layers.ants.checked) {
+        if (world.ants.length > 2500) drawAntCloud();
+        else for (const ant of world.ants) drawAnt(ant);
+      }
+    }
+
+    function pheromoneSum(name) {
+      return Math.round(world.pheromones[name].data.reduce((sum, value) => sum + value, 0));
+    }
+
+    function countBy(items, keyFn) {
+      return items.reduce((acc, item) => {
+        const key = keyFn(item) || 'none';
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+      }, {});
+    }
+
+    function selectedCounts(counts, keys, prefix) {
+      return keys.reduce((acc, key) => {
+        acc[`${prefix}_${key}`] = counts[key] || 0;
+        return acc;
+      }, {});
+    }
+
+    function parameterSnapshot() {
+      return {
+        model_version: MODEL_UNITS.modelVersion,
+        calibration_status: MODEL_UNITS.calibrationStatus,
+        px_per_cm: MODEL_UNITS.pxPerCm,
+        arena_width_cm: Number((world.width / MODEL_UNITS.pxPerCm).toFixed(2)),
+        arena_height_cm: Number((world.height / MODEL_UNITS.pxPerCm).toFixed(2)),
+        nest_radius_cm: Number((world.nest.radius / MODEL_UNITS.pxPerCm).toFixed(2)),
+        sim_day_seconds: MODEL_UNITS.simDaySeconds,
+        seed: world.seed,
+        random_state: world.randomState,
+        species: ui.species.value,
+        speed: Number(ui.speed.value),
+        ant_count_target: Number(ui.antCount.value),
+        pheromone_strength: Number(ui.pheromoneStrength.value),
+        diffusion_rate: Number(ui.diffusionRate.value),
+        evaporation_rate: Number(ui.evaporationRate.value),
+        sense_threshold: Number(ui.senseThreshold.value),
+        temperature: Number(ui.temperature.value),
+        humidity: Number(ui.humidity.value),
+        resource_pressure: Number(ui.foodSpawn.value),
+        threat_pressure: Number(ui.threatPressure.value),
+        hunger_pressure: Number(ui.hunger.value),
+        brood_demand: Number(ui.broodDemand.value),
+        soldier_ratio: Number(ui.soldierRatio.value)
+      };
+    }
+
+    function collectStatsSnapshot() {
+      const carryingFood = world.ants.filter(ant => ant.carrying && ant.health > 0).length;
+      const carryingWater = world.ants.filter(ant => ant.carryingWater && ant.health > 0).length;
+      const carryingCorpse = world.ants.filter(ant => ant.carryingCorpse && ant.health > 0).length;
+      const taskCounts = countBy(world.ants, ant => ant.task || 'none');
+      const stateCounts = countBy(world.ants, ant => (ant.state || 'none').replaceAll(' ', '_'));
+      const roleCounts = countBy(world.ants, ant => ant.role || 'none');
+      const dumpX = world.nest.x + 160;
+      const dumpY = world.nest.y + 130;
+      const nestCorpses = world.corpses.filter(corpse => !corpse.disposed && dist(corpse.x, corpse.y, world.nest.x, world.nest.y) < world.nest.radius + 90).length;
+      const disposedCorpses = world.corpses.filter(corpse => corpse.disposed || dist(corpse.x, corpse.y, dumpX, dumpY) < 55).length;
+      const avg = field => world.ants.length
+        ? Math.round(world.ants.reduce((sum, ant) => sum + ant[field], 0) / world.ants.length)
+        : null;
+      const avgTurnNoise = world.ants.length
+        ? Number((world.ants.reduce((sum, ant) => sum + ant.turnNoise, 0) / world.ants.length).toFixed(4))
+        : null;
+      const avgBaseTurnNoise = world.ants.length
+        ? Number((world.ants.reduce((sum, ant) => sum + (ant.baseTurnNoise ?? ant.turnNoise), 0) / world.ants.length).toFixed(4))
+        : null;
+      const avgExplorationDrive = world.ants.length
+        ? Number((world.ants.reduce((sum, ant) => sum + (ant.explorationDrive || 0), 0) / world.ants.length).toFixed(3))
+        : null;
+      const avgTrafficLoad = world.ants.length
+        ? Number((world.ants.reduce((sum, ant) => sum + (ant.trafficLoad || 0), 0) / world.ants.length).toFixed(3))
+        : null;
+      const antsWithFoodMemory = world.ants.filter(ant => ant.memory && ant.memory.foodX != null && (ant.memory.foodStrength || 0) > 0.01).length;
+      const avgFoodMemoryStrength = antsWithFoodMemory
+        ? Number((world.ants.reduce((sum, ant) => sum + (ant.memory?.foodStrength || 0), 0) / antsWithFoodMemory).toFixed(3))
+        : 0;
+      const params = parameterSnapshot();
+      const broodTotal = Math.round(world.eggs + world.larvae + world.pupae);
+      const foragingTrips = world.stats.foodTrips + world.stats.waterTrips;
+      return {
+        day: Number(world.day.toFixed(2)),
+        ...params,
+        ants: world.ants.length,
+        queens: world.queens.length,
+        role_worker: roleCounts.worker || 0,
+        role_nurse: roleCounts.nurse || 0,
+        role_soldier: roleCounts.soldier || 0,
+        eggs: Math.round(world.eggs),
+        larvae: Math.round(world.larvae),
+        pupae: Math.round(world.pupae),
+        brood_total: broodTotal,
+        dead: world.corpses.length,
+        nest_corpses: nestCorpses,
+        disposed_corpses: disposedCorpses,
+        food_store: Math.round(world.foodStore),
+        water_store: Math.round(world.waterStore),
+        carrying_food: carryingFood,
+        carrying_water: carryingWater,
+        carrying_corpse: carryingCorpse,
+        avg_energy: avg('energy'),
+        avg_hydration: avg('hydration'),
+        avg_turn_noise: avgTurnNoise,
+        avg_base_turn_noise: avgBaseTurnNoise,
+        avg_exploration_drive: avgExplorationDrive,
+        avg_traffic_load: avgTrafficLoad,
+        traffic_max_cell: world.traffic.max,
+        traffic_mean_occupied_cell: Number(world.traffic.meanOccupied.toFixed(2)),
+        traffic_congested_cells: world.traffic.congestedCells,
+        ants_with_food_memory: antsWithFoodMemory,
+        avg_food_memory_strength: avgFoodMemoryStrength,
+        low_noise_ants: world.ants.filter(ant => ant.turnNoise < 0.035).length,
+        high_noise_ants: world.ants.filter(ant => ant.turnNoise > 0.075).length,
+        brood_temp: Number(world.broodClimate.temp.toFixed(1)),
+        brood_humidity: Number(world.broodClimate.humidity.toFixed(1)),
+        brood_stress: Number(world.broodClimate.stress.toFixed(2)),
+        food_trips: world.stats.foodTrips,
+        water_trips: world.stats.waterTrips,
+        foraging_trips: foragingTrips,
+        food_collected: Math.round(world.stats.foodCollected),
+        water_collected: Math.round(world.stats.waterCollected),
+        food_trip_rate: world.day > 0 ? Number((world.stats.foodTrips / world.day).toFixed(3)) : 0,
+        water_trip_rate: world.day > 0 ? Number((world.stats.waterTrips / world.day).toFixed(3)) : 0,
+        corpse_moves: world.stats.corpseMoves,
+        corpse_move_rate: world.day > 0 ? Number((world.stats.corpseMoves / world.day).toFixed(3)) : 0,
+        ...selectedCounts(taskCounts, ['explore', 'food', 'water', 'brood', 'corpse', 'patrol', 'defense'], 'task'),
+        ...selectedCounts(stateCounts, ['exploring', 'following_food_trail', 'following_water_trail', 'carrying_food', 'carrying_water', 'brood_care', 'corpse_cleanup', 'carrying_corpse', 'returning_to_recover', 'patrolling', 'traffic_detour', 'checking_known_food_site'], 'state'),
+        food_pheromone: pheromoneSum('food'),
+        water_pheromone: pheromoneSum('water'),
+        nest_pheromone: pheromoneSum('nest'),
+        alarm_pheromone: pheromoneSum('alarm'),
+        death_pheromone: pheromoneSum('death'),
+        avoid_pheromone: pheromoneSum('avoid')
+      };
+    }
+
+    function collectIndividualSnapshot(limit = Infinity) {
+      const maxRows = Number.isFinite(Number(limit)) ? Math.max(0, Math.floor(Number(limit))) : Infinity;
+      return world.ants.slice(0, maxRows).map(ant => ({
+        day: Number(world.day.toFixed(2)),
+        seed: world.seed,
+        id: ant.id,
+        role: ant.role,
+        task: ant.task || 'none',
+        state: ant.state || 'none',
+        x: Number(ant.x.toFixed(1)),
+        y: Number(ant.y.toFixed(1)),
+        age: Number(ant.age.toFixed(2)),
+        energy: Number(ant.energy.toFixed(1)),
+        hydration: Number(ant.hydration.toFixed(1)),
+        health: Number(ant.health.toFixed(1)),
+        turn_noise: Number(ant.turnNoise.toFixed(4)),
+        base_turn_noise: Number((ant.baseTurnNoise ?? ant.turnNoise).toFixed(4)),
+        exploration_drive: Number((ant.explorationDrive || 0).toFixed(3)),
+        traffic_load: Number((ant.trafficLoad || 0).toFixed(3)),
+        food_memory_strength: Number((ant.memory?.foodStrength || 0).toFixed(3)),
+        carrying_food: ant.carrying || 0,
+        carrying_water: ant.carryingWater || 0,
+        carrying_corpse: ant.carryingCorpse ? 1 : 0
+      }));
+    }
+
+    function recordStatsSnapshot() {
+      world.statsHistory.push(collectStatsSnapshot());
+      world.lastStatsDay = world.day;
+      if (world.statsHistory.length > 2000) world.statsHistory.splice(0, world.statsHistory.length - 2000);
+    }
+
+    function exportCsv() {
+      const current = collectStatsSnapshot();
+      const rows = world.statsHistory.length ? world.statsHistory.concat([current]) : [current];
+      const headers = Object.keys(rows[0]);
+      const csv = [
+        headers.join(','),
+        ...rows.map(row => headers.map(header => {
+          const value = row[header] ?? '';
+          const text = String(value);
+          return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+        }).join(','))
+      ].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ant_colony_stats_day_${Math.floor(world.day)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    const SCRIPTABLE_PARAMS = new Set([
+      'speed',
+      'antCount',
+      'pheromoneStrength',
+      'diffusionRate',
+      'evaporationRate',
+      'senseThreshold',
+      'temperature',
+      'humidity',
+      'foodSpawn',
+      'threatPressure',
+      'species',
+      'hunger',
+      'broodDemand',
+      'soldierRatio',
+      'fakePheromone',
+      'brushSize',
+      'brushStrength'
+    ]);
+
+    function setParam(name, value) {
+      if (!SCRIPTABLE_PARAMS.has(name) || !ui[name]) {
+        throw new Error(`Unknown scriptable parameter: ${name}`);
+      }
+      ui[name].value = value;
+      if (name === 'species') applySpeciesDefaults();
+      if (name === 'antCount') {
+        const target = Number(ui.antCount.value);
+        while (world.ants.length < target) world.ants.push(createAnt(world.ants.length + 1));
+        if (world.ants.length > target) world.ants.length = target;
+        if (world.selected && !world.ants.includes(world.selected) && !world.queens.includes(world.selected)) world.selected = null;
+      }
+      syncLabels();
+      return parameterSnapshot();
+    }
+
+    function runSteps(steps, dt = 9) {
+      const count = Math.max(0, Math.floor(Number(steps) || 0));
+      const stepDt = Math.max(0.1, Number(dt) || 9);
+      world.running = false;
+      ui.playPause.textContent = '▶';
+      for (let i = 0; i < count; i++) update(stepDt);
+      syncStats();
+      return collectStatsSnapshot();
+    }
+
+    function tick(dt = 9) {
+      return runSteps(1, dt);
+    }
+
+    function runDays(days, dt = 9) {
+      const stepDt = Math.max(0.1, Number(dt) || 9);
+      const steps = Math.round(Math.max(0, Number(days) || 0) * 900 / stepDt);
+      return runSteps(steps, stepDt);
+    }
+
+    function getExperimentConfig() {
+      return {
+        model: 'Ant-Colony-Sim behavior-level ABM',
+        model_version: '0.2-research-prototype',
+        params: parameterSnapshot()
+      };
+    }
+
+    function syncStats() {
+      const carrying = world.ants.filter(ant => (ant.carrying || ant.carryingWater || ant.carryingCorpse) && ant.health > 0).length;
+      const dead = world.corpses.length;
+      ui.foodStore.textContent = Math.floor(world.foodStore);
+      ui.waterStore.textContent = Math.floor(world.waterStore);
+      ui.eggs.textContent = Math.floor(world.eggs);
+      ui.larvae.textContent = Math.floor(world.larvae);
+      ui.pupae.textContent = Math.floor(world.pupae);
+      ui.carrying.textContent = carrying;
+      ui.dead.textContent = dead;
+      ui.forageTrips.textContent = `${world.stats.foodTrips}/${world.stats.waterTrips}`;
+      ui.corpseMoves.textContent = world.stats.corpseMoves;
+      ui.broodClimate.textContent = `${world.broodClimate.temp.toFixed(0)}C/${world.broodClimate.humidity.toFixed(0)}%`;
+      const dayIndex = Math.floor(world.day);
+      const dayProgress = world.day - dayIndex;
+      const minutes = Math.floor(dayProgress * 24 * 60);
+      const hour = Math.floor(minutes / 60);
+      const minute = minutes % 60;
+      const eventLabel = world.rainTimer > 0 ? ' Rain' : world.disturbanceTimer > 0 ? ' Disturbed' : '';
+      ui.dayLabel.textContent = `Day ${dayIndex}${eventLabel}`;
+      ui.clockLabel.textContent = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+      ui.timeFill.style.width = `${Math.floor(dayProgress * 100)}%`;
+
+      const ant = world.selected;
+      if (!ant) {
+        ui.inspector.innerHTML = `
+          <div class="row"><span>id</span><strong>-</strong></div>
+          <div class="row"><span>role</span><strong>-</strong></div>
+          <div class="row"><span>state</span><strong>-</strong></div>
+          <div class="row"><span>age</span><strong>-</strong></div>
+          <div class="row"><span>energy</span><strong>-</strong></div>
+          <div class="row"><span>hydration</span><strong>-</strong></div>
+          <div class="row"><span>health</span><strong>-</strong></div>`;
+        return;
+      }
+      if (ant.role === 'queen') {
+        ui.inspector.innerHTML = `
+          <div class="row"><span>id</span><strong>Q${ant.id}</strong></div>
+          <div class="row"><span>role</span><strong>queen</strong></div>
+          <div class="row"><span>state</span><strong>${ant.state}</strong></div>
+          <div class="row"><span>age</span><strong>${ant.age.toFixed(1)} days</strong></div>
+          <div class="row"><span>energy</span><strong>${Math.max(0, ant.energy).toFixed(0)}%</strong></div>
+          <div class="row"><span>hydration</span><strong>${Math.max(0, ant.hydration).toFixed(0)}%</strong></div>
+          <div class="row"><span>health</span><strong>${Math.max(0, ant.health).toFixed(0)}%</strong></div>
+          <div class="row"><span>reserves</span><strong>${Math.max(0, ant.reserves).toFixed(0)}</strong></div>
+          <div class="row"><span>egg timer</span><strong>${Math.floor(ant.eggTimer / speciesConfig().eggInterval * 100)}%</strong></div>`;
+        return;
+      }
+      ui.inspector.innerHTML = `
+        <div class="row"><span>id</span><strong>#${ant.id}</strong></div>
+        <div class="row"><span>role</span><strong>${ant.role}</strong></div>
+        <div class="row"><span>task</span><strong>${ant.task || '-'}</strong></div>
+        <div class="row"><span>state</span><strong>${ant.state}</strong></div>
+        <div class="row"><span>age</span><strong>${ant.age.toFixed(1)} days</strong></div>
+        <div class="row"><span>energy</span><strong>${Math.max(0, ant.energy).toFixed(0)}%</strong></div>
+        <div class="row"><span>hydration</span><strong>${Math.max(0, ant.hydration).toFixed(0)}%</strong></div>
+        <div class="row"><span>health</span><strong>${Math.max(0, ant.health).toFixed(0)}%</strong></div>`;
+    }
+
+    function syncLabels() {
+      ui.speedLabel.textContent = `${Number(ui.speed.value).toFixed(1)}x`;
+      ui.antsLabel.textContent = world.ants.length;
+      ui.pheromoneLabel.textContent = `${ui.pheromoneStrength.value}%`;
+      ui.diffusionLabel.textContent = `${ui.diffusionRate.value}%`;
+      ui.evaporationLabel.textContent = `${ui.evaporationRate.value}%`;
+      ui.senseThresholdLabel.textContent = ui.senseThreshold.value;
+      ui.seedLabel.textContent = world.seed;
+      ui.tempLabel.textContent = `${ui.temperature.value}°C`;
+      ui.humidityLabel.textContent = `${ui.humidity.value}%`;
+      ui.foodSpawnLabel.textContent = `${ui.foodSpawn.value}%`;
+      ui.threatLabel.textContent = `${ui.threatPressure.value}%`;
+      ui.speciesLabel.textContent = speciesConfig().label;
+      ui.hungerLabel.textContent = `${ui.hunger.value}%`;
+      ui.broodDemandLabel.textContent = `${ui.broodDemand.value}%`;
+      ui.soldierRatioLabel.textContent = `${ui.soldierRatio.value}%`;
+      ui.placeCasteLabel.textContent = ui.placeCaste.value;
+      ui.fakePheromoneLabel.textContent = ui.fakePheromone.value;
+      ui.brushSizeLabel.textContent = ui.brushSize.value;
+      ui.brushStrengthLabel.textContent = `${ui.brushStrength.value}%`;
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      ctx.setTransform(canvas.width / world.width, 0, 0, canvas.height / world.height, 0, 0);
+    }
+
+    function screenToWorld(event) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (event.clientX - rect.left) / rect.width * world.width,
+        y: (event.clientY - rect.top) / rect.height * world.height
+      };
+    }
+
+    function setTool(tool) {
+      world.tool = tool;
+      document.querySelectorAll('[data-tool]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tool === tool);
+      });
+    }
+
+    function handleCanvasClick(event) {
+      const point = screenToWorld(event);
+      if (world.tool === 'food') {
+        addFood(point.x, point.y, rand(70, 145));
+      } else if (world.tool === 'water') {
+        addWater(point.x, point.y, rand(70, 145));
+      } else if (world.tool === 'ant') {
+        addAntAt(point.x, point.y, ui.placeCaste.value);
+      } else if (world.tool === 'enemy') {
+        addEnemy(point.x, point.y);
+      } else if (world.tool === 'rock') {
+        world.rocks.push({ x: point.x, y: point.y, r: rand(24, 48) });
+      } else if (world.tool === 'pheromone') {
+        return;
+      } else if (world.tool === 'erase') {
+        eraseAt(point.x, point.y);
+      } else {
+        let best = null;
+        let bestD = 18;
+        for (const queen of world.queens) {
+          const d = dist(point.x, point.y, queen.x, queen.y);
+          if (d < 24 && d < bestD + 8) {
+            bestD = d;
+            best = queen;
+          }
+        }
+        for (const ant of world.ants) {
+          const d = dist(point.x, point.y, ant.x, ant.y);
+          if (d < bestD) {
+            bestD = d;
+            best = ant;
+          }
+        }
+        world.selected = best;
+      }
+      syncStats();
+    }
+
+    let painting = false;
+
+    function handleCanvasPointerDown(event) {
+      if (world.tool !== 'pheromone') return;
+      painting = true;
+      const point = screenToWorld(event);
+      paintPheromone(point.x, point.y);
+    }
+
+    function handleCanvasPointerMove(event) {
+      if (!painting || world.tool !== 'pheromone') return;
+      const point = screenToWorld(event);
+      paintPheromone(point.x, point.y);
+    }
+
+    function stopPainting() {
+      painting = false;
+    }
+
+    let lastTime = performance.now();
+    let statClock = 0;
+    function loop(now) {
+      const elapsed = Math.min(40, now - lastTime);
+      lastTime = now;
+      if (world.running) {
+        const speed = Number(ui.speed.value);
+        update(elapsed * 0.06 * speed);
+      }
+      render();
+      statClock += elapsed;
+      if (statClock > 180) {
+        syncStats();
+        statClock = 0;
+      }
+      requestAnimationFrame(loop);
+    }
+
+    ui.playPause.addEventListener('click', () => {
+      world.running = !world.running;
+      ui.playPause.textContent = world.running ? '⏸' : '▶';
+    });
+
+    ui.reset.addEventListener('click', () => resetWorld());
+    ui.speed.addEventListener('input', syncLabels);
+    ui.pheromoneStrength.addEventListener('input', syncLabels);
+    ui.diffusionRate.addEventListener('input', syncLabels);
+    ui.evaporationRate.addEventListener('input', syncLabels);
+    ui.senseThreshold.addEventListener('input', syncLabels);
+    ui.randomSeed.addEventListener('input', () => {
+      ui.seedLabel.textContent = normalizeSeed(ui.randomSeed.value);
+    });
+    ui.applySeed.addEventListener('click', () => setSeed(ui.randomSeed.value));
+    ui.temperature.addEventListener('input', syncLabels);
+    ui.humidity.addEventListener('input', syncLabels);
+    ui.foodSpawn.addEventListener('input', syncLabels);
+    ui.threatPressure.addEventListener('input', syncLabels);
+    ui.species.addEventListener('change', () => {
+      applySpeciesDefaults();
+      setupFoundingColony();
+    });
+    ui.hunger.addEventListener('input', syncLabels);
+    ui.broodDemand.addEventListener('input', syncLabels);
+    ui.soldierRatio.addEventListener('input', syncLabels);
+    ui.placeCaste.addEventListener('change', syncLabels);
+    ui.fakePheromone.addEventListener('change', syncLabels);
+    ui.brushSize.addEventListener('input', syncLabels);
+    ui.brushStrength.addEventListener('input', syncLabels);
+    ui.antCount.addEventListener('input', () => {
+      syncLabels();
+      const target = Number(ui.antCount.value);
+      while (world.ants.length < target) world.ants.push(createAnt(world.ants.length + 1));
+      if (world.ants.length > target) world.ants.length = target;
+      if (world.selected && !world.ants.includes(world.selected) && !world.queens.includes(world.selected)) world.selected = null;
+    });
+    ui.foundingMode.addEventListener('click', setupFoundingColony);
+    ui.matureColony.addEventListener('click', setupMatureColony);
+    ui.spawnWorkers.addEventListener('click', () => spawnAnts(20, 'worker'));
+    ui.spawnSoldiers.addEventListener('click', () => spawnAnts(10, 'soldier'));
+    ui.induceAlarm.addEventListener('click', () => induceAlarmAt());
+    ui.clearPheromones.addEventListener('click', clearPheromones);
+    ui.induceMill.addEventListener('click', () => createAntMill());
+    ui.breakMills.addEventListener('click', breakAntMills);
+    ui.healColony.addEventListener('click', () => {
+      for (const ant of world.ants) {
+        ant.health = 100;
+        ant.energy = 100;
+        ant.hydration = 100;
+      }
+      for (const queen of world.queens) {
+        queen.health = 100;
+        queen.energy = 100;
+        queen.hydration = 100;
+        queen.reserves = Math.max(queen.reserves || 0, 100);
+      }
+      syncStats();
+    });
+    ui.removeDead.addEventListener('click', () => {
+      world.corpses = [];
+      for (const ant of world.ants) {
+        ant.carryingCorpse = null;
+        if (ant.state === 'carrying corpse' || ant.state === 'corpse cleanup' || ant.state === 'lifting corpse') ant.state = 'exploring';
+      }
+      world.pheromones.death.data.fill(0);
+      syncStats();
+    });
+    ui.humanDisturbance.addEventListener('click', triggerHumanDisturbance);
+    ui.rainEvent.addEventListener('click', triggerRain);
+    ui.heatwaveEvent.addEventListener('click', triggerHeatwave);
+    ui.floodEvent.addEventListener('click', triggerFlood);
+    ui.massDeathEvent.addEventListener('click', triggerMassDeath);
+    ui.exportCsv.addEventListener('click', exportCsv);
+    canvas.addEventListener('click', handleCanvasClick);
+    canvas.addEventListener('pointerdown', handleCanvasPointerDown);
+    canvas.addEventListener('pointermove', handleCanvasPointerMove);
+    window.addEventListener('pointerup', stopPainting);
+    window.addEventListener('pointercancel', stopPainting);
+    window.addEventListener('resize', resizeCanvas);
+    document.querySelectorAll('[data-tool]').forEach(btn => {
+      btn.addEventListener('click', () => setTool(btn.dataset.tool));
+    });
+
+    resizeCanvas();
+    resetWorld();
+    syncLabels();
+    syncStats();
+    window.antSim = {
+      world,
+      ui,
+      resetWorld,
+      addFood,
+      addWater,
+      addEnemy,
+      addAntAt,
+      setupFoundingColony,
+      setupMatureColony,
+      clearPheromones,
+      paintPheromone,
+      induceAlarmAt,
+      triggerAlert,
+      createAntMill,
+      breakAntMills,
+      triggerRain,
+      triggerHumanDisturbance,
+      triggerHeatwave,
+      triggerFlood,
+      triggerMassDeath,
+      setSeed,
+      setParam,
+      tick,
+      runSteps,
+      runDays,
+      syncUi: () => {
+        syncAntCountControl();
+        syncStats();
+        return collectStatsSnapshot();
+      },
+      parameterSnapshot,
+      getExperimentConfig,
+      collectStatsSnapshot,
+      collectIndividualSnapshot,
+      exportCsv
+    };
+    window.tick = tick;
+    window.resetWorld = resetWorld;
+    window.triggerAlert = triggerAlert;
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>

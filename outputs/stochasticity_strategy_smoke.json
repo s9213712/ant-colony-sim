@@ -1,0 +1,92 @@
+{
+  "literature_target": "Shiraishi et al. 2018 diverse stochasticity and adaptive foraging",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "profiles": [
+    "low",
+    "medium",
+    "high",
+    "diverse"
+  ],
+  "clear_old_trails": false,
+  "rows": 24,
+  "summary": [
+    {
+      "profile": "diverse",
+      "phase": "initial_food",
+      "n": 3,
+      "mean_phase_food_trips": 7.0,
+      "mean_phase_food_collected": 37.0,
+      "mean_avg_turn_noise": 0.0604,
+      "mean_food_pheromone": 22959.0
+    },
+    {
+      "profile": "diverse",
+      "phase": "relocated_food",
+      "n": 3,
+      "mean_phase_food_trips": 26.667,
+      "mean_phase_food_collected": 133.333,
+      "mean_avg_turn_noise": 0.0604,
+      "mean_food_pheromone": 56260.0
+    },
+    {
+      "profile": "high",
+      "phase": "initial_food",
+      "n": 3,
+      "mean_phase_food_trips": 2.333,
+      "mean_phase_food_collected": 13.333,
+      "mean_avg_turn_noise": 0.105,
+      "mean_food_pheromone": 9159.667
+    },
+    {
+      "profile": "high",
+      "phase": "relocated_food",
+      "n": 3,
+      "mean_phase_food_trips": 17.333,
+      "mean_phase_food_collected": 87.667,
+      "mean_avg_turn_noise": 0.105,
+      "mean_food_pheromone": 23297.333
+    },
+    {
+      "profile": "low",
+      "phase": "initial_food",
+      "n": 3,
+      "mean_phase_food_trips": 9.0,
+      "mean_phase_food_collected": 46.667,
+      "mean_avg_turn_noise": 0.018,
+      "mean_food_pheromone": 43863.0
+    },
+    {
+      "profile": "low",
+      "phase": "relocated_food",
+      "n": 3,
+      "mean_phase_food_trips": 74.0,
+      "mean_phase_food_collected": 362.0,
+      "mean_avg_turn_noise": 0.018,
+      "mean_food_pheromone": 47733.0
+    },
+    {
+      "profile": "medium",
+      "phase": "initial_food",
+      "n": 3,
+      "mean_phase_food_trips": 9.0,
+      "mean_phase_food_collected": 45.667,
+      "mean_avg_turn_noise": 0.055,
+      "mean_food_pheromone": 30338.667
+    },
+    {
+      "profile": "medium",
+      "phase": "relocated_food",
+      "n": 3,
+      "mean_phase_food_trips": 35.333,
+      "mean_phase_food_collected": 177.333,
+      "mean_avg_turn_noise": 0.055,
+      "mean_food_pheromone": 54618.0
+    }
+  ],
+  "output": "ant_colony_sim/outputs/stochasticity_strategy_smoke.csv",
+  "summary_output": "ant_colony_sim/outputs/stochasticity_strategy_smoke_summary.csv"
+}

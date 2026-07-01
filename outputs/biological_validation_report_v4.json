@@ -1,0 +1,138 @@
+{
+  "diverse": {
+    "relocated_early": {
+      "n": 8,
+      "trip_ratio_mean": 0.5223578013548373,
+      "trip_ratio_ci": [
+        0.33077122480231347,
+        0.7139443779073612
+      ],
+      "trip_mean": 11.0,
+      "trip_ci": [
+        7.466559750045291,
+        14.533440249954708
+      ],
+      "collected_ratio_mean": 0.5262930515361506,
+      "traffic_mean": 0.10350000000000001,
+      "exploration_mean": 0.102625
+    },
+    "relocated_total": {
+      "n": 8,
+      "trip_ratio_mean": 3.812207149413246,
+      "trip_ratio_ci": [
+        2.798040291020715,
+        4.826374007805777
+      ],
+      "trip_mean": 79.75,
+      "trip_ci": [
+        66.32440876534669,
+        93.17559123465331
+      ],
+      "collected_ratio_mean": 3.916044863634519,
+      "traffic_mean": 0.098,
+      "exploration_mean": 0.06512499999999999
+    }
+  },
+  "high": {
+    "relocated_early": {
+      "n": 8,
+      "trip_ratio_mean": 0.24895236299648063,
+      "trip_ratio_ci": [
+        0.15152222127173745,
+        0.3463825047212238
+      ],
+      "trip_mean": 4.125,
+      "trip_ci": [
+        2.4919583593796513,
+        5.758041640620348
+      ],
+      "collected_ratio_mean": 0.2677255561509718,
+      "traffic_mean": 0.0036249999999999998,
+      "exploration_mean": 0.017499999999999998
+    },
+    "relocated_total": {
+      "n": 8,
+      "trip_ratio_mean": 3.091180869783811,
+      "trip_ratio_ci": [
+        2.547747693771485,
+        3.6346140457961367
+      ],
+      "trip_mean": 49.125,
+      "trip_ci": [
+        44.719863793252244,
+        53.530136206747756
+      ],
+      "collected_ratio_mean": 3.3210659379254412,
+      "traffic_mean": 0.003625,
+      "exploration_mean": 0.00425
+    }
+  },
+  "low": {
+    "relocated_early": {
+      "n": 8,
+      "trip_ratio_mean": 0.367996506997886,
+      "trip_ratio_ci": [
+        0.2699953562385595,
+        0.46599765775721247
+      ],
+      "trip_mean": 30.75,
+      "trip_ci": [
+        25.00274848297032,
+        36.49725151702968
+      ],
+      "collected_ratio_mean": 0.3756054251623185,
+      "traffic_mean": 0.29025,
+      "exploration_mean": 0.23525000000000001
+    },
+    "relocated_total": {
+      "n": 8,
+      "trip_ratio_mean": 1.3144553138149675,
+      "trip_ratio_ci": [
+        1.0786110433886442,
+        1.5502995842412908
+      ],
+      "trip_mean": 113.375,
+      "trip_ci": [
+        93.95100903521627,
+        132.79899096478374
+      ],
+      "collected_ratio_mean": 1.3333104255189212,
+      "traffic_mean": 0.324125,
+      "exploration_mean": 0.18637499999999999
+    }
+  },
+  "medium": {
+    "relocated_early": {
+      "n": 8,
+      "trip_ratio_mean": 0.3723602143568041,
+      "trip_ratio_ci": [
+        0.21786080877235117,
+        0.5268596199412571
+      ],
+      "trip_mean": 6.5,
+      "trip_ci": [
+        4.843497660732108,
+        8.156502339267892
+      ],
+      "collected_ratio_mean": 0.35918488259170095,
+      "traffic_mean": 0.08974999999999998,
+      "exploration_mean": 0.09199999999999998
+    },
+    "relocated_total": {
+      "n": 8,
+      "trip_ratio_mean": 1.9950909148566633,
+      "trip_ratio_ci": [
+        1.4824285995981672,
+        2.5077532301151595
+      ],
+      "trip_mean": 36.375,
+      "trip_ci": [
+        30.41461200927322,
+        42.33538799072678
+      ],
+      "collected_ratio_mean": 1.9643028943300926,
+      "traffic_mean": 0.136375,
+      "exploration_mean": 0.092625
+    }
+  }
+}

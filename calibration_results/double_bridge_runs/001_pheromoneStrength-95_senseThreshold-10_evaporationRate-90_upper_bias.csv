@@ -1,0 +1,4 @@
+seed,species,ants,days,bias_branch,bias_strength,upper_crossings,lower_crossings,total_crossings,upper_return_crossings,lower_return_crossings,return_crossings,selected_branch,return_selected_branch,dominance,return_dominance,food_trips,food_collected,food_pheromone,upper_food_pheromone,lower_food_pheromone,final_ants,dead
+1,lasius,240,4,upper,350,624,121,745,190,19,209,upper,upper,0.6752,0.8182,182,905,35434,1681,472,240,0
+2,lasius,240,4,upper,350,646,158,804,207,14,221,upper,upper,0.607,0.8733,186,895,40604,1974,777,240,0
+3,lasius,240,4,upper,350,530,309,839,160,53,213,upper,upper,0.2634,0.5023,151,743,44002,1693,1038,240,0
