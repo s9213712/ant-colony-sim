@@ -194,14 +194,15 @@ Run a multi-paper validation pass that maps literature claims to explicit simula
 ```bash
 python3 ant_colony_sim/experiments/paper_conditions_probe.py \
   --seeds 1-3 \
-  --output ant_colony_sim/outputs/paper_conditions_v2.csv \
-  --json-output ant_colony_sim/outputs/paper_conditions_v2.json \
-  --report-output ant_colony_sim/outputs/paper_conditions_report_v2.md
+  --output ant_colony_sim/outputs/paper_conditions_v3.csv \
+  --json-output ant_colony_sim/outputs/paper_conditions_v3.json \
+  --report-output ant_colony_sim/outputs/paper_conditions_report_v3.md
 ```
 
-The current `v2` matrix covers:
+The current `v3` matrix covers:
 
 - Perna et al. 2012: local pheromone trail formation and the missing Weber-law turning export;
+- Ramirez et al. 2018: tropotaxis gradient-response proxy and the missing sensing/turning logs;
 - Amorim 2014: trail formation plus food-removal/rain washout;
 - Deneubourg/Goss/Beckers double bridge: branch bias and positive-feedback sensitivity;
 - Dussutour et al. 2004: crowded traffic and alternate route use;
@@ -211,11 +212,13 @@ The current `v2` matrix covers:
 - Kang & Theraulaz 2015: external task-demand changes and task reallocation;
 - Afek/Kecher/Sulamy 2015: fail-stop foraging resilience after mass worker loss;
 - Jimenez-Romero et al. 2015: negative pheromone as a forbidden-path signal.
+- Aswale et al. 2022: misleading food pheromone attack and cautionary-pheromone defense proxy.
 
-`outputs/paper_conditions_report_v2.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
+`outputs/paper_conditions_report_v3.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
 
-Current `v2` additions show:
+Current `v3` additions show:
 
 - task-demand reallocation aligns qualitatively with response-threshold task organization;
 - fail-stop foraging is only partial because food trips continue after mass death but drop to a low resilience ratio;
 - negative pheromone is only partial because it reduces hazard-region occupancy weakly and lacks individual learning.
+- misleading pheromone is only partial because the static fake trail does not reduce food trips; an active detractor-agent mechanism is needed.

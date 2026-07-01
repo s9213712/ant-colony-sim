@@ -21,6 +21,11 @@ SOURCES = [
         "url": "https://arxiv.org/abs/1201.5827",
     },
     {
+        "id": "ramirez_2018",
+        "paper": "Ramirez et al. 2018, Modeling tropotaxis in ant colonies: recruitment and trail formation",
+        "url": "https://arxiv.org/abs/1811.00590",
+    },
+    {
         "id": "deneubourg_goss_bridge",
         "paper": "Deneubourg/Goss/Beckers double-bridge trail-selection paradigm, cited and summarized in Perna et al. 2012",
         "url": "https://arxiv.org/abs/1201.5827",
@@ -64,6 +69,11 @@ SOURCES = [
         "id": "jimenez_romero_2015",
         "paper": "Jimenez-Romero et al. 2015, A Model for Foraging Ants, Controlled by Spiking Neural Networks and Double Pheromones",
         "url": "https://arxiv.org/abs/1507.08467",
+    },
+    {
+        "id": "aswale_2022",
+        "paper": "Aswale et al. 2022, Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It",
+        "url": "https://arxiv.org/abs/2202.01808",
     },
 ]
 
@@ -204,6 +214,18 @@ PAPER_CONDITIONS_JS = """
       for (let i = 0; i <= steps; i++) {
         const t = i / steps;
         antSim.world.pheromones.food.add(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t, strength);
+      }
+    }
+  };
+  const addPheromonePath = (fieldName, points, strength, spacing = 12) => {
+    const field = antSim.world.pheromones[fieldName];
+    for (let p = 0; p < points.length - 1; p++) {
+      const [x1, y1] = points[p];
+      const [x2, y2] = points[p + 1];
+      const steps = Math.max(1, Math.ceil(Math.hypot(x2 - x1, y2 - y1) / spacing));
+      for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        field.add(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t, strength);
       }
     }
   };
@@ -370,6 +392,45 @@ PAPER_CONDITIONS_JS = """
       avg_traffic_load: snap.avg_traffic_load,
     };
   };
+  const runMisleadingPheromone = (seed, mode) => {
+    baseMature(seed, config.ants);
+    antSim.world.water = [];
+    antSim.addFood(980, 545, config.foodAmount);
+    const fakePath = [
+      [antSim.world.nest.x, antSim.world.nest.y],
+      [610, 250],
+      [880, 190],
+      [1000, 175],
+    ];
+    if (mode !== 'control') {
+      addPheromonePath('food', fakePath, config.fakeTrailStrength, 10);
+    }
+    if (mode === 'caution') {
+      addPheromonePath('avoid', fakePath, config.fakeTrailStrength * 0.92, 10);
+    }
+    let fakeOccupancy = 0;
+    let realApproachOccupancy = 0;
+    let samples = 0;
+    const chunks = Math.max(1, Math.round(config.misleadingDays / config.sampleDays));
+    for (let i = 0; i < chunks; i++) {
+      antSim.runDays(config.sampleDays, config.dt);
+      fakeOccupancy += antSim.world.ants.filter(ant => ant.y < 285 && ant.x > 520 && ant.x < 1030).length;
+      realApproachOccupancy += antSim.world.ants.filter(ant => ant.y > 455 && ant.x > 650 && ant.x < 1030).length;
+      samples += 1;
+    }
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: `misleading_pheromone_${mode}`,
+      seed,
+      ants: snap.ants,
+      mean_fake_path_occupancy: samples ? fakeOccupancy / samples : 0,
+      mean_real_approach_occupancy: samples ? realApproachOccupancy / samples : 0,
+      food_trips: snap.food_trips,
+      food_collected: snap.food_collected,
+      food_pheromone: snap.food_pheromone,
+      avoid_pheromone: snap.avoid_pheromone,
+    };
+  };
 
   const rows = [];
 
@@ -485,6 +546,9 @@ PAPER_CONDITIONS_JS = """
     rows.push(runFailStopForaging(seed, true));
     rows.push(runAvoidSignal(seed, false));
     rows.push(runAvoidSignal(seed, true));
+    rows.push(runMisleadingPheromone(seed, 'control'));
+    rows.push(runMisleadingPheromone(seed, 'attack'));
+    rows.push(runMisleadingPheromone(seed, 'caution'));
   }
   return rows;
 }
@@ -518,6 +582,16 @@ def aggregate(raw_rows):
         "status": "partial" if trail_pass else "fail",
         "observed": json.dumps(trail_metrics, ensure_ascii=False),
         "gap": "Matches trail reinforcement qualitatively, but the model does not yet export turn-angle vs. local left/right pheromone samples, so Weber-law response cannot be quantitatively tested.",
+    })
+
+    summaries.append({
+        "paper_id": "ramirez_2018",
+        "paper": "Ramirez et al. 2018",
+        "condition": "tropotaxis_gradient_response_proxy",
+        "expected": "A gradient-sensitive pheromone response should yield recruitment to newly found food sources and colony-level trail networks.",
+        "status": "partial" if trail_pass else "fail",
+        "observed": json.dumps(trail_metrics, ensure_ascii=False),
+        "gap": "The model uses left/right/front sampling and forms trails, but does not yet export local gradient vectors or per-step orientation changes needed to fit the tropotaxis equations.",
     })
 
     washout_rows = by_condition["rain_food_removal_washout"]
@@ -714,12 +788,47 @@ def aggregate(raw_rows):
         "gap": "The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper.",
     })
 
+    mislead_control = by_condition["misleading_pheromone_control"]
+    mislead_attack = by_condition["misleading_pheromone_attack"]
+    mislead_caution = by_condition["misleading_pheromone_caution"]
+    control_trips = mean(float(r["food_trips"]) for r in mislead_control)
+    attack_trips = mean(float(r["food_trips"]) for r in mislead_attack)
+    caution_trips = mean(float(r["food_trips"]) for r in mislead_caution)
+    attack_damage_ratio = attack_trips / control_trips if control_trips else 0
+    caution_recovery_ratio = caution_trips / attack_trips if attack_trips else 0
+    misleading_metrics = {
+        "control_mean_food_trips": round(control_trips, 3),
+        "attack_mean_food_trips": round(attack_trips, 3),
+        "caution_mean_food_trips": round(caution_trips, 3),
+        "attack_vs_control_trip_ratio": round(attack_damage_ratio, 4),
+        "caution_vs_attack_trip_ratio": round(caution_recovery_ratio, 4),
+        "attack_mean_fake_path_occupancy": round(mean(float(r["mean_fake_path_occupancy"]) for r in mislead_attack), 3),
+        "caution_mean_fake_path_occupancy": round(mean(float(r["mean_fake_path_occupancy"]) for r in mislead_caution), 3),
+    }
+    attack_visible = attack_damage_ratio < 0.92 or misleading_metrics["attack_mean_fake_path_occupancy"] > misleading_metrics["caution_mean_fake_path_occupancy"]
+    caution_visible = caution_recovery_ratio > 1.08 or misleading_metrics["caution_mean_fake_path_occupancy"] < misleading_metrics["attack_mean_fake_path_occupancy"] * 0.9
+    if attack_visible and caution_visible:
+        misleading_status = "pass"
+    elif attack_visible or caution_visible:
+        misleading_status = "partial"
+    else:
+        misleading_status = "fail"
+    summaries.append({
+        "paper_id": "aswale_2022",
+        "paper": "Aswale et al. 2022",
+        "condition": "misleading_pheromone_attack_and_caution",
+        "expected": "Misleading food pheromone should disrupt foraging; a cautionary/avoid signal should limit, but not necessarily eliminate, the disruption.",
+        "status": misleading_status,
+        "observed": json.dumps(misleading_metrics, ensure_ascii=False),
+        "gap": "The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone.",
+    })
+
     return summaries
 
 
 def write_markdown(path, summaries, raw_output, json_output):
     lines = [
-        "# Paper Condition Validation v2",
+        "# Paper Condition Validation v3",
         "",
         "This report maps published ant-behaviour findings to reproducible simulation conditions. Status values mean:",
         "",
@@ -754,9 +863,9 @@ def write_markdown(path, summaries, raw_output, json_output):
 def main():
     parser = argparse.ArgumentParser(description="Validate ant simulator conditions against multiple ant-behaviour papers.")
     parser.add_argument("--seeds", default="1-3")
-    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v2.csv"))
-    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v2.json"))
-    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v2.md"))
+    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v3.csv"))
+    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v3.json"))
+    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v3.md"))
     parser.add_argument("--quick", action="store_true")
     args = parser.parse_args()
 
@@ -766,27 +875,29 @@ def main():
 
     config = {
         "seeds": seeds,
-        "ants": 240 if args.quick else 280,
-        "lowDensityAnts": 120 if args.quick else 160,
-        "highDensityAnts": 360 if args.quick else 520,
+        "ants": 180 if args.quick else 280,
+        "lowDensityAnts": 90 if args.quick else 160,
+        "highDensityAnts": 260 if args.quick else 520,
         "foodAmount": 1200,
         "dt": 9,
-        "trailDays": 3 if args.quick else 4,
+        "trailDays": 2.2 if args.quick else 4,
         "washoutDays": 0.7,
-        "bridgeDays": 2.5 if args.quick else 3.5,
-        "sampleDays": 0.1,
+        "bridgeDays": 1.8 if args.quick else 3.5,
+        "sampleDays": 0.2 if args.quick else 0.1,
         "speedProbeDays": 0.45,
         "noiseProfiles": ["low", "medium", "high", "diverse"],
         "initialFoodX": 980,
         "initialFoodY": 250,
         "relocatedFoodX": 980,
         "relocatedFoodY": 540,
-        "stochasticPreDays": 2.5 if args.quick else 3.5,
+        "stochasticPreDays": 1.8 if args.quick else 3.5,
         "adaptationDays": 0.6,
-        "taskDemandDays": 0.9 if args.quick else 1.2,
-        "failStopAnts": 240 if args.quick else 320,
-        "failStopDays": 1.1 if args.quick else 1.6,
-        "avoidDays": 1.2 if args.quick else 1.8,
+        "taskDemandDays": 0.6 if args.quick else 1.2,
+        "failStopAnts": 200 if args.quick else 320,
+        "failStopDays": 0.8 if args.quick else 1.6,
+        "avoidDays": 0.8 if args.quick else 1.8,
+        "misleadingDays": 0.6 if args.quick else 1.5,
+        "fakeTrailStrength": 700,
     }
 
     server = None
