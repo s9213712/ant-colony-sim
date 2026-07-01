@@ -239,3 +239,43 @@ python3 ant_colony_sim/experiments/build_literature_corpus.py \
 ```
 
 The current corpus contains 120 deduplicated records from Crossref plus curated seed works. It is a candidate pool for future validation conditions, not a claim that all papers have already been reproduced. The generated records include DOI/URL, category labels and a candidate mapping such as `existing_traffic_density_probe`, `extend_corpse_cleanup_probe` or `needs_food_quality_resource_model`.
+
+## Sequential Corpus Evaluation
+
+Evaluate all 120 corpus records against the current paper-condition probes:
+
+```bash
+python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
+  --corpus ant_colony_sim/outputs/literature_corpus_100.json \
+  --conditions ant_colony_sim/outputs/paper_conditions_v3.json \
+  --csv-output ant_colony_sim/outputs/literature_corpus_120_evaluation.csv \
+  --json-output ant_colony_sim/outputs/literature_corpus_120_evaluation.json \
+  --md-output ant_colony_sim/outputs/literature_corpus_120_evaluation.md
+```
+
+Current result:
+
+- `pass`: 7
+- `partial`: 56
+- `not_covered`: 25
+- `not_biological_target`: 32
+
+Interpretation: most of the 120 papers are not yet correctly simulated in a strict sense. They are either covered only by a generic proxy, need new validation conditions, or are algorithmic/robotics papers that should not be treated as direct biological targets.
+
+Generate the backlog of papers that are not fully simulated yet:
+
+```bash
+python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
+  --evaluation ant_colony_sim/outputs/literature_corpus_120_evaluation.json \
+  --csv-output ant_colony_sim/outputs/literature_gap_backlog.csv \
+  --json-output ant_colony_sim/outputs/literature_gap_backlog.json \
+  --md-output ant_colony_sim/outputs/literature_gap_backlog.md
+```
+
+Current backlog:
+
+- `P0_missing_biology_condition`: 25
+- `P1_exact_condition_partial`: 5
+- `P2_proxy_only`: 51
+- `P3_algorithmic_reference_only`: 32
+- total: 113

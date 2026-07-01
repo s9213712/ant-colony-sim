@@ -422,3 +422,65 @@ python3 experiments/paper_conditions_probe.py \
 - 這是「測試候選池」，不是 120 篇都已經完成驗證。
 - 文獻庫混合三類資料：真實螞蟻行為/生態實驗、ABM/PDE/數學模型、以及受螞蟻啟發的 swarm robotics / ACO 模型。後兩者可提供演算法與測試條件，但不能直接當作生物學真實度證據。
 - 下一批最值得轉成自動測試的主題：food quality vs. trail strength、nest relocation quorum、brood microclimate、corpse cleanup latency、active misleading pheromone detractor agents。
+
+## 12. 120-paper sequential evaluation
+
+`experiments/evaluate_literature_corpus.py` 逐篇讀取 `outputs/literature_corpus_100.json`，並把每一篇對應到目前 `outputs/paper_conditions_v3.json` 的 simulation evidence。輸出：
+
+- `outputs/literature_corpus_120_evaluation.csv`
+- `outputs/literature_corpus_120_evaluation.json`
+- `outputs/literature_corpus_120_evaluation.md`
+
+目前逐篇結果：
+
+| 狀態 | 數量 | 解讀 |
+| --- | ---: | --- |
+| pass | 7 | 有 exact paper-condition，且目前定性方向符合 |
+| partial | 56 | 有 exact condition 或 category proxy，但缺 paper-specific 數據/機制 |
+| not_covered | 25 | 目前驗證套件或模型缺必要條件 |
+| not_biological_target | 32 | 主要是 robotics / ACO / 工程類比，不應作為直接生物學驗證 |
+
+範圍統計：
+
+| scope | 數量 |
+| --- | ---: |
+| category_proxy | 74 |
+| algorithmic_or_robotics_analogy | 32 |
+| exact_paper_condition | 12 |
+| unmapped | 2 |
+
+直接結論：目前不能說 120 篇都能正確模擬。較嚴格地說，只有少數 exact condition 達到定性通過；大多數仍需轉成更精確的 simulation condition，或先補模型機制。下一輪優先順序應是：
+
+1. `food_quality_needed`：加入食物品質/濃度/距離收益，測 food quality vs. trail strength。
+2. `brood_microclimate_needed`：建立育幼微氣候 condition，測溫濕度與 brood survival proxy。
+3. `corpse_cleanup_needed`：建立 necrophoresis latency / corpse disposal curve。
+4. `nest_relocation_needed`：建立 nest-site quorum / relocation condition。
+5. `active_misleading_pheromone`：把 static fake trail 改成 active detractor agents。
+
+## 13. Gap backlog for later work
+
+`experiments/generate_literature_gap_backlog.py` 會把逐篇評估中所有非 `pass` 文獻記錄成待辦清單。輸出：
+
+- `outputs/literature_gap_backlog.csv`
+- `outputs/literature_gap_backlog.json`
+- `outputs/literature_gap_backlog.md`
+
+目前 backlog：
+
+| 優先級 | 數量 | 用途 |
+| --- | ---: | --- |
+| P0_missing_biology_condition | 25 | 生物學相關，但目前模型/測試條件不足，優先補 |
+| P1_exact_condition_partial | 5 | 已有 exact paper condition，但仍缺關鍵量測或機制 |
+| P2_proxy_only | 51 | 只有泛化 proxy，需逐篇轉成專用 condition |
+| P3_algorithmic_reference_only | 32 | robotics / ACO / 工程類比，只作靈感或演算法參考 |
+| total | 113 | 所有尚未 fully simulated 的文獻 |
+
+目前 P0 的主要工作群：
+
+- food quality / concentration / distance reward model。
+- brood microclimate validation。
+- necrophoresis latency and corpse disposal curves。
+- nest relocation / quorum decision conditions。
+- active misleading pheromone detractor agents。
+
+後續改模型時，應先從 P0 做起；每補一個 condition，就重跑 `paper_conditions_probe.py`、`evaluate_literature_corpus.py`、`generate_literature_gap_backlog.py`，讓 backlog 數量逐步下降。

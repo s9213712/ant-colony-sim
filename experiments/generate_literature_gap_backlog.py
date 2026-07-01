@@ -1,0 +1,167 @@
+#!/usr/bin/env python3
+import argparse
+import csv
+import json
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def priority(row):
+    if row["status"] == "not_covered" and row["scope"] != "algorithmic_or_robotics_analogy":
+        return "P0_missing_biology_condition"
+    if row["status"] == "partial" and row["scope"] == "exact_paper_condition":
+        return "P1_exact_condition_partial"
+    if row["status"] == "partial":
+        return "P2_proxy_only"
+    if row["status"] == "not_biological_target":
+        return "P3_algorithmic_reference_only"
+    return "P4_other"
+
+
+def next_action(row):
+    condition = row.get("matched_condition", "")
+    gap = row.get("gap", "")
+    if "food_quality_needed" in condition or "food-quality" in gap or "food quality" in gap:
+        return "Add resource quality/concentration and compare recruitment or trail strength across food qualities."
+    if "brood_microclimate" in condition or "thermoregulation" in gap:
+        return "Add brood microclimate validation for temperature/humidity stress and brood survival/development."
+    if "corpse_cleanup" in condition or "necrophoresis" in gap:
+        return "Add necrophoresis latency and corpse disposal curve validation."
+    if "nest" in condition and "relocation" in condition:
+        return "Add nest relocation and quorum decision condition."
+    if "misleading" in condition or "negative_pheromone" in condition or "avoid" in condition:
+        return "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths."
+    if "traffic" in condition or "no_jam" in condition:
+        return "Add trail-segment flow-density and velocity measurements."
+    if "task" in condition:
+        return "Add task-switching rates and worker contact/network metrics."
+    if "trail" in condition or "tropotaxis" in condition:
+        return "Add per-step local pheromone samples, gradient vectors and turn-angle logs."
+    if row["status"] == "not_biological_target":
+        return "Keep as algorithmic inspiration only; do not use as direct biological validation target."
+    return "Define a paper-specific simulation condition before claiming alignment."
+
+
+def write_csv(path, rows):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    headers = [
+        "priority",
+        "index",
+        "status",
+        "scope",
+        "verdict",
+        "title",
+        "year",
+        "doi",
+        "url",
+        "categories",
+        "matched_condition",
+        "evidence_paper_id",
+        "next_action",
+        "gap",
+    ]
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=headers)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def write_markdown(path, rows, summary, source, csv_path, json_path):
+    lines = [
+        "# Literature Gap Backlog",
+        "",
+        "This backlog records every literature-corpus paper that is not fully simulated by the current validation matrix.",
+        "",
+        f"- Source evaluation: `{source}`",
+        f"- CSV: `{csv_path}`",
+        f"- JSON: `{json_path}`",
+        "",
+        "## Summary",
+        "",
+    ]
+    for key, value in summary.items():
+        lines.append(f"- `{key}`: {value}")
+    current = None
+    for row in rows:
+        if row["priority"] != current:
+            current = row["priority"]
+            lines.extend(["", f"## {current}", ""])
+        lines.extend([
+            f"### {row['index']}. {row['title']}",
+            "",
+            f"- Status: `{row['status']}`",
+            f"- Scope: `{row['scope']}`",
+            f"- Year: {row['year']}",
+            f"- DOI: {row['doi'] or 'none'}",
+            f"- URL: {row['url']}",
+            f"- Categories: {row['categories']}",
+            f"- Matched condition: {row['matched_condition'] or 'none'}",
+            f"- Evidence paper id: {row['evidence_paper_id'] or 'none'}",
+            f"- Next action: {row['next_action']}",
+            f"- Gap: {row['gap']}",
+            "",
+        ])
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate a backlog for literature papers not fully simulated yet.")
+    parser.add_argument("--evaluation", default=str(ROOT / "outputs" / "literature_corpus_120_evaluation.json"))
+    parser.add_argument("--csv-output", default=str(ROOT / "outputs" / "literature_gap_backlog.csv"))
+    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "literature_gap_backlog.json"))
+    parser.add_argument("--md-output", default=str(ROOT / "outputs" / "literature_gap_backlog.md"))
+    args = parser.parse_args()
+
+    evaluation = json.loads(Path(args.evaluation).read_text(encoding="utf-8"))
+    rows = []
+    for row in evaluation["rows"]:
+        if row["status"] == "pass":
+            continue
+        item = {
+            "priority": priority(row),
+            "next_action": next_action(row),
+            **row,
+        }
+        rows.append(item)
+    priority_order = {
+        "P0_missing_biology_condition": 0,
+        "P1_exact_condition_partial": 1,
+        "P2_proxy_only": 2,
+        "P3_algorithmic_reference_only": 3,
+        "P4_other": 4,
+    }
+    rows.sort(key=lambda row: (priority_order.get(row["priority"], 99), int(row["index"])))
+    summary = {}
+    for row in rows:
+        summary[row["priority"]] = summary.get(row["priority"], 0) + 1
+    summary["total"] = len(rows)
+
+    csv_path = Path(args.csv_output)
+    json_path = Path(args.json_output)
+    md_path = Path(args.md_output)
+    write_csv(csv_path, rows)
+    json_path.parent.mkdir(parents=True, exist_ok=True)
+    json_path.write_text(
+        json.dumps(
+            {
+                "source": args.evaluation,
+                "summary": summary,
+                "rows": rows,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    write_markdown(md_path, rows, summary, args.evaluation, csv_path, json_path)
+    print(f"Wrote {csv_path}")
+    print(f"Wrote {json_path}")
+    print(f"Wrote {md_path}")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()

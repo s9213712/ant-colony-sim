@@ -35,6 +35,8 @@ jobs:
             experiments/calibrate_double_bridge.py \
             experiments/calibrate_foraging.py \
             experiments/double_bridge_probe.py \
+            experiments/evaluate_literature_corpus.py \
+            experiments/generate_literature_gap_backlog.py \
             experiments/generate_validation_report.py \
             experiments/literature_alignment_probe.py \
             experiments/paper_conditions_probe.py \
