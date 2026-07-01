@@ -1,0 +1,76 @@
+name: validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Playwright
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Python syntax check
+        run: |
+          python -m py_compile \
+            behavior_probe.py \
+            experiments/batch_runner.py \
+            experiments/calibrate_double_bridge.py \
+            experiments/calibrate_foraging.py \
+            experiments/double_bridge_probe.py \
+            experiments/generate_validation_report.py \
+            experiments/literature_alignment_probe.py \
+            experiments/performance_probe.py \
+            experiments/qa_report_probe.py \
+            experiments/stochasticity_probe.py \
+            experiments/summarize_batch.py
+
+      - name: Script API and UI QA
+        run: python experiments/qa_report_probe.py
+
+      - name: Literature alignment probe
+        run: python experiments/literature_alignment_probe.py
+
+      - name: Stochasticity smoke probe
+        run: |
+          python experiments/stochasticity_probe.py \
+            --seeds 1-2 \
+            --pre-days 1 \
+            --post-days 1 \
+            --adaptation-days 0.25 \
+            --profiles low,medium,high,diverse \
+            --output outputs/ci_stochasticity_smoke.csv
+
+      - name: Generate validation report
+        run: |
+          python experiments/generate_validation_report.py \
+            --stochasticity-csv outputs/ci_stochasticity_smoke.csv \
+            --output outputs/ci_biological_validation_report.md
+
+      - name: Upload validation outputs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-outputs
+          path: |
+            outputs/ci_stochasticity_smoke.csv
+            outputs/ci_stochasticity_smoke.json
+            outputs/ci_stochasticity_smoke_summary.csv
+            outputs/ci_biological_validation_report.md
+            outputs/ci_biological_validation_report.json

@@ -1,5 +1,7 @@
 # Ant Colony Sim
 
+[![validation](https://github.com/s9213712/ant-colony-sim/actions/workflows/validation.yml/badge.svg)](https://github.com/s9213712/ant-colony-sim/actions/workflows/validation.yml)
+
 Behavior-level ant colony simulation for exploring pheromone-mediated foraging, resource pressure, brood care, necrophoresis, traffic costs and stochasticity-driven adaptation.
 
 The current model is a qualitative research aid and teaching tool. It is not calibrated for numerical prediction of real ant colonies.
@@ -25,3 +27,7 @@ python3 experiments/generate_validation_report.py --stochasticity-csv outputs/st
 ```
 
 See `BIOLOGICAL_VALIDATION.md`, `PARAMETER_PROVENANCE.md`, and `experiments/README.md` for model boundaries, parameter provenance and reproducible experiment workflows.
+
+## Continuous Validation
+
+GitHub Actions runs `.github/workflows/validation.yml` on pushes and pull requests. It installs Playwright Chromium, runs syntax checks, API/UI QA, literature-alignment probes, a short stochasticity smoke experiment, and uploads generated validation artifacts.
