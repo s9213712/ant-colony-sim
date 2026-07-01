@@ -31,6 +31,7 @@ jobs:
           python -m py_compile \
             behavior_probe.py \
             experiments/batch_runner.py \
+            experiments/build_literature_corpus.py \
             experiments/calibrate_double_bridge.py \
             experiments/calibrate_foraging.py \
             experiments/double_bridge_probe.py \

@@ -1,0 +1,2665 @@
+{
+  "generated_at": "2026-07-01T22:50:33Z",
+  "source": "Crossref REST API plus curated seed works",
+  "queries": [
+    "ant pheromone trail foraging",
+    "ant trail pheromone recruitment foraging",
+    "ant foraging pheromone model",
+    "ant colony foraging model pheromone",
+    "ant tropotaxis pheromone trail",
+    "Lasius niger food recruitment pheromone",
+    "Linepithema humile trail pheromone foraging",
+    "Argentine ant trail pheromone foraging",
+    "ant double bridge experiment pheromone",
+    "ant traffic trail density flow",
+    "ant trail traffic jam density",
+    "ant task allocation response threshold",
+    "social insect task allocation ants response threshold",
+    "ant division of labor task allocation model",
+    "ant necrophoresis corpse removal chemical",
+    "ant corpse management necrophoresis",
+    "ant brood care temperature humidity",
+    "ant colony thermoregulation brood",
+    "ant nest relocation quorum Temnothorax",
+    "ant house hunting quorum decision",
+    "army ant raid collective behavior model",
+    "Eciton army ant raid trail pheromone",
+    "ant mill circular trail following",
+    "ant stochasticity foraging pheromone",
+    "ant negative pheromone foraging",
+    "ant misleading pheromone trail foraging",
+    "ant colony resilience foraging pheromone",
+    "ant foraging food quality recruitment",
+    "ant foraging distance food quality pheromone",
+    "ant social insect network task allocation",
+    "ant collective decision making foraging",
+    "ant pathogen social immunity corpse removal"
+  ],
+  "summary": {
+    "count": 120,
+    "readiness": {
+      "direct_or_near_term": 118,
+      "needs_new_condition": 2
+    },
+    "categories": {
+      "pheromone_trail_foraging": 81,
+      "computational_swarm_model": 70,
+      "networks_interactions": 30,
+      "task_allocation_division_labor": 25,
+      "traffic_collective_motion": 22,
+      "army_ant_raids_mills": 17,
+      "food_quality_choice": 16,
+      "nest_relocation_house_hunting": 8,
+      "brood_nest_microclimate": 6,
+      "misleading_negative_pheromone": 6,
+      "necrophoresis_social_immunity": 2
+    }
+  },
+  "works": [
+    {
+      "id": "ramirez_2018",
+      "title": "Modeling tropotaxis in ant colonies: recruitment and trail formation",
+      "year": 2018,
+      "authors": "Ramirez et al.",
+      "venue": "arXiv",
+      "doi": "10.48550/arxiv.1811.00590",
+      "url": "https://arxiv.org/abs/1811.00590",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 24
+    },
+    {
+      "id": "jimenez_romero_2015",
+      "title": "A Model for Foraging Ants, Controlled by Spiking Neural Networks and Double Pheromones",
+      "year": 2015,
+      "authors": "Jimenez-Romero et al.",
+      "venue": "arXiv",
+      "doi": "10.48550/arxiv.1507.08467",
+      "url": "https://arxiv.org/abs/1507.08467",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 24
+    },
+    {
+      "id": "amorim_2014",
+      "title": "A continuous model of ant foraging with pheromones and trail formation",
+      "year": 2014,
+      "authors": "Amorim",
+      "venue": "arXiv",
+      "doi": "10.48550/arxiv.1402.5611",
+      "url": "https://arxiv.org/abs/1402.5611",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 24
+    },
+    {
+      "id": "malickova_2015",
+      "title": "A stochastic model of ant trail following with two pheromones",
+      "year": 2015,
+      "authors": "Malickova, Yates & Bodova",
+      "venue": "arXiv",
+      "doi": "10.48550/arxiv.1508.06816",
+      "url": "https://arxiv.org/abs/1508.06816",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 22
+    },
+    {
+      "id": "john_2009",
+      "title": "Trafficlike collective movement of ants on trails: absence of a jammed phase",
+      "year": 2009,
+      "authors": "John et al.",
+      "venue": "Physical Review Letters / arXiv",
+      "doi": "10.1103/physrevlett.102.108001",
+      "url": "https://arxiv.org/abs/0903.2717",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 22
+    },
+    {
+      "title": "Applying Social Network Analysis to Agent-Based Models: A Case Study of Task Allocation in Swarm Robotics Inspired by Ant Foraging Behavior",
+      "year": 2019,
+      "authors": "Georgina Montserrat Reséndiz-Benhumea, Tom Froese, Gabriel Ramos-Fernández, Sandra E. Smith-Aguilar",
+      "venue": "The 2019 Conference on Artificial Life",
+      "doi": "10.1162/isal_a_00229",
+      "url": "https://doi.org/10.1162/isal_a_00229",
+      "type": "proceedings-article",
+      "cited_by_crossref": 3,
+      "abstract": "",
+      "source_query": "ant social insect network task allocation",
+      "categories": [
+        "pheromone_trail_foraging",
+        "task_allocation_division_labor",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 20
+    },
+    {
+      "title": "Modeling no-jam traffic in ant trails: a pheromone-controlled approach",
+      "year": 2018,
+      "authors": "Ning Guo, Mao-Bin Hu, Rui Jiang, Jianxun Ding, et al.",
+      "venue": "Journal of Statistical Mechanics: Theory and Experiment",
+      "doi": "10.1088/1742-5468/aabfc7",
+      "url": "https://doi.org/10.1088/1742-5468/aabfc7",
+      "type": "journal-article",
+      "cited_by_crossref": 3,
+      "abstract": "Abstract The experiment in John et al (2009 Phys. Rev. Lett . 102 108001) shows that when ants move in a single-file trail, no jam emerges even at very high densities. We propose a self-propelled model of ant traffic to reproduce the fundamental diagram without a jammed branch. In this model, ants can adjust their desired velocities actively by perceiving pheromone concentration near the front of the trail. Moreover, ants will bear the repulsive force when they have physical contact with neighbors. The velocity in the simulation decreases slightly with increasing density, which captures the main feature observed in the experiment. Distributions of velocity and distance headway basically also conform to the experimental ones.",
+      "source_query": "ant double bridge experiment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion",
+        "food_quality_choice",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 20
+    },
+    {
+      "id": "afek_2015",
+      "title": "Optimal and Resilient Pheromone Utilization in Ant Foraging",
+      "year": 2015,
+      "authors": "Afek, Kecher & Sulamy",
+      "venue": "arXiv",
+      "doi": "10.48550/arxiv.1507.00772",
+      "url": "https://arxiv.org/abs/1507.00772",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 20
+    },
+    {
+      "id": "dussutour_2004",
+      "title": "Optimal traffic organisation in ants under crowded conditions",
+      "year": 2004,
+      "authors": "Dussutour et al.",
+      "venue": "Nature",
+      "doi": "10.1038/nature02585",
+      "url": "https://arxiv.org/abs/cond-mat/0403142",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "traffic_collective_motion"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 20
+    },
+    {
+      "title": "Phase Transitions in Ant Traffic Driven by Density-Dependent Pheromone Feedback",
+      "year": 2026,
+      "authors": "Ozhan Kayacan, Salih Yalcinbas",
+      "venue": "Elsevier BV",
+      "doi": "10.2139/ssrn.6619462",
+      "url": "https://doi.org/10.2139/ssrn.6619462",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "In this study, we present a one-dimensional model of ant traffic incorporating pheromone-based communication with density-dependent feedback. Our model assumes that ants deposit less pheromone in high-density regions to avoid congestion and more pheromone in low-density regions to attract others, reflecting an adaptive regulation mechanism observed in social insects. Through numerical simulations, we demonstrate how this feedback influences the collective movement patterns and traffic flow stability. Our results show that the interplay between the deposition threshold and the evaporation rate gives rise to rich collective dynamics, including sharp phase transitions between jammed and free-flow states, nonlinear velocity-density relationships, and the emergence of self-organized traffic patterns. These behaviors highlight the critical role of local density feedback in regulating collective motion and preventing traffic deadlocks. The model provides a novel quantitative framework to better understand how local pheromone dynamics regulate ant traffic and may contribute to efficient resource allocation in biological and engineered swarm systems.",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion",
+        "necrophoresis_social_immunity",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe",
+        "extend_corpse_cleanup_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 18
+    },
+    {
+      "id": "aswale_2022",
+      "title": "Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It",
+      "year": 2022,
+      "authors": "Aswale et al.",
+      "venue": "AAMAS / arXiv",
+      "doi": "10.48550/arxiv.2202.01808",
+      "url": "https://arxiv.org/abs/2202.01808",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "misleading_negative_pheromone",
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_negative_pheromone_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 18
+    },
+    {
+      "id": "shiraishi_2018",
+      "title": "Diverse Stochasticity Leads a Colony of Ants to Optimal Foraging",
+      "year": 2018,
+      "authors": "Shiraishi et al.",
+      "venue": "arXiv",
+      "doi": "10.48550/arxiv.1805.05598",
+      "url": "https://arxiv.org/abs/1805.05598",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 18
+    },
+    {
+      "id": "perna_2012",
+      "title": "Individual rules for trail pattern formation in Argentine ants (Linepithema humile)",
+      "year": 2012,
+      "authors": "Perna et al.",
+      "venue": "PLoS Computational Biology / arXiv",
+      "doi": "10.1371/journal.pcbi.1002592",
+      "url": "https://arxiv.org/abs/1201.5827",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 18
+    },
+    {
+      "title": "Heterogeneous multi-agent task allocation based on graph neural network ant colony optimization algorithms",
+      "year": 2023,
+      "authors": "Ziyuan Ma, Huajun Gong",
+      "venue": "Intelligence &amp; Robotics",
+      "doi": "10.20517/ir.2023.33",
+      "url": "https://doi.org/10.20517/ir.2023.33",
+      "type": "journal-article",
+      "cited_by_crossref": 8,
+      "abstract": "Heterogeneous multi-agent task allocation is a key optimization problem widely used in fields such as drone swarms and multi-robot coordination. This paper proposes a new paradigm that innovatively combines graph neural networks and ant colony optimization algorithms to solve the assignment problem of heterogeneous multi-agents. The paper introduces an innovative Graph-based Heterogeneous Neural Network Ant Colony Optimization (GHNN-ACO) algorithm for heterogeneous multi-agent scenarios. The multi-agent system is composed of unmanned aerial vehicles, unmanned ships, and unmanned vehicles that work together to effectively respond to emergencies. This method uses graph neural networks to learn the relationship between tasks and agents, forming a graph representation, which is then integrated into ant colony optimization algorithms to guide the search process of ants. Firstly, the algorithm in this paper constructs heterogeneous graph data containing different types of agents and their relationships and uses the algorithm to classify and predict linkages for agent nodes. Secondly, the GHNN-ACO algorithm performs effectively in heterogeneous multi-agent scenarios, providing an effective solution for node classification and link prediction tasks in intelligent agent systems. Thirdly, the algorithm achieves an accuracy rate of 95.31% in assigning multiple tasks to multiple agents. It holds potential application prospects in emergency response and provides a new idea for multi-agent system cooperation.",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 16
+    },
+    {
+      "title": "Small differences in learning speed for different food qualities can drive efficient collective foraging in ant colonies",
+      "year": 2018,
+      "authors": "F. B. Oberhauser, A. Koch, T. J. Czaczkes",
+      "venue": "openRxiv",
+      "doi": "10.1101/274209",
+      "url": "https://doi.org/10.1101/274209",
+      "type": "posted-content",
+      "cited_by_crossref": 2,
+      "abstract": "Abstract Social insects frequently make important collective decisions, such as selecting the best food sources. Many collective decisions are achieved via communication, for example by differential recruitment depending on resource quality. However, even species without recruitment can respond to a changing environment on collective level by tracking food source quality. We hypothesised that an apparent collective decision to focus on the highest quality food source can be explained by differential learning of food qualities. Ants may learn the location of higher quality food faster, with most ants finally congregating at the best food source. To test the effect of reward quality and motivation on learning in Lasius niger , we trained individual ants to find a reward of various sucrose molarities on one arm of a T-maze in spring and in autumn after one or four days of starvation. As hypothesised, ants learned fastest in spring and lowest in autumn, with reduced starvation leading to slower learning. Surprisingly, the effect of food quality and motivation on the learning speed of individuals which persisted in visiting the feeders was small. However, persistence rates varied dramatically: All ants in spring made all (6) return visits to all food qualities, in contrast to 33% of ants in autumn under low starvation. Fitting the empirical findings into an agent-based model revealed that even a tendency of ants to memorise routes to high quality food sources faster can result in ecologically sensible colony-level behaviour. Low motivation colonies are also choosier, due to increasing sensitivity to food quality. Significance statement Collective decisions of insects are often achieved via communication and/or other interactions between individuals. However, animals can also make collective decisions in the absence of communication. We show that foraging motivation and food quality can affect both route memory and the likelihood to return to the food source and thus mediate selective food exploitation. An agent-based model, implemented with our empirical findings, demonstrates that, at the collective level, even small differences in learning lead to ecologically sensible behaviour: mildly starved colonies are selective for high quality food while highly starved colonies exploit all food sources equally. We therefore suggest that non-interactive factors such as individual learning and the foraging motivation of a colony can mediate or even drive group level behaviour. Instead of accounting collective behaviour exclusively to social interactions, possible contributing individual processes should also be considered.",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 16
+    },
+    {
+      "title": "Analysis of Cooperative Perception in Ant Traffic and Its Effects on Transportation System by Using a Congestion-Free Ant-Trail Model",
+      "year": 2021,
+      "authors": "Prafull Kasture, Hidekazu Nishimura",
+      "venue": "Sensors",
+      "doi": "10.3390/s21072393",
+      "url": "https://doi.org/10.3390/s21072393",
+      "type": "journal-article",
+      "cited_by_crossref": 1,
+      "abstract": "We investigated agent-based model simulations that mimic an ant transportation system to analyze the cooperative perception and communication in the system. On a trail, ants use cooperative perception through chemotaxis to maintain a constant average velocity irrespective of their density, thereby avoiding traffic jams. Using model simulations and approximate mathematical representations, we analyzed various aspects of the communication system and their effects on cooperative perception in ant traffic. Based on the analysis, insights about the cooperative perception of ants which facilitate decentralized self-organization is presented. We also present values of communication-parameters in ant traffic, where the system conveys traffic conditions to individual ants, which ants use to self-organize and avoid traffic-jams. The mathematical analysis also verifies our findings and provides a better understanding of various model parameters leading to model improvements.",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 16
+    },
+    {
+      "title": "A Pheromone-Based Utility Model for Collaborative Foraging",
+      "year": 2004,
+      "authors": "Liviu Panait, Sean Luke",
+      "venue": "International Joint Conference on Autonomous Agents and Multiagent Systems",
+      "doi": "10.65109/aoay8418",
+      "url": "https://doi.org/10.65109/aoay8418",
+      "type": "proceedings-article",
+      "cited_by_crossref": 1,
+      "abstract": "Multi-agent research often borrows from biology, where remarkable examples of collective intelligence may be found. One interesting example is ant colonies'y use of pheromones as a joint communication mechanism. In this paper we propose two pheromone-based algorithms for artificial agent foraging, trail-creation, and other tasks. Whereas practically all previous work in this area has focused on biologically-plausible but ad-hoc single pheromone models, we have developed a formalism which uses multiple pheromones to guide cooperative tasks. This model bears some similarity to reinforcement learning. However, our model takes advantage of symmetries common to foraging environments which enables it to achieve much faster reward propagation than reinforcement learning does. Using this approach we demonstrate cooperative behaviors well beyond the previous ant-foraging work, including the ability to create optimal foraging paths in the presence of obstacles, to cope with dynamic environments, and to follow tours with multiple waypoints.We believe that this model may be used for more complex problems still.",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 16
+    },
+    {
+      "title": "A Pheromone-Based Utility Model for Collaborative Foraging",
+      "year": 2004,
+      "authors": "Liviu Panait, Sean Luke",
+      "venue": "International Joint Conference on Autonomous Agents and Multiagent Systems",
+      "doi": "10.65109/ivir1553",
+      "url": "https://doi.org/10.65109/ivir1553",
+      "type": "proceedings-article",
+      "cited_by_crossref": 1,
+      "abstract": "Multi-agent research often borrows from biology, where remarkable examples of collective intelligence may be found. One interesting example is ant colonies? use of pheromones as a joint communication mechanism. In this paper we propose two pheromone-based algorithms for artificial agent foraging, trail-creation, and other tasks. Whereas practically all previous work in this area has focused on biologically-plausible but ad-hoc single pheromone models, we have developed a formalism which uses multiple pheromones to guide cooperative tasks. This model bears some similarity to reinforcement learning. However, our model takes advantage of symmetries common to foraging environments which enables it to achieve much faster reward propagation than reinforcement learning does. Using this approach we demonstrate cooperative behaviors well beyond the previous ant-foraging work, including the ability to create optimal foraging paths in the presence of obstacles, to cope with dynamic environments, and to follow tours with multiple waypoints.We believe that this model may be used for more complex problems still.",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 16
+    },
+    {
+      "title": "Development of Task Allocation Method for Swarm Robotic Systems Using Optimal Foraging Theory and Ant Colony Labor Division Model",
+      "year": 2021,
+      "authors": "Takuya YAMASHITA, Kohei YAMAGISHI, Tsuyoshi SUZUKI",
+      "venue": "The Proceedings of JSME annual Conference on Robotics and Mechatronics (Robomec)",
+      "doi": "10.1299/jsmermd.2021.1p2-f03",
+      "url": "https://doi.org/10.1299/jsmermd.2021.1p2-f03",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant division of labor task allocation model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 16
+    },
+    {
+      "id": "kang_theraulaz_2015",
+      "title": "Dynamical models of task organization in social insect colonies",
+      "year": 2015,
+      "authors": "Kang & Theraulaz",
+      "venue": "arXiv",
+      "doi": "10.48550/arxiv.1511.04769",
+      "url": "https://arxiv.org/abs/1511.04769",
+      "source_query": "seed",
+      "abstract": "",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 16
+    },
+    {
+      "title": "Energetics of Trail Running, Load Carriage, and Emigration in the Column-Raiding Army Ant Eciton hamatum",
+      "year": 1988,
+      "authors": "George A. Bartholomew, John R. B. Lighton, Donald H. Feener",
+      "venue": "Physiological Zoology",
+      "doi": "10.1086/physzool.61.1.30163737",
+      "url": "https://doi.org/10.1086/physzool.61.1.30163737",
+      "type": "journal-article",
+      "cited_by_crossref": 64,
+      "abstract": "",
+      "source_query": "Eciton army ant raid trail pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "nest_relocation_house_hunting",
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 15
+    },
+    {
+      "title": "Spatiotemporal chemotactic model for ant foraging",
+      "year": 2014,
+      "authors": "Subramanian Ramakrishnan, Thomas Laurent, Manish Kumar, Andrea L. Bertozzi",
+      "venue": "Modern Physics Letters B",
+      "doi": "10.1142/s0217984914502388",
+      "url": "https://doi.org/10.1142/s0217984914502388",
+      "type": "journal-article",
+      "cited_by_crossref": 8,
+      "abstract": "In this paper, we present a generic theoretical chemotactic model that accounts for certain emergent behaviors observed in ant foraging. The model does not have many of the constraints and limitations of existing models for ants colony dynamics and takes into account the distinctly different behaviors exhibited in nature by ant foragers in search of food and food ferrying ants. Numerical simulations based on the model show trail formation in foraging ant colonies to be an emergent phenomenon and, in particular, replicate behavior observed in experiments involving the species P. megacephala. The results have broader implications for the study of randomness in chemotactic models. Potential applications include the developments of novel algorithms for stochastic search in engineered complex systems such as robotic swarms.",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 15
+    },
+    {
+      "title": "Trail traffic flow prediction by contact frequency among individual ants",
+      "year": 2013,
+      "authors": "Hideyasu Sasaki, Ho-fung Leung",
+      "venue": "Swarm Intelligence",
+      "doi": "10.1007/s11721-013-0085-8",
+      "url": "https://doi.org/10.1007/s11721-013-0085-8",
+      "type": "journal-article",
+      "cited_by_crossref": 8,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 15
+    },
+    {
+      "title": "Congestion-Free Ant Traffic: Jam Absorption Mechanism in Multiple Platoons",
+      "year": 2019,
+      "authors": "Prafull Kasture, Hidekazu Nishimura",
+      "venue": "Applied Sciences",
+      "doi": "10.3390/app9142918",
+      "url": "https://doi.org/10.3390/app9142918",
+      "type": "journal-article",
+      "cited_by_crossref": 6,
+      "abstract": "In this paper, an agent-based model of ant traffic on a unidirectional single-lane ant trail is presented to provide better understanding of the jam-free traffic of an ant colony. On a trail, the average velocity of ants remains approximately constant irrespective of density, thereby avoiding jamming. Assuming chemotaxis, we analyze platoon-related scenarios to assess the marching-platoon hypothesis, which claims that ants on a trail form a single platoon in which they march synchronously, thereby reducing hindrances due to increasing density. Contrary to that hypothesis, our findings show that ants on a trail do not march synchronously and do experience stop-and-go motion. However, more interestingly, our study also indicates that the ants’ chemotaxis behavior leads to a peculiar jam absorption mechanism, which helps to maintain free flow on a trail and avoids jamming. Again, contrary to the marching-platoon hypothesis, our findings also indicate that, rather than assisting traffic flow, forming a single cluster actually triggers jamming.",
+      "source_query": "ant trail traffic jam density",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 15
+    },
+    {
+      "title": "Interactions and information: Exploring task allocation in ant colonies using network analysis",
+      "year": 2021,
+      "authors": "Anshuman Swain, Sara D. Williams, Louisa J. Di Felice, Elizabeth A. Hobson",
+      "venue": "openRxiv",
+      "doi": "10.1101/2021.03.29.437501",
+      "url": "https://doi.org/10.1101/2021.03.29.437501",
+      "type": "posted-content",
+      "cited_by_crossref": 1,
+      "abstract": "ABSTRACT In animal societies, individuals may take on different roles to fulfil their own needs and the needs of their groups. Ant colonies display high levels of organisational complexity, with ants fulfilling different roles at different timescales (what is known as task allocation ). Factors affecting task allocation can be at the individual level (e.g., physiology), or at the group level (e.g., the network of interactions). We focus on group level processes by exploring the relationship between interaction networks, task allocation and task switching using a previously published dataset (Mersch et al., 2013) tracking the behaviour of six Camponotus fellah colonies over 41 days. In our new analyses, our goal was to better explain the noisy process of task switching beyond simple age polyethism. First, we investigated the architecture of interaction networks using node (individual) level network measures and their relation to the individual’s task – foraging, cleaning or nursing – and whether or not the ant switched tasks. We then explored how noisy information propagation was among ants, as a function of the colony composition (how many ants carried out which tasks), through the information-theoretic metric of Effective Information . Our results show that interaction history was tied to task allocation: ants who switched to a task are more likely to have interacted with other ants carrying out that task. The degree to which interactions related to task allocation, as well as the noise in those interactions, depended on which groups of ants were interacting. Overall, we showed that colony cohesion was stable even as ant-level network measures varied more for ants when they switched functional groups; thus, ant colonies maintained a high level of information flow as determined by network analysis, and ant functional groups played different roles in maintaining colony cohesion through varied information flows. Highlights We analysed the interaction networks of six Camponotus fellah colonies We tested how centrality and information flow were tied to task switching Node-level network metrics and the information theoretic measure of Effective Information explained differences among functional groups Interactions were correlated with task switching, but the strength of the correlation differed across functional groups",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion",
+        "task_allocation_division_labor",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 15
+    },
+    {
+      "title": "The Neuro-ethology of Collective Decision-Making in Ant Colonies: A Case Study on Formica Rufa",
+      "year": 2025,
+      "authors": "Nasar Ahmed khan",
+      "venue": "International Journal for Multidimensional Research Perspectives",
+      "doi": "10.61877/ijmrp.v3i9.303",
+      "url": "https://doi.org/10.61877/ijmrp.v3i9.303",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "This study investigates the neuro-ethology of collective decision-making in Formica rufa, the red wood ant, emphasizing how neural mechanisms, sensory integration, and social interactions shape adaptive colony-level behaviour. Drawing on field observations, laboratory assays, and computational models, the research demonstrates that innate visual attraction to conspicuous landmarks provides an orientation scaffold that is subsequently refined through visual snapshot learning, path integration, and multimodal cue processing (Buehlmann et al., 2022; Graham & Collett, 2002). Lesion experiments highlight the central complex as a neural hub critical for switching between innate and learned navigation strategies, while treadmill-based assays confirm that stored visual memories transfer reliably across contexts, underscoring the robustness of wood-ant spatial cognition (Buehlmann et al., 2023; Goulard et al., 2020). At the collective scale, pheromone trails and recruitment amplify weak private signals into robust group consensus, balancing speed and accuracy depending on ecological urgency (Czaczkes et al., 2015). Comparative insights from Indian studies on Diacamma indicum further reveal that heterogeneity in leadership and role differentiation are universal features of ant decision systems, despite species-specific recruitment modalities (Sumana & Annagiri, 2018). The findings underscore that F. rufa’s collective decisions are not merely emergent outcomes of simple behavioural rules but deeply shaped by neural circuitry, sensory biases, learning, and redundancy, enabling colonies to remain resilient under uncertainty and environmental complexity (Collett, 2025). Methodologically, the integration of field ecology, neuro-ethological experiments, and agent-based simulations offers a comprehensive framework to connect individual-level neural processes with colony-level outcomes. This case study contributes to both ecological neuro-ethology and the broader theory of distributed cognition, while also providing principles of robustness, adaptability, and scalability with potential applications in bio-inspired swarm robotics and distributed decision-support systems.",
+      "source_query": "ant collective decision making foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 15
+    },
+    {
+      "title": "Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis",
+      "year": 2007,
+      "authors": "Duncan E. Jackson, Nicolas Châline",
+      "venue": "Animal Behaviour",
+      "doi": "10.1016/j.anbehav.2006.11.027",
+      "url": "https://doi.org/10.1016/j.anbehav.2006.11.027",
+      "type": "journal-article",
+      "cited_by_crossref": 59,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "A cellular automata ant memory model of foraging in a swarm of robots",
+      "year": 2017,
+      "authors": "Danielli A. Lima, Gina M. B. Oliveira",
+      "venue": "Applied Mathematical Modelling",
+      "doi": "10.1016/j.apm.2017.03.021",
+      "url": "https://doi.org/10.1016/j.apm.2017.03.021",
+      "type": "journal-article",
+      "cited_by_crossref": 55,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "An agent-based model to investigate the roles of attractive and repellent pheromones in ant decision making during foraging",
+      "year": 2008,
+      "authors": "Elva J.H. Robinson, Francis L.W. Ratnieks, M. Holcombe",
+      "venue": "Journal of Theoretical Biology",
+      "doi": "10.1016/j.jtbi.2008.08.015",
+      "url": "https://doi.org/10.1016/j.jtbi.2008.08.015",
+      "type": "journal-article",
+      "cited_by_crossref": 43,
+      "abstract": "",
+      "source_query": "ant collective decision making foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Trail Pheromone Disruption of Argentine Ant Trail Formation and Foraging",
+      "year": 2010,
+      "authors": "David Maxwell Suckling, Robert W. Peck, Lloyd D. Stringer, Kirsten Snook, et al.",
+      "venue": "Journal of Chemical Ecology",
+      "doi": "10.1007/s10886-009-9734-1",
+      "url": "https://doi.org/10.1007/s10886-009-9734-1",
+      "type": "journal-article",
+      "cited_by_crossref": 27,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "misleading_negative_pheromone",
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_negative_pheromone_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "The foraging ecology of the army ant Eciton rapax: an ergonomic enigma?",
+      "year": 1985,
+      "authors": "JAMES L. BURTON, NIGEL R. FRANKS",
+      "venue": "Ecological Entomology",
+      "doi": "10.1111/j.1365-2311.1985.tb00542.x",
+      "url": "https://doi.org/10.1111/j.1365-2311.1985.tb00542.x",
+      "type": "journal-article",
+      "cited_by_crossref": 24,
+      "abstract": "Abstract. 1. The army ant Eciton rapax (F. Smith) produces longer raid systems than any other member of its genus and it is a specialist predator of forest floor and understory ants such as species of Camponotus, Odontomachus and Pachycondyla. 2. Allometrical analysis confirms that E. rapax is the only member of its genus without distinct physical castes among its workers: its foraging population is entirely monomorphic and there are no majors. 3. The workers of E. rapax are distributed over a considerable size range, and there are distinct divisions of labour within these colonies: small workers tend to stay in the nests and among the larger foraging workers those retrieving prey items are significantly bigger than the rest. 4. An analysis of foraging efficiency and worker performance in E. rapax suggests that transport costs, resulting from the great distances that workers travel during raids and emigrations, are one of the selection pressures that have favoured the evolution of large monomorphic workers in this species.",
+      "source_query": "Eciton army ant raid trail pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "nest_relocation_house_hunting",
+        "army_ant_raids_mills",
+        "food_quality_choice"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "A probabilistic cellular automata ant memory model for a swarm of foraging robots",
+      "year": 2016,
+      "authors": "Danielli A. Lima, Gina M. B. Oliveira",
+      "venue": "2016 14th International Conference on Control, Automation, Robotics and Vision (ICARCV)",
+      "doi": "10.1109/icarcv.2016.7838615",
+      "url": "https://doi.org/10.1109/icarcv.2016.7838615",
+      "type": "proceedings-article",
+      "cited_by_crossref": 13,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Ants (Lasius niger) deposit more pheromone close to food sources and further from the nest but do not attempt to update erroneous pheromone trails",
+      "year": 2024,
+      "authors": "Tomer J. Czaczkes, Federico-Javier Olivera-Rodriguez, Laure-Anne Poissonnier",
+      "venue": "Insectes Sociaux",
+      "doi": "10.1007/s00040-024-00995-y",
+      "url": "https://doi.org/10.1007/s00040-024-00995-y",
+      "type": "journal-article",
+      "cited_by_crossref": 10,
+      "abstract": "Abstract Many social insects use pheromone trails to recruit workers to resources. Pheromone trails have some limitations, however. Two major limitations are that they evaporate over time, meaning that more distant locations may be more difficult to recruit precisely to, and that they cannot be removed if laid erroneously, or if they become outdated. Here, we ask whether Lasius niger ants can adaptively modulate pheromone deposition to overcome these limitations. Specifically, we first ask whether ants which have followed a pheromone trail to a wrong (unrewarded) location upregulate pheromone deposition to the correct food location to compete with the erroneous trail. They do not. Then, we examine how food distance and proximity to food influence pheromone deposition. We find that ants deposit up to 22 times more pheromone within 10 cm of a food source compared to when they are about to reach the nest. Moreover, they deposit up to four times more pheromone next to a food source placed 100 cm away from the nest as compared to one placed 20 cm away from the nest. Lasius niger ants thus do not display a mechanism for overcoming outdated or erroneously-laid trails by strengthening correct alternatives in our experiment, but do strongly upregulate recruitment to more distant food sources, which are more difficult to locate and recruit to.",
+      "source_query": "Lasius niger food recruitment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Aerosol delivery of trail pheromone disrupts the foraging of the red imported fire ant, <i>Solenopsis invicta</i>",
+      "year": 2012,
+      "authors": "David Maxwell Suckling, Lloyd D Stringer, Joshua E Corn, Barry Bunn, et al.",
+      "venue": "Pest Management Science",
+      "doi": "10.1002/ps.3349",
+      "url": "https://doi.org/10.1002/ps.3349",
+      "type": "journal-article",
+      "cited_by_crossref": 8,
+      "abstract": "Abstract BACKGROUND: The fire ant, Solenopsis invicta , is one of the most aggressive and invasive species in the world. The trail pheromone Z , E ‐α‐farnesene (91% purity) was prepared, and disruption of worker trail orientation was tested using an ethanol‐based aerosol formulation presenting a single puff of this compound by airbrush and compressed air. Trail‐following behaviour was recorded by overhead webcam and ants digitised before and after presentation of the aerosol treatment at four rates (1.6, 16, 160 and 1600 ng cm −2 ). RESULTS: Ants preferred 110 ng cm −1 over 11, 1.1 and 0.11 ng cm −1 for trail following. Within seconds of presentation of 1600 ng cm −2 , the highest dose tested, trail disruption was observed. Disruption was evident as reduced arrival success and reduction in the trail integrity statistic ( r 2 ), as well as increased deviation from the trail (deg). The distribution of walking track angles was also flattened. CONCLUSIONS: The feasibility of using aerosol for delivery of trail pheromone was demonstrated, but the need for high purity combined with the difficulty of commercial supply makes this technique impractical. However, the commercial production of Z , E ‐α‐farnesene of high purity by industrial biotechnology or from ( E )‐nerolidol may be possible in future, which would facilitate further development of trail pheromone disruption of S. invicta . Copyright © 2012 Society of Chemical Industry",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "misleading_negative_pheromone",
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_negative_pheromone_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Formal analysis in a cellular automata ant model using swarm intelligence in robotics foraging task",
+      "year": 2017,
+      "authors": "Danielli A. Lima, Gina M. B. Oliveira",
+      "venue": "2017 IEEE International Conference on Systems, Man, and Cybernetics (SMC)",
+      "doi": "10.1109/smc.2017.8122876",
+      "url": "https://doi.org/10.1109/smc.2017.8122876",
+      "type": "proceedings-article",
+      "cited_by_crossref": 5,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Ant Colony Optimization Based Model Checking Extended by Smell-like Pheromone",
+      "year": 2016,
+      "authors": "Tsutomu Kumazawa, Chihiro Yokoyama, Munehiro Takimoto, Yasushi Kambayashi",
+      "venue": "EAI Endorsed Transactions on Industrial Networks and Intelligent Systems",
+      "doi": "10.4108/eai.21-4-2016.151156",
+      "url": "https://doi.org/10.4108/eai.21-4-2016.151156",
+      "type": "journal-article",
+      "cited_by_crossref": 5,
+      "abstract": "Model Checking is a technique for automatically checking the model representing software or hardware about whether they satisfy the corresponding specifications. Traditionally, the model checking uses deterministic algorithms, but the deterministic algorithms have a fatal problem. They are consuming too many computer resources. In order to mitigate the problem, an approach based on the Ant Colony Optimization (ACO) was proposed. Instead of performing exhaustive checks on the entire model, the ACO based approach statistically checks a part of the model through movements of ants (ant-like software agents). Thus the ACO based approach not only suppresses resource consumption, but also guides the ants to reach the goals efficiently. The ACO based approach is known to generate shorter counter examples too. This article presents an improvement of the ACO based approach. We employ a technique that further suppresses futile movements of ants while suppressing the resource consumption by introducing a smell-like pheromone. While ACO detects the semi-shortest path to food by putting pheromones on the trails of ants, the smell-like pheromone diffuses differently from the traditional pheromone. In our approach, the smell-like pheromone diffuses from food, and guidesants to the food. Thus our approach not only makes the ants reach the goals farther and more efficiently but also generates much shorter counter examples than those of the traditional approaches. In order to demonstrate the effectiveness of our approach, we have implemented our approach on a practical model checker, and conducted numerical experiments. The experimental results show that our approach is effective for improving execution efficiency and the length of counter examples.",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Walk this way: modeling foraging ant dynamics in multiple food source environments",
+      "year": 2024,
+      "authors": "Sean Hartman, Shawn D. Ryan, Bhargav R. Karamched",
+      "venue": "Journal of Mathematical Biology",
+      "doi": "10.1007/s00285-024-02136-2",
+      "url": "https://doi.org/10.1007/s00285-024-02136-2",
+      "type": "journal-article",
+      "cited_by_crossref": 4,
+      "abstract": "Abstract Foraging for resources is an essential process for the daily life of an ant colony. What makes this process so fascinating is the self-organization of ants into trails using chemical pheromone in the absence of direct communication. Here we present a stochastic lattice model that captures essential features of foraging ant dynamics inspired by recent agent-based models while forgoing more detailed interactions that may not be essential to trail formation. Nevertheless, our model’s results coincide with those presented in more sophisticated theoretical models and experiments. Furthermore, it captures the phenomenon of multiple trail formation in environments with multiple food sources. This latter phenomenon is not described well by other more detailed models. We complement the stochastic lattice model by describing a macroscopic PDE which captures the basic structure of lattice model. The PDE provides a continuum framework for the first-principle interactions described in the stochastic lattice model and is amenable to analysis. Linear stability analysis of this PDE facilitates a computational study of the impact various parameters impart on trail formation. We also highlight universal features of the modeling framework that may allow this simple formation to be used to study complex systems beyond ants.",
+      "source_query": "ant foraging food quality recruitment",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "A continuous model of ant foraging with pheromones and trail formation",
+      "year": 2015,
+      "authors": "Paulo Amorim",
+      "venue": "Proceeding Series of the Brazilian Society of Computational and Applied Mathematics",
+      "doi": "10.5540/03.2015.003.01.0323",
+      "url": "https://doi.org/10.5540/03.2015.003.01.0323",
+      "type": "proceedings-article",
+      "cited_by_crossref": 3,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Distributed Task Allocation in Network of Agents Based on Ant Colony Foraging Behavior",
+      "year": 2023,
+      "authors": "Dorian Minarolli",
+      "venue": "Proceedings of the 24th International Conference on Computer Systems and Technologies",
+      "doi": "10.1145/3606305.3606324",
+      "url": "https://doi.org/10.1145/3606305.3606324",
+      "type": "proceedings-article",
+      "cited_by_crossref": 2,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "pheromone_trail_foraging",
+        "task_allocation_division_labor",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Avoiding traffic jams: Hitchhiking behavior as a strategy to reduce ant workers’ traffic on the foraging trail",
+      "year": 2018,
+      "authors": "Isabel Neto Hastenreiter, Juliane Floriano Santos Lopes, Roberto da Silva Camargo, Luiz Carlos Forti",
+      "venue": "Behavioural Processes",
+      "doi": "10.1016/j.beproc.2018.08.015",
+      "url": "https://doi.org/10.1016/j.beproc.2018.08.015",
+      "type": "journal-article",
+      "cited_by_crossref": 2,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Effect of trail pheromones and weather on the moving behaviour of the army ant Eciton burchellii",
+      "year": 2011,
+      "authors": "D. Califano, J. Chaves-Campos",
+      "venue": "Insectes Sociaux",
+      "doi": "10.1007/s00040-010-0140-z",
+      "url": "https://doi.org/10.1007/s00040-010-0140-z",
+      "type": "journal-article",
+      "cited_by_crossref": 2,
+      "abstract": "",
+      "source_query": "Eciton army ant raid trail pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Delay-Induced Hopf Bifurcation and Entropy-Based Distributional Uncertainty in a Stochastic Time-Delay Pheromone Feedback Model of Ant Foraging Dynamics",
+      "year": 2026,
+      "authors": "Jiaxin Zhu, Luyan Wang, Qiubao Wang",
+      "venue": "Entropy",
+      "doi": "10.3390/e28070751",
+      "url": "https://doi.org/10.3390/e28070751",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "This study proposes a stochastic time-delay pheromone feedback model to describe ant foraging dynamics, and investigates how response delays and environmental noise jointly induce stochastic oscillations and reorganize the system’s probabilistic structure. By employing near-Hopf center-mode projection and stochastic averaging, we derive the first-order stochastic amplitude equation and analyze the stochastic dynamical properties near the deterministic delay-induced Hopf bifurcation. Subsequently, normalized Shannon entropy and Jensen–Shannon divergence, computed relative to a pre-Hopf stochastic stationary reference distribution, are used to quantify uncertainty expansion and distributional reorganization in the stationary amplitude distribution and reconstructed state-variable distributions. The analytical results are supported by numerical simulations, which indicate that response delay primarily determines the transition from stable foraging to oscillatory behavior, while noise intensity mainly affects the dispersion and uncertainty of the amplitude distribution. Information-theoretic metrics further reveal noise-induced uncertainty growth and delay-induced probabilistic restructuring. This study elucidates the stability regulation mechanisms of ant foraging systems under stochastic conditions from a combined dynamical and information-theoretic perspective, and provides a theoretical reference for the design of delayed feedback in swarm intelligence systems.",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger",
+      "year": 2026,
+      "authors": "L.-A. Poissonnier, D. Winter, F.‑J. Olivera‑Rodriguez, C. Werneke, et al.",
+      "venue": "Insectes Sociaux",
+      "doi": "10.1007/s00040-026-01106-9",
+      "url": "https://doi.org/10.1007/s00040-026-01106-9",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract Ant foraging and recruitment often relies heavily on pheromone trails, and ants modulate pheromone trail deposition strategically. Ants are also known to modulate trail following depending on their own private information, such as the known location of the nest and their knowledge of food sources in the environment. Here we ask how a series of important context variables—distance from the nest, direction of travel, and prior food discovery—affects the fidelity of pheromone trail following in the black garden ant Lasius niger . Using both an open arena assay and a binary Y-maze design, we evaluated whether ants adjust their trail-following behaviour. Ants exhibited robust and consistent trail-following behaviour across all conditions. Surprisingly, we found no significant modulation by distance, travel direction, or recent experience. However, we observed that distance travelled before finding a pheromone trail significantly influenced subsequent walking patterns such as straightness, speed, and total distance travelled. These findings suggest that while L. niger trail-following behaviour is remarkably stable across contexts, locomotory traits remain plastic and context-sensitive. The decoupling of pheromone response from internal or external conditions highlights the need for further investigation into the mechanisms regulating individual foraging decisions in social insects.",
+      "source_query": "Lasius niger food recruitment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Building a polydomous colony: nest network expansion by Linepithema humile",
+      "year": 2026,
+      "authors": "P. Nonacs",
+      "venue": "Insectes Sociaux",
+      "doi": "10.1007/s00040-026-01081-1",
+      "url": "https://doi.org/10.1007/s00040-026-01081-1",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract A number of ant species are polydomous, where the members of the colony reside in multiple nests rather than all inhabiting one central location. Polydomous nests have interconnected trail systems and individual ants can freely exchange between sites. This appears to spatially distribute workers in ways that create advantages for encountering, defending and exploiting food resources. Indeed, many successfully invasive ant species exhibit polydomy to the extent that, as evidenced in the Argentine ant ( Linepithema humile ), introduced propagules can grow into supercolonies of enormous size that displace or eradicate the formerly-present native species. This study examines how initial single nests of L. humile expand into building polydomous networks. Key findings are that: 1) Expansion to a relatively stable distribution occurs rapidly over the course of 5–10 days; 2) Expansion favors areas that are more rewarding in food than water; 3) Expansion, however, does not completely saturate all available sites, including some that contain food or water; 4) Some queens and brood do migrate out of the central location, but most of the expansion sites contain only workers; and 5) Queen and brood relocations do not always minimize distance to either food or water. The results are suggestive that for L. humile the edges of their polydomic aggregations serve to increase foraging and territory defense success rather than brood rearing. The consistent lack of total habitat saturation further suggests that colony-level satiation acts as a brake on nest-site expansion and may leave areas open for use by other species.",
+      "source_query": "Linepithema humile trail pheromone foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "brood_nest_microclimate",
+        "nest_relocation_house_hunting",
+        "food_quality_choice",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "extend_brood_microclimate_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger",
+      "year": 2025,
+      "authors": "Laure-Anne Poissonnier, Delia Winter, Federico Federico-Javier Olivera-Rodriguez, Cosmina Werneke, et al.",
+      "venue": "Springer Science and Business Media LLC",
+      "doi": "10.21203/rs.3.rs-7630446/v1",
+      "url": "https://doi.org/10.21203/rs.3.rs-7630446/v1",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract Ant foraging and recruitment often relies heavily on pheromone trails, and ants modulate pheromone trail deposition strategically. Ants are also known to modulate trail following depending on their own private information, such as the known location of the nest and their knowledge of food sources in the environment. Here we ask how a series of important context variables; distance from the nest, direction of travel, and prior food discovery—affects the fidelity of pheromone trail following in the black garden ant Lasius niger . Using both an open arena assay and a binary Y-maze design, we evaluated whether ants adjust their trail-following behaviour. Ants exhibited robust and consistent trail-following behaviour across all conditions. Surprisingly, we found no significant modulation by distance, travel direction, or recent experience. However, we observed that path length before finding a pheromone trail significantly influenced walking patterns such as meander, speed, and total distance travelled. These findings suggest that while L. niger trail-following behaviour is remarkably stable across contexts, locomotory traits remain plastic and context-sensitive. The decoupling of pheromone response from internal or external conditions highlights the need for further investigation into the mechanisms regulating individual foraging decisions in social insects.",
+      "source_query": "Lasius niger food recruitment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Stop and go: exploring alternative mechanisms for task allocation in social insects - response and satisfaction thresholds trade off cost, accuracy, and speed differently",
+      "year": 2024,
+      "authors": "CM Lynch, RC Wilson, A Dornhaus",
+      "venue": "openRxiv",
+      "doi": "10.1101/2024.05.13.593812",
+      "url": "https://doi.org/10.1101/2024.05.13.593812",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract Division of labor, a key feature of many complex systems, requires a mechanism that allows individuals to choose tasks. The popular ‘response threshold hypothesis’ posits that some workers start engaging in particular tasks at a lower level of need than others. However, individuals may only have access to information about need after they actually engage in a task. We therefore introduce two novel interpretations of this task-allocation mechanism. While the ‘response threshold mechanism’ determines when individuals start working, the ‘satisfaction threshold mechanism’ drives when individuals stop working. We also model a ‘composite threshold mechanism’ where workers consider task need both to start and end working. Second, we model the possibility that the stimulus perceived by workers is a ‘completion’ cue instead of a ‘demand’ cue. While these may seem like subtle variations, we show here that they can yield dramatically different collective dynamics. In simulations with biologically relevant parameter ranges, response thresholds produced the quickest reaction to increases in task demand, satisfaction thresholds yielded the lowest task-switching rate, and composite thresholds most closely matched the number of workers allocated to the number needed. Different threshold types thus differentially trade off speed, cost, and accuracy. We did not model benefits of specialization; purely in terms of allocating workers to tasks, we also found that response thresholds usually perform worse than a null random choice model in terms of cost and efficiency, and variation among workers does not improve task allocation. Colonies utilizing task demand cues also tend to perform better than those using task completion cues. Our results ultimately suggest that different threshold mechanisms may be suited for different situations or types of tasks. Author Summary Division of labor is a phenomenon where workers in a community consistently differ in the tasks they work on. Many scientists believe division of labor arises in social insects (i.e. ants and bees) as a result of difference in workers’ responsiveness to cues that correspond to the demand for work in a task. For example, some ants in a colony start feeding brood much sooner than others, possibly because of a higher sensitivity, or lower ‘response threshold’, to brood pheromone. We show that instead of using such a cue to decide when to start on a task, theoretically workers may instead use it only to decide when to stop working; similarly, workers may use a cue that tells them how much work is needed in a task, or they may use one that corresponds to how much work has already been done. These seemingly subtle differences affect how much a colony invests in work and how quickly stability is reached when the balance of work needed in different tasks changes. Therefore, these different mechanisms may evolve to solve different problems.",
+      "source_query": "social insect task allocation ants response threshold",
+      "categories": [
+        "pheromone_trail_foraging",
+        "task_allocation_division_labor",
+        "brood_nest_microclimate",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe",
+        "extend_brood_microclimate_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Walk This Way: Modeling Foraging Ant Dynamics in Multiple Food Source Environments",
+      "year": 2024,
+      "authors": "Sean Hartman, Shawn D. Ryan, Bhargav R. Karamched",
+      "venue": "openRxiv",
+      "doi": "10.1101/2024.01.20.576461",
+      "url": "https://doi.org/10.1101/2024.01.20.576461",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract Foraging for resources is an essential process for the daily life of an ant colony. What makes this process so fascinating is the self-organization of ants into trails using chemical pheromone in the absence of direct communication. Here we present a stochastic lattice model that captures essential features of foraging ant dynamics inspired by recent agent-based models while forgoing more detailed interactions that may not be essential to trail formation. Nevertheless, our model’s results coincide with those presented in more sophisticated theoretical models and experiment. Furthermore, it captures the phenomenon of multiple trail formation in environments with multiple food sources. This latter phenomenon is not described well by other more detailed models. An additional feature of this approach is the ability to derive a corresponding macroscopic PDE from the stochastic lattice model which can be described via first principle interactions and is amenable to analysis. Linear stability analysis of this PDE reveals the key biophysical parameters that give rise to trail formation. We also highlight universal features of the modeling framework that this simple formation may allow it to be used to study complex systems beyond ants.",
+      "source_query": "ant stochasticity foraging pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "Ant traffic flow: Raiding swarms with few rules avoid gridlock",
+      "year": 2002,
+      "authors": "Susan Milius",
+      "venue": "Science News",
+      "doi": "10.2307/4013963",
+      "url": "https://doi.org/10.2307/4013963",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "army_ant_raids_mills",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 14
+    },
+    {
+      "title": "MODELING AND SIMULATION OF ANT COLONY'S LABOR DIVISION WITH CONSTRAINTS FOR TASK ALLOCATION OF RESILIENT SUPPLY CHAINS",
+      "year": 2012,
+      "authors": "RENBIN XIAO, TONGYANG YU, XIAOGUANG GONG",
+      "venue": "International Journal on Artificial Intelligence Tools",
+      "doi": "10.1142/s0218213012400143",
+      "url": "https://doi.org/10.1142/s0218213012400143",
+      "type": "journal-article",
+      "cited_by_crossref": 39,
+      "abstract": "Emergency incidents increase the uncertainty of supply chain environment, and also make the supply chain vulnerability expose. Creating resilient supply chain is an effective way to overcome the supply chain vulnerability. The supply chain characteristics of self-adaptation and self-coordination are consistent with the self-organization feature of ant colony's labor division. In this paper, a generalized ant colony's labor division model with constraints is provided, which is used to construct the ant colony's labor division model with constraints of resilient supply chain to solve task allocation of resilient supply chains. The simulation principle and algorithm of resilient supply chain are provided based on the proposed model and task allocation of the supply chain is analyzed from the five aspects, that is, task allocation status, supply chain coordination, emergency incidents' impact to task allocation, task allocation rate and the influence of different incidents for task allocation. The simulation results show that, with the proposed model, it is effective to allocate resilient supply chain tasks and has excellent performance, such as faster response and robustness.",
+      "source_query": "ant division of labor task allocation model",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 13
+    },
+    {
+      "title": "Chemical Releasers of Social Behavior—IV. The Hindgut as the Source of the Odor Trail Pheromone in the Neotropical Army Ant Genus Eciton1",
+      "year": 1964,
+      "authors": "Murray S. Blum, Cesar A. Portocarrero",
+      "venue": "Annals of the Entomological Society of America",
+      "doi": "10.1093/aesa/57.6.793",
+      "url": "https://doi.org/10.1093/aesa/57.6.793",
+      "type": "journal-article",
+      "cited_by_crossref": 35,
+      "abstract": "",
+      "source_query": "Eciton army ant raid trail pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 13
+    },
+    {
+      "title": "Plastic collective endothermy in a complex animal society (army ant bivouacs: <i>Eciton burchellii parvispinum</i> )",
+      "year": 2019,
+      "authors": "Kaitlin M. Baudier, Catherine L. D'Amelio, Elisabeth Sulger, Michael P. O'Connor, et al.",
+      "venue": "Ecography",
+      "doi": "10.1111/ecog.04064",
+      "url": "https://doi.org/10.1111/ecog.04064",
+      "type": "journal-article",
+      "cited_by_crossref": 10,
+      "abstract": "Endothermic animals do not always have a single adaptive internal temperature; some species exhibit plastic homeostasis, adaptively allowing body temperature to drop when thermoregulatory costs are high. Like large‐bodied endotherms, some animal societies exhibit collective thermal homeostasis. We tested for plasticity of thermoregulation in the self‐assembled temporary nests (bivouacs) of army ants. We measured core bivouac temperatures under a range of environmental conditions and at different colony developmental (larval vs pupal brood) stages. Contrary to previous assertions, bivouacs were not perfect thermoregulators in all developmental stages. Instead, bivouacs functioned as superorganismal facultative endotherms, using a combination of site choice and context‐dependent metabolic heating to adjust core temperatures across an elevational cline in ambient temperature. When ambient temperature was low, the magnitude of metabolic heating was dependent on colony developmental stage: pupal bivouacs were warmer than larval bivouacs. At cooler high elevations, bivouacs functioned like some endothermic animals that intermittently lower their body temperatures to conserve energy. Bivouacs potentially conserved energy by investing less metabolic heating in larval brood because the high costs of impaired worker development may require more stringent thermoregulation of pupae. Our data also suggest that site choice played an important role in bivouac cooling under high ambient temperatures at low elevations. Climate warming may expand upper elevational range limits of Eciton burchellii parvispinum , while reducing the availability of cool and moist bivouac sites at lower elevations, potentially leading to future low‐elevation range contraction.",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "brood_nest_microclimate",
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "extend_brood_microclimate_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 13
+    },
+    {
+      "title": "Multiple-Agent Task Allocation Algorithm Utilizing Ant Colony Optimization",
+      "year": 2013,
+      "authors": "Kai Zhao",
+      "venue": "Journal of Networks",
+      "doi": "10.4304/jnw.8.11.2599-2606",
+      "url": "https://doi.org/10.4304/jnw.8.11.2599-2606",
+      "type": "journal-article",
+      "cited_by_crossref": 4,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 13
+    },
+    {
+      "title": "No evidence that recruitment pheromone modulates olfactory, visual, or spatial learning in the ant Lasius niger",
+      "year": 2024,
+      "authors": "Alexandra Koch, Melanie Kabas, Tomer J. Czaczkes",
+      "venue": "Behavioral Ecology and Sociobiology",
+      "doi": "10.1007/s00265-024-03430-1",
+      "url": "https://doi.org/10.1007/s00265-024-03430-1",
+      "type": "journal-article",
+      "cited_by_crossref": 2,
+      "abstract": "Abstract Pheromones are perhaps the most common form of intraspecific communication in the animal kingdom and used in various contexts. Their modulatory potential on cognitive processes has been demonstrated in both vertebrates and invertebrates. Particularly interesting in this regard are social insects, due to their extensive use of pheromones to organise collective behaviour. Recruitment pheromones might be expected to encourage learning, but could also hinder learning due to a blocking effect, whereby the pheromone already partially predicts the reward, hindering further cues being associated with the reward. Here, we use free-running learning assays using realistic pheromone strength to test for a modulation effect on learning in the black garden ant Lasius niger . We found no evidence that learning in three modalities (olfactory, visual, and spatial) is affected by the presence of a realistic pheromone trail . Interestingly, this is in contrast to findings in honeybees. The fact that associative learning does not seem to be influenced by recruitment pheromone in L. niger and reportedly the Argentine ant, while it is in honeybees, the possibly best-studied social insect species, is noteworthy. We speculate that a species-specific importance of social information use could drive modulatory effects of pheromones on a wide range of cognitive processes. Significance statement Pheromones have been shown to modulate associative learning in a variety of animals. Among social insects, attractive pheromone has been found to enhance associative olfactory learning in honeybees but not in ants. In ants, recruitment pheromone predicts a food source; therefore, it might hinder learning of a new cue for a food reward. We use a free-running learning assay to test for an effect of trail pheromone on associative learning in three different modalities—olfactory, spatial, visual—in Lasius niger , but find no evidence of any effect. Our learning assay demonstrated fast olfactory learning, moderate spatial learning, and no visual learning after only one training visit. Based on our findings, and findings in two other ant species, we speculate that the ecological foraging conditions of mass-recruiting ants, i.e. following a trail, have not favoured a modulation potential of recruitment pheromone opposed to attractive pheromone in honeybees.",
+      "source_query": "Lasius niger food recruitment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 13
+    },
+    {
+      "title": "Reduced foraging investment as an adaptation to patchy food sources: a phasic army ant simulation",
+      "year": 2017,
+      "authors": "Serafino Teseo, Francesco Delloro",
+      "venue": "openRxiv",
+      "doi": "10.1101/101600",
+      "url": "https://doi.org/10.1101/101600",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract Colonies of several ant species within the subfamily Dorylinae alternate stereotypical discrete phases of foraging and reproduction. Such phasic cycles are thought to be adaptive because they minimize the amount of foraging and the related costs, and at the same time enhance the colony-level ability to rely on patchily distributed food sources. In order to investigate these hypotheses, we use here a simple computational approach to study the population dynamics of two species of virtual ant colonies that differ quantitatively in their foraging investment. One species, which we refer to as “phasic”, forages only half of the time, mirroring the phasic activity of some army ants; the other “non-phasic” species forages instead all the time. We show that, when foraging costs are relatively high, populations of phasic colonies grow on average faster than non-phasic populations, outcompeting them in mixed populations. Interestingly, such tendency becomes more consistent as food becomes more difficult to find but locally abundant. According to our results, reducing the foraging investment, for example by adopting a phasic lifestyle, can result in a reproductive advantage, but only in specific conditions. We thus suggest phasic colony cycles to have emerged together with the doryline specialization in feeding on the brood of other eusocial insects, a resource that is hard to obtain but highly abundant if available.",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "brood_nest_microclimate",
+        "army_ant_raids_mills",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe",
+        "extend_brood_microclimate_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 13
+    },
+    {
+      "title": "Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis",
+      "year": 2002,
+      "authors": "Stephen Pratt, Eamonn Mallon, David Sumpter, Nigel Franks",
+      "venue": "Behavioral Ecology and Sociobiology",
+      "doi": "10.1007/s00265-002-0487-x",
+      "url": "https://doi.org/10.1007/s00265-002-0487-x",
+      "type": "journal-article",
+      "cited_by_crossref": 364,
+      "abstract": "",
+      "source_query": "ant house hunting quorum decision",
+      "categories": [
+        "pheromone_trail_foraging",
+        "nest_relocation_house_hunting"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Ant-like task allocation and recruitment in cooperative robots",
+      "year": 2000,
+      "authors": "Michael J. B. Krieger, Jean-Bernard Billeter, Laurent Keller",
+      "venue": "Nature",
+      "doi": "10.1038/35023164",
+      "url": "https://doi.org/10.1038/35023164",
+      "type": "journal-article",
+      "cited_by_crossref": 265,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "pheromone_trail_foraging",
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "From nonlinearity to optimality: pheromone trail foraging by ants",
+      "year": 2003,
+      "authors": "David J.T Sumpter, Madeleine Beekman",
+      "venue": "Animal Behaviour",
+      "doi": "10.1006/anbe.2003.2224",
+      "url": "https://doi.org/10.1006/anbe.2003.2224",
+      "type": "journal-article",
+      "cited_by_crossref": 183,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Trail geometry gives polarity to ant foraging networks",
+      "year": 2004,
+      "authors": "Duncan E. Jackson, Mike Holcombe, Francis L. W. Ratnieks",
+      "venue": "Nature",
+      "doi": "10.1038/nature03105",
+      "url": "https://doi.org/10.1038/nature03105",
+      "type": "journal-article",
+      "cited_by_crossref": 136,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "The blind leading the blind in army ant raid patterns: Testing a model of self-organization (Hymenoptera: Formicidae)",
+      "year": 1991,
+      "authors": "N. R. Franks, N. Gomez, S. Goss, J. L. Deneubourg",
+      "venue": "Journal of Insect Behavior",
+      "doi": "10.1007/bf01048072",
+      "url": "https://doi.org/10.1007/bf01048072",
+      "type": "journal-article",
+      "cited_by_crossref": 105,
+      "abstract": "",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "army_ant_raids_mills",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Algorithms for task allocation in ants. (A study of temporal polyethism: Theory)",
+      "year": 1993,
+      "authors": "Chris Tofts",
+      "venue": "Bulletin of Mathematical Biology",
+      "doi": "10.1007/bf02460691",
+      "url": "https://doi.org/10.1007/bf02460691",
+      "type": "journal-article",
+      "cited_by_crossref": 76,
+      "abstract": "",
+      "source_query": "social insect task allocation ants response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Multi-robot Task Allocation Based on Ant Colony Algorithm",
+      "year": 2012,
+      "authors": "Jianping Wang, Yuesheng Gu, Xiaomin Li",
+      "venue": "Journal of Computers",
+      "doi": "10.4304/jcp.7.9.2160-2167",
+      "url": "https://doi.org/10.4304/jcp.7.9.2160-2167",
+      "type": "journal-article",
+      "cited_by_crossref": 46,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Spatial and temporal variation in pheromone composition of ant foraging trails",
+      "year": 2007,
+      "authors": "D. E. Jackson, S. J. Martin, F. L. W. Ratnieks, M. Holcombe",
+      "venue": "Behavioral Ecology",
+      "doi": "10.1093/beheco/arl104",
+      "url": "https://doi.org/10.1093/beheco/arl104",
+      "type": "journal-article",
+      "cited_by_crossref": 44,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "A connectionist type model of self-organized foraging and emergent behavior in ant swarms",
+      "year": 1992,
+      "authors": "Mark M. Millonas",
+      "venue": "Journal of Theoretical Biology",
+      "doi": "10.1016/s0022-5193(05)80697-6",
+      "url": "https://doi.org/10.1016/s0022-5193(05)80697-6",
+      "type": "journal-article",
+      "cited_by_crossref": 39,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Pheromone Disruption of Argentine Ant Trail Integrity",
+      "year": 2008,
+      "authors": "D. M. Suckling, R. W. Peck, L. M. Manning, L. D. Stringer, et al.",
+      "venue": "Journal of Chemical Ecology",
+      "doi": "10.1007/s10886-008-9566-4",
+      "url": "https://doi.org/10.1007/s10886-008-9566-4",
+      "type": "journal-article",
+      "cited_by_crossref": 35,
+      "abstract": "",
+      "source_query": "Argentine ant trail pheromone foraging",
+      "categories": [
+        "misleading_negative_pheromone",
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_negative_pheromone_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Colony size does not predict foraging distance in the ant Temnothorax rugatulus: a puzzle for standard scaling models",
+      "year": 2013,
+      "authors": "S. E. Bengston, A. Dornhaus",
+      "venue": "Insectes Sociaux",
+      "doi": "10.1007/s00040-012-0272-4",
+      "url": "https://doi.org/10.1007/s00040-012-0272-4",
+      "type": "journal-article",
+      "cited_by_crossref": 32,
+      "abstract": "",
+      "source_query": "ant foraging distance food quality pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Consensus decision making in the ant Myrmecina nipponica: house-hunters combine pheromone trails with quorum responses",
+      "year": 2012,
+      "authors": "Adam L. Cronin",
+      "venue": "Animal Behaviour",
+      "doi": "10.1016/j.anbehav.2012.08.036",
+      "url": "https://doi.org/10.1016/j.anbehav.2012.08.036",
+      "type": "journal-article",
+      "cited_by_crossref": 31,
+      "abstract": "",
+      "source_query": "ant house hunting quorum decision",
+      "categories": [
+        "pheromone_trail_foraging",
+        "nest_relocation_house_hunting"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Argentine Ant (Hymenoptera: Formicidae) Trail Pheromone Enhances Consumption of Liquid Sucrose Solution",
+      "year": 2000,
+      "authors": "Les Greenberg, John H. Klotz",
+      "venue": "Journal of Economic Entomology",
+      "doi": "10.1603/0022-0493-93.1.119",
+      "url": "https://doi.org/10.1603/0022-0493-93.1.119",
+      "type": "journal-article",
+      "cited_by_crossref": 27,
+      "abstract": "",
+      "source_query": "Argentine ant trail pheromone foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Movement, Encounter Rate, and Collective Behavior in Ant Colonies",
+      "year": 2021,
+      "authors": "Deborah M Gordon",
+      "venue": "Annals of the Entomological Society of America",
+      "doi": "10.1093/aesa/saaa036",
+      "url": "https://doi.org/10.1093/aesa/saaa036",
+      "type": "journal-article",
+      "cited_by_crossref": 25,
+      "abstract": "Abstract Spatial patterns of movement regulate many aspects of social insect behavior, because how workers move around, and how many are there, determines how often they meet and interact. Interactions are usually olfactory; for example, in ants, by means of antennal contact in which one worker assesses the cuticular hydrocarbons of another. Encounter rates may be a simple outcome of local density: a worker experiences more encounters, the more other workers there are around it. This means that encounter rate can be used as a cue for overall density even though no individual can assess global density. Encounter rate as a cue for local density regulates many aspects of social insect behavior, including collective search, task allocation, nest choice, and traffic flow. As colonies grow older and larger, encounter rates change, which leads to changes in task allocation. Nest size affects local density and movement patterns, which influences encounter rate, so that nest size and connectivity influence colony behavior. However, encounter rate is not a simple function of local density when individuals change their movement in response to encounters, thus influencing further encounter rates. Natural selection on the regulation of collective behavior can draw on variation within and among colonies in the relation of movement patterns, encounter rate, and response to encounters.",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "traffic_collective_motion",
+        "task_allocation_division_labor",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe",
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Response thresholds to recruitment signals and the regulation of foraging intensity in the ant Myrmica sabuleti (Hymenoptera, Formicidae)",
+      "year": 2000,
+      "authors": "Jean-Christophe de Biseau, Jacques M. Pasteels",
+      "venue": "Behavioural Processes",
+      "doi": "10.1016/s0376-6357(99)00077-7",
+      "url": "https://doi.org/10.1016/s0376-6357(99)00077-7",
+      "type": "journal-article",
+      "cited_by_crossref": 22,
+      "abstract": "",
+      "source_query": "ant foraging food quality recruitment",
+      "categories": [
+        "pheromone_trail_foraging",
+        "task_allocation_division_labor"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Foraging energetics of a nectar-feeding ant: metabolic expenditure as a function of food-source profitability",
+      "year": 2006,
+      "authors": "Pablo E. Schilman, Flavio Roces",
+      "venue": "Journal of Experimental Biology",
+      "doi": "10.1242/jeb.02478",
+      "url": "https://doi.org/10.1242/jeb.02478",
+      "type": "journal-article",
+      "cited_by_crossref": 21,
+      "abstract": "SUMMARY We examined the quantitative relationship between the energetic costs and benefits of nectar collection by nectar-feeding ants, Camponotus rufipes. In the laboratory, individual workers were trained to visit an artificial feeder that provided a sucrose solution of 1%, 5%, 10%, 30% or 50%at controlled flows, in a similar span range to those observed in natural nectar sources. We measured foraging times, nectar loads collected, and CO2 production during actual feeding, as an indication of the energy expenditure for a single forager. Results show an increase in individual metabolic rates with increasing flow rate of sugar solution, but no dependence on sucrose concentration. This increase in metabolic expenditure does not depend on the crop load attained while feeding, as intuitively expected, and is therefore a result of an increased activity brought about by the food-source profitability experienced by the forager. The energy gained during collection of sugar solution is always higher than the energy spent by the ant. Even with a food source of lower quality than a natural source, the ants gain ca. tenfold of what they spend. Based on a simplified model, we calculated that foragers of C. rufipes could travel from 0.5 to 9 km with the energy gained in a single foraging trip only. These results suggest that decreasing foraging time is more important than increasing individual energetic efficiency when workers of the nectar-feeding ant C. rufipes decide to stop drinking and return to the nest with partial crop loads.",
+      "source_query": "ant foraging food quality recruitment",
+      "categories": [
+        "pheromone_trail_foraging",
+        "traffic_collective_motion",
+        "food_quality_choice",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "existing_traffic_density_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Coordination of Raiding and Emigration in the Ponerine Army Ant Leptogenys distinguenda (Hymenoptera: Formicidae: Ponerinae): A Signal Analysis",
+      "year": 2002,
+      "authors": "V. Witte, U. Maschwitz",
+      "venue": "Journal of Insect Behavior",
+      "doi": "10.1023/a:1015484917019",
+      "url": "https://doi.org/10.1023/a:1015484917019",
+      "type": "journal-article",
+      "cited_by_crossref": 20,
+      "abstract": "",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "nest_relocation_house_hunting",
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Notes on an army ant (<i>Eciton burchelli</i>) raid on a social wasp colony (<i>Agelaia yepocapa</i>) in Costa Rica",
+      "year": 1990,
+      "authors": "Sean O'Donnell, Robert L. Jeanne",
+      "venue": "Journal of Tropical Ecology",
+      "doi": "10.1017/s0266467400004958",
+      "url": "https://doi.org/10.1017/s0266467400004958",
+      "type": "journal-article",
+      "cited_by_crossref": 19,
+      "abstract": "",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "First identification of a trail pheromone of an army ant (Aenictus species)",
+      "year": 1994,
+      "authors": "N. J. Oldham, E. D. Morgan, B. Gobin, J. Billen",
+      "venue": "Experientia",
+      "doi": "10.1007/bf01919378",
+      "url": "https://doi.org/10.1007/bf01919378",
+      "type": "journal-article",
+      "cited_by_crossref": 18,
+      "abstract": "",
+      "source_query": "ant tropotaxis pheromone trail",
+      "categories": [
+        "pheromone_trail_foraging",
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Effect of Trail Bifurcation Asymmetry and Pheromone Presence or Absence on Trail Choice by <i>Lasius niger</i> Ants",
+      "year": 2014,
+      "authors": "Antonia Forster, Tomer J. Czaczkes, Emma Warner, Tom Woodall, et al.",
+      "venue": "Ethology",
+      "doi": "10.1111/eth.12248",
+      "url": "https://doi.org/10.1111/eth.12248",
+      "type": "journal-article",
+      "cited_by_crossref": 17,
+      "abstract": "Abstract During foraging, ant workers are known to make use of multiple information sources, such as private information (personal memory) and social information (trail pheromones). Environmental effects on foraging, and how these interact with other information sources, have, however, been little studied. One environmental effect is trail bifurcation asymmetry. Ants forage on branching trail networks and must often decide which branch to take at a junction (bifurcation). This is an important decision, as finding food sources relies on making the correct choices at bifurcations. Bifurcation angle may provide important information when making this choice. We used a Y ‐maze with a pivoting 90° bifurcation to study trail choice of L asius niger foragers at varying branch asymmetries (0°, [both branches 45° from straight ahead], 30° [branches at 30° and 60° from straight ahead], 45°, 60° and 90° [one branch straight ahead, the other at 90°]). The experiment was carried out either with equal amounts of trail pheromone on both branches of the bifurcation or with pheromone present on only one branch. Our results show that with equal pheromone, trail asymmetry has a significant effect on trail choice. Ants preferentially follow the branch deviating least from straight, and this effect increases as asymmetry increases (47% at 0°, 54% at 30°, 57% at 45°, 66% at 60° and 73% at 90°). However, when pheromone is only present on one branch, the graded effect of asymmetry disappears. Overall, however, there is an effect of asymmetry as the preference of ants for the pheromone‐marked branch over the unmarked branch is reduced from 65%, when it is the less deviating branch, to 53%, when it is the more deviating branch. These results demonstrate that trail asymmetry influences ant decision‐making at bifurcations and that this information interacts with trail pheromone presence in a non‐hierarchical manner.",
+      "source_query": "Lasius niger food recruitment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Evolving neural networks using ant colony optimization with pheromone trail limits",
+      "year": 2013,
+      "authors": "Michalis Mavrovouniotis, Shengxiang Yang",
+      "venue": "2013 13th UK Workshop on Computational Intelligence (UKCI)",
+      "doi": "10.1109/ukci.2013.6651282",
+      "url": "https://doi.org/10.1109/ukci.2013.6651282",
+      "type": "proceedings-article",
+      "cited_by_crossref": 17,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Argentine Ant Trail Pheromone Disruption is Mediated by Trail Concentration",
+      "year": 2011,
+      "authors": "David Maxwell Suckling, Lloyd D. Stringer, Joshua E. Corn",
+      "venue": "Journal of Chemical Ecology",
+      "doi": "10.1007/s10886-011-0019-0",
+      "url": "https://doi.org/10.1007/s10886-011-0019-0",
+      "type": "journal-article",
+      "cited_by_crossref": 17,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "misleading_negative_pheromone",
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_negative_pheromone_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Food recruitment as a component of the trunk-trail foraging behaviour of Lasius fuliginosus (Hymenoptera: Formicidae)",
+      "year": 1997,
+      "authors": "Yves Quinet, Jean-Christophe de Biseau, Jacques M Pasteels",
+      "venue": "Behavioural Processes",
+      "doi": "10.1016/s0376-6357(97)00773-0",
+      "url": "https://doi.org/10.1016/s0376-6357(97)00773-0",
+      "type": "journal-article",
+      "cited_by_crossref": 16,
+      "abstract": "",
+      "source_query": "Lasius niger food recruitment pheromone",
+      "categories": [
+        "pheromone_trail_foraging"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "An Improvement in ant Algorithm Method for Optimizing a Transport Route with Regard to Traffic Flow",
+      "year": 2017,
+      "authors": "Viktor Danchuk, Olena Bakulich, Vitaliy Svatko",
+      "venue": "Procedia Engineering",
+      "doi": "10.1016/j.proeng.2017.04.396",
+      "url": "https://doi.org/10.1016/j.proeng.2017.04.396",
+      "type": "journal-article",
+      "cited_by_crossref": 15,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Elevational and geographic variation in army ant swarm raid rates",
+      "year": 2011,
+      "authors": "S. O’Donnell, M. Kaspari, A. Kumar, J. Lattke, et al.",
+      "venue": "Insectes Sociaux",
+      "doi": "10.1007/s00040-010-0129-7",
+      "url": "https://doi.org/10.1007/s00040-010-0129-7",
+      "type": "journal-article",
+      "cited_by_crossref": 15,
+      "abstract": "",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "army_ant_raids_mills",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Interactions and information: exploring task allocation in ant colonies using network analysis",
+      "year": 2022,
+      "authors": "Anshuman Swain, Sara D. Williams, Louisa J. Di Felice, Elizabeth A. Hobson",
+      "venue": "Animal Behaviour",
+      "doi": "10.1016/j.anbehav.2022.04.015",
+      "url": "https://doi.org/10.1016/j.anbehav.2022.04.015",
+      "type": "journal-article",
+      "cited_by_crossref": 9,
+      "abstract": "",
+      "source_query": "ant social insect network task allocation",
+      "categories": [
+        "task_allocation_division_labor",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Decentralized communication, trail connectivity and emergent benefits of ant pheromone trail networks",
+      "year": 2011,
+      "authors": "Duncan E. Jackson, Mesude Bicak, Mike Holcombe",
+      "venue": "Memetic Computing",
+      "doi": "10.1007/s12293-010-0039-2",
+      "url": "https://doi.org/10.1007/s12293-010-0039-2",
+      "type": "journal-article",
+      "cited_by_crossref": 8,
+      "abstract": "",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Research on task allocation in multiple logistics robots based on an improved ant colony algorithm",
+      "year": 2016,
+      "authors": "Juntao Li, Tingting Dong, Yuanyuan Li",
+      "venue": "2016 International Conference on Robotics and Automation Engineering (ICRAE)",
+      "doi": "10.1109/icrae.2016.7738780",
+      "url": "https://doi.org/10.1109/icrae.2016.7738780",
+      "type": "proceedings-article",
+      "cited_by_crossref": 7,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Multi-Agent Cooperation Using the Ant Algorithm with Variable Pheromone Placement",
+      "year": 2005,
+      "authors": "E. Borzello, L.D. Merkle",
+      "venue": "2005 IEEE Congress on Evolutionary Computation",
+      "doi": "10.1109/cec.2005.1554831",
+      "url": "https://doi.org/10.1109/cec.2005.1554831",
+      "type": "proceedings-article",
+      "cited_by_crossref": 7,
+      "abstract": "",
+      "source_query": "ant double bridge experiment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Trail Pheromone Does Not Modulate Subjective Reward Evaluation in Lasius niger Ants",
+      "year": 2020,
+      "authors": "Felix B. Oberhauser, Stephanie Wendt, Tomer J. Czaczkes",
+      "venue": "Frontiers in Psychology",
+      "doi": "10.3389/fpsyg.2020.555576",
+      "url": "https://doi.org/10.3389/fpsyg.2020.555576",
+      "type": "journal-article",
+      "cited_by_crossref": 6,
+      "abstract": "",
+      "source_query": "Lasius niger food recruitment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Optimal ant colony algorithm based multi-robot task allocation and processing sequence scheduling",
+      "year": 2008,
+      "authors": "Taixiong Zheng, Liangyi Yang",
+      "venue": "2008 7th World Congress on Intelligent Control and Automation",
+      "doi": "10.1109/wcica.2008.4593859",
+      "url": "https://doi.org/10.1109/wcica.2008.4593859",
+      "type": "proceedings-article",
+      "cited_by_crossref": 6,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "A single-pheromone model accounts for empirical patterns of ant colony foraging previously modeled using two pheromones",
+      "year": 2023,
+      "authors": "Eric Saund, Daniel Ari Friedman",
+      "venue": "Cognitive Systems Research",
+      "doi": "10.1016/j.cogsys.2023.02.005",
+      "url": "https://doi.org/10.1016/j.cogsys.2023.02.005",
+      "type": "journal-article",
+      "cited_by_crossref": 5,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Algorithms for task allocation in ants. (A study of temporal polyethism: Theory)",
+      "year": 1993,
+      "authors": "C TOFTS",
+      "venue": "Bulletin of Mathematical Biology",
+      "doi": "10.1016/s0092-8240(05)80195-8",
+      "url": "https://doi.org/10.1016/s0092-8240(05)80195-8",
+      "type": "journal-article",
+      "cited_by_crossref": 5,
+      "abstract": "",
+      "source_query": "social insect task allocation ants response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Social organization of necrophoresis: insights into disease risk management in ant societies",
+      "year": 2024,
+      "authors": "Quentin Avanzi, Léon Lisart, Claire Detrain",
+      "venue": "Royal Society Open Science",
+      "doi": "10.1098/rsos.240764",
+      "url": "https://doi.org/10.1098/rsos.240764",
+      "type": "journal-article",
+      "cited_by_crossref": 4,
+      "abstract": "Insect societies, which are at a high risk of disease outbreaks, have evolved sanitary strategies that contribute to their social immunity. Here, we investigated in the red ant Myrmica rubra, how the discarding of nestmate cadavers is socially organized depending on the associated pathogenicity. We examined whether necrophoresis is carried out by a specific functional group of workers or by any nestmates that may become short-term specialists. By observing the behavioural profiles of tagged individuals, we assigned half of the colony members to functional groups (foragers, intermittent-foragers, domestics, nurses and inactives). Following the introduction of uninfected or sporulating corpses into the nest, intermittent-foragers were the functional group most involved in necrophoresis, as they touched, moved and discarded more cadavers. Interestingly, sporulating corpses induced a more generalized response in workers from all functional groups, thereby accelerating their rejection from the nest. The individuals contacting corpses were also prophylactically engaged in more grooming behaviour, suggesting the existence of hygienist workers within ant colonies. These findings raise questions about a trade-off existing between concentrating health risks on a few workers who are highly specialized in necrophoresis and exposing a larger population of nestmates who cooperate to speed up nest sanitization.",
+      "source_query": "ant necrophoresis corpse removal chemical",
+      "categories": [
+        "necrophoresis_social_immunity",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "extend_corpse_cleanup_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Improved Intelligent Method for Traffic Flow Prediction Based on Artificial Neural Networks and Ant Colony Optimization",
+      "year": 2012,
+      "authors": "Lingling Song -",
+      "venue": "Journal of Convergence Information Technology",
+      "doi": "10.4156/jcit.vol7.issue8.31",
+      "url": "https://doi.org/10.4156/jcit.vol7.issue8.31",
+      "type": "journal-article",
+      "cited_by_crossref": 4,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Research on Improvement of Ant Colony Algorithm for Multi-Robot Task Allocation",
+      "year": 2019,
+      "authors": "Xu Li, Zhengyan Liu",
+      "venue": "2019 IEEE 8th Joint International Information Technology and Artificial Intelligence Conference (ITAIC)",
+      "doi": "10.1109/itaic.2019.8785605",
+      "url": "https://doi.org/10.1109/itaic.2019.8785605",
+      "type": "proceedings-article",
+      "cited_by_crossref": 3,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Modeling Ant Nest Relocation at Low Active Ratio by Particle Swarm Optimization",
+      "year": 2019,
+      "authors": "Hideyasu Sasaki",
+      "venue": "2019 IEEE Congress on Evolutionary Computation (CEC)",
+      "doi": "10.1109/cec.2019.8789942",
+      "url": "https://doi.org/10.1109/cec.2019.8789942",
+      "type": "proceedings-article",
+      "cited_by_crossref": 3,
+      "abstract": "",
+      "source_query": "ant nest relocation quorum Temnothorax",
+      "categories": [
+        "nest_relocation_house_hunting",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [],
+      "readiness": "needs_new_condition",
+      "relevance_score": 12
+    },
+    {
+      "title": "Novel observation of a raptor, Collared Forest-falcon ( <i>Micrastur semitorquatus</i> ), depredating a fleeing snake at an army ant ( <i>Eciton burchellii parvispinum</i> ) raid front",
+      "year": 2018,
+      "authors": "Robert J. Driver, Sara DeLeon, Sean O'Donnell",
+      "venue": "The Wilson Journal of Ornithology",
+      "doi": "10.1676/1559-4491-130.3.792",
+      "url": "https://doi.org/10.1676/1559-4491-130.3.792",
+      "type": "journal-article",
+      "cited_by_crossref": 3,
+      "abstract": "",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Induced biotic response in Amazonian ant-plants: the role of leaf damage intensity and plant-derived food rewards on ant recruitment",
+      "year": 2016,
+      "authors": "Thiago Gonçalves-Souza",
+      "venue": "Sociobiology",
+      "doi": "10.13102/sociobiology.v63i3.1050",
+      "url": "https://doi.org/10.13102/sociobiology.v63i3.1050",
+      "type": "journal-article",
+      "cited_by_crossref": 3,
+      "abstract": "Although plant-ants respond to cues indicating the presence of herbivores, it remains unclear how ant workers are stimulated by herbivory cues with varying intensity. I hypothesized that ants respond more quickly to intense foliar damage, and ants inhabiting myrmecophytes that provide food resource recruit workers to any intensity of foliar damage. I tested the induced response in three ant-plant systems: two that provide food resources and another one that does not provide. I simulated leaf damage using different concentrations of foliar extracts. In all systems the plant-ant recruitment increased after damage simulations. In food providing system ants did not distinguish between different intensity damages, although one system have shown a mixed response to that intensity. This result indicates that ants defend more intensely their host plant to avoid damages that diminish food provisioning. In the non-food providing system ants responded more quickly to simulation of high foliar damage. This faster recruitment to leaves with high damage suggests that ants are searching for hot spots that potentially have more insects for feeding on. I suggested that future works could manipulate plant size and quality, and food provisioning to better understand why mutual ant-plant systems with very distinct characteristics are evolutionarily stabilized.",
+      "source_query": "ant foraging food quality recruitment",
+      "categories": [
+        "pheromone_trail_foraging",
+        "food_quality_choice",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "needs_food_quality_resource_model"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Deterministic Model for Analyzing the Dynamics of Ant System Algorithm and Performance Amelioration through a New Pheromone Deposition Approach",
+      "year": 2008,
+      "authors": "Ayan Acharya, Deepyaman Maiti, Amit Konar, Janarthanan Ramadoss",
+      "venue": "2008 4th International Conference on Information and Automation for Sustainability",
+      "doi": "10.1109/iciafs.2008.4783979",
+      "url": "https://doi.org/10.1109/iciafs.2008.4783979",
+      "type": "proceedings-article",
+      "cited_by_crossref": 3,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "The emergence of a collective sensory response threshold in ant colonies",
+      "year": 2021,
+      "authors": "Asaf Gal, Daniel J. C. Kronauer",
+      "venue": "openRxiv",
+      "doi": "10.1101/2021.10.30.466564",
+      "url": "https://doi.org/10.1101/2021.10.30.466564",
+      "type": "posted-content",
+      "cited_by_crossref": 2,
+      "abstract": "Abstract The sensory response threshold is a fundamental biophysical property of biological systems that underlies many physiological and computational functions, and its systematic study has played a pivotal role in uncovering the principles of neural computation. Here, we show that ant colonies, which perform computational tasks at the group level, have emergent collective sensory response thresholds. Colonies respond collectively to step changes in temperature and evacuate the nest during severe perturbations. This response is characterized by a group-size dependent threshold, and the underlying dynamics are dominated by social feedback between the ants. Using a binary network model, we demonstrate that a balance between short-range excitatory and long-range inhibitory interactions can explain the emergence of the collective response threshold and its size dependency. Our findings illustrate how simple social dynamics allow insect colonies to integrate information about the external environment and their internal state to produce adaptive collective responses.",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "brood_nest_microclimate",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe",
+        "extend_brood_microclimate_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Optimal A* Path Planning with Ant Colony Optimization on Multi-Robot Task Allocation for Manufacturing Model",
+      "year": 2021,
+      "authors": "Rawinun Praserttaweelap, Somyot Kiatwanidvilai",
+      "venue": "2021 IEEE 8th International Conference on Industrial Engineering and Applications (ICIEA)",
+      "doi": "10.1109/iciea52957.2021.9436716",
+      "url": "https://doi.org/10.1109/iciea52957.2021.9436716",
+      "type": "proceedings-article",
+      "cited_by_crossref": 2,
+      "abstract": "",
+      "source_query": "ant division of labor task allocation model",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "A Novel Improved Ant Colony Algorithm for Multi-Robot Task Allocation",
+      "year": 2018,
+      "authors": "Xu Li, Zhengyan Liu, Yan Zhang",
+      "venue": "2018 IEEE 4th Information Technology and Mechatronics Engineering Conference (ITOEC)",
+      "doi": "10.1109/itoec.2018.8740438",
+      "url": "https://doi.org/10.1109/itoec.2018.8740438",
+      "type": "proceedings-article",
+      "cited_by_crossref": 2,
+      "abstract": "",
+      "source_query": "ant task allocation response threshold",
+      "categories": [
+        "task_allocation_division_labor",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Reduced foraging investment as an adaptation to patchy food sources: A phasic army ant simulation",
+      "year": 2017,
+      "authors": "Serafino Teseo, Francesco Delloro",
+      "venue": "Journal of Theoretical Biology",
+      "doi": "10.1016/j.jtbi.2017.06.009",
+      "url": "https://doi.org/10.1016/j.jtbi.2017.06.009",
+      "type": "journal-article",
+      "cited_by_crossref": 2,
+      "abstract": "",
+      "source_query": "ant foraging food quality recruitment",
+      "categories": [
+        "pheromone_trail_foraging",
+        "army_ant_raids_mills",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Ant Colony Algorithm in Traffic Flow Control",
+      "year": 2024,
+      "authors": "Andrii Danyliuk, Oleksandr Muliarevych",
+      "venue": "Advances in Cyber-Physical Systems",
+      "doi": "10.23939/acps2024.02.158",
+      "url": "https://doi.org/10.23939/acps2024.02.158",
+      "type": "journal-article",
+      "cited_by_crossref": 1,
+      "abstract": "The relevance of the research is determined by the need to optimize traffic light control at intersections to reduce congestion and delays and increase the capacity of intersections. A practical solution to this problem is using intelligent transport systems and specific decision-making subsystems. However, automating such tasks requires scientific research to develop effective algorithms suitable for practical use. This work proposes an approach to optimizing traffic light control at intersections that considers the traffic flow parameters at a specific intersection and those at adjacent intersections, utilizing an ant colony optimization algorithm to optimize traffic light control at neighboring intersections. The results obtained show that this approach is more effective compared to existing methods and has the potential to reduce delays by 10% and increase intersection capacity by 15% and more.",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Graph Convolutional Network Based Ant Colony Optimization for Robot Task Allocation",
+      "year": 2023,
+      "authors": "Jiang Qiu, Yi Liu, Yilan Yu, Wei Li",
+      "venue": "2023 IEEE Symposium Series on Computational Intelligence (SSCI)",
+      "doi": "10.1109/ssci52147.2023.10372050",
+      "url": "https://doi.org/10.1109/ssci52147.2023.10372050",
+      "type": "proceedings-article",
+      "cited_by_crossref": 1,
+      "abstract": "",
+      "source_query": "ant social insect network task allocation",
+      "categories": [
+        "task_allocation_division_labor",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Ant Colony Optimization Algorithm for Traffic Flow Estimation",
+      "year": 2017,
+      "authors": "Milena Karova, Nikola Vasilev, Ivaylo Penev",
+      "venue": "Proceedings of the 18th International Conference on Computer Systems and Technologies",
+      "doi": "10.1145/3134302.3134317",
+      "url": "https://doi.org/10.1145/3134302.3134317",
+      "type": "proceedings-article",
+      "cited_by_crossref": 1,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Traffic Flow Estimation Using Ant Colony Optimization Algorithms",
+      "year": 2014,
+      "authors": "Antonio Bolufe Rohler, Juan Manuel Otero Pereira, Sonia Fiol-González",
+      "venue": "Computación y Sistemas",
+      "doi": "10.13053/cys-18-1-2014-017",
+      "url": "https://doi.org/10.13053/cys-18-1-2014-017",
+      "type": "journal-article",
+      "cited_by_crossref": 1,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Hybrid Algorithm Based on Ant and Genetic Algorithms for Task Allocation on a Network of Homogeneous Processors",
+      "year": 2014,
+      "authors": "Sawsan Yousef Abu Shuqeir, Tamara Amjad Al Qublan",
+      "venue": "International journal of Computer Networks &amp; Communications",
+      "doi": "10.5121/ijcnc.2014.6113",
+      "url": "https://doi.org/10.5121/ijcnc.2014.6113",
+      "type": "journal-article",
+      "cited_by_crossref": 1,
+      "abstract": "",
+      "source_query": "ant social insect network task allocation",
+      "categories": [
+        "task_allocation_division_labor",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Ant System Algorithm with Negative Pheromone for Course Scheduling Problem",
+      "year": 2008,
+      "authors": "Djasli Djamarus, Ku Ruhana Ku-Mahamud",
+      "venue": "2008 Eighth International Conference on Intelligent Systems Design and Applications",
+      "doi": "10.1109/isda.2008.154",
+      "url": "https://doi.org/10.1109/isda.2008.154",
+      "type": "proceedings-article",
+      "cited_by_crossref": 1,
+      "abstract": "",
+      "source_query": "ant negative pheromone foraging",
+      "categories": [
+        "misleading_negative_pheromone",
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_negative_pheromone_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Dynamics of ant activity under extreme climatic changes in 2024: effects of temperature and humidity on Formica rufa and Lasius fuliginosus behavior",
+      "year": 2026,
+      "authors": "STANISLAV STUKALYUK, MYKOLA KOZYR, VIRA BALABUKH",
+      "venue": "Turkish Journal of Zoology",
+      "doi": "10.55730/1300-0179.3265",
+      "url": "https://doi.org/10.55730/1300-0179.3265",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "Global warming and extreme heatwaves, which can alter species distribution and ecosystem dynamics, have profound effects on forest ants. T‍his study investigated the impact of summer and autumn 2024 heatwaves on the activity, prey transport, and nest-building of Formica rufa Linnaeus, 1761 and Lasius fuliginosus (Latreille, 1798) in deciduous forests of Kyiv, Ukraine. Fieldwork was conducted from June to September 2024 in Holosiyivo Forest and the Feofaniya tract. Ant colonies were assigned to experimental plots, where logs were placed along foraging trails, or to control plots with unmanipulated ground-floor trails. The study included 10 F. rufa anthills for activity monitoring (five experimental, five control) and 16 F. rufa anthills for structural measurements (eight experimental, eight control), along with six L. fuliginosus colonies (three experimental, three control), with a total of 186 observations (120 for F. rufa, 66 for L. fuliginosus). Data on temperature and humidity were recorded to assess their influence on ant activity and nest structure. For F. rufa, trail activity showed a negative correlation with temperature (r = –0.308, p",
+      "source_query": "ant brood care temperature humidity",
+      "categories": [
+        "pheromone_trail_foraging",
+        "brood_nest_microclimate"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe",
+        "extend_brood_microclimate_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "An Ensemble Ant Colony Optimization Algorithm with a Hybrid Pheromone Model for Learning Rule Lists",
+      "year": 2025,
+      "authors": "James Brookhouse, Ayah Helal, Fernando Otero",
+      "venue": "Proceedings of the Genetic and Evolutionary Computation Conference",
+      "doi": "10.1145/3712256.3726427",
+      "url": "https://doi.org/10.1145/3712256.3726427",
+      "type": "proceedings-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant foraging pheromone model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "ANTi-JAM solutions for smart roads: Ant-inspired traffic flow rules under CAVs environment",
+      "year": 2025,
+      "authors": "Marco Guerrieri, Nicola Pugno",
+      "venue": "Transportation Research Interdisciplinary Perspectives",
+      "doi": "10.1016/j.trip.2025.101331",
+      "url": "https://doi.org/10.1016/j.trip.2025.101331",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant trail traffic jam density",
+      "categories": [
+        "traffic_collective_motion"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Pheromone representation in the ant antennal lobe changes with age",
+      "year": 2024,
+      "authors": "Taylor Hart, Lindsey E. Lopes, Dominic D. Frank, Daniel J.C. Kronauer",
+      "venue": "openRxiv",
+      "doi": "10.1101/2024.02.13.580193",
+      "url": "https://doi.org/10.1101/2024.02.13.580193",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract While the neural basis of age-related decline has been extensively studied ( 1–3 ), less is known about changes in neural function during the pre-senescent stages of adulthood. Adult neural plasticity is likely a key factor in social insect age polyethism, where individuals perform different tasks as they age and divide labor in an age-dependent manner ( 4–9 ). Primarily, workers transition from nursing to foraging tasks ( 5 , 10 ), become more aggressive, and more readily display alarm behavior ( 11–16 ) as they get older. While it is unknown how these behavioral dynamics are neurally regulated, they could partially be generated by altered salience of behaviorally relevant stimuli ( 4 , 6 , 7 ). Here, we investigated how odor coding in the antennal lobe (AL) changes with age in the context of alarm pheromone communication in the clonal raider ant ( Ooceraea biroi ) ( 17 ). Similar to other social insects ( 11 , 12 , 16 ), older ants responded more rapidly to alarm pheromones, the chemical signals for danger. Using whole-AL calcium imaging ( 18 ), we then mapped odor representations for five general odorants and two alarm pheromones in young and old ants. Alarm pheromones were represented sparsely at all ages. However, alarm pheromone responses within individual glomeruli changed with age, either increasing or decreasing. Only two glomeruli became sensitized to alarm pheromones with age, while at the same time becoming desensitized to general odorants. Our results suggest that the heightened response to alarm pheromones in older ants occurs via increased sensitivity in these two core glomeruli, illustrating the importance of sensory modulation in social insect division of labor and age-associated behavioral plasticity.",
+      "source_query": "ant double bridge experiment pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "task_allocation_division_labor",
+        "army_ant_raids_mills"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe",
+        "existing_task_demand_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Anti-Jam Solutions for Smart Roads: Ant-Inspired Traffic Flow Rules Under Cooperative Automated Vehicles Environment",
+      "year": 2024,
+      "authors": "MARCO GUERRIERI, Nicola Pugno",
+      "venue": "Elsevier BV",
+      "doi": "10.2139/ssrn.4701534",
+      "url": "https://doi.org/10.2139/ssrn.4701534",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Research on Improved Ant Colony Path Planning Algorithm for Updating Pheromone of Subway Inspection Mobile Robot",
+      "year": 2023,
+      "authors": "Lina Wang, Xin Yang, Zeling Chen, Binrui Wang",
+      "venue": "Elsevier BV",
+      "doi": "10.2139/ssrn.4623370",
+      "url": "https://doi.org/10.2139/ssrn.4623370",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant colony foraging model pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Optimization Design of Expressway Traffic Flow Guidance System Based on GIS and Improved Ant Colony Optimization Algorithms",
+      "year": 2023,
+      "authors": "Xiaoying Xia, E Jing",
+      "venue": "2023 International Conference on Telecommunications, Electronics and Informatics (ICTEI)",
+      "doi": "10.1109/ictei60496.2023.00104",
+      "url": "https://doi.org/10.1109/ictei60496.2023.00104",
+      "type": "proceedings-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Role of the pheromone for orientation in the group foraging ant, Veromessor pergandei",
+      "year": 2020,
+      "authors": "Cody A Freas, Marcia L Spetch",
+      "venue": "Center for Open Science",
+      "doi": "10.31219/osf.io/w2rn4",
+      "url": "https://doi.org/10.31219/osf.io/w2rn4",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "Role of the pheromone for orientation in the group foraging ant, Veromessor pergandei Navigation is comprised of a variety of strategies which rely on multiple external cues to shape a navigator’s behavioral output. An additional navigational challenge is coping with forces such as wind and water currents that push navigators off-course. Here, we explore the cue interactions that dictate orientation and foragers’ ability to counter course altering rotational changes in the desert ant, Veromessor pergandei. We found a cross sensory interaction between the pheromone cue and the path integrator underlies correct orientation during the inbound journey. The celestial compass provides directional information while the presence of the trail pheromone acts as a critical context cue, triggering distinct behavioral responses (vector orientation, search and backtracking). A particularly interesting interaction occurs between the pheromone and the forager’s vector state. While exposed to the pheromone, foragers orient to the vector direction regardless of vector state, while in the pheromone’s absence the current vector triggers the switch between behaviors. Such interactions maximize the foragers’ return to the nest and inhibit movement off the trail. Finally, our manipulations continuously pushed foragers away from their desired heading, yet foragers were highly proficient at counteracting these changes, steering to maintain a correct heading even at rotational speeds of ~40°/s.",
+      "source_query": "ant pheromone trail foraging",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Modeling Fast and Robust Ant Nest Relocation using Particle Swarm Optimization",
+      "year": 2019,
+      "authors": "Hideyasu Sasaki",
+      "venue": "The 2019 Conference on Artificial Life",
+      "doi": "10.1162/isal_a_00231",
+      "url": "https://doi.org/10.1162/isal_a_00231",
+      "type": "proceedings-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant nest relocation quorum Temnothorax",
+      "categories": [
+        "nest_relocation_house_hunting",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [],
+      "readiness": "needs_new_condition",
+      "relevance_score": 12
+    },
+    {
+      "title": "Optimal construction of army ant living bridges",
+      "year": 2017,
+      "authors": "Jason M. Graham, Albert B. Kao, Dylana A. Wilhelm, Simon Garnier",
+      "venue": "openRxiv",
+      "doi": "10.1101/116780",
+      "url": "https://doi.org/10.1101/116780",
+      "type": "posted-content",
+      "cited_by_crossref": 0,
+      "abstract": "Abstract Integrating the costs and benefits of collective behaviors is a fundamental challenge to understanding the evolution of group living. These costs and benefits can rarely be quantified simultaneously due to the complexity of the interactions within the group, or even compared to each other because of the absence of common metrics between them. The construction of ‘living bridges’ by New World army ants - which they use to shorten their foraging trails - is a unique example of a collective behavior where costs and benefits have been experimentally measured and related to each other. As a result, it is possible to make quantitative predictions about when and how the behavior will be observed. In this paper, we extend a previous mathematical model of these costs and benefits into a general framework for analyzing the optimal formation, and final configuration, of army ant living bridges. We provide experimentally testable predictions of the final bridge position, as well as the optimal formation process for certain cases, for a wide range of scenarios, which more closely resemble common terrain obstacles that ants encounter in nature. As such, our framework offers a rare benchmark for determining the evolutionary pressures governing the evolution of a naturally occurring collective animal behavior.",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "pheromone_trail_foraging",
+        "army_ant_raids_mills",
+        "networks_interactions",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe",
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Fault Pheromone Trail Evaporation of Power Distribution Networks using Ant Colony Optimization",
+      "year": 2014,
+      "authors": "Ramesh Gamasu, Venkata Ramesh Babu Jasti",
+      "venue": "International Journal of Hybrid Information Technology",
+      "doi": "10.14257/ijhit.2014.7.1.07",
+      "url": "https://doi.org/10.14257/ijhit.2014.7.1.07",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant tropotaxis pheromone trail",
+      "categories": [
+        "pheromone_trail_foraging",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Traffic Flow Estimation Using Ant Colony Optimization Algorithms",
+      "year": 2014,
+      "authors": "Antonio Bolufe Rohler, Juan Manuel Otero Pereira, Sonia Fiol-González",
+      "venue": "Computación y Sistemas",
+      "doi": "10.13053/cys-18-1-1581",
+      "url": "https://doi.org/10.13053/cys-18-1-1581",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Pheromone-Based Ant Colony Algorithm for Optimal Proliferation of Research",
+      "year": 2013,
+      "authors": "Lei Lei Deng",
+      "venue": "Advanced Materials Research",
+      "doi": "10.4028/www.scientific.net/amr.734-737.3152",
+      "url": "https://doi.org/10.4028/www.scientific.net/amr.734-737.3152",
+      "type": "journal-article",
+      "cited_by_crossref": 0,
+      "abstract": "In order to realize the water-saving irrigation of field plots path pipeline deployment management and control, the pheromone of ant colony algorithm for optimization design of. Ant colony algorithm (ACA) is a kind of Bionic Engineering with the development of the optimization algorithm, is mainly based on ant foraging in the search for the shortest path model and form. This article attempts in the existing ant colony algorithm combinatorial optimization of real defect on the basis of field plots, to coordinate as a data source, An improved ant colony algorithm for field plots wiring path design, thereby improving the ant colony algorithm in an iterative process to update the optimal solution ability, Finally in the same number of iterations to find path shorter, cost less rules, solve agricultural water-saving irrigation pipeline path optimization deployment problem. And in the VC++ program validation path optimization problems. The test results show that, under the same climatic conditions, route optimization design results can be deployed for water saving irrigation pipeline layout management provides reference basis and data support.",
+      "source_query": "ant colony foraging model pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Ant Colony Algorithm Based on Dynamic Adaptive Pheromone Updating and Its Simulation",
+      "year": 2013,
+      "authors": "Guiqing Liu, Juxia Xiong",
+      "venue": "2013 Sixth International Symposium on Computational Intelligence and Design",
+      "doi": "10.1109/iscid.2013.62",
+      "url": "https://doi.org/10.1109/iscid.2013.62",
+      "type": "proceedings-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant colony foraging model pheromone",
+      "categories": [
+        "pheromone_trail_foraging",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_trail_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "Traffic flow forecasting based on ant colony neural network",
+      "year": 2010,
+      "authors": "Qingle Pang, Min Zhang",
+      "venue": "2010 8th World Congress on Intelligent Control and Automation",
+      "doi": "10.1109/wcica.2010.5554931",
+      "url": "https://doi.org/10.1109/wcica.2010.5554931",
+      "type": "proceedings-article",
+      "cited_by_crossref": 0,
+      "abstract": "",
+      "source_query": "ant traffic trail density flow",
+      "categories": [
+        "traffic_collective_motion",
+        "networks_interactions"
+      ],
+      "test_mapping": [
+        "existing_traffic_density_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 12
+    },
+    {
+      "title": "The blind leading the blind: Modeling chemically mediated army ant raid patterns",
+      "year": 1989,
+      "authors": "J. L. Deneubourg, S. Goss, N. Franks, J. M. Pasteels",
+      "venue": "Journal of Insect Behavior",
+      "doi": "10.1007/bf01065789",
+      "url": "https://doi.org/10.1007/bf01065789",
+      "type": "journal-article",
+      "cited_by_crossref": 160,
+      "abstract": "",
+      "source_query": "army ant raid collective behavior model",
+      "categories": [
+        "army_ant_raids_mills",
+        "computational_swarm_model"
+      ],
+      "test_mapping": [
+        "existing_or_extend_ant_mill_probe"
+      ],
+      "readiness": "direct_or_near_term",
+      "relevance_score": 11
+    }
+  ]
+}

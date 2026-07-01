@@ -389,3 +389,36 @@ python3 experiments/paper_conditions_probe.py \
 - 下一個最重要的科學改進不是增加更多 UI，而是增加可校準資料輸出：per-step sensing/turning log、trail-segment crossing log、flow-density log、branch choice probability curve fitting。
 - v2 新增文獻指出兩個模型缺口：大量死亡後的覓食韌性偏弱；negative pheromone 目前只是局部排斥場，還不像雙費洛蒙模型中的可學習「禁止路徑」記憶。
 - v3 新增文獻指出兩個模型缺口：tropotaxis 需要逐步感知/轉向 log；misleading pheromone 應改成 active detractor agents，而不是一次性靜態 fake trail。
+
+## 11. 100+ paper triage corpus
+
+`experiments/build_literature_corpus.py` 用 Crossref 查詢與既有 seed papers 建立 100+ 文獻候選池。輸出：
+
+- `outputs/literature_corpus_100.json`
+- `outputs/literature_corpus_100.csv`
+- `outputs/literature_corpus_100.md`
+
+目前 corpus 摘要：
+
+| 指標 | 數量 |
+| --- | ---: |
+| deduplicated records | 120 |
+| direct_or_near_term | 118 |
+| needs_new_condition | 2 |
+| pheromone_trail_foraging | 81 |
+| computational_swarm_model | 70 |
+| networks_interactions | 30 |
+| task_allocation_division_labor | 25 |
+| traffic_collective_motion | 22 |
+| army_ant_raids_mills | 17 |
+| food_quality_choice | 16 |
+| nest_relocation_house_hunting | 8 |
+| brood_nest_microclimate | 6 |
+| misleading_negative_pheromone | 6 |
+| necrophoresis_social_immunity | 2 |
+
+解讀：
+
+- 這是「測試候選池」，不是 120 篇都已經完成驗證。
+- 文獻庫混合三類資料：真實螞蟻行為/生態實驗、ABM/PDE/數學模型、以及受螞蟻啟發的 swarm robotics / ACO 模型。後兩者可提供演算法與測試條件，但不能直接當作生物學真實度證據。
+- 下一批最值得轉成自動測試的主題：food quality vs. trail strength、nest relocation quorum、brood microclimate、corpse cleanup latency、active misleading pheromone detractor agents。

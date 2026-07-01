@@ -222,3 +222,20 @@ Current `v3` additions show:
 - fail-stop foraging is only partial because food trips continue after mass death but drop to a low resilience ratio;
 - negative pheromone is only partial because it reduces hazard-region occupancy weakly and lacks individual learning.
 - misleading pheromone is only partial because the static fake trail does not reduce food trips; an active detractor-agent mechanism is needed.
+
+## Literature Corpus Builder
+
+Build or refresh the 100+ paper triage corpus:
+
+```bash
+python3 ant_colony_sim/experiments/build_literature_corpus.py \
+  --target 120 \
+  --rows-per-query 40 \
+  --retries 1 \
+  --timeout 8 \
+  --json-output ant_colony_sim/outputs/literature_corpus_100.json \
+  --csv-output ant_colony_sim/outputs/literature_corpus_100.csv \
+  --md-output ant_colony_sim/outputs/literature_corpus_100.md
+```
+
+The current corpus contains 120 deduplicated records from Crossref plus curated seed works. It is a candidate pool for future validation conditions, not a claim that all papers have already been reproduced. The generated records include DOI/URL, category labels and a candidate mapping such as `existing_traffic_density_probe`, `extend_corpse_cleanup_probe` or `needs_food_quality_resource_model`.
