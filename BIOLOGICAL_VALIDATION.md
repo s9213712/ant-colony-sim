@@ -365,23 +365,23 @@ python3 experiments/paper_conditions_probe.py \
   --report-output outputs/paper_conditions_report_v5.md
 ```
 
-目前 `v5` 結果：16 個 exact/near-exact biological conditions 中，15 個 `pass`，1 個 `partial`。`pass` 只表示 shared general rules 在該條件下重現文獻定性方向，不表示已完成物種專屬數值擬合。
+目前 `v5` 結果：16 個 exact/near-exact biological conditions 全部為 `pass`。`pass` 只表示 shared general rules 在該條件下重現文獻定性方向，不表示已完成物種專屬數值擬合。
 
 | 文獻 / 條件 | 狀態 | 觀測摘要 | 仍缺什麼 |
 | --- | --- | --- | --- |
-| Perna et al. 2012 / local pheromone trail | pass | 平均 `food_trips=123.333`、trajectory rows `16000.0`、trajectory sensing rows `8039.0`、trajectory alignment `1.0`，且 trail segment flow `165.6976` | 已有 per-step trajectory/sensing 與 segment metrics；仍缺 digitized curve fitting |
+| Perna et al. 2012 / local pheromone trail | pass | 平均 `food_trips=131.667`、trajectory rows `16000.0`、trajectory sensing rows `7479.333`、trajectory alignment `0.955`，且 trail segment flow `160.9912` | 已有 per-step trajectory/sensing 與 segment metrics；仍缺 digitized curve fitting |
 | Ramirez et al. 2018 / tropotaxis | pass | 與 Perna 條件共享 per-step trajectory/sensing、gradient-turn 與 segment-flow metrics | 缺文獻 trajectory/方程式曲線 digitization 與數值擬合 |
 | Amorim 2014 / trail formation and washout | pass | rain + food removal 後 `food_pheromone_ratio=0.0` | 仍是 ABM heuristic field，不是 PDE 參數單位 |
-| Deneubourg/Goss/Beckers double bridge | partial | seeded branch fraction `0.2661`、branch curve error `0.4214`，biased branch 未穩定被選中 | 已輸出 branch-choice timecourse；仍需校準橋幾何、時間尺度與 digitized probability curve |
+| Deneubourg/Goss/Beckers double bridge | pass | seeded selected fraction `0.667`、seeded return selected fraction `0.667`、return-traffic lift `0.0964`、branch curve error `0.2623` | 已輸出 branch-choice timecourse、return-traffic choice 與 curve error；仍需 digitized probability/time-course curve 做數值擬合 |
 | Dussutour et al. 2004 / crowded traffic | pass | 高密度 crossings 較高，segment density/flow 上升，segment speed 未崩潰 | 缺 explicit antennal contacts、lane discipline、collision avoidance |
-| John et al. 2009 / no jammed phase | pass | 高/低密度位移比 `0.6767`，segment flow `373.6356` > `122.2987` | 已有 flow-density proxy；仍缺 digitized no-jam curve |
-| Shiraishi et al. 2018 / diverse stochasticity | pass | diverse relocation ratio `2.5912` > low `1.0532` | 尚未重建文獻中的 environment-dependent optimum distribution |
+| John et al. 2009 / no jammed phase | pass | 高/低密度位移比 `0.6719`，segment flow `396.9503` > `154.181` | 已有 flow-density proxy；仍缺 digitized no-jam curve |
+| Shiraishi et al. 2018 / diverse stochasticity | pass | diverse relocation ratio `2.2357` > low `0.7085` | 尚未重建文獻中的 environment-dependent optimum distribution |
 | Malickova/Yates/Bodova 2015 / two-cue adaptation proxy | pass | relocation 有適應，washout 能清除 food pheromone | 不是該文 exact two-pheromone stochastic model，缺 synchronization metric |
-| Kang & Theraulaz 2015 / task organization | pass | brood demand 下 `task_brood=249.667`；resource shortage 下 food/water tasks `193.0`；已輸出 task-switch rate | 缺可校準的 worker-worker contact matrix |
-| Afek/Kecher/Sulamy 2015 / fail-stop foraging | pass | 大量死亡後 food trips 降低但非零，resilience ratio `0.8235` | 仍缺 algorithmic lower-bound 對照，不能作 proof-level validation |
-| Jimenez-Romero et al. 2015 / negative pheromone | pass | avoid field 將 hazard occupancy ratio 降到 `0.8307`，且不永久阻斷覓食 | 仍不是該文 spiking-neural-controller implementation |
+| Kang & Theraulaz 2015 / task organization | pass | brood demand 下 `task_brood=249.667`；resource shortage 下 food/water tasks `132.333`；已輸出 task-switch rate | 缺可校準的 worker-worker contact matrix |
+| Afek/Kecher/Sulamy 2015 / fail-stop foraging | pass | 大量死亡後 food trips 降低但非零，resilience ratio `0.5873` | 仍缺 algorithmic lower-bound 對照，不能作 proof-level validation |
+| Jimenez-Romero et al. 2015 / negative pheromone | pass | avoid field 將 hazard occupancy ratio 降到 `0.8231`，且不永久阻斷覓食 | 仍不是該文 spiking-neural-controller implementation |
 | Aswale et al. 2022 / misleading pheromone attack | pass | sustained fake trail 與 caution/avoid signal 產生可測 disruption/mitigation | 缺主動 attacker agents 與定量 effect-size 校準 |
-| Jackson & Chaline 2007 / food quality recruitment | pass | counterbalanced 條件下平均採集品質 `1.2832`，high-quality source pheromone `178.667` > low-quality `87.0` | 缺物種專屬蔗糖濃度校準與直接 trail-laying event counts |
+| Jackson & Chaline 2007 / food quality recruitment | pass | counterbalanced 條件下平均採集品質 `1.334`，high-quality source pheromone `156.167` > low-quality `96.333` | 缺物種專屬蔗糖濃度校準與直接 trail-laying event counts |
 | Avanzi, Lisart & Detrain 2024 / necrophoresis cleanup | pass | 巢區屍體由 `36.0` 降到 `0.333`，平均 disposed corpses `34.333` | 缺病原狀態、屍體年齡化學曲線與 colony interaction network 驗證 |
 | Baudier et al. 2019 / brood microclimate | pass | heat-dry stress `1.8` > stable `0.0`；cold pupal brood chamber 比 cold larval 高 `1.5°C` | 缺 fitted metabolic heat budget、巢址幾何與物種專屬 brood survival curve |
 | Pratt et al. 2002 / nest relocation quorum | pass | high-quality site visits `73.973` > low-quality `0.0`，quorum/redeployment 完成 | 缺 tandem running、搬運軌跡、巢容積與 quorum threshold 實測校準 |

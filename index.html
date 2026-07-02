@@ -1257,6 +1257,7 @@
         alarmTimer: 0,
         retreatTimer: 0,
         recruitTimer: 0,
+        trailRecruitment: 0,
         taskLock: rand(0, 160),
         taskAge: 0,
         lastDX: 0,
@@ -1406,6 +1407,7 @@
         turnContrastProductSum: 0,
         waterTrips: 0,
         waterCollected: 0,
+        foodRecruitments: 0,
         corpseMoves: 0
       };
     }
@@ -1893,6 +1895,31 @@
       return dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius;
     }
 
+    function recruitNestmatesToFood(recruiter, foodX, foodY, quality, source) {
+      if (foodX == null || foodY == null) return;
+      const pressure = colonyPressure();
+      const recruitmentChance = clamp(0.055 + quality * 0.035 + pressure.hunger * 0.045, 0.045, 0.16);
+      const maxRecruits = Math.round(3 + quality * 2.5 + pressure.hunger * 3.5);
+      let recruited = 0;
+      for (const peer of world.ants) {
+        if (recruited >= maxRecruits) break;
+        if (peer === recruiter || peer.role === 'soldier' || peer.carrying || peer.carryingWater || peer.carryingCorpse) continue;
+        if (!isInNest(peer) && dist(peer.x, peer.y, world.nest.x, world.nest.y) > world.nest.radius + 45) continue;
+        if (random() > recruitmentChance) continue;
+        peer.memory.foodX = foodX;
+        peer.memory.foodY = foodY;
+        peer.memory.foodQuality = quality;
+        peer.memory.foodSource = source || 'recruited';
+        peer.memory.foodStrength = Math.max(peer.memory.foodStrength || 0, clamp(0.46 + quality * 0.22, 0.4, 1));
+        peer.memory.foodAge = 0;
+        peer.trailRecruitment = Math.max(peer.trailRecruitment || 0, 130 + quality * 70);
+        peer.task = 'food';
+        peer.taskLock = Math.max(peer.taskLock || 0, 140);
+        recruited += 1;
+      }
+      world.stats.foodRecruitments += recruited;
+    }
+
     function taskIndex(task) {
       switch (task) {
         case 'food': return 1;
@@ -1988,10 +2015,18 @@
     function avoidRocks(ant) {
       for (const rock of world.rocks) {
         const d = dist(ant.x, ant.y, rock.x, rock.y);
-        if (d < rock.r + 10) {
-          ant.angle = angleTo(rock.x, rock.y, ant.x, ant.y) + rand(-0.45, 0.45);
-          ant.x += Math.cos(ant.angle) * 3;
-          ant.y += Math.sin(ant.angle) * 3;
+        if (d < rock.r + 14) {
+          const radial = angleTo(rock.x, rock.y, ant.x, ant.y);
+          const tangentA = radial + Math.PI / 2;
+          const tangentB = radial - Math.PI / 2;
+          const tangent = Math.abs(normAngle(tangentA - ant.angle)) < Math.abs(normAngle(tangentB - ant.angle)) ? tangentA : tangentB;
+          const penetration = clamp((rock.r + 14 - d) / 24, 0, 1);
+          const desiredX = Math.cos(radial) * (0.45 + penetration * 0.45) + Math.cos(tangent) * 0.9;
+          const desiredY = Math.sin(radial) * (0.45 + penetration * 0.45) + Math.sin(tangent) * 0.9;
+          const desired = Math.atan2(desiredY, desiredX);
+          ant.angle += normAngle(desired - ant.angle) * (0.28 + penetration * 0.34);
+          ant.x += Math.cos(radial) * (1.6 + penetration * 2.8);
+          ant.y += Math.sin(radial) * (1.6 + penetration * 2.8);
         }
       }
     }
@@ -2016,12 +2051,33 @@
       let turn = clamp(sideContrast * (0.26 + trailFocus * 0.18) * aheadBias, -0.3, 0.3);
       if (invert) turn = -turn;
       ant.angle += turn;
+      let tangentTurn = 0;
+      const trailState = (ant.state || '').includes('trail') || ant.state === 'checking known food site' || ant.state === 'recruited by food trail';
+      if (!invert && trailState && trailFocus > 0.72 && Math.abs(sideContrast) < 0.12 && ['food', 'water', 'nest'].includes(field.name || '')) {
+        const gradientStep = 22;
+        const gx = field.sample(ant.x + gradientStep, ant.y) - field.sample(ant.x - gradientStep, ant.y);
+        const gy = field.sample(ant.x, ant.y + gradientStep) - field.sample(ant.x, ant.y - gradientStep);
+        const gradientMagnitude = Math.hypot(gx, gy);
+        if (gradientMagnitude > detectionThreshold * 1.2) {
+          const tangentA = Math.atan2(gy, gx) + Math.PI / 2;
+          const tangentB = tangentA + Math.PI;
+          const outbound = field.name !== 'nest' && !ant.carrying && !ant.carryingWater && !ant.carryingCorpse;
+          const contextAngle = outbound
+            ? angleTo(world.nest.x, world.nest.y, ant.x, ant.y)
+            : angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
+          const desiredTangent = Math.abs(normAngle(tangentA - contextAngle)) < Math.abs(normAngle(tangentB - contextAngle))
+            ? tangentA
+            : tangentB;
+          tangentTurn = clamp(normAngle(desiredTangent - ant.angle) * (0.018 + trailFocus * 0.035), -0.07, 0.07);
+          ant.angle += tangentTurn;
+        }
+      }
       const expectedTurnSign = Math.sign(invert ? -sideContrast : sideContrast);
-      const actualTurnSign = Math.sign(turn);
+      const actualTurnSign = Math.sign(turn + tangentTurn);
       world.stats.detectableSensingSamples += 1;
       world.stats.absSideContrastSum += Math.abs(sideContrast);
-      world.stats.absTurnSum += Math.abs(turn);
-      world.stats.turnContrastProductSum += Math.abs(sideContrast * turn);
+      world.stats.absTurnSum += Math.abs(turn + tangentTurn);
+      world.stats.turnContrastProductSum += Math.abs(sideContrast * (turn + tangentTurn));
       if (expectedTurnSign !== 0 && actualTurnSign === expectedTurnSign) world.stats.gradientAlignedTurns += 1;
       ant.lastSensing = {
         field: field.name || 'field',
@@ -2030,7 +2086,8 @@
         right,
         total,
         sideContrast,
-        turn,
+        turn: turn + tangentTurn,
+        tangentTurn,
         inverted: invert ? 1 : 0
       };
       ant.trailFocus = Math.max(ant.trailFocus || 0, trailFocus);
@@ -2049,6 +2106,7 @@
       ant.alarmTimer = Math.max(0, ant.alarmTimer - dt);
       ant.retreatTimer = Math.max(0, ant.retreatTimer - dt);
       ant.recruitTimer = Math.max(0, ant.recruitTimer - dt);
+      ant.trailRecruitment = Math.max(0, (ant.trailRecruitment || 0) - dt);
       ant.taskLock = Math.max(0, ant.taskLock - dt);
       ant.taskAge = (ant.taskAge || 0) + dt / 900;
       ant.trailFocus = 0;
@@ -2349,6 +2407,7 @@
             world.stats.foodSourceTrips[source] = (world.stats.foodSourceTrips[source] || 0) + 1;
             world.stats.foodSourceCollected[source] = (world.stats.foodSourceCollected[source] || 0) + ant.carrying;
             world.foodStore += ant.carrying;
+            recruitNestmatesToFood(ant, ant.memory.foodX, ant.memory.foodY, carriedQuality, source);
             ant.carrying = 0;
             ant.carryingFoodQuality = 1;
             ant.carryingFoodSource = null;
@@ -2449,17 +2508,45 @@
             } else {
               ant.memory.unrewardedTrail = Math.max(0, (ant.memory.unrewardedTrail || 0) - 0.012 * dt);
             }
-            const waterTrailThreshold = waterPriority > foodPriority + 0.25 ? 0.35 : 0.7;
-            const targetField = needWater && waterTrail >= foodTrail * waterTrailThreshold ? world.pheromones.water : world.pheromones.food;
-            const trailStrength = Math.max(foodTrail, waterTrail);
-            const leavesTrail = trailStrength > 14 && random() < (scoutBias * 0.22 + trafficLoad * (0.015 + scoutBias * 0.18)) * dt;
-            ant.state = memoryPull ? ant.state : trailStrength > 14 && !leavesTrail
+          const waterTrailThreshold = waterPriority > foodPriority + 0.25 ? 0.35 : 0.7;
+          const targetField = needWater && waterTrail >= foodTrail * waterTrailThreshold ? world.pheromones.water : world.pheromones.food;
+          const trailStrength = Math.max(foodTrail, waterTrail);
+          const hazardCaution = clamp(avoidHere / 85 + (ant.memory?.avoidStrength || 0), 0, 1);
+          const trailCommitment = clamp(
+            (ant.trailRecruitment || 0) / 210
+            + foodMemoryStrength * 0.42
+            + clamp(trailStrength / 180, 0, 0.35),
+            0,
+            1
+          ) * (1 - hazardCaution * 0.82);
+          const recruitableFoodTrail = foodTrail > Number(ui.senseThreshold.value) * 4.5
+            && !needWater
+            && isInNest(ant)
+            && ant.role !== 'soldier'
+            && ant.task !== 'brood';
+          if (recruitableFoodTrail) {
+            ant.trailRecruitment = Math.max(ant.trailRecruitment || 0, 90 + clamp(foodTrail / 9, 0, 120));
+            ant.task = 'food';
+            ant.taskLock = Math.max(ant.taskLock, 120);
+          }
+          const leavesTrail = trailStrength > 14 && random() < (scoutBias * 0.22 + trafficLoad * (0.015 + scoutBias * 0.18)) * (1 - trailCommitment * 0.74) * dt;
+          ant.state = memoryPull ? ant.state : ant.trailRecruitment > 0 && targetField === world.pheromones.food && !leavesTrail
+            ? 'recruited by food trail'
+            : trailStrength > 14 && !leavesTrail
               ? (targetField === world.pheromones.water ? 'following water trail' : 'following food trail')
               : scoutBias > 0.55 ? 'scouting' : 'exploring';
-            if (!memoryPull && !leavesTrail && (trailStrength > 14 || random() < 0.02 + pressure.hunger * 0.05)) {
-              steerByField(ant, targetField);
-            }
-            const explorationJitter = 0.018 + scoutBias * 0.065 + clamp((100 - ant.energy) / 120, 0, 0.035) - exploitBias * 0.008;
+          if (!memoryPull && !leavesTrail && (trailStrength > 14 || random() < 0.02 + pressure.hunger * 0.05)) {
+            steerByField(ant, targetField);
+          }
+          const recruitmentFocus = clamp((ant.trailRecruitment || 0) / 160, 0, 1);
+          if (recruitmentFocus > 0 && targetField === world.pheromones.food && !memoryPull && !leavesTrail) {
+            const outward = angleTo(world.nest.x, world.nest.y, ant.x, ant.y);
+            ant.angle += normAngle(outward - ant.angle) * (0.025 + recruitmentFocus * 0.035);
+          }
+          const explorationJitter = Math.max(
+            0.006,
+            0.018 + scoutBias * 0.065 + clamp((100 - ant.energy) / 120, 0, 0.035) - exploitBias * 0.008 - recruitmentFocus * 0.018
+          );
             if (leavesTrail) ant.angle += rand(-0.9 - trafficLoad * 0.5, 0.9 + trafficLoad * 0.5);
             if (trafficLoad > 0.25 && random() < (0.006 + scoutBias * 0.022) * trafficLoad * dt) {
               ant.angle += (traffic.left > traffic.right ? 1 : -1) * rand(0.18, 0.42);
@@ -2472,6 +2559,7 @@
 
       const onTrailState = ant.state === 'following food trail'
         || ant.state === 'following water trail'
+        || ant.state === 'recruited by food trail'
         || ant.state === 'carrying food'
         || ant.state === 'carrying water'
         || ant.state === 'returning to recover'
@@ -3259,6 +3347,7 @@
         low_quality_food_collected: Math.round(world.stats.foodSourceCollected.low_quality || 0),
         food_quality_collected: Math.round(world.stats.foodQualityCollected),
         avg_collected_food_quality: world.stats.foodCollected > 0 ? Number((world.stats.foodQualityCollected / world.stats.foodCollected).toFixed(3)) : 0,
+        food_recruitments: world.stats.foodRecruitments,
         high_quality_food_remaining: Math.round(remainingHighQualityFood),
         low_quality_food_remaining: Math.round(remainingLowQualityFood),
         water_trips: world.stats.waterTrips,
@@ -3299,6 +3388,7 @@
         base_turn_noise: Number((ant.baseTurnNoise ?? ant.turnNoise).toFixed(4)),
         exploration_drive: Number((ant.explorationDrive || 0).toFixed(3)),
         traffic_load: Number((ant.trafficLoad || 0).toFixed(3)),
+        trail_recruitment: Number((ant.trailRecruitment || 0).toFixed(3)),
         task_age: Number((ant.taskAge || 0).toFixed(3)),
         last_dx: Number((ant.lastDX || 0).toFixed(4)),
         last_dy: Number((ant.lastDY || 0).toFixed(4)),
@@ -3336,6 +3426,7 @@
         hydration: Number(ant.hydration.toFixed(3)),
         health: Number(ant.health.toFixed(3)),
         traffic_load: Number((ant.trafficLoad || 0).toFixed(4)),
+        trail_recruitment: Number((ant.trailRecruitment || 0).toFixed(3)),
         trail_focus: Number((ant.trailFocus || 0).toFixed(4)),
         sensing_field: sensing?.field || '',
         sensing_left: sensing ? Number(sensing.left.toFixed(5)) : 0,
@@ -3344,6 +3435,7 @@
         sensing_total: sensing ? Number(sensing.total.toFixed(5)) : 0,
         sensing_side_contrast: sensing ? Number(sensing.sideContrast.toFixed(6)) : 0,
         sensing_turn: sensing ? Number(sensing.turn.toFixed(6)) : 0,
+        sensing_tangent_turn: sensing ? Number((sensing.tangentTurn || 0).toFixed(6)) : 0,
         sensing_inverted: sensing?.inverted || 0
       };
     }

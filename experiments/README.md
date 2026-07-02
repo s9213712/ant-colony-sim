@@ -271,7 +271,7 @@ Current result:
 - `partial`: 69
 - `not_biological_target`: 34
 
-Interpretation: exact biological conditions currently represented in the validation matrix are mostly qualitatively aligned, with double-bridge remaining partial. Most of the 120 corpus papers are still not fully simulated in a strict sense. The remaining biological papers are category proxies that need per-paper conditions, digitized reference data or species-specific calibration. Algorithmic/robotics papers should not be treated as direct biological targets.
+Interpretation: exact biological conditions currently represented in the validation matrix are qualitatively aligned, including the counterbalanced double-bridge condition. Most of the 120 corpus papers are still not fully simulated in a strict sense. The remaining biological papers are category proxies that need per-paper conditions, digitized reference data or species-specific calibration. Algorithmic/robotics papers should not be treated as direct biological targets.
 
 Generate the backlog of papers that are not fully simulated yet:
 

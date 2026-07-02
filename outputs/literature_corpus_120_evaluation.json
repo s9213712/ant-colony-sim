@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-02T06:20:04Z",
+  "generated_at": "2026-07-02T10:26:46Z",
   "corpus": "/home/s92137/ant_colony_sim/outputs/literature_corpus_100.json",
-  "conditions": "outputs/paper_conditions_v5.json",
+  "conditions": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
   "summary": {
     "count": 120,
     "status": {

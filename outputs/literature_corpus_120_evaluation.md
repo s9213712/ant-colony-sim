@@ -10,9 +10,9 @@ Important interpretation rules:
 - `not_biological_target` means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation.
 
 - Corpus: `/home/s92137/ant_colony_sim/outputs/literature_corpus_100.json`
-- Condition source: `outputs/paper_conditions_v5.json`
-- CSV: `outputs/literature_corpus_120_evaluation.csv`
-- JSON: `outputs/literature_corpus_120_evaluation.json`
+- Condition source: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
+- CSV: `/home/s92137/ant_colony_sim/outputs/literature_corpus_120_evaluation.csv`
+- JSON: `/home/s92137/ant_colony_sim/outputs/literature_corpus_120_evaluation.json`
 
 ## Summary
 

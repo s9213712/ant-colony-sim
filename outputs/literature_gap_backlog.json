@@ -1,5 +1,5 @@
 {
-  "source": "outputs/literature_corpus_120_evaluation.json",
+  "source": "/home/s92137/ant_colony_sim/outputs/literature_corpus_120_evaluation.json",
   "summary": {
     "P2_proxy_only": 69,
     "P3_algorithmic_reference_only": 34,
