@@ -1332,9 +1332,15 @@
       world.traffic.max = 0;
       world.traffic.meanOccupied = 0;
       world.traffic.congestedCells = 0;
+      world.nextFoodId = 1;
       world.stats = {
         foodTrips: 0,
         foodCollected: 0,
+        foodQualityCollected: 0,
+        highQualityFoodTrips: 0,
+        lowQualityFoodTrips: 0,
+        foodSourceTrips: {},
+        foodSourceCollected: {},
         waterTrips: 0,
         waterCollected: 0,
         corpseMoves: 0
@@ -1394,8 +1400,25 @@
       world.rocks.push({ x: 480, y: 610, r: 32 });
     }
 
-    function addFood(x, y, amount = 70) {
-      world.food.push({ x, y, amount, max: amount, r: clamp(10 + amount * 0.045, 12, 22) });
+    function addFood(x, y, amount = 70, quality = 1, label = null) {
+      let options = {};
+      if (typeof quality === 'object' && quality !== null) {
+        options = quality;
+        quality = options.quality ?? 1;
+        label = options.label ?? label;
+      }
+      const normalizedQuality = clamp(Number(quality) || 1, 0.15, 3);
+      const id = options.id ?? `food_${world.nextFoodId++}`;
+      world.food.push({
+        id,
+        x,
+        y,
+        amount,
+        max: amount,
+        quality: normalizedQuality,
+        label: label || (normalizedQuality >= 1.4 ? 'high_quality' : normalizedQuality <= 0.75 ? 'low_quality' : 'standard_quality'),
+        r: clamp(10 + amount * 0.045, 12, 22)
+      });
     }
 
     function addWater(x, y, amount = 70) {
@@ -1720,10 +1743,14 @@
     function nearestFood(ant) {
       let best = null;
       let bestD = Infinity;
+      let bestScore = Infinity;
       for (const food of world.food) {
         if (food.amount <= 0) continue;
         const d = dist(ant.x, ant.y, food.x, food.y);
-        if (d < bestD) {
+        const quality = clamp(food.quality ?? 1, 0.2, 3);
+        const utilityDistance = d / Math.pow(quality, 0.82);
+        if (utilityDistance < bestScore) {
+          bestScore = utilityDistance;
           bestD = d;
           best = food;
         }
@@ -2120,16 +2147,26 @@
         } else if (ant.carrying) {
           ant.state = 'carrying food';
           const foodTrailReinforcement = 1 + clamp(world.pheromones.food.sample(ant.x, ant.y) / 130, 0, 0.85);
-          world.pheromones.food.add(ant.x, ant.y, 7.5 * strength * species.pheromoneDeposit * (0.7 + pressure.hunger) * foodTrailReinforcement * pheromoneDeposit);
+          const carriedQuality = clamp(ant.carryingFoodQuality || 1, 0.2, 3);
+          const qualityRecruitment = clamp(0.58 + carriedQuality * 0.52, 0.45, 2.15);
+          world.pheromones.food.add(ant.x, ant.y, 7.5 * strength * species.pheromoneDeposit * (0.7 + pressure.hunger) * qualityRecruitment * foodTrailReinforcement * pheromoneDeposit);
           const nestAngle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
           ant.angle += normAngle(nestAngle - ant.angle) * 0.045;
           steerByField(ant, world.pheromones.nest);
           if (isInNest(ant)) {
             world.stats.foodTrips += 1;
             world.stats.foodCollected += ant.carrying;
+            world.stats.foodQualityCollected += ant.carrying * carriedQuality;
+            if (carriedQuality >= 1.4) world.stats.highQualityFoodTrips += 1;
+            if (carriedQuality <= 0.75) world.stats.lowQualityFoodTrips += 1;
+            const source = ant.carryingFoodSource || 'unknown';
+            world.stats.foodSourceTrips[source] = (world.stats.foodSourceTrips[source] || 0) + 1;
+            world.stats.foodSourceCollected[source] = (world.stats.foodSourceCollected[source] || 0) + ant.carrying;
             world.foodStore += ant.carrying;
             ant.carrying = 0;
-            ant.energy = Math.min(100, ant.energy + 18);
+            ant.carryingFoodQuality = 1;
+            ant.carryingFoodSource = null;
+            ant.energy = Math.min(100, ant.energy + 12 + carriedQuality * 8);
             ant.angle += Math.PI + rand(-0.45, 0.45);
             ant.state = 'leaving nest';
           }
@@ -2174,12 +2211,17 @@
             ant.angle += normAngle(angleTo(ant.x, ant.y, water.x, water.y) - ant.angle) * 0.08;
           } else if (food && foodD < food.r + 8) {
             const siteCrowding = clamp((trafficAt(food.x, food.y) - 3) / 10, 0, 0.75);
+            const foodQuality = clamp(food.quality ?? 1, 0.2, 3);
             const taken = Math.min(food.amount, rand(3, 7) * (1 - siteCrowding * 0.5));
             food.amount -= taken;
             ant.carrying = Math.round(taken);
+            ant.carryingFoodQuality = foodQuality;
+            ant.carryingFoodSource = food.label || food.id || 'unknown';
             ant.memory.foodX = food.x;
             ant.memory.foodY = food.y;
-            ant.memory.foodStrength = Math.min(1, (ant.memory.foodStrength || 0) + 0.48 + exploitBias * 0.2);
+            ant.memory.foodQuality = foodQuality;
+            ant.memory.foodSource = ant.carryingFoodSource;
+            ant.memory.foodStrength = Math.min(1, (ant.memory.foodStrength || 0) + 0.34 + foodQuality * 0.2 + exploitBias * 0.16);
             ant.memory.foodAge = 0;
             ant.state = 'carrying food';
             ant.angle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
@@ -2814,6 +2856,12 @@
       const avgFoodMemoryStrength = antsWithFoodMemory
         ? Number((world.ants.reduce((sum, ant) => sum + (ant.memory?.foodStrength || 0), 0) / antsWithFoodMemory).toFixed(3))
         : 0;
+      const remainingHighQualityFood = world.food
+        .filter(food => (food.quality ?? 1) >= 1.4)
+        .reduce((sum, food) => sum + food.amount, 0);
+      const remainingLowQualityFood = world.food
+        .filter(food => (food.quality ?? 1) <= 0.75)
+        .reduce((sum, food) => sum + food.amount, 0);
       const params = parameterSnapshot();
       const broodTotal = Math.round(world.eggs + world.larvae + world.pupae);
       const foragingTrips = world.stats.foodTrips + world.stats.waterTrips;
@@ -2854,6 +2902,14 @@
         brood_humidity: Number(world.broodClimate.humidity.toFixed(1)),
         brood_stress: Number(world.broodClimate.stress.toFixed(2)),
         food_trips: world.stats.foodTrips,
+        high_quality_food_trips: world.stats.highQualityFoodTrips,
+        low_quality_food_trips: world.stats.lowQualityFoodTrips,
+        high_quality_food_collected: Math.round(world.stats.foodSourceCollected.high_quality || 0),
+        low_quality_food_collected: Math.round(world.stats.foodSourceCollected.low_quality || 0),
+        food_quality_collected: Math.round(world.stats.foodQualityCollected),
+        avg_collected_food_quality: world.stats.foodCollected > 0 ? Number((world.stats.foodQualityCollected / world.stats.foodCollected).toFixed(3)) : 0,
+        high_quality_food_remaining: Math.round(remainingHighQualityFood),
+        low_quality_food_remaining: Math.round(remainingLowQualityFood),
         water_trips: world.stats.waterTrips,
         foraging_trips: foragingTrips,
         food_collected: Math.round(world.stats.foodCollected),

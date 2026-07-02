@@ -23,12 +23,16 @@ def priority(row):
 def next_action(row):
     condition = row.get("matched_condition", "")
     gap = row.get("gap", "")
-    if "food_quality_needed" in condition or "food-quality" in gap or "food quality" in gap:
+    if "food_quality_needed" in condition:
         return "Add resource quality/concentration and compare recruitment or trail strength across food qualities."
+    if "food_quality_recruitment" in condition or "food-quality" in gap or "food quality" in gap:
+        return "Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts."
     if "brood_microclimate" in condition or "thermoregulation" in gap:
         return "Add brood microclimate validation for temperature/humidity stress and brood survival/development."
-    if "corpse_cleanup" in condition or "necrophoresis" in gap:
+    if "corpse_cleanup" in condition:
         return "Add necrophoresis latency and corpse disposal curve validation."
+    if "necrophoresis_cleanup_latency" in condition or "necrophoresis" in gap:
+        return "Calibrate corpse-age chemistry, pathogen state and corpse-removal interaction networks."
     if "nest" in condition and "relocation" in condition:
         return "Add nest relocation and quorum decision condition."
     if "misleading" in condition or "negative_pheromone" in condition or "avoid" in condition:

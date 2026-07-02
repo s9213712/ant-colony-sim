@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-07-01T23:53:47Z",
+  "generated_at": "2026-07-02T00:43:49Z",
   "corpus": "outputs/literature_corpus_100.json",
-  "conditions": "outputs/paper_conditions_v3.json",
+  "conditions": "outputs/paper_conditions_v4.json",
   "summary": {
     "count": 120,
     "status": {
-      "partial": 56,
+      "partial": 73,
       "not_biological_target": 32,
-      "not_covered": 25,
-      "pass": 7
+      "pass": 8,
+      "not_covered": 7
     },
     "scope": {
-      "category_proxy": 74,
+      "category_proxy": 72,
       "algorithmic_or_robotics_analogy": 32,
-      "exact_paper_condition": 12,
+      "exact_paper_condition": 14,
       "unmapped": 2
     },
     "verdict": {
-      "covered_by_generic_proxy": 51,
+      "covered_by_generic_proxy": 67,
       "not_a_direct_biology_validation": 32,
-      "not_currently_testable": 25,
-      "aligned_qualitative": 7,
-      "partial_alignment": 5
+      "aligned_qualitative": 8,
+      "not_currently_testable": 7,
+      "partial_alignment": 6
     }
   },
   "rows": [
@@ -75,8 +75,8 @@
       "url": "https://arxiv.org/abs/1508.06816",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "exact_paper_condition",
-      "status": "pass",
-      "verdict": "aligned_qualitative",
+      "status": "partial",
+      "verdict": "partial_alignment",
       "matched_condition": "two-cue adaptation proxy",
       "evidence_paper_id": "malickova_2015",
       "gap": "The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics."
@@ -117,11 +117,11 @@
       "url": "https://doi.org/10.1088/1742-5468/aabfc7",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;networks_interactions;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 8,
@@ -131,8 +131,8 @@
       "url": "https://arxiv.org/abs/1507.00772",
       "categories": "pheromone_trail_foraging",
       "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
       "matched_condition": "fail_stop_foraging_resilience",
       "evidence_paper_id": "afek_2015",
       "gap": "Afek et al. is an algorithmic pheromone model; this ABM only tests biological-style degradation, not asymptotic pheromone lower bounds or proof-level optimality."
@@ -159,11 +159,11 @@
       "url": "https://doi.org/10.2139/ssrn.6619462",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;necrophoresis_social_immunity;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "corpse_cleanup_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Corpse/death chemical exists in the simulator, but no dedicated literature-calibrated necrophoresis latency curve is run in the paper matrix yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "necrophoresis_cleanup_latency",
+      "evidence_paper_id": "avanzi_2024",
+      "gap": "Corpse cleanup is now testable, but generic corpse-management papers still need corpse-age chemistry, pathogen state and interaction-network validation."
     },
     {
       "index": 11,
@@ -187,8 +187,8 @@
       "url": "https://arxiv.org/abs/1805.05598",
       "categories": "pheromone_trail_foraging",
       "scope": "exact_paper_condition",
-      "status": "pass",
-      "verdict": "aligned_qualitative",
+      "status": "partial",
+      "verdict": "partial_alignment",
       "matched_condition": "stochasticity_relocation",
       "evidence_paper_id": "shiraishi_2018",
       "gap": "The current check measures relative relocation adaptation. It does not yet fit the paper's environment-dependent optimal stochasticity distribution."
@@ -229,11 +229,11 @@
       "url": "https://doi.org/10.1101/274209",
       "categories": "pheromone_trail_foraging;food_quality_choice;networks_interactions;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 16,
@@ -257,11 +257,11 @@
       "url": "https://doi.org/10.65109/aoay8418",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 18,
@@ -271,11 +271,11 @@
       "url": "https://doi.org/10.65109/ivir1553",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 19,
@@ -396,12 +396,12 @@
       "doi": "10.1016/j.anbehav.2006.11.027",
       "url": "https://doi.org/10.1016/j.anbehav.2006.11.027",
       "categories": "pheromone_trail_foraging;food_quality_choice",
-      "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "scope": "exact_paper_condition",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "The simulator now has food quality and quality-weighted recruitment, but it still lacks species-specific sucrose concentration calibration and direct trail-laying event counts."
     },
     {
       "index": 28,
@@ -453,11 +453,11 @@
       "url": "https://doi.org/10.1111/j.1365-2311.1985.tb00542.x",
       "categories": "pheromone_trail_foraging;nest_relocation_house_hunting;army_ant_raids_mills;food_quality_choice",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 32,
@@ -481,11 +481,11 @@
       "url": "https://doi.org/10.1007/s00040-024-00995-y",
       "categories": "pheromone_trail_foraging;food_quality_choice;networks_interactions",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 34,
@@ -621,11 +621,11 @@
       "url": "https://doi.org/10.1007/s00040-026-01106-9",
       "categories": "pheromone_trail_foraging;food_quality_choice",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 44,
@@ -635,11 +635,11 @@
       "url": "https://doi.org/10.1007/s00040-026-01081-1",
       "categories": "pheromone_trail_foraging;brood_nest_microclimate;nest_relocation_house_hunting;food_quality_choice;networks_interactions",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 45,
@@ -649,11 +649,11 @@
       "url": "https://doi.org/10.21203/rs.3.rs-7630446/v1",
       "categories": "pheromone_trail_foraging;food_quality_choice",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 46,
@@ -666,7 +666,7 @@
       "status": "not_covered",
       "verdict": "not_currently_testable",
       "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
+      "evidence_paper_id": "not_in_current_paper_conditions",
       "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
     },
     {
@@ -736,7 +736,7 @@
       "status": "not_covered",
       "verdict": "not_currently_testable",
       "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
+      "evidence_paper_id": "not_in_current_paper_conditions",
       "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
     },
     {
@@ -761,11 +761,11 @@
       "url": "https://doi.org/10.1007/s00265-024-03430-1",
       "categories": "pheromone_trail_foraging;food_quality_choice",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 54,
@@ -778,7 +778,7 @@
       "status": "not_covered",
       "verdict": "not_currently_testable",
       "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
+      "evidence_paper_id": "not_in_current_paper_conditions",
       "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
     },
     {
@@ -929,11 +929,11 @@
       "url": "https://doi.org/10.1007/s00040-012-0272-4",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 66,
@@ -957,11 +957,11 @@
       "url": "https://doi.org/10.1603/0022-0493-93.1.119",
       "categories": "pheromone_trail_foraging;food_quality_choice",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 68,
@@ -999,11 +999,11 @@
       "url": "https://doi.org/10.1242/jeb.02478",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 71,
@@ -1195,11 +1195,11 @@
       "url": "https://doi.org/10.3389/fpsyg.2020.555576",
       "categories": "pheromone_trail_foraging;food_quality_choice",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 85,
@@ -1250,12 +1250,12 @@
       "doi": "10.1098/rsos.240764",
       "url": "https://doi.org/10.1098/rsos.240764",
       "categories": "necrophoresis_social_immunity;networks_interactions",
-      "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "corpse_cleanup_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Corpse/death chemical exists in the simulator, but no dedicated literature-calibrated necrophoresis latency curve is run in the paper matrix yet."
+      "scope": "exact_paper_condition",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
+      "matched_condition": "necrophoresis_cleanup_latency",
+      "evidence_paper_id": "avanzi_2024",
+      "gap": "Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation."
     },
     {
       "index": 89,
@@ -1321,11 +1321,11 @@
       "url": "https://doi.org/10.13102/sociobiology.v63i3.1050",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "food_quality_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
-      "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "food_quality_recruitment",
+      "evidence_paper_id": "jackson_chaline_2007",
+      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
     },
     {
       "index": 94,
@@ -1352,7 +1352,7 @@
       "status": "not_covered",
       "verdict": "not_currently_testable",
       "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
+      "evidence_paper_id": "not_in_current_paper_conditions",
       "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
     },
     {
@@ -1492,7 +1492,7 @@
       "status": "not_covered",
       "verdict": "not_currently_testable",
       "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_paper_conditions_v3",
+      "evidence_paper_id": "not_in_current_paper_conditions",
       "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
     },
     {

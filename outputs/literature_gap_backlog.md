@@ -8,156 +8,13 @@ This backlog records every literature-corpus paper that is not fully simulated b
 
 ## Summary
 
-- `P0_missing_biology_condition`: 25
-- `P1_exact_condition_partial`: 5
-- `P2_proxy_only`: 51
+- `P0_missing_biology_condition`: 7
+- `P1_exact_condition_partial`: 6
+- `P2_proxy_only`: 67
 - `P3_algorithmic_reference_only`: 32
-- `total`: 113
+- `total`: 112
 
 ## P0_missing_biology_condition
-
-### 7. Modeling no-jam traffic in ant trails: a pheromone-controlled approach
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2018
-- DOI: 10.1088/1742-5468/aabfc7
-- URL: https://doi.org/10.1088/1742-5468/aabfc7
-- Categories: pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;networks_interactions;computational_swarm_model
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 10. Phase Transitions in Ant Traffic Driven by Density-Dependent Pheromone Feedback
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2026
-- DOI: 10.2139/ssrn.6619462
-- URL: https://doi.org/10.2139/ssrn.6619462
-- Categories: pheromone_trail_foraging;traffic_collective_motion;necrophoresis_social_immunity;computational_swarm_model
-- Matched condition: corpse_cleanup_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add necrophoresis latency and corpse disposal curve validation.
-- Gap: Corpse/death chemical exists in the simulator, but no dedicated literature-calibrated necrophoresis latency curve is run in the paper matrix yet.
-
-### 15. Small differences in learning speed for different food qualities can drive efficient collective foraging in ant colonies
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2018
-- DOI: 10.1101/274209
-- URL: https://doi.org/10.1101/274209
-- Categories: pheromone_trail_foraging;food_quality_choice;networks_interactions;computational_swarm_model
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 17. A Pheromone-Based Utility Model for Collaborative Foraging
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2004
-- DOI: 10.65109/aoay8418
-- URL: https://doi.org/10.65109/aoay8418
-- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 18. A Pheromone-Based Utility Model for Collaborative Foraging
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2004
-- DOI: 10.65109/ivir1553
-- URL: https://doi.org/10.65109/ivir1553
-- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 27. Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2007
-- DOI: 10.1016/j.anbehav.2006.11.027
-- URL: https://doi.org/10.1016/j.anbehav.2006.11.027
-- Categories: pheromone_trail_foraging;food_quality_choice
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 31. The foraging ecology of the army ant Eciton rapax: an ergonomic enigma?
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 1985
-- DOI: 10.1111/j.1365-2311.1985.tb00542.x
-- URL: https://doi.org/10.1111/j.1365-2311.1985.tb00542.x
-- Categories: pheromone_trail_foraging;nest_relocation_house_hunting;army_ant_raids_mills;food_quality_choice
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 33. Ants (Lasius niger) deposit more pheromone close to food sources and further from the nest but do not attempt to update erroneous pheromone trails
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2024
-- DOI: 10.1007/s00040-024-00995-y
-- URL: https://doi.org/10.1007/s00040-024-00995-y
-- Categories: pheromone_trail_foraging;food_quality_choice;networks_interactions
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 43. Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2026
-- DOI: 10.1007/s00040-026-01106-9
-- URL: https://doi.org/10.1007/s00040-026-01106-9
-- Categories: pheromone_trail_foraging;food_quality_choice
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 44. Building a polydomous colony: nest network expansion by Linepithema humile
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2026
-- DOI: 10.1007/s00040-026-01081-1
-- URL: https://doi.org/10.1007/s00040-026-01081-1
-- Categories: pheromone_trail_foraging;brood_nest_microclimate;nest_relocation_house_hunting;food_quality_choice;networks_interactions
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 45. Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2025
-- DOI: 10.21203/rs.3.rs-7630446/v1
-- URL: https://doi.org/10.21203/rs.3.rs-7630446/v1
-- Categories: pheromone_trail_foraging;food_quality_choice
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
 
 ### 46. Stop and go: exploring alternative mechanisms for task allocation in social insects - response and satisfaction thresholds trade off cost, accuracy, and speed differently
 
@@ -168,7 +25,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - URL: https://doi.org/10.1101/2024.05.13.593812
 - Categories: pheromone_trail_foraging;task_allocation_division_labor;brood_nest_microclimate;computational_swarm_model
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
@@ -181,22 +38,9 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - URL: https://doi.org/10.1111/ecog.04064
 - Categories: brood_nest_microclimate;army_ant_raids_mills
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
-
-### 53. No evidence that recruitment pheromone modulates olfactory, visual, or spatial learning in the ant Lasius niger
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2024
-- DOI: 10.1007/s00265-024-03430-1
-- URL: https://doi.org/10.1007/s00265-024-03430-1
-- Categories: pheromone_trail_foraging;food_quality_choice
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
 
 ### 54. Reduced foraging investment as an adaptation to patchy food sources: a phasic army ant simulation
 
@@ -207,74 +51,9 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - URL: https://doi.org/10.1101/101600
 - Categories: pheromone_trail_foraging;brood_nest_microclimate;army_ant_raids_mills;computational_swarm_model
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
-
-### 65. Colony size does not predict foraging distance in the ant Temnothorax rugatulus: a puzzle for standard scaling models
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2013
-- DOI: 10.1007/s00040-012-0272-4
-- URL: https://doi.org/10.1007/s00040-012-0272-4
-- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 67. Argentine Ant (Hymenoptera: Formicidae) Trail Pheromone Enhances Consumption of Liquid Sucrose Solution
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2000
-- DOI: 10.1603/0022-0493-93.1.119
-- URL: https://doi.org/10.1603/0022-0493-93.1.119
-- Categories: pheromone_trail_foraging;food_quality_choice
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 70. Foraging energetics of a nectar-feeding ant: metabolic expenditure as a function of food-source profitability
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2006
-- DOI: 10.1242/jeb.02478
-- URL: https://doi.org/10.1242/jeb.02478
-- Categories: pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;computational_swarm_model
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 84. Trail Pheromone Does Not Modulate Subjective Reward Evaluation in Lasius niger Ants
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2020
-- DOI: 10.3389/fpsyg.2020.555576
-- URL: https://doi.org/10.3389/fpsyg.2020.555576
-- Categories: pheromone_trail_foraging;food_quality_choice
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
-### 88. Social organization of necrophoresis: insights into disease risk management in ant societies
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2024
-- DOI: 10.1098/rsos.240764
-- URL: https://doi.org/10.1098/rsos.240764
-- Categories: necrophoresis_social_immunity;networks_interactions
-- Matched condition: corpse_cleanup_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add necrophoresis latency and corpse disposal curve validation.
-- Gap: Corpse/death chemical exists in the simulator, but no dedicated literature-calibrated necrophoresis latency curve is run in the paper matrix yet.
 
 ### 91. Modeling Ant Nest Relocation at Low Active Ratio by Particle Swarm Optimization
 
@@ -289,19 +68,6 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Define a paper-specific simulation condition before claiming alignment.
 - Gap: No simulation condition has been mapped for this paper yet.
 
-### 93. Induced biotic response in Amazonian ant-plants: the role of leaf damage intensity and plant-derived food rewards on ant recruitment
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2016
-- DOI: 10.13102/sociobiology.v63i3.1050
-- URL: https://doi.org/10.13102/sociobiology.v63i3.1050
-- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Next action: Add resource quality/concentration and compare recruitment or trail strength across food qualities.
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
-
 ### 95. The emergence of a collective sensory response threshold in ant colonies
 
 - Status: `not_covered`
@@ -311,7 +77,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - URL: https://doi.org/10.1101/2021.10.30.466564
 - Categories: task_allocation_division_labor;brood_nest_microclimate;networks_interactions;computational_swarm_model
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
@@ -324,7 +90,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - URL: https://doi.org/10.55730/1300-0179.3265
 - Categories: pheromone_trail_foraging;brood_nest_microclimate
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
@@ -370,18 +136,18 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
 - Gap: The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper.
 
-### 8. Optimal and Resilient Pheromone Utilization in Ant Foraging
+### 4. A stochastic model of ant trail following with two pheromones
 
 - Status: `partial`
 - Scope: `exact_paper_condition`
 - Year: 2015
-- DOI: 10.48550/arxiv.1507.00772
-- URL: https://arxiv.org/abs/1507.00772
-- Categories: pheromone_trail_foraging
-- Matched condition: fail_stop_foraging_resilience
-- Evidence paper id: afek_2015
+- DOI: 10.48550/arxiv.1508.06816
+- URL: https://arxiv.org/abs/1508.06816
+- Categories: pheromone_trail_foraging;computational_swarm_model
+- Matched condition: two-cue adaptation proxy
+- Evidence paper id: malickova_2015
 - Next action: Define a paper-specific simulation condition before claiming alignment.
-- Gap: Afek et al. is an algorithmic pheromone model; this ABM only tests biological-style degradation, not asymptotic pheromone lower bounds or proof-level optimality.
+- Gap: The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics.
 
 ### 11. Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It
 
@@ -395,6 +161,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: aswale_2022
 - Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
 - Gap: The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone.
+
+### 12. Diverse Stochasticity Leads a Colony of Ants to Optimal Foraging
+
+- Status: `partial`
+- Scope: `exact_paper_condition`
+- Year: 2018
+- DOI: 10.48550/arxiv.1805.05598
+- URL: https://arxiv.org/abs/1805.05598
+- Categories: pheromone_trail_foraging
+- Matched condition: stochasticity_relocation
+- Evidence paper id: shiraishi_2018
+- Next action: Define a paper-specific simulation condition before claiming alignment.
+- Gap: The current check measures relative relocation adaptation. It does not yet fit the paper's environment-dependent optimal stochasticity distribution.
 
 ### 13. Individual rules for trail pattern formation in Argentine ants (Linepithema humile)
 
@@ -412,6 +191,45 @@ This backlog records every literature-corpus paper that is not fully simulated b
 
 ## P2_proxy_only
 
+### 7. Modeling no-jam traffic in ant trails: a pheromone-controlled approach
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2018
+- DOI: 10.1088/1742-5468/aabfc7
+- URL: https://doi.org/10.1088/1742-5468/aabfc7
+- Categories: pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;networks_interactions;computational_swarm_model
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
+### 10. Phase Transitions in Ant Traffic Driven by Density-Dependent Pheromone Feedback
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2026
+- DOI: 10.2139/ssrn.6619462
+- URL: https://doi.org/10.2139/ssrn.6619462
+- Categories: pheromone_trail_foraging;traffic_collective_motion;necrophoresis_social_immunity;computational_swarm_model
+- Matched condition: necrophoresis_cleanup_latency
+- Evidence paper id: avanzi_2024
+- Next action: Calibrate corpse-age chemistry, pathogen state and corpse-removal interaction networks.
+- Gap: Corpse cleanup is now testable, but generic corpse-management papers still need corpse-age chemistry, pathogen state and interaction-network validation.
+
+### 15. Small differences in learning speed for different food qualities can drive efficient collective foraging in ant colonies
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2018
+- DOI: 10.1101/274209
+- URL: https://doi.org/10.1101/274209
+- Categories: pheromone_trail_foraging;food_quality_choice;networks_interactions;computational_swarm_model
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
 ### 16. Analysis of Cooperative Perception in Ant Traffic and Its Effects on Transportation System by Using a Congestion-Free Ant-Trail Model
 
 - Status: `partial`
@@ -424,6 +242,32 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: dussutour_2004/john_2009
 - Next action: Add trail-segment flow-density and velocity measurements.
 - Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+
+### 17. A Pheromone-Based Utility Model for Collaborative Foraging
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2004
+- DOI: 10.65109/aoay8418
+- URL: https://doi.org/10.65109/aoay8418
+- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
+### 18. A Pheromone-Based Utility Model for Collaborative Foraging
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2004
+- DOI: 10.65109/ivir1553
+- URL: https://doi.org/10.65109/ivir1553
+- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 21. Energetics of Trail Running, Load Carriage, and Emigration in the Column-Raiding Army Ant Eciton hamatum
 
@@ -529,6 +373,32 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
 - Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
 
+### 31. The foraging ecology of the army ant Eciton rapax: an ergonomic enigma?
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 1985
+- DOI: 10.1111/j.1365-2311.1985.tb00542.x
+- URL: https://doi.org/10.1111/j.1365-2311.1985.tb00542.x
+- Categories: pheromone_trail_foraging;nest_relocation_house_hunting;army_ant_raids_mills;food_quality_choice
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
+### 33. Ants (Lasius niger) deposit more pheromone close to food sources and further from the nest but do not attempt to update erroneous pheromone trails
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2024
+- DOI: 10.1007/s00040-024-00995-y
+- URL: https://doi.org/10.1007/s00040-024-00995-y
+- Categories: pheromone_trail_foraging;food_quality_choice;networks_interactions
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
 ### 34. Aerosol delivery of trail pheromone disrupts the foraging of the red imported fire ant, <i>Solenopsis invicta</i>
 
 - Status: `partial`
@@ -607,6 +477,45 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
 - Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
 
+### 43. Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2026
+- DOI: 10.1007/s00040-026-01106-9
+- URL: https://doi.org/10.1007/s00040-026-01106-9
+- Categories: pheromone_trail_foraging;food_quality_choice
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
+### 44. Building a polydomous colony: nest network expansion by Linepithema humile
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2026
+- DOI: 10.1007/s00040-026-01081-1
+- URL: https://doi.org/10.1007/s00040-026-01081-1
+- Categories: pheromone_trail_foraging;brood_nest_microclimate;nest_relocation_house_hunting;food_quality_choice;networks_interactions
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
+### 45. Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2025
+- DOI: 10.21203/rs.3.rs-7630446/v1
+- URL: https://doi.org/10.21203/rs.3.rs-7630446/v1
+- Categories: pheromone_trail_foraging;food_quality_choice
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
 ### 47. Walk This Way: Modeling Foraging Ant Dynamics in Multiple Food Source Environments
 
 - Status: `partial`
@@ -658,6 +567,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: literature_alignment_probe
 - Next action: Define a paper-specific simulation condition before claiming alignment.
 - Gap: Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions.
+
+### 53. No evidence that recruitment pheromone modulates olfactory, visual, or spatial learning in the ant Lasius niger
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2024
+- DOI: 10.1007/s00265-024-03430-1
+- URL: https://doi.org/10.1007/s00265-024-03430-1
+- Categories: pheromone_trail_foraging;food_quality_choice
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 55. Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis
 
@@ -763,6 +685,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
 - Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
 
+### 65. Colony size does not predict foraging distance in the ant Temnothorax rugatulus: a puzzle for standard scaling models
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2013
+- DOI: 10.1007/s00040-012-0272-4
+- URL: https://doi.org/10.1007/s00040-012-0272-4
+- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
 ### 66. Consensus decision making in the ant Myrmecina nipponica: house-hunters combine pheromone trails with quorum responses
 
 - Status: `partial`
@@ -775,6 +710,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: perna_2012
 - Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
 - Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+
+### 67. Argentine Ant (Hymenoptera: Formicidae) Trail Pheromone Enhances Consumption of Liquid Sucrose Solution
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2000
+- DOI: 10.1603/0022-0493-93.1.119
+- URL: https://doi.org/10.1603/0022-0493-93.1.119
+- Categories: pheromone_trail_foraging;food_quality_choice
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 68. Movement, Encounter Rate, and Collective Behavior in Ant Colonies
 
@@ -801,6 +749,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: kang_theraulaz_2015
 - Next action: Add task-switching rates and worker contact/network metrics.
 - Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+
+### 70. Foraging energetics of a nectar-feeding ant: metabolic expenditure as a function of food-source profitability
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2006
+- DOI: 10.1242/jeb.02478
+- URL: https://doi.org/10.1242/jeb.02478
+- Categories: pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;computational_swarm_model
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 71. Coordination of Raiding and Emigration in the Ponerine Army Ant Leptogenys distinguenda (Hymenoptera: Formicidae: Ponerinae): A Signal Analysis
 
@@ -945,6 +906,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
 - Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
 
+### 84. Trail Pheromone Does Not Modulate Subjective Reward Evaluation in Lasius niger Ants
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2020
+- DOI: 10.3389/fpsyg.2020.555576
+- URL: https://doi.org/10.3389/fpsyg.2020.555576
+- Categories: pheromone_trail_foraging;food_quality_choice
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
+
 ### 86. A single-pheromone model accounts for empirical patterns of ant colony foraging previously modeled using two pheromones
 
 - Status: `partial`
@@ -983,6 +957,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: literature_alignment_probe
 - Next action: Define a paper-specific simulation condition before claiming alignment.
 - Gap: Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions.
+
+### 93. Induced biotic response in Amazonian ant-plants: the role of leaf damage intensity and plant-derived food rewards on ant recruitment
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2016
+- DOI: 10.13102/sociobiology.v63i3.1050
+- URL: https://doi.org/10.13102/sociobiology.v63i3.1050
+- Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 94. Deterministic Model for Analyzing the Dynamics of Ant System Algorithm and Performance Amelioration through a New Pheromone Deposition Approach
 

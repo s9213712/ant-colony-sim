@@ -22,6 +22,8 @@ EXACT_CONDITION_BY_DOI = {
     "10.48550/arxiv.1805.05598": "shiraishi_2018",
     "10.1371/journal.pcbi.1002592": "perna_2012",
     "10.48550/arxiv.1511.04769": "kang_theraulaz_2015",
+    "10.1016/j.anbehav.2006.11.027": "jackson_chaline_2007",
+    "10.1098/rsos.240764": "avanzi_2024",
 }
 
 EXACT_TITLE_RULES = [
@@ -36,6 +38,8 @@ EXACT_TITLE_RULES = [
     ("dynamical models of task organization", "kang_theraulaz_2015"),
     ("optimal and resilient pheromone", "afek_2015"),
     ("hacking the colony", "aswale_2022"),
+    ("modulation of pheromone trail strength with food quality", "jackson_chaline_2007"),
+    ("social organization of necrophoresis", "avanzi_2024"),
 ]
 
 ALGORITHMIC_PATTERNS = [
@@ -119,22 +123,22 @@ MAPPING_TO_EVIDENCE = {
         "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions.",
     },
     "extend_corpse_cleanup_probe": {
-        "condition": "corpse_cleanup_needed",
-        "paper_id": "not_in_paper_conditions_v3",
-        "default_status": "not_covered",
-        "gap": "Corpse/death chemical exists in the simulator, but no dedicated literature-calibrated necrophoresis latency curve is run in the paper matrix yet.",
+        "condition": "necrophoresis_cleanup_latency",
+        "paper_id": "avanzi_2024",
+        "default_status": "partial",
+        "gap": "Corpse cleanup is now testable, but generic corpse-management papers still need corpse-age chemistry, pathogen state and interaction-network validation.",
     },
     "extend_brood_microclimate_probe": {
         "condition": "brood_microclimate_needed",
-        "paper_id": "not_in_paper_conditions_v3",
+        "paper_id": "not_in_current_paper_conditions",
         "default_status": "not_covered",
         "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.",
     },
     "needs_food_quality_resource_model": {
-        "condition": "food_quality_needed",
-        "paper_id": "not_in_paper_conditions_v3",
-        "default_status": "not_covered",
-        "gap": "Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.",
+        "condition": "food_quality_recruitment",
+        "paper_id": "jackson_chaline_2007",
+        "default_status": "partial",
+        "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.",
     },
 }
 
@@ -381,7 +385,7 @@ def write_markdown(path, rows, summary, corpus_path, conditions_path, csv_path, 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate every paper in the literature corpus against current simulation validation conditions.")
     parser.add_argument("--corpus", default=str(ROOT / "outputs" / "literature_corpus_100.json"))
-    parser.add_argument("--conditions", default=str(ROOT / "outputs" / "paper_conditions_v3.json"))
+    parser.add_argument("--conditions", default=str(ROOT / "outputs" / "paper_conditions_v4.json"))
     parser.add_argument("--csv-output", default=str(ROOT / "outputs" / "literature_corpus_120_evaluation.csv"))
     parser.add_argument("--json-output", default=str(ROOT / "outputs" / "literature_corpus_120_evaluation.json"))
     parser.add_argument("--md-output", default=str(ROOT / "outputs" / "literature_corpus_120_evaluation.md"))

@@ -75,6 +75,16 @@ SOURCES = [
         "paper": "Aswale et al. 2022, Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It",
         "url": "https://arxiv.org/abs/2202.01808",
     },
+    {
+        "id": "jackson_chaline_2007",
+        "paper": "Jackson & Chaline 2007, Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis",
+        "url": "https://doi.org/10.1016/j.anbehav.2006.11.027",
+    },
+    {
+        "id": "avanzi_2024",
+        "paper": "Avanzi, Lisart & Detrain 2024, Social organization of necrophoresis: insights into disease risk management in ant societies",
+        "url": "https://doi.org/10.1098/rsos.240764",
+    },
 ]
 
 
@@ -431,6 +441,76 @@ PAPER_CONDITIONS_JS = """
       avoid_pheromone: snap.avoid_pheromone,
     };
   };
+  const runFoodQuality = (seed) => {
+    baseMature(seed, config.ants);
+    antSim.world.water = [];
+    antSim.world.foodStore = 0;
+    antSim.world.waterStore = 2000;
+    antSim.addFood(940, 260, config.foodAmount, { quality: 1.8, label: 'high_quality' });
+    antSim.addFood(940, 520, config.foodAmount, { quality: 0.55, label: 'low_quality' });
+    antSim.runDays(config.foodQualityDays, config.dt);
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: 'food_quality_recruitment',
+      seed,
+      ants: snap.ants,
+      food_trips: snap.food_trips,
+      high_quality_food_trips: snap.high_quality_food_trips,
+      low_quality_food_trips: snap.low_quality_food_trips,
+      high_quality_food_collected: snap.high_quality_food_collected,
+      low_quality_food_collected: snap.low_quality_food_collected,
+      avg_collected_food_quality: snap.avg_collected_food_quality,
+      high_quality_food_remaining: snap.high_quality_food_remaining,
+      low_quality_food_remaining: snap.low_quality_food_remaining,
+      food_quality_collected: snap.food_quality_collected,
+      food_pheromone: snap.food_pheromone,
+      high_source_food_pheromone: Math.round(antSim.world.pheromones.food.sample(940, 260)),
+      low_source_food_pheromone: Math.round(antSim.world.pheromones.food.sample(940, 520)),
+    };
+  };
+  const runNecrophoresis = (seed) => {
+    baseMature(seed, config.ants);
+    antSim.world.food = [];
+    antSim.world.water = [];
+    antSim.world.foodStore = 260;
+    antSim.world.waterStore = 260;
+    antSim.world.corpses = [];
+    const corpseCount = config.corpseCount;
+    for (let i = 0; i < corpseCount; i++) {
+      const a = i / corpseCount * Math.PI * 2;
+      const r = 38 + (i % 4) * 18;
+      const x = antSim.world.nest.x + Math.cos(a) * r;
+      const y = antSim.world.nest.y + Math.sin(a) * r;
+      antSim.world.corpses.push({
+        id: i + 1,
+        x,
+        y,
+        role: 'worker',
+        age: 0,
+        carriedBy: null,
+        disposed: false,
+        chemical: 135,
+      });
+      antSim.world.pheromones.death.add(x, y, 130);
+    }
+    const start = antSim.collectStatsSnapshot();
+    antSim.runDays(config.necrophoresisDays, config.dt);
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: 'necrophoresis_cleanup_latency',
+      seed,
+      ants: snap.ants,
+      initial_corpses: corpseCount,
+      initial_nest_corpses: start.nest_corpses,
+      final_nest_corpses: snap.nest_corpses,
+      disposed_corpses: snap.disposed_corpses,
+      corpse_moves: snap.corpse_moves,
+      death_pheromone: snap.death_pheromone,
+      task_corpse: snap.task_corpse || 0,
+      state_corpse_cleanup: snap.state_corpse_cleanup || 0,
+      state_carrying_corpse: snap.state_carrying_corpse || 0,
+    };
+  };
 
   const rows = [];
 
@@ -549,6 +629,8 @@ PAPER_CONDITIONS_JS = """
     rows.push(runMisleadingPheromone(seed, 'control'));
     rows.push(runMisleadingPheromone(seed, 'attack'));
     rows.push(runMisleadingPheromone(seed, 'caution'));
+    rows.push(runFoodQuality(seed));
+    rows.push(runNecrophoresis(seed));
   }
   return rows;
 }
@@ -823,12 +905,54 @@ def aggregate(raw_rows):
         "gap": "The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone.",
     })
 
+    const_food_rows = by_condition["food_quality_recruitment"]
+    food_quality_metrics = {
+        "mean_high_quality_food_trips": round(mean(float(r["high_quality_food_trips"]) for r in const_food_rows), 3),
+        "mean_low_quality_food_trips": round(mean(float(r["low_quality_food_trips"]) for r in const_food_rows), 3),
+        "mean_avg_collected_food_quality": round(mean(float(r["avg_collected_food_quality"]) for r in const_food_rows), 4),
+        "mean_high_source_food_pheromone": round(mean(float(r["high_source_food_pheromone"]) for r in const_food_rows), 3),
+        "mean_low_source_food_pheromone": round(mean(float(r["low_source_food_pheromone"]) for r in const_food_rows), 3),
+    }
+    high_trips = food_quality_metrics["mean_high_quality_food_trips"]
+    low_trips = food_quality_metrics["mean_low_quality_food_trips"]
+    high_pheromone = food_quality_metrics["mean_high_source_food_pheromone"]
+    low_pheromone = food_quality_metrics["mean_low_source_food_pheromone"]
+    food_quality_status = "pass" if high_trips > low_trips * 1.15 and food_quality_metrics["mean_avg_collected_food_quality"] > 1.05 else "partial" if high_trips >= low_trips or high_pheromone >= low_pheromone else "fail"
+    summaries.append({
+        "paper_id": "jackson_chaline_2007",
+        "paper": "Jackson & Chaline 2007",
+        "condition": "food_quality_recruitment",
+        "expected": "Higher-quality food should produce stronger recruitment or higher-quality-biased collection than lower-quality food at comparable access cost.",
+        "status": food_quality_status,
+        "observed": json.dumps(food_quality_metrics, ensure_ascii=False),
+        "gap": "The simulator now has food quality and quality-weighted recruitment, but it still lacks species-specific sucrose concentration calibration and direct trail-laying event counts.",
+    })
+
+    corpse_rows = by_condition["necrophoresis_cleanup_latency"]
+    corpse_metrics = {
+        "mean_initial_nest_corpses": round(mean(float(r["initial_nest_corpses"]) for r in corpse_rows), 3),
+        "mean_final_nest_corpses": round(mean(float(r["final_nest_corpses"]) for r in corpse_rows), 3),
+        "mean_disposed_corpses": round(mean(float(r["disposed_corpses"]) for r in corpse_rows), 3),
+        "mean_corpse_moves": round(mean(float(r["corpse_moves"]) for r in corpse_rows), 3),
+        "mean_death_pheromone": round(mean(float(r["death_pheromone"]) for r in corpse_rows), 3),
+    }
+    corpse_status = "pass" if corpse_metrics["mean_disposed_corpses"] >= 12 and corpse_metrics["mean_final_nest_corpses"] <= corpse_metrics["mean_initial_nest_corpses"] * 0.7 else "partial" if corpse_metrics["mean_corpse_moves"] > 0 else "fail"
+    summaries.append({
+        "paper_id": "avanzi_2024",
+        "paper": "Avanzi, Lisart & Detrain 2024",
+        "condition": "necrophoresis_cleanup_latency",
+        "expected": "Workers should respond to corpse/death chemical cues and progressively remove corpses from the nest area.",
+        "status": corpse_status,
+        "observed": json.dumps(corpse_metrics, ensure_ascii=False),
+        "gap": "Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation.",
+    })
+
     return summaries
 
 
 def write_markdown(path, summaries, raw_output, json_output):
     lines = [
-        "# Paper Condition Validation v3",
+        "# Paper Condition Validation v4",
         "",
         "This report maps published ant-behaviour findings to reproducible simulation conditions. Status values mean:",
         "",
@@ -863,9 +987,9 @@ def write_markdown(path, summaries, raw_output, json_output):
 def main():
     parser = argparse.ArgumentParser(description="Validate ant simulator conditions against multiple ant-behaviour papers.")
     parser.add_argument("--seeds", default="1-3")
-    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v3.csv"))
-    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v3.json"))
-    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v3.md"))
+    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v4.csv"))
+    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v4.json"))
+    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v4.md"))
     parser.add_argument("--quick", action="store_true")
     args = parser.parse_args()
 
@@ -897,6 +1021,9 @@ def main():
         "failStopDays": 0.8 if args.quick else 1.6,
         "avoidDays": 0.8 if args.quick else 1.8,
         "misleadingDays": 0.6 if args.quick else 1.5,
+        "foodQualityDays": 1.4 if args.quick else 2.2,
+        "corpseCount": 24 if args.quick else 36,
+        "necrophoresisDays": 1.2 if args.quick else 2.0,
         "fakeTrailStrength": 700,
     }
 

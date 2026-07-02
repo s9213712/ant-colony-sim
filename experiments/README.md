@@ -194,12 +194,12 @@ Run a multi-paper validation pass that maps literature claims to explicit simula
 ```bash
 python3 ant_colony_sim/experiments/paper_conditions_probe.py \
   --seeds 1-3 \
-  --output ant_colony_sim/outputs/paper_conditions_v3.csv \
-  --json-output ant_colony_sim/outputs/paper_conditions_v3.json \
-  --report-output ant_colony_sim/outputs/paper_conditions_report_v3.md
+  --output ant_colony_sim/outputs/paper_conditions_v4.csv \
+  --json-output ant_colony_sim/outputs/paper_conditions_v4.json \
+  --report-output ant_colony_sim/outputs/paper_conditions_report_v4.md
 ```
 
-The current `v3` matrix covers:
+The current `v4` matrix covers:
 
 - Perna et al. 2012: local pheromone trail formation and the missing Weber-law turning export;
 - Ramirez et al. 2018: tropotaxis gradient-response proxy and the missing sensing/turning logs;
@@ -213,15 +213,19 @@ The current `v3` matrix covers:
 - Afek/Kecher/Sulamy 2015: fail-stop foraging resilience after mass worker loss;
 - Jimenez-Romero et al. 2015: negative pheromone as a forbidden-path signal.
 - Aswale et al. 2022: misleading food pheromone attack and cautionary-pheromone defense proxy.
+- Jackson & Chaline 2007: food quality and trail-recruitment strength.
+- Avanzi, Lisart & Detrain 2024: corpse/death cue response and necrophoresis cleanup latency.
 
-`outputs/paper_conditions_report_v3.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
+`outputs/paper_conditions_report_v4.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
 
-Current `v3` additions show:
+Current `v4` additions show:
 
 - task-demand reallocation aligns qualitatively with response-threshold task organization;
-- fail-stop foraging is only partial because food trips continue after mass death but drop to a low resilience ratio;
+- fail-stop foraging is qualitatively aligned in the full probe, but remains algorithmic rather than proof-level validation;
 - negative pheromone is only partial because it reduces hazard-region occupancy weakly and lacks individual learning.
 - misleading pheromone is only partial because the static fake trail does not reduce food trips; an active detractor-agent mechanism is needed.
+- food-quality recruitment is now testable and qualitatively aligned, but lacks species-specific concentration calibration.
+- necrophoresis cleanup is now testable and qualitatively aligned, but lacks corpse-age chemistry, pathogen state and interaction-network validation.
 
 ## Literature Corpus Builder
 
@@ -247,7 +251,7 @@ Evaluate all 120 corpus records against the current paper-condition probes:
 ```bash
 python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
   --corpus ant_colony_sim/outputs/literature_corpus_100.json \
-  --conditions ant_colony_sim/outputs/paper_conditions_v3.json \
+  --conditions ant_colony_sim/outputs/paper_conditions_v4.json \
   --csv-output ant_colony_sim/outputs/literature_corpus_120_evaluation.csv \
   --json-output ant_colony_sim/outputs/literature_corpus_120_evaluation.json \
   --md-output ant_colony_sim/outputs/literature_corpus_120_evaluation.md
@@ -255,9 +259,9 @@ python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
 
 Current result:
 
-- `pass`: 7
-- `partial`: 56
-- `not_covered`: 25
+- `pass`: 8
+- `partial`: 73
+- `not_covered`: 7
 - `not_biological_target`: 32
 
 Interpretation: most of the 120 papers are not yet correctly simulated in a strict sense. They are either covered only by a generic proxy, need new validation conditions, or are algorithmic/robotics papers that should not be treated as direct biological targets.
@@ -274,8 +278,8 @@ python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
 
 Current backlog:
 
-- `P0_missing_biology_condition`: 25
-- `P1_exact_condition_partial`: 5
-- `P2_proxy_only`: 51
+- `P0_missing_biology_condition`: 7
+- `P1_exact_condition_partial`: 6
+- `P2_proxy_only`: 67
 - `P3_algorithmic_reference_only`: 32
-- total: 113
+- total: 112

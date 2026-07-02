@@ -10,7 +10,7 @@ Important interpretation rules:
 - `not_biological_target` means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation.
 
 - Corpus: `outputs/literature_corpus_100.json`
-- Condition source: `outputs/paper_conditions_v3.json`
+- Condition source: `outputs/paper_conditions_v4.json`
 - CSV: `outputs/literature_corpus_120_evaluation.csv`
 - JSON: `outputs/literature_corpus_120_evaluation.json`
 
@@ -18,25 +18,25 @@ Important interpretation rules:
 
 ### status
 
-- `partial`: 56
+- `partial`: 73
 - `not_biological_target`: 32
-- `not_covered`: 25
-- `pass`: 7
+- `pass`: 8
+- `not_covered`: 7
 
 ### scope
 
-- `category_proxy`: 74
+- `category_proxy`: 72
 - `algorithmic_or_robotics_analogy`: 32
-- `exact_paper_condition`: 12
+- `exact_paper_condition`: 14
 - `unmapped`: 2
 
 ### verdict
 
-- `covered_by_generic_proxy`: 51
+- `covered_by_generic_proxy`: 67
 - `not_a_direct_biology_validation`: 32
-- `not_currently_testable`: 25
-- `aligned_qualitative`: 7
-- `partial_alignment`: 5
+- `aligned_qualitative`: 8
+- `not_currently_testable`: 7
+- `partial_alignment`: 6
 
 ## Sequential Results
 
@@ -86,8 +86,8 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1508.06816
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Scope: `exact_paper_condition`
-- Status: `pass`
-- Verdict: `aligned_qualitative`
+- Status: `partial`
+- Verdict: `partial_alignment`
 - Matched condition: two-cue adaptation proxy
 - Evidence paper id: malickova_2015
 - Gap: The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics.
@@ -125,11 +125,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1088/1742-5468/aabfc7
 - Categories: pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;networks_interactions;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 8. Optimal and Resilient Pheromone Utilization in Ant Foraging
 
@@ -138,8 +138,8 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1507.00772
 - Categories: pheromone_trail_foraging
 - Scope: `exact_paper_condition`
-- Status: `partial`
-- Verdict: `partial_alignment`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
 - Matched condition: fail_stop_foraging_resilience
 - Evidence paper id: afek_2015
 - Gap: Afek et al. is an algorithmic pheromone model; this ABM only tests biological-style degradation, not asymptotic pheromone lower bounds or proof-level optimality.
@@ -164,11 +164,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.2139/ssrn.6619462
 - Categories: pheromone_trail_foraging;traffic_collective_motion;necrophoresis_social_immunity;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: corpse_cleanup_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Corpse/death chemical exists in the simulator, but no dedicated literature-calibrated necrophoresis latency curve is run in the paper matrix yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: necrophoresis_cleanup_latency
+- Evidence paper id: avanzi_2024
+- Gap: Corpse cleanup is now testable, but generic corpse-management papers still need corpse-age chemistry, pathogen state and interaction-network validation.
 
 ### 11. Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It
 
@@ -190,8 +190,8 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1805.05598
 - Categories: pheromone_trail_foraging
 - Scope: `exact_paper_condition`
-- Status: `pass`
-- Verdict: `aligned_qualitative`
+- Status: `partial`
+- Verdict: `partial_alignment`
 - Matched condition: stochasticity_relocation
 - Evidence paper id: shiraishi_2018
 - Gap: The current check measures relative relocation adaptation. It does not yet fit the paper's environment-dependent optimal stochasticity distribution.
@@ -229,11 +229,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1101/274209
 - Categories: pheromone_trail_foraging;food_quality_choice;networks_interactions;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 16. Analysis of Cooperative Perception in Ant Traffic and Its Effects on Transportation System by Using a Congestion-Free Ant-Trail Model
 
@@ -255,11 +255,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.65109/aoay8418
 - Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 18. A Pheromone-Based Utility Model for Collaborative Foraging
 
@@ -268,11 +268,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.65109/ivir1553
 - Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 19. Development of Task Allocation Method for Swarm Robotic Systems Using Optimal Foraging Theory and Ant Colony Labor Division Model
 
@@ -384,12 +384,12 @@ Important interpretation rules:
 - DOI: 10.1016/j.anbehav.2006.11.027
 - URL: https://doi.org/10.1016/j.anbehav.2006.11.027
 - Categories: pheromone_trail_foraging;food_quality_choice
-- Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Scope: `exact_paper_condition`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: The simulator now has food quality and quality-weighted recruitment, but it still lacks species-specific sucrose concentration calibration and direct trail-laying event counts.
 
 ### 28. A cellular automata ant memory model of foraging in a swarm of robots
 
@@ -437,11 +437,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1111/j.1365-2311.1985.tb00542.x
 - Categories: pheromone_trail_foraging;nest_relocation_house_hunting;army_ant_raids_mills;food_quality_choice
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 32. A probabilistic cellular automata ant memory model for a swarm of foraging robots
 
@@ -463,11 +463,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1007/s00040-024-00995-y
 - Categories: pheromone_trail_foraging;food_quality_choice;networks_interactions
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 34. Aerosol delivery of trail pheromone disrupts the foraging of the red imported fire ant, <i>Solenopsis invicta</i>
 
@@ -593,11 +593,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1007/s00040-026-01106-9
 - Categories: pheromone_trail_foraging;food_quality_choice
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 44. Building a polydomous colony: nest network expansion by Linepithema humile
 
@@ -606,11 +606,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1007/s00040-026-01081-1
 - Categories: pheromone_trail_foraging;brood_nest_microclimate;nest_relocation_house_hunting;food_quality_choice;networks_interactions
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 45. Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger
 
@@ -619,11 +619,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.21203/rs.3.rs-7630446/v1
 - Categories: pheromone_trail_foraging;food_quality_choice
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 46. Stop and go: exploring alternative mechanisms for task allocation in social insects - response and satisfaction thresholds trade off cost, accuracy, and speed differently
 
@@ -635,7 +635,7 @@ Important interpretation rules:
 - Status: `not_covered`
 - Verdict: `not_currently_testable`
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
 ### 47. Walk This Way: Modeling Foraging Ant Dynamics in Multiple Food Source Environments
@@ -700,7 +700,7 @@ Important interpretation rules:
 - Status: `not_covered`
 - Verdict: `not_currently_testable`
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
 ### 52. Multiple-Agent Task Allocation Algorithm Utilizing Ant Colony Optimization
@@ -723,11 +723,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1007/s00265-024-03430-1
 - Categories: pheromone_trail_foraging;food_quality_choice
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 54. Reduced foraging investment as an adaptation to patchy food sources: a phasic army ant simulation
 
@@ -739,7 +739,7 @@ Important interpretation rules:
 - Status: `not_covered`
 - Verdict: `not_currently_testable`
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
 ### 55. Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis
@@ -879,11 +879,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1007/s00040-012-0272-4
 - Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 66. Consensus decision making in the ant Myrmecina nipponica: house-hunters combine pheromone trails with quorum responses
 
@@ -905,11 +905,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1603/0022-0493-93.1.119
 - Categories: pheromone_trail_foraging;food_quality_choice
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 68. Movement, Encounter Rate, and Collective Behavior in Ant Colonies
 
@@ -944,11 +944,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1242/jeb.02478
 - Categories: pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 71. Coordination of Raiding and Emigration in the Ponerine Army Ant Leptogenys distinguenda (Hymenoptera: Formicidae: Ponerinae): A Signal Analysis
 
@@ -1126,11 +1126,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.3389/fpsyg.2020.555576
 - Categories: pheromone_trail_foraging;food_quality_choice
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 85. Optimal ant colony algorithm based multi-robot task allocation and processing sequence scheduling
 
@@ -1177,12 +1177,12 @@ Important interpretation rules:
 - DOI: 10.1098/rsos.240764
 - URL: https://doi.org/10.1098/rsos.240764
 - Categories: necrophoresis_social_immunity;networks_interactions
-- Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: corpse_cleanup_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Corpse/death chemical exists in the simulator, but no dedicated literature-calibrated necrophoresis latency curve is run in the paper matrix yet.
+- Scope: `exact_paper_condition`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
+- Matched condition: necrophoresis_cleanup_latency
+- Evidence paper id: avanzi_2024
+- Gap: Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation.
 
 ### 89. Improved Intelligent Method for Traffic Flow Prediction Based on Artificial Neural Networks and Ant Colony Optimization
 
@@ -1243,11 +1243,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.13102/sociobiology.v63i3.1050
 - Categories: pheromone_trail_foraging;food_quality_choice;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: food_quality_needed
-- Evidence paper id: not_in_paper_conditions_v3
-- Gap: Resources currently have amount but not reward concentration/quality, so food-quality recruitment papers cannot be tested correctly yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: food_quality_recruitment
+- Evidence paper id: jackson_chaline_2007
+- Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
 ### 94. Deterministic Model for Analyzing the Dynamics of Ant System Algorithm and Performance Amelioration through a New Pheromone Deposition Approach
 
@@ -1272,7 +1272,7 @@ Important interpretation rules:
 - Status: `not_covered`
 - Verdict: `not_currently_testable`
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
 ### 96. Optimal A* Path Planning with Ant Colony Optimization on Multi-Robot Task Allocation for Manufacturing Model
@@ -1402,7 +1402,7 @@ Important interpretation rules:
 - Status: `not_covered`
 - Verdict: `not_currently_testable`
 - Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_paper_conditions_v3
+- Evidence paper id: not_in_current_paper_conditions
 - Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
 
 ### 106. An Ensemble Ant Colony Optimization Algorithm with a Hybrid Pheromone Model for Learning Rule Lists
