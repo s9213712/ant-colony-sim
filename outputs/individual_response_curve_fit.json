@@ -1,0 +1,80 @@
+{
+  "generated_at": "2026-07-02T15:33:02Z",
+  "target_csv": "/home/s92137/ant_colony_sim/targets/digitized_curves/perna_2012_individual_pheromone_response.csv",
+  "target_id": "individual_pheromone_response_curve",
+  "fit": {
+    "amplitude_A": 35.92767427710757,
+    "beta": 1.0337904157161752,
+    "r2_log_space": 0.9976311330751421,
+    "n": 6
+  },
+  "summary": {
+    "status": "pass",
+    "strict_ci_status": "needs_review",
+    "checks": {
+      "amplitude_in_reported_ci": false,
+      "beta_in_reported_ci": false,
+      "amplitude_within_20pct_of_reported": true,
+      "beta_within_0_05_of_reported": true,
+      "r2_at_least_0_995": true
+    },
+    "reported_reference": {
+      "amplitude_A_low": 36.9,
+      "amplitude_A_high": 48.74,
+      "beta_low": 1.037,
+      "beta_high": 1.079,
+      "reported_r2": 0.9982
+    },
+    "interpretation": "Fit is usable as a rounded/bin-reconstructed Perna et al. Figure 5 response target; strict Figure 6 confidence-interval reproduction still needs raw x/y data."
+  },
+  "residual_rows": [
+    {
+      "source_id": "perna_2012",
+      "target_id": "individual_pheromone_response_curve",
+      "x_value": 57.131,
+      "observed_y": 0.4981,
+      "predicted_y": 0.5485192196811378,
+      "relative_error": 0.10122308709322993
+    },
+    {
+      "source_id": "perna_2012",
+      "target_id": "individual_pheromone_response_curve",
+      "x_value": 114.263,
+      "observed_y": 0.282,
+      "predicted_y": 0.2679081934564559,
+      "relative_error": -0.04997094518987264
+    },
+    {
+      "source_id": "perna_2012",
+      "target_id": "individual_pheromone_response_curve",
+      "x_value": 228.052,
+      "observed_y": 0.1416,
+      "predicted_y": 0.13113429149494638,
+      "relative_error": -0.07391037079840132
+    },
+    {
+      "source_id": "perna_2012",
+      "target_id": "individual_pheromone_response_curve",
+      "x_value": 455.901,
+      "observed_y": 0.0662,
+      "predicted_y": 0.06407877768031234,
+      "relative_error": -0.03204263322791023
+    },
+    {
+      "source_id": "perna_2012",
+      "target_id": "individual_pheromone_response_curve",
+      "x_value": 912.417,
+      "observed_y": 0.0307,
+      "predicted_y": 0.031275882425302964,
+      "relative_error": 0.01875838518902159
+    },
+    {
+      "source_id": "perna_2012",
+      "target_id": "individual_pheromone_response_curve",
+      "x_value": 1824.214,
+      "observed_y": 0.0146,
+      "predicted_y": 0.015281296906088348,
+      "relative_error": 0.04666417164988686
+    }
+  ]
+}

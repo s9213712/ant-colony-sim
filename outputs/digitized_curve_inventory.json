@@ -1,15 +1,35 @@
 {
-  "generated_at": "2026-07-02T15:18:17Z",
+  "generated_at": "2026-07-02T15:33:02Z",
   "curve_dir": "/home/s92137/ant_colony_sim/targets/digitized_curves",
   "summary": {
-    "curve_files": 0,
-    "fit_ready_files": 0,
-    "target_ids_with_digitized_files": 0,
-    "source_leads": 5,
-    "level_4_blocker": "No fit-ready digitized biological curve is available."
+    "curve_files": 1,
+    "fit_ready_files": 1,
+    "target_ids_with_digitized_files": 1,
+    "source_leads": 6,
+    "level_4_blocker": "Needs independent holdout validation before Level 4."
   },
-  "rows": [],
+  "rows": [
+    {
+      "file": "/home/s92137/ant_colony_sim/targets/digitized_curves/perna_2012_individual_pheromone_response.csv",
+      "row_count": 6,
+      "target_ids": "individual_pheromone_response_curve",
+      "digitization_methods": "figure_legend_numeric",
+      "missing_required_columns": "",
+      "numeric_x_rows": 6,
+      "numeric_y_rows": 6,
+      "fit_ready": "yes"
+    }
+  ],
   "source_leads": [
+    {
+      "target_id": "individual_pheromone_response_curve",
+      "source_id": "perna_2012_individual_response",
+      "title": "Individual rules for trail pattern formation in Argentine ants",
+      "species": "Linepithema humile",
+      "status": "fit_ready_curve_committed",
+      "source_url": "https://arxiv.org/abs/1201.5827",
+      "notes": "Figure 5 legend gives six rounded slope values and Figure 6 reports the no-evaporation power-law fit. The committed CSV reconstructs x values from pheromone-bin geometric midpoints."
+    },
     {
       "target_id": "trail_decay_curve",
       "source_id": "robinson_2008_decay_rates_lead",

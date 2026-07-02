@@ -152,16 +152,42 @@ python3 ant_colony_sim/experiments/quantitative_readiness_audit.py \
 
 Current result:
 
-- estimated current level: `3.0`
-- ready_for_fit digitized curves: `0`
+- estimated current level: `3.5`
+- ready_for_fit digitized curves: `1`
+- ready_for_holdout curves: `0`
 - model_reference_only: `1`
 - qualitative_proxy_only: `1`
 - missing_digitized_data: `4`
 - open P0 targets: `4`
 
-Interpretation: qualitative constraints are currently clean, but Level 4 is
-blocked until at least one real biological target curve is digitized and an
-independent validation curve is held out.
+Interpretation: the Perna 2012 individual pheromone-response curve is now a
+fit-ready primary-source target with species-unit mapping. Level 4 is still
+blocked until an independent holdout curve is digitized and kept out of the fit.
+
+## Individual Pheromone Response Fit
+
+Fit the Perna 2012 individual response target:
+
+```bash
+python3 ant_colony_sim/experiments/fit_individual_response_curve.py \
+  --csv-output ant_colony_sim/outputs/individual_response_curve_fit.csv \
+  --json-output ant_colony_sim/outputs/individual_response_curve_fit.json \
+  --report-output ant_colony_sim/outputs/individual_response_curve_fit.md \
+  --fail-on-issues
+```
+
+Current result:
+
+- status: `pass` under rounded/bin-reconstructed tolerance
+- strict CI status: `needs_review`
+- fitted A: `35.9277`
+- fitted beta: `1.0338`
+- log-space R2: `0.99763`
+
+The target uses Figure 5 legend slope values and geometric midpoints of the
+published pheromone bins. It is fit-ready for shared response-submodel
+calibration, but exact Figure 6 confidence-interval reproduction still needs raw
+x/y data or author-provided data.
 
 ## Individual-Level Output
 

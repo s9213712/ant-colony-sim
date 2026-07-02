@@ -1,1 +1,2 @@
 file,row_count,target_ids,digitization_methods,missing_required_columns,numeric_x_rows,numeric_y_rows,fit_ready
+/home/s92137/ant_colony_sim/targets/digitized_curves/perna_2012_individual_pheromone_response.csv,6,individual_pheromone_response_curve,figure_legend_numeric,,6,6,yes

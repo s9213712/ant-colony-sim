@@ -1,0 +1,7 @@
+source_id,target_id,x_value,observed_y,predicted_y,relative_error
+perna_2012,individual_pheromone_response_curve,57.131,0.4981,0.5485192196811378,0.10122308709322993
+perna_2012,individual_pheromone_response_curve,114.263,0.282,0.2679081934564559,-0.04997094518987264
+perna_2012,individual_pheromone_response_curve,228.052,0.1416,0.13113429149494638,-0.07391037079840132
+perna_2012,individual_pheromone_response_curve,455.901,0.0662,0.06407877768031234,-0.03204263322791023
+perna_2012,individual_pheromone_response_curve,912.417,0.0307,0.031275882425302964,0.01875838518902159
+perna_2012,individual_pheromone_response_curve,1824.214,0.0146,0.015281296906088348,0.04666417164988686

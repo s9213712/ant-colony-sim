@@ -1,0 +1,24 @@
+{
+  "id": "species_unit_maps_v1",
+  "description": "Species-level unit mappings used by quantitative calibration targets. These mappings document units from the primary literature; they do not by themselves make simulator units physically predictive.",
+  "species": [
+    {
+      "species_id": "linepithema_humile_perna_2012",
+      "species": "Linepithema humile",
+      "source_id": "perna_2012",
+      "source_url": "https://arxiv.org/abs/1201.5827",
+      "targets": [
+        "individual_pheromone_response_curve"
+      ],
+      "time_unit": "second",
+      "distance_unit": "centimeter",
+      "angle_unit": "degree",
+      "pheromone_unit": "inferred pheromone map unit proportional to prior ant occupancy",
+      "notes": [
+        "Perna et al. estimate pheromone concentration from tracked ant passages rather than chemical mass.",
+        "Tracking intervals are reported in 0.4 s windows; pheromone map correlations use a map 16 s before the tracking event.",
+        "The target curve fits individual turning response, not full colony food retrieval or physical pheromone half-life."
+      ]
+    }
+  ]
+}

@@ -40,6 +40,7 @@ jobs:
             experiments/digitized_curve_inventory.py \
             experiments/double_bridge_probe.py \
             experiments/evaluate_literature_corpus.py \
+            experiments/fit_individual_response_curve.py \
             experiments/generate_literature_gap_backlog.py \
             experiments/generate_validation_report.py \
             experiments/literature_calibration_cycle.py \
@@ -112,6 +113,14 @@ jobs:
             --json-output outputs/ci_digitized_curve_inventory.json \
             --report-output outputs/ci_digitized_curve_inventory.md
 
+      - name: Individual pheromone response fit
+        run: |
+          python experiments/fit_individual_response_curve.py \
+            --csv-output outputs/ci_individual_response_curve_fit.csv \
+            --json-output outputs/ci_individual_response_curve_fit.json \
+            --report-output outputs/ci_individual_response_curve_fit.md \
+            --fail-on-issues
+
       - name: Literature alignment probe
         run: python experiments/literature_alignment_probe.py
 
@@ -165,6 +174,9 @@ jobs:
             outputs/ci_digitized_curve_inventory.csv
             outputs/ci_digitized_curve_inventory.json
             outputs/ci_digitized_curve_inventory.md
+            outputs/ci_individual_response_curve_fit.csv
+            outputs/ci_individual_response_curve_fit.json
+            outputs/ci_individual_response_curve_fit.md
             outputs/ci_paper_conditions_smoke.csv
             outputs/ci_paper_conditions_smoke.json
             outputs/ci_paper_conditions_smoke.md

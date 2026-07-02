@@ -15,6 +15,27 @@
   ],
   "targets": [
     {
+      "target_id": "individual_pheromone_response_curve",
+      "biological_process": "Individual turning response as a function of local pheromone difference and total pheromone.",
+      "priority": "P0",
+      "status": "ready_for_fit",
+      "source_candidates": [
+        {
+          "id": "perna_2012",
+          "title": "Individual rules for trail pattern formation in Argentine ants",
+          "url": "https://arxiv.org/abs/1201.5827"
+        }
+      ],
+      "required_data": [
+        "total pheromone around the ant",
+        "turning slope or turn angle response",
+        "species/arena conditions",
+        "source figure/table and fitted parameter confidence interval"
+      ],
+      "current_proxy": "paper_conditions_v5 exports per-step sensing and turning logs but previously lacked a numeric target curve.",
+      "next_action": "Use the Perna 2012 response curve to calibrate shared Weber-style turn-response parameters, then validate against an independent holdout curve."
+    },
+    {
       "target_id": "trail_decay_curve",
       "biological_process": "Pheromone trail decay after food removal or rain/washout.",
       "priority": "P0",

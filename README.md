@@ -6,7 +6,7 @@ Behavior-level ant colony simulation for exploring pheromone-mediated foraging, 
 
 The current model is a qualitative research aid and teaching tool. It is not calibrated for numerical prediction of real ant colonies.
 
-Current scientific validation level: qualitative behavior-level ABM, estimated Level 3.0. The 120-paper corpus now separates simulator-condition passes from biological calibration: 86 records still require paper-level quantitative curves or species-specific data, while 34 engineering/ACO references are screened out as non-biological targets.
+Current scientific validation level: behavior-level ABM with one fit-ready primary-source response curve, estimated Level 3.5. The 120-paper corpus separates simulator-condition passes from biological calibration: 86 records still require paper-level quantitative curves or species-specific data, while 34 engineering/ACO references are screened out as non-biological targets.
 
 ## Run
 

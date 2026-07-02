@@ -667,10 +667,30 @@ python3 experiments/quantitative_readiness_audit.py \
 
 ## 18. Digitized curve inventory
 
-Level 4 需要至少一條 primary-source digitized biological curve，且另有一條獨立 validation curve。`experiments/digitized_curve_inventory.py` 會檢查 `targets/digitized_curves/*.csv` 是否符合欄位、數值與來源要求。輸出：
+Level 4 需要至少一條 primary-source digitized biological curve，且另有一條獨立 validation curve。現在已加入 Perna et al. 2012 的 `individual_pheromone_response_curve` 作為第一條 fit-ready 曲線，來源是 Figure 5 圖說中的六個斜率值，x 軸由原文 pheromone-bin 範圍的幾何中點重建。`experiments/digitized_curve_inventory.py` 會檢查 `targets/digitized_curves/*.csv` 是否符合欄位、數值與來源要求。輸出：
 
 - `outputs/digitized_curve_inventory.csv`
 - `outputs/digitized_curve_inventory.json`
 - `outputs/digitized_curve_inventory.md`
 
 `targets/digitized_curves/source_leads.json` 只記錄候選來源，不可直接用於 fitting。若只找到二手摘要，必須標為 lead，不能填入 target value。這避免為了配合文獻而製造例外規則或虛假數值。
+
+## 19. Individual response curve fit
+
+`experiments/fit_individual_response_curve.py` 會對 Perna 2012 的個體費洛蒙反應曲線做 power-law fit。輸出：
+
+- `outputs/individual_response_curve_fit.csv`
+- `outputs/individual_response_curve_fit.json`
+- `outputs/individual_response_curve_fit.md`
+
+目前結果：
+
+| 指標 | 值 |
+| --- | ---: |
+| status | pass |
+| strict CI status | needs_review |
+| fitted A | 35.9277 |
+| fitted beta | 1.0338 |
+| log-space R2 | 0.99763 |
+
+解讀：這是第一條可用於共享 response submodel calibration 的 primary-source quantitative target，因此 readiness 從 Level 3.0 推進到 Level 3.5。它仍不是 Level 4，因為 strict Figure 6 CI reproduction 需要原始 x/y 資料，且還缺一條獨立 holdout validation curve。

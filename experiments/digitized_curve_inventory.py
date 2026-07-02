@@ -87,7 +87,7 @@ def summarize(rows, leads):
         "fit_ready_files": ready,
         "target_ids_with_digitized_files": len(target_ids),
         "source_leads": len(leads),
-        "level_4_blocker": "No fit-ready digitized biological curve is available." if ready == 0 else "Needs independent holdout validation and species-unit mapping.",
+        "level_4_blocker": "No fit-ready digitized biological curve is available." if ready == 0 else "Needs independent holdout validation before Level 4.",
     }
 
 
