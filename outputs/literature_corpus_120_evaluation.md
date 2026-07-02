@@ -196,7 +196,7 @@ Important interpretation rules:
 - Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift
 - Evidence paper id: dussutour_2004
-- Gap: The model now exports segment-level density, speed and flow. It still lacks explicit antennal-contact mechanics and lane-discipline calibration from crowded trail experiments.
+- Gap: The model now exports segment-level density, speed, flow and traffic-redirect probability. It still lacks calibrated body-contact/pushing mechanics from crowded trail experiments.
 
 ### 10. Phase Transitions in Ant Traffic Driven by Density-Dependent Pheromone Feedback
 

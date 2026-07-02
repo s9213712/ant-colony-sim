@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T15:18:27Z",
+  "generated_at": "2026-07-02T17:34:20Z",
   "corpus": "/home/s92137/ant_colony_sim/outputs/literature_corpus_100.json",
   "conditions": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
   "summary": {
@@ -195,7 +195,7 @@
       "verdict": "aligned_qualitative",
       "matched_condition": "crowding_bridge_density_shift",
       "evidence_paper_id": "dussutour_2004",
-      "gap": "The model now exports segment-level density, speed and flow. It still lacks explicit antennal-contact mechanics and lane-discipline calibration from crowded trail experiments."
+      "gap": "The model now exports segment-level density, speed, flow and traffic-redirect probability. It still lacks calibrated body-contact/pushing mechanics from crowded trail experiments."
     },
     {
       "index": 10,

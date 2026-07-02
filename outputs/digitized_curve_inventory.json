@@ -1,14 +1,24 @@
 {
-  "generated_at": "2026-07-02T15:40:56Z",
+  "generated_at": "2026-07-02T17:31:57Z",
   "curve_dir": "/home/s92137/ant_colony_sim/targets/digitized_curves",
   "summary": {
-    "curve_files": 2,
-    "fit_ready_files": 2,
-    "target_ids_with_digitized_files": 2,
-    "source_leads": 7,
+    "curve_files": 3,
+    "fit_ready_files": 3,
+    "target_ids_with_digitized_files": 3,
+    "source_leads": 8,
     "level_4_blocker": "Level 4 curve prerequisites are present; next blocker is broader external validation and uncertainty for Level 5."
   },
   "rows": [
+    {
+      "file": "/home/s92137/ant_colony_sim/targets/digitized_curves/dussutour_2004_pushing_redirect_probability.csv",
+      "row_count": 1,
+      "target_ids": "traffic_pushing_redirect_probability",
+      "digitization_methods": "figure_legend_numeric",
+      "missing_required_columns": "",
+      "numeric_x_rows": 1,
+      "numeric_y_rows": 1,
+      "fit_ready": "yes"
+    },
     {
       "file": "/home/s92137/ant_colony_sim/targets/digitized_curves/john_2009_traffic_velocity_density_holdout.csv",
       "row_count": 3,
@@ -84,6 +94,15 @@
       "status": "candidate_for_curve_digitization",
       "source_url": "https://doi.org/10.1038/nature02585",
       "notes": "Candidate for speed-density or flow-density target curves."
+    },
+    {
+      "target_id": "traffic_pushing_redirect_probability",
+      "source_id": "dussutour_2004_pushing_redirect",
+      "title": "Optimal traffic organisation in ants under crowded conditions",
+      "species": "Lasius niger",
+      "status": "holdout_ready_curve_committed",
+      "source_url": "https://arxiv.org/abs/cond-mat/0403142",
+      "notes": "Figure 3d legend reports the pushing probability slope J = 0.571 +/- 0.057 CI95; the committed CSV uses it as a mechanism-level traffic holdout."
     },
     {
       "target_id": "traffic_flow_density_curve",

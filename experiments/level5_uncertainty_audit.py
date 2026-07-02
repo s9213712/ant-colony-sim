@@ -19,25 +19,35 @@ def bool_status(value):
     return "yes" if value else "no"
 
 
-def audit(individual_fit, traffic_holdout, replicate_statistics=None):
+def audit(individual_fit, traffic_holdout, replicate_statistics=None, pushing_redirect=None):
     bootstrap = individual_fit.get("bootstrap", {})
     traffic = traffic_holdout.get("result", {})
     target = traffic.get("target", {})
     replicate_summary = (replicate_statistics or {}).get("summary", {})
+    pushing_result = (pushing_redirect or {}).get("result", {})
     replicate_ci_ready = (
         replicate_summary.get("core_metric_count", 0) > 0
         and replicate_summary.get("core_metric_ci_ready") == replicate_summary.get("core_metric_count")
         and not replicate_summary.get("underpowered_core_metrics")
     )
+    pushing_holdout_pass = pushing_result.get("status") == "pass"
     checks = {
         "fit_curve_bootstrap_ci": bootstrap.get("status") == "available",
         "holdout_curve_present": traffic.get("status") == "pass",
         "holdout_has_variance_values": target.get("low_speed_sd") is not None and target.get("high_speed_sd") is not None,
         "paper_condition_replicate_ci": replicate_ci_ready,
+        "independent_pushing_redirect_holdout": pushing_holdout_pass,
         "holdout_formal_ci_available": bool(target.get("formal_ci_available")),
     }
     level5_ready = all(checks.values())
-    if checks["fit_curve_bootstrap_ci"] and checks["holdout_has_variance_values"] and checks["paper_condition_replicate_ci"]:
+    if (
+        checks["fit_curve_bootstrap_ci"]
+        and checks["holdout_has_variance_values"]
+        and checks["paper_condition_replicate_ci"]
+        and checks["independent_pushing_redirect_holdout"]
+    ):
+        estimated_level = 4.4
+    elif checks["fit_curve_bootstrap_ci"] and checks["holdout_has_variance_values"] and checks["paper_condition_replicate_ci"]:
         estimated_level = 4.3
     elif checks["fit_curve_bootstrap_ci"] and checks["holdout_has_variance_values"]:
         estimated_level = 4.2
@@ -79,6 +89,16 @@ def audit(individual_fit, traffic_holdout, replicate_statistics=None):
             "min_n": replicate_summary.get("min_n"),
             "underpowered_core_metrics": replicate_summary.get("underpowered_core_metrics", []),
         },
+        "pushing_redirect_holdout": {
+            "status": pushing_result.get("status", "missing"),
+            "target_probability": pushing_result.get("target", {}).get("value"),
+            "target_ci95_low": pushing_result.get("target", {}).get("ci95_low"),
+            "target_ci95_high": pushing_result.get("target", {}).get("ci95_high"),
+            "model_mean_redirect_per_encounter": pushing_result.get("model", {}).get("mean_redirect_per_encounter"),
+            "model_ci95_redirect_per_encounter": pushing_result.get("model", {}).get("ci95_redirect_per_encounter"),
+            "replicates": pushing_result.get("model", {}).get("replicates"),
+            "source": "Dussutour et al. 2004",
+        },
     }
 
 
@@ -101,6 +121,7 @@ def write_report(path, result):
     fit = result["fit_uncertainty"]
     holdout = result["holdout_uncertainty"]
     replicate = result["replicate_uncertainty"]
+    pushing = result["pushing_redirect_holdout"]
     lines = [
         "# Level 5 Uncertainty Audit",
         "",
@@ -146,9 +167,19 @@ def write_report(path, result):
         f"- minimum replicate count: `{replicate['min_n']}`",
         f"- underpowered core metrics: `{replicate['underpowered_core_metrics']}`",
         "",
+        "## Pushing Redirect Holdout",
+        "",
+        f"- holdout status: `{pushing['status']}`",
+        f"- source: {pushing['source']}",
+        f"- target probability: `{pushing['target_probability']}`",
+        f"- target 95% CI: `[{pushing['target_ci95_low']}, {pushing['target_ci95_high']}]`",
+        f"- model mean redirect per encounter: `{pushing['model_mean_redirect_per_encounter']}`",
+        f"- model 95% CI: `{pushing['model_ci95_redirect_per_encounter']}`",
+        f"- replicates: `{pushing['replicates']}`",
+        "",
         "## Interpretation",
         "",
-        "The simulator has moved beyond Level 4 by attaching bootstrap uncertainty to the fitted individual-response curve and replicate uncertainty to paper-condition probes. The traffic holdout includes reported SD values, but formal confidence intervals require density-bin sample sizes or raw tracking data from the source experiment.",
+        "The simulator has moved beyond Level 4 by attaching bootstrap uncertainty to the fitted individual-response curve, replicate uncertainty to paper-condition probes, and an independent crowded-traffic pushing holdout. The traffic speed holdout includes reported SD values, but formal confidence intervals require density-bin sample sizes or raw tracking data from the source experiment.",
     ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -159,6 +190,7 @@ def main():
     parser.add_argument("--individual-fit", type=Path, default=ROOT / "outputs" / "individual_response_curve_fit.json")
     parser.add_argument("--traffic-holdout", type=Path, default=ROOT / "outputs" / "traffic_holdout_validation.json")
     parser.add_argument("--replicate-statistics", type=Path, default=None)
+    parser.add_argument("--pushing-redirect", type=Path, default=None)
     parser.add_argument("--csv-output", type=Path, default=ROOT / "outputs" / "level5_uncertainty_audit.csv")
     parser.add_argument("--json-output", type=Path, default=ROOT / "outputs" / "level5_uncertainty_audit.json")
     parser.add_argument("--report-output", type=Path, default=ROOT / "outputs" / "level5_uncertainty_audit.md")
@@ -166,7 +198,8 @@ def main():
     args = parser.parse_args()
 
     replicate_statistics = read_json(args.replicate_statistics) if args.replicate_statistics else None
-    result = audit(read_json(args.individual_fit), read_json(args.traffic_holdout), replicate_statistics)
+    pushing_redirect = read_json(args.pushing_redirect) if args.pushing_redirect else None
+    result = audit(read_json(args.individual_fit), read_json(args.traffic_holdout), replicate_statistics, pushing_redirect)
     write_csv(args.csv_output, result)
     args.json_output.parent.mkdir(parents=True, exist_ok=True)
     args.json_output.write_text(
@@ -176,6 +209,7 @@ def main():
                 "individual_fit": str(args.individual_fit),
                 "traffic_holdout": str(args.traffic_holdout),
                 "replicate_statistics": str(args.replicate_statistics) if args.replicate_statistics else None,
+                "pushing_redirect": str(args.pushing_redirect) if args.pushing_redirect else None,
                 "result": result,
             },
             ensure_ascii=False,
@@ -192,6 +226,8 @@ def main():
         if not result["checks"]["fit_curve_bootstrap_ci"]:
             return 1
         if args.replicate_statistics and not result["checks"]["paper_condition_replicate_ci"]:
+            return 1
+        if args.pushing_redirect and not result["checks"]["independent_pushing_redirect_holdout"]:
             return 1
     return 0
 

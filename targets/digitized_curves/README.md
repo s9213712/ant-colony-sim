@@ -34,6 +34,7 @@ Current status:
 
 - `perna_2012_individual_pheromone_response.csv` is fit-ready for `individual_pheromone_response_curve`.
 - `john_2009_traffic_velocity_density_holdout.csv` is holdout-ready for `traffic_velocity_density_holdout`.
+- `dussutour_2004_pushing_redirect_probability.csv` is holdout-ready for `traffic_pushing_redirect_probability`.
 - The next priorities are `trail_decay_curve`, `food_recruitment_strength_curve` and `double_bridge_branch_choice_curve`.
 
 Fit-ready and holdout-ready rows may be used for calibration or validation scripts. Source leads remain leads only and must not be used as target values.

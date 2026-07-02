@@ -37,6 +37,24 @@
         "The paper reports 1 body length is approximately 18 mm for Leptogenys processionalis.",
         "The target curve uses the Figure 4 density-regime Gaussian velocity fits and validates no-jam speed retention, not absolute simulator speed units."
       ]
+    },
+    {
+      "species_id": "lasius_niger_dussutour_2004",
+      "species": "Lasius niger",
+      "source_id": "dussutour_2004",
+      "source_url": "https://arxiv.org/abs/cond-mat/0403142",
+      "targets": [
+        "traffic_pushing_redirect_probability"
+      ],
+      "time_unit": "minute",
+      "distance_unit": "millimeter",
+      "angle_unit": "not applicable",
+      "pheromone_unit": "not measured directly in the pushing probability target",
+      "notes": [
+        "Bridge widths tested in the paper are 10.0, 6.0, 3.0 and 1.5 mm.",
+        "The pushing target uses the Figure 3d regression slope J = 0.571 with CI95 half-width 0.057.",
+        "This target validates a crowded-traffic body-contact redirect mechanism, not absolute ant speed or pheromone concentration."
+      ]
     }
   ]
 }

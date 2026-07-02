@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T16:10:44Z",
+  "generated_at": "2026-07-02T17:34:29Z",
   "target_csv": "/home/s92137/ant_colony_sim/targets/digitized_curves/john_2009_traffic_velocity_density_holdout.csv",
   "target_id": "traffic_velocity_density_holdout",
   "model_summary": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
@@ -25,14 +25,14 @@
       "formal_ci_available": false
     },
     "model": {
-      "low_segment_density": 0.00108,
-      "high_segment_density": 0.00537,
-      "low_segment_speed": 6.8265,
-      "high_segment_speed": 3.5109,
-      "velocity_retention": 0.5143045484508899,
-      "velocity_drop": 0.4856954515491101,
-      "low_segment_flow": 154.181,
-      "high_segment_flow": 396.9503
+      "low_segment_density": 0.00094,
+      "high_segment_density": 0.00533,
+      "low_segment_speed": 5.4303,
+      "high_segment_speed": 3.6518,
+      "velocity_retention": 0.6724858663425594,
+      "velocity_drop": 0.32751413365744064,
+      "low_segment_flow": 102.8966,
+      "high_segment_flow": 394.2192
     },
     "interpretation": "The independent John 2009 holdout supports the model's qualitative no-jam traffic behavior: speed remains positive and high-density flow does not collapse.",
     "uncertainty_note": "Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed."

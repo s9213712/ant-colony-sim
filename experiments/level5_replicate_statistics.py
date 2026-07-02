@@ -55,6 +55,7 @@ CORE_METRICS = {
     "crowding_high_density_bridge": [
         "total_crossings",
         "avg_traffic_load",
+        "traffic_redirect_per_encounter",
         "upper_segment_flow",
         "lower_segment_flow",
     ],
@@ -68,6 +69,7 @@ CORE_METRICS = {
         "mean_displacement",
         "segment_density",
         "segment_abs_forward_speed",
+        "traffic_redirect_per_encounter",
         "segment_flow",
     ],
     "food_quality_recruitment": [

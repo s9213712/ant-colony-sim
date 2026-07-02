@@ -208,7 +208,7 @@ Current result:
 
 - status: `pass`
 - target high/low velocity retention: `0.748`
-- model high/low velocity retention: `0.514`
+- model high/low velocity retention: `0.672`
 
 This is a normalized no-jam holdout. It checks speed retention and non-collapsed
 flow, not an absolute physical-unit speed match.
@@ -223,6 +223,7 @@ python3 ant_colony_sim/experiments/level5_uncertainty_audit.py \
   --individual-fit ant_colony_sim/outputs/individual_response_curve_fit.json \
   --traffic-holdout ant_colony_sim/outputs/traffic_holdout_validation.json \
   --replicate-statistics ant_colony_sim/outputs/level5_replicate_statistics.json \
+  --pushing-redirect ant_colony_sim/outputs/pushing_redirect_validation.json \
   --csv-output ant_colony_sim/outputs/level5_uncertainty_audit.csv \
   --json-output ant_colony_sim/outputs/level5_uncertainty_audit.json \
   --report-output ant_colony_sim/outputs/level5_uncertainty_audit.md \
@@ -231,18 +232,42 @@ python3 ant_colony_sim/experiments/level5_uncertainty_audit.py \
 
 Current result:
 
-- estimated level: `4.3`
+- estimated level: `4.4`
 - fit-curve bootstrap CI: `true`
 - holdout curve present: `true`
 - holdout variance values present: `true`
 - paper-condition replicate CI: `true`
+- independent pushing redirect holdout: `true`
 - holdout formal CI available: `false`
 
 Interpretation: the model now has bootstrap uncertainty for the fitted Perna
-response curve, replicate uncertainty for paper-condition probes and SD values
-for the John traffic holdout. Level 5 remains blocked because the holdout target
-lacks density-bin sample sizes or raw tracking data, so formal holdout confidence
-intervals cannot be computed.
+response curve, replicate uncertainty for paper-condition probes, an independent
+Dussutour pushing/redirect holdout and SD values for the John traffic holdout.
+Level 5 remains blocked because the John speed holdout target lacks density-bin
+sample sizes or raw tracking data, so formal holdout confidence intervals cannot
+be computed.
+
+## Pushing Redirect Holdout
+
+Validate the crowded-traffic frontal-encounter redirect rule against Dussutour et al. 2004:
+
+```bash
+python3 ant_colony_sim/experiments/validate_pushing_redirect.py \
+  --csv-output ant_colony_sim/outputs/pushing_redirect_validation.csv \
+  --json-output ant_colony_sim/outputs/pushing_redirect_validation.json \
+  --report-output ant_colony_sim/outputs/pushing_redirect_validation.md \
+  --fail-on-issues
+```
+
+Current result:
+
+- status: `pass`
+- target pushing probability J: `0.571`
+- target 95% CI: `[0.514, 0.628]`
+- model mean redirect per encounter: `0.6122`
+- model 95% CI: `[0.595, 0.6234]`
+
+Interpretation: this is the first mechanism-level external traffic/contact holdout. It validates a general frontal-encounter redirect rule, not the full Dussutour bridge-width transition curve.
 
 ## Level 5 Replicate Statistics
 
@@ -261,7 +286,7 @@ Current result from `paper_conditions_v5.json`:
 
 - condition count: `27`
 - summary pass fraction: `1.0`
-- core metrics with bootstrap CI: `48 / 48`
+- core metrics with bootstrap CI: `50 / 50`
 - minimum replicate count: `3`
 
 Interpretation: this moves the simulator toward Level 5 by reporting stochastic-run uncertainty for the qualitative paper-condition matrix. It does not make qualitative paper matches quantitative; paper-specific digitized curves and independent holdouts are still required for biological calibration claims.
@@ -537,4 +562,4 @@ python3 ant_colony_sim/experiments/digitized_curve_inventory.py \
 
 Curve CSV files belong under `targets/digitized_curves/` and must follow `targets/digitized_curves/curve_schema.csv`.
 
-Current interpretation: one fit-ready primary-source curve is committed for Perna 2012 individual pheromone response, and one holdout-ready curve is committed for John 2009 traffic velocity-density validation. Source leads still exist for trail decay, food-quality recruitment and branch-choice curves; those remain the next blockers for stronger Level 5 external validation.
+Current interpretation: one fit-ready primary-source curve is committed for Perna 2012 individual pheromone response, and two holdout-ready curves are committed for John 2009 traffic velocity-density validation and Dussutour 2004 pushing/redirect probability. Source leads still exist for trail decay, food-quality recruitment and branch-choice curves; those remain the next blockers for stronger Level 5 external validation.

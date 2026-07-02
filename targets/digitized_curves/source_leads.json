@@ -62,6 +62,15 @@
       "notes": "Candidate for speed-density or flow-density target curves."
     },
     {
+      "target_id": "traffic_pushing_redirect_probability",
+      "source_id": "dussutour_2004_pushing_redirect",
+      "title": "Optimal traffic organisation in ants under crowded conditions",
+      "species": "Lasius niger",
+      "status": "holdout_ready_curve_committed",
+      "source_url": "https://arxiv.org/abs/cond-mat/0403142",
+      "notes": "Figure 3d legend reports the pushing probability slope J = 0.571 +/- 0.057 CI95; the committed CSV uses it as a mechanism-level traffic holdout."
+    },
+    {
       "target_id": "traffic_flow_density_curve",
       "source_id": "john_2009",
       "title": "Trafficlike collective movement of ants on trails: absence of a jammed phase",

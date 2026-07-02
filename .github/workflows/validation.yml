@@ -53,6 +53,7 @@ jobs:
             experiments/quantitative_readiness_audit.py \
             experiments/stochasticity_probe.py \
             experiments/summarize_batch.py \
+            experiments/validate_pushing_redirect.py \
             experiments/validate_traffic_holdout.py
 
       - name: Validation boundary check
@@ -154,12 +155,22 @@ jobs:
             --min-n 2 \
             --fail-on-underpowered
 
+      - name: Pushing redirect holdout validation
+        run: |
+          python experiments/validate_pushing_redirect.py \
+            --model-summary outputs/ci_paper_conditions_smoke.json \
+            --csv-output outputs/ci_pushing_redirect_validation.csv \
+            --json-output outputs/ci_pushing_redirect_validation.json \
+            --report-output outputs/ci_pushing_redirect_validation.md \
+            --fail-on-issues
+
       - name: Level 5 uncertainty audit
         run: |
           python experiments/level5_uncertainty_audit.py \
             --individual-fit outputs/ci_individual_response_curve_fit.json \
             --traffic-holdout outputs/ci_traffic_holdout_validation.json \
             --replicate-statistics outputs/ci_level5_replicate_statistics.json \
+            --pushing-redirect outputs/ci_pushing_redirect_validation.json \
             --csv-output outputs/ci_level5_uncertainty_audit.csv \
             --json-output outputs/ci_level5_uncertainty_audit.json \
             --report-output outputs/ci_level5_uncertainty_audit.md \
@@ -221,5 +232,8 @@ jobs:
             outputs/ci_level5_replicate_statistics.csv
             outputs/ci_level5_replicate_statistics.json
             outputs/ci_level5_replicate_statistics.md
+            outputs/ci_pushing_redirect_validation.csv
+            outputs/ci_pushing_redirect_validation.json
+            outputs/ci_pushing_redirect_validation.md
             outputs/ci_biological_validation_report.md
             outputs/ci_biological_validation_report.json

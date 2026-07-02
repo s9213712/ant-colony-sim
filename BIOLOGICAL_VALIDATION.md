@@ -709,7 +709,7 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 | --- | ---: |
 | status | pass |
 | target high/low velocity retention | 0.748 |
-| model high/low velocity retention | 0.514 |
+| model high/low velocity retention | 0.672 |
 
 這使 readiness 從 Level 3.5 推進到 Level 4.0：已有一條 fit-ready primary-source response curve，也有一條獨立 holdout curve。下一階段不是宣稱「完整生物真實」，而是朝 Level 5 補 uncertainty、更多物種曲線、物理單位映射與外部資料驗證。
 
@@ -725,14 +725,15 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 
 | 指標 | 值 |
 | --- | --- |
-| estimated level | 4.3 |
+| estimated level | 4.4 |
 | fit curve bootstrap CI | true |
 | holdout curve present | true |
 | holdout variance values | true |
 | paper-condition replicate CI | true |
+| independent pushing redirect holdout | true |
 | holdout formal CI available | false |
 
-解讀：Perna response fit 已有 bootstrap 95% CI，paper-condition probes 已有跨 seed bootstrap CI；John traffic holdout 有 Figure 4 報告的 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
+解讀：Perna response fit 已有 bootstrap 95% CI，paper-condition probes 已有跨 seed bootstrap CI，Dussutour pushing/redirect probability 已有獨立數值 holdout；John traffic holdout 有 Figure 4 報告的 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
 
 ## 22. Level 5 replicate statistics
 
@@ -756,7 +757,32 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 | --- | ---: |
 | condition count | 27 |
 | summary pass fraction | 1.0 |
-| core metrics with bootstrap CI | 48 / 48 |
+| core metrics with bootstrap CI | 50 / 50 |
 | minimum replicate count | 3 |
 
 解讀：這把 paper-condition matrix 從「單次/平均觀察」推進到「可報告 stochastic replicate uncertainty」。它沒有改變任何螞蟻規則，也不把 qualitative pass 升格成 quantitative reproduction；Level 5 仍需要更多 primary-source digitized curves、文獻端 sample size/raw data、獨立 holdout 與物種單位映射。
+
+## 23. Dussutour pushing/redirect holdout
+
+`experiments/validate_pushing_redirect.py` 使用 Dussutour et al. 2004 Figure 3d 的 pushing probability 斜率 `J = 0.571 ± 0.057 CI95%` 作為 crowded-traffic mechanism holdout。模型端使用通用交通壓力規則輸出的 `traffic_redirect_per_encounter`，不是為該文獻特別注入狀態或任務。
+
+輸出：
+
+- `outputs/pushing_redirect_validation.csv`
+- `outputs/pushing_redirect_validation.json`
+- `outputs/pushing_redirect_validation.md`
+
+目前結果：
+
+| 指標 | 值 |
+| --- | ---: |
+| status | pass |
+| target J | 0.571 |
+| target 95% CI low | 0.514 |
+| target 95% CI high | 0.628 |
+| model mean redirect per encounter | 0.6122 |
+| model 95% CI low | 0.595 |
+| model 95% CI high | 0.6234 |
+| model encounters | 28800 |
+
+解讀：這是目前第二條獨立 traffic/contact 類 holdout，且比 John speed-retention 更接近微觀機制層。它支持模型的通用 frontal-encounter redirect rule，但仍不等於完整重現 Dussutour 的橋寬轉換、雙向 lane discipline 或完整接觸網路。

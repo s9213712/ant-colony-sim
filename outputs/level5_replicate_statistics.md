@@ -8,61 +8,63 @@ This report adds replicate-level uncertainty to literature-condition probes with
 - status: `pass`
 - condition count: `27`
 - summary pass fraction: `1.0`
-- core metrics with bootstrap CI: `48` / `48`
+- core metrics with bootstrap CI: `50` / `50`
 - minimum replicate count required: `3`
 
 ## Core Metric CI
 
 | Condition | Metric | n | Mean | SD | 95% CI |
 |---|---|---:|---:|---:|---|
-| `army_ant_mill_mortality` | `corpse_fraction` | 3 | 0.759524 | 0.0 | [0.759524, 0.759524] |
+| `army_ant_mill_mortality` | `corpse_fraction` | 3 | 0.753175 | 0.009014 | [0.742857, 0.759524] |
 | `army_ant_mill_mortality` | `mills` | 3 | 1.0 | 0.0 | [1.0, 1.0] |
-| `army_ant_mill_mortality` | `survivor_fraction` | 3 | 0.247619 | 0.002381 | [0.245238, 0.25] |
-| `crowding_high_density_bridge` | `avg_traffic_load` | 3 | 0.119 | 0.027495 | [0.095, 0.149] |
-| `crowding_high_density_bridge` | `lower_segment_flow` | 3 | 265.304936 | 52.516104 | [204.708794, 297.60846] |
-| `crowding_high_density_bridge` | `total_crossings` | 3 | 767.0 | 120.465763 | [663.0, 899.0] |
-| `crowding_high_density_bridge` | `upper_segment_flow` | 3 | 119.450362 | 71.433753 | [70.245906, 201.384711] |
-| `crowding_low_density_bridge` | `avg_traffic_load` | 3 | 0.027667 | 0.023245 | [0.01, 0.054] |
-| `crowding_low_density_bridge` | `lower_segment_flow` | 3 | 103.350067 | 35.139764 | [64.835023, 133.664106] |
-| `crowding_low_density_bridge` | `total_crossings` | 3 | 269.666667 | 14.153916 | [261.0, 286.0] |
-| `crowding_low_density_bridge` | `upper_segment_flow` | 3 | 39.856904 | 29.610799 | [18.926591, 73.736606] |
-| `double_bridge_lower_bias` | `return_branch_curve_error` | 3 | 0.258367 | 0.089204 | [0.155642, 0.316285] |
-| `double_bridge_lower_bias` | `return_dominance` | 3 | 0.685759 | 0.33434 | [0.3, 0.891892] |
-| `double_bridge_lower_bias` | `seeded_return_crossings` | 3 | 90.333333 | 17.953644 | [70.0, 101.666667] |
-| `double_bridge_lower_bias` | `seeded_return_fraction` | 3 | 0.842879 | 0.16717 | [0.65, 0.945946] |
-| `double_bridge_unbiased_baseline` | `return_branch_curve_error` | 3 | 0.453008 | 0.257291 | [0.155916, 0.60247] |
-| `double_bridge_unbiased_baseline` | `return_dominance` | 3 | 0.556366 | 0.415359 | [0.076923, 0.807229] |
-| `double_bridge_unbiased_baseline` | `seeded_return_fraction` | 3 | 0.247458 | 0.252078 | [0.096386, 0.538462] |
-| `double_bridge_upper_bias` | `return_branch_curve_error` | 3 | 0.26188 | 0.081678 | [0.167599, 0.311167] |
-| `double_bridge_upper_bias` | `return_dominance` | 3 | 0.382337 | 0.227077 | [0.123457, 0.547826] |
-| `double_bridge_upper_bias` | `seeded_return_crossings` | 3 | 48.0 | 37.242449 | [26.0, 91.0] |
-| `double_bridge_upper_bias` | `seeded_return_fraction` | 3 | 0.349984 | 0.18426 | [0.226087, 0.561728] |
-| `food_quality_recruitment` | `avg_collected_food_quality` | 6 | 1.334 | 0.433199 | [1.018333, 1.633237] |
-| `food_quality_recruitment` | `high_quality_food_trips` | 6 | 158.833333 | 170.785733 | [45.6625, 272.833333] |
-| `food_quality_recruitment` | `low_quality_food_trips` | 6 | 144.0 | 184.323628 | [19.666667, 268.333333] |
-| `necrophoresis_cleanup_latency` | `corpse_moves` | 3 | 34.0 | 2.0 | [32.0, 36.0] |
-| `necrophoresis_cleanup_latency` | `disposed_corpses` | 3 | 34.333333 | 2.081666 | [32.0, 36.0] |
-| `necrophoresis_cleanup_latency` | `final_nest_corpses` | 3 | 0.333333 | 0.57735 | [0.0, 1.0] |
+| `army_ant_mill_mortality` | `survivor_fraction` | 3 | 0.257143 | 0.014483 | [0.247619, 0.27381] |
+| `crowding_high_density_bridge` | `avg_traffic_load` | 3 | 0.127333 | 0.08356 | [0.042, 0.209] |
+| `crowding_high_density_bridge` | `lower_segment_flow` | 3 | 256.830652 | 54.506486 | [193.910403, 289.609349] |
+| `crowding_high_density_bridge` | `total_crossings` | 3 | 752.333333 | 59.91939 | [706.0, 820.0] |
+| `crowding_high_density_bridge` | `traffic_redirect_per_encounter` | 3 | 0.612167 | 0.015101 | [0.595, 0.6234] |
+| `crowding_high_density_bridge` | `upper_segment_flow` | 3 | 115.387813 | 60.310261 | [73.328226, 184.486006] |
+| `crowding_low_density_bridge` | `avg_traffic_load` | 3 | 0.022333 | 0.02318 | [0.007, 0.049] |
+| `crowding_low_density_bridge` | `lower_segment_flow` | 3 | 81.438487 | 36.242229 | [39.60282, 103.268406] |
+| `crowding_low_density_bridge` | `total_crossings` | 3 | 241.666667 | 29.143324 | [221.0, 275.0] |
+| `crowding_low_density_bridge` | `upper_segment_flow` | 3 | 39.545231 | 29.545156 | [20.751354, 73.600006] |
+| `double_bridge_lower_bias` | `return_branch_curve_error` | 3 | 0.235634 | 0.061251 | [0.166884, 0.284389] |
+| `double_bridge_lower_bias` | `return_dominance` | 3 | 0.615833 | 0.347013 | [0.21519, 0.821782] |
+| `double_bridge_lower_bias` | `seeded_return_crossings` | 3 | 91.333333 | 5.033223 | [86.0, 94.666667] |
+| `double_bridge_lower_bias` | `seeded_return_fraction` | 3 | 0.807916 | 0.173506 | [0.607595, 0.910891] |
+| `double_bridge_unbiased_baseline` | `return_branch_curve_error` | 3 | 0.476473 | 0.249073 | [0.189163, 0.631403] |
+| `double_bridge_unbiased_baseline` | `return_dominance` | 3 | 0.584089 | 0.487802 | [0.020833, 0.868421] |
+| `double_bridge_unbiased_baseline` | `seeded_return_fraction` | 3 | 0.207955 | 0.243901 | [0.065789, 0.489583] |
+| `double_bridge_upper_bias` | `return_branch_curve_error` | 3 | 0.26291 | 0.063702 | [0.190895, 0.311889] |
+| `double_bridge_upper_bias` | `return_dominance` | 3 | 0.342579 | 0.200375 | [0.117021, 0.5] |
+| `double_bridge_upper_bias` | `seeded_return_crossings` | 3 | 54.666667 | 43.730234 | [26.0, 105.0] |
+| `double_bridge_upper_bias` | `seeded_return_fraction` | 3 | 0.367718 | 0.166732 | [0.25, 0.558511] |
+| `food_quality_recruitment` | `avg_collected_food_quality` | 6 | 1.246833 | 0.405391 | [0.964833, 1.524667] |
+| `food_quality_recruitment` | `high_quality_food_trips` | 6 | 153.5 | 180.311675 | [34.833333, 272.675] |
+| `food_quality_recruitment` | `low_quality_food_trips` | 6 | 146.5 | 180.985911 | [24.5, 268.516667] |
+| `necrophoresis_cleanup_latency` | `corpse_moves` | 3 | 33.666667 | 1.527525 | [32.0, 35.0] |
+| `necrophoresis_cleanup_latency` | `disposed_corpses` | 3 | 33.666667 | 1.527525 | [32.0, 35.0] |
+| `necrophoresis_cleanup_latency` | `final_nest_corpses` | 3 | 2.0 | 1.0 | [1.0, 3.0] |
 | `necrophoresis_cleanup_latency` | `initial_nest_corpses` | 3 | 36.0 | 0.0 | [36.0, 36.0] |
-| `nest_relocation_quorum_choice` | `high_quality_site_visits` | 3 | 73.973333 | 12.256661 | [66.54, 88.12] |
+| `nest_relocation_quorum_choice` | `high_quality_site_visits` | 3 | 76.34 | 3.104497 | [74.39, 79.92] |
 | `nest_relocation_quorum_choice` | `low_quality_site_visits` | 3 | 0.0 | 0.0 | [0.0, 0.0] |
 | `nest_relocation_quorum_choice` | `nest_quorum_events` | 3 | 1.0 | 0.0 | [1.0, 1.0] |
 | `nest_relocation_quorum_choice` | `nest_relocation_completed` | 3 | 1.0 | 0.0 | [1.0, 1.0] |
 | `nest_relocation_quorum_choice` | `nest_relocations` | 3 | 1.0 | 0.0 | [1.0, 1.0] |
-| `no_jam_high_density` | `mean_displacement` | 3 | 142.616325 | 12.979128 | [132.625697, 157.28626] |
-| `no_jam_high_density` | `segment_abs_forward_speed` | 3 | 3.510933 | 0.435914 | [3.1494, 3.995] |
-| `no_jam_high_density` | `segment_density` | 3 | 0.005367 | 0.002475 | [0.00258, 0.00731] |
-| `no_jam_high_density` | `segment_flow` | 3 | 396.950267 | 34.451111 | [362.5602, 431.4621] |
-| `no_jam_low_density` | `mean_displacement` | 3 | 212.269832 | 17.119855 | [201.227369, 231.990974] |
-| `no_jam_low_density` | `segment_abs_forward_speed` | 3 | 6.826467 | 0.700212 | [6.0183, 7.2517] |
-| `no_jam_low_density` | `segment_density` | 3 | 0.001077 | 0.0005 | [0.0005, 0.00139] |
-| `no_jam_low_density` | `segment_flow` | 3 | 154.181033 | 10.813137 | [144.4403, 165.8162] |
-| `rain_food_removal_washout` | `food_pheromone_ratio` | 3 | 6.8e-05 | 6e-05 | [1.1e-05, 0.000131] |
-| `rain_food_removal_washout` | `nest_pheromone_ratio` | 3 | 0.003645 | 0.000893 | [0.002643, 0.004356] |
-| `single_food_trail` | `food_collected` | 3 | 651.333333 | 77.487633 | [592.0, 739.0] |
-| `single_food_trail` | `food_trips` | 3 | 131.666667 | 13.428825 | [122.0, 147.0] |
-| `single_food_trail` | `gradient_alignment_ratio` | 3 | 0.971333 | 0.004041 | [0.967, 0.975] |
-| `single_food_trail` | `trail_segment_mean_speed` | 3 | 8.530767 | 0.597495 | [8.1283, 9.2173] |
+| `no_jam_high_density` | `mean_displacement` | 3 | 140.176282 | 13.496741 | [131.405289, 155.718134] |
+| `no_jam_high_density` | `segment_abs_forward_speed` | 3 | 3.651767 | 0.775342 | [3.1748, 4.5464] |
+| `no_jam_high_density` | `segment_density` | 3 | 0.005327 | 0.002717 | [0.00222, 0.00726] |
+| `no_jam_high_density` | `segment_flow` | 3 | 394.219167 | 34.727182 | [355.5779, 422.8197] |
+| `no_jam_high_density` | `traffic_redirect_per_encounter` | 3 | 0.676533 | 0.009732 | [0.6653, 0.6824] |
+| `no_jam_low_density` | `mean_displacement` | 3 | 204.384212 | 18.779185 | [191.961161, 225.987574] |
+| `no_jam_low_density` | `segment_abs_forward_speed` | 3 | 5.430267 | 0.098101 | [5.3709, 5.5435] |
+| `no_jam_low_density` | `segment_density` | 3 | 0.00094 | 0.000548 | [0.00033, 0.00139] |
+| `no_jam_low_density` | `segment_flow` | 3 | 102.8966 | 25.722673 | [77.6092, 129.0335] |
+| `rain_food_removal_washout` | `food_pheromone_ratio` | 3 | 3.1e-05 | 2.5e-05 | [1.2e-05, 5.9e-05] |
+| `rain_food_removal_washout` | `nest_pheromone_ratio` | 3 | 0.003503 | 0.000313 | [0.003147, 0.003734] |
+| `single_food_trail` | `food_collected` | 3 | 658.0 | 133.225373 | [513.0, 775.0] |
+| `single_food_trail` | `food_trips` | 3 | 134.0 | 28.213472 | [104.0, 160.0] |
+| `single_food_trail` | `gradient_alignment_ratio` | 3 | 0.968333 | 0.003055 | [0.965, 0.971] |
+| `single_food_trail` | `trail_segment_mean_speed` | 3 | 8.275067 | 0.802586 | [7.4379, 9.0379] |
 
 ## Interpretation
 

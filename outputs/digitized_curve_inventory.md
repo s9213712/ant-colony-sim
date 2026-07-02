@@ -4,16 +4,17 @@ This report checks whether the repository contains primary-source numeric biolog
 
 ## Summary
 
-- `curve_files`: 2
-- `fit_ready_files`: 2
-- `target_ids_with_digitized_files`: 2
-- `source_leads`: 7
+- `curve_files`: 3
+- `fit_ready_files`: 3
+- `target_ids_with_digitized_files`: 3
+- `source_leads`: 8
 - `level_4_blocker`: Level 4 curve prerequisites are present; next blocker is broader external validation and uncertainty for Level 5.
 
 ## Curve Files
 
 | Fit ready | Rows | Targets | Methods | Missing columns | File |
 |---|---:|---|---|---|---|
+| `yes` | 1 | traffic_pushing_redirect_probability | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/dussutour_2004_pushing_redirect_probability.csv` |
 | `yes` | 3 | traffic_velocity_density_holdout | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/john_2009_traffic_velocity_density_holdout.csv` |
 | `yes` | 6 | individual_pheromone_response_curve | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/perna_2012_individual_pheromone_response.csv` |
 
@@ -66,6 +67,14 @@ This report checks whether the repository contains primary-source numeric biolog
 - Species: Lasius niger
 - Source: https://doi.org/10.1038/nature02585
 - Notes: Candidate for speed-density or flow-density target curves.
+
+### dussutour_2004_pushing_redirect
+
+- Target: `traffic_pushing_redirect_probability`
+- Status: `holdout_ready_curve_committed`
+- Species: Lasius niger
+- Source: https://arxiv.org/abs/cond-mat/0403142
+- Notes: Figure 3d legend reports the pushing probability slope J = 0.571 +/- 0.057 CI95; the committed CSV uses it as a mechanism-level traffic holdout.
 
 ### john_2009
 

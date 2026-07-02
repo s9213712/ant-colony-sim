@@ -10,9 +10,9 @@ This report validates the traffic no-jam behavior against John et al. 2009 witho
 
 - status: `pass`
 - target velocity retention high/low: `0.748`
-- model velocity retention high/low: `0.514`
-- model low flow: `154.1810`
-- model high flow: `396.9503`
+- model velocity retention high/low: `0.672`
+- model low flow: `102.8966`
+- model high flow: `394.2192`
 - target low-density speed SD: `1.58`
 - target high-density speed SD: `0.6`
 - formal target CI available: `False`

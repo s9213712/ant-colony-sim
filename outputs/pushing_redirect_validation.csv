@@ -1,0 +1,2 @@
+status,target_probability,target_ci95_low,target_ci95_high,model_mean_redirect_per_encounter,model_ci95_low,model_ci95_high,absolute_error,replicates,total_encounters,total_encounter_redirects
+pass,0.571,0.5139999999999999,0.628,0.6121666666666666,0.595,0.6234,0.041166666666666685,3,28800.0,17608.0

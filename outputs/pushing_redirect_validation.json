@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-07-02T17:34:29Z",
+  "target_csv": "/home/s92137/ant_colony_sim/targets/digitized_curves/dussutour_2004_pushing_redirect_probability.csv",
+  "target_id": "traffic_pushing_redirect_probability",
+  "model_summary": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
+  "result": {
+    "status": "pass",
+    "checks": {
+      "model_has_encounters": true,
+      "model_ci_overlaps_target_ci": true,
+      "model_mean_within_0_12_absolute_error": true
+    },
+    "target": {
+      "source_id": "dussutour_2004",
+      "target_id": "traffic_pushing_redirect_probability",
+      "species": "Lasius niger",
+      "figure_or_table": "Figure 3d legend",
+      "value": 0.571,
+      "ci95_low": 0.5139999999999999,
+      "ci95_high": 0.628,
+      "ci95_half_width": 0.057,
+      "n": 16,
+      "notes": "Figure 3d legend: linear regression slope equals 0.571 +/- 0.057 CI95%; points with <=3 encounters were excluded; 16 points per branch width from 2 branches x 4 experiments x 2 time intervals."
+    },
+    "model": {
+      "condition": "crowding_high_density_bridge",
+      "replicates": 3,
+      "mean_redirect_per_encounter": 0.6121666666666666,
+      "sd_redirect_per_encounter": 0.015101103712422254,
+      "ci95_redirect_per_encounter": [
+        0.595,
+        0.6234
+      ],
+      "absolute_error": 0.041166666666666685,
+      "total_encounters": 28800.0,
+      "total_encounter_redirects": 17608.0
+    },
+    "replicate_rows": [
+      {
+        "seed": 1,
+        "condition": "crowding_high_density_bridge",
+        "traffic_redirect_encounters": 6965.0,
+        "traffic_encounter_redirects": 4342.0,
+        "traffic_redirect_per_encounter": 0.6234
+      },
+      {
+        "seed": 2,
+        "condition": "crowding_high_density_bridge",
+        "traffic_redirect_encounters": 9951.0,
+        "traffic_encounter_redirects": 5921.0,
+        "traffic_redirect_per_encounter": 0.595
+      },
+      {
+        "seed": 3,
+        "condition": "crowding_high_density_bridge",
+        "traffic_redirect_encounters": 11884.0,
+        "traffic_encounter_redirects": 7345.0,
+        "traffic_redirect_per_encounter": 0.6181
+      }
+    ],
+    "interpretation": "The general frontal-encounter redirect rule is quantitatively aligned with the Dussutour 2004 pushing probability target."
+  }
+}

@@ -156,6 +156,27 @@
       "next_action": "Digitize speed-density or flow-density curves and fit contact/crowding parameters."
     },
     {
+      "target_id": "traffic_pushing_redirect_probability",
+      "biological_process": "Frontal encounter pushing/redirect probability under crowded ant traffic.",
+      "priority": "P0",
+      "status": "ready_for_holdout",
+      "source_candidates": [
+        {
+          "id": "dussutour_2004",
+          "title": "Optimal traffic organisation in ants under crowded conditions",
+          "url": "https://arxiv.org/abs/cond-mat/0403142"
+        }
+      ],
+      "required_data": [
+        "frontal encounter count",
+        "pushing or redirect count",
+        "bridge width / crowding condition",
+        "confidence interval"
+      ],
+      "current_proxy": "paper_conditions_v5 now exports traffic_redirect_per_encounter from the shared traffic-pressure rule; validate_pushing_redirect.py compares it to the Figure 3d slope.",
+      "next_action": "Keep as a mechanism holdout while fitting traffic/contact parameters to independent traffic curves."
+    },
+    {
       "target_id": "brood_survival_microclimate_curve",
       "biological_process": "Temperature/humidity stress versus brood survival or development.",
       "priority": "P0",

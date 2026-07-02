@@ -859,7 +859,11 @@
         foodCollected: 0,
         waterTrips: 0,
         waterCollected: 0,
-        corpseMoves: 0
+        corpseMoves: 0,
+        trafficRedirectOpportunities: 0,
+        trafficRedirectEncounters: 0,
+        trafficEncounterRedirects: 0,
+        trafficRedirects: 0
       },
       traffic: {
         cell: 34,
@@ -1395,6 +1399,10 @@
         contactSamples: 0,
         contactPairsSum: 0,
         crossTaskContactPairsSum: 0,
+        trafficRedirectOpportunities: 0,
+        trafficRedirectEncounters: 0,
+        trafficEncounterRedirects: 0,
+        trafficRedirects: 0,
         moveSamples: 0,
         moveDistanceSum: 0,
         trailMoveSamples: 0,
@@ -2548,9 +2556,21 @@
             0.018 + scoutBias * 0.065 + clamp((100 - ant.energy) / 120, 0, 0.035) - exploitBias * 0.008 - recruitmentFocus * 0.018
           );
             if (leavesTrail) ant.angle += rand(-0.9 - trafficLoad * 0.5, 0.9 + trafficLoad * 0.5);
-            if (trafficLoad > 0.25 && random() < (0.006 + scoutBias * 0.022) * trafficLoad * dt) {
-              ant.angle += (traffic.left > traffic.right ? 1 : -1) * rand(0.18, 0.42);
-              ant.state = scoutBias > 0.55 ? 'traffic detour' : ant.state;
+            if (trafficLoad > 0.25) {
+              world.stats.trafficRedirectOpportunities += 1;
+              const frontalEncounter = traffic.ahead >= 4
+                && traffic.ahead >= traffic.here
+                && traffic.ahead >= Math.max(traffic.left, traffic.right);
+              if (frontalEncounter) world.stats.trafficRedirectEncounters += 1;
+              const redirectProbability = frontalEncounter
+                ? clamp(0.42 + trafficLoad * 0.22 + scoutBias * 0.08, 0.2, 0.72)
+                : clamp((0.006 + scoutBias * 0.022) * trafficLoad * dt, 0, 0.24);
+              if (random() < redirectProbability) {
+                world.stats.trafficRedirects += 1;
+                if (frontalEncounter) world.stats.trafficEncounterRedirects += 1;
+                ant.angle += (traffic.left > traffic.right ? 1 : -1) * rand(0.18, 0.42);
+                ant.state = 'traffic detour';
+              }
             }
             if (random() < explorationJitter * dt) ant.angle += rand(-0.45 - scoutBias * 0.25, 0.45 + scoutBias * 0.25);
           }
@@ -3198,7 +3218,10 @@
 
     function selectedCounts(counts, keys, prefix) {
       return keys.reduce((acc, key) => {
-        acc[`${prefix}_${key}`] = counts[key] || 0;
+        const sourceKey = Object.prototype.hasOwnProperty.call(counts, key)
+          ? key
+          : key.replace(/_/g, ' ');
+        acc[`${prefix}_${key}`] = counts[sourceKey] || 0;
         return acc;
       }, {});
     }
@@ -3285,6 +3308,8 @@
       const contactSamples = world.stats.contactSamples || 0;
       const moveSamples = world.stats.moveSamples || 0;
       const trailMoveSamples = world.stats.trailMoveSamples || 0;
+      const redirectOpportunities = world.stats.trafficRedirectOpportunities || 0;
+      const redirectEncounters = world.stats.trafficRedirectEncounters || 0;
       return {
         day: Number(world.day.toFixed(2)),
         ...params,
@@ -3318,6 +3343,16 @@
         traffic_cross_task_contact_pairs: Number((world.traffic.crossTaskContactPairs || 0).toFixed(2)),
         mean_contact_pairs: contactSamples ? Number((world.stats.contactPairsSum / contactSamples).toFixed(3)) : 0,
         mean_cross_task_contact_pairs: contactSamples ? Number((world.stats.crossTaskContactPairsSum / contactSamples).toFixed(3)) : 0,
+        traffic_redirect_opportunities: redirectOpportunities,
+        traffic_redirect_encounters: redirectEncounters,
+        traffic_redirects: world.stats.trafficRedirects || 0,
+        traffic_encounter_redirects: world.stats.trafficEncounterRedirects || 0,
+        traffic_redirect_probability: redirectOpportunities
+          ? Number(((world.stats.trafficRedirects || 0) / redirectOpportunities).toFixed(4))
+          : 0,
+        traffic_redirect_per_encounter: redirectEncounters
+          ? Number(((world.stats.trafficEncounterRedirects || 0) / redirectEncounters).toFixed(4))
+          : 0,
         task_switches: world.stats.taskSwitches,
         task_switch_rate: world.day > 0 ? Number((world.stats.taskSwitches / world.day).toFixed(3)) : 0,
         mean_move_per_tick: moveSamples ? Number((world.stats.moveDistanceSum / moveSamples).toFixed(4)) : 0,

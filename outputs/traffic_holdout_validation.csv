@@ -1,2 +1,2 @@
 status,target_velocity_retention,model_velocity_retention,target_velocity_drop,model_velocity_drop,model_low_segment_flow,model_high_segment_flow,target_low_speed_sd,target_high_speed_sd,formal_target_ci_available
-pass,0.7483870967741935,0.5143045484508899,0.25161290322580654,0.4856954515491101,154.181,396.9503,1.58,0.6,False
+pass,0.7483870967741935,0.6724858663425594,0.25161290322580654,0.32751413365744064,102.8966,394.2192,1.58,0.6,False
