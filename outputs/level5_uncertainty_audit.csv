@@ -1,0 +1,5 @@
+check,pass
+fit_curve_bootstrap_ci,yes
+holdout_curve_present,yes
+holdout_has_variance_values,yes
+holdout_formal_ci_available,no

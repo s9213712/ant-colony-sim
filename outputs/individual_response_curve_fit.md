@@ -21,6 +21,14 @@ This report fits a primary-source individual pheromone response target from Pern
 - Reported beta = 1.058 with 95% CI [1.037, 1.079].
 - Reported R2 = 0.9982.
 
+## Bootstrap Uncertainty
+
+- status: `available`
+- samples used: `2000`
+- A 95% bootstrap CI: `[25.6448, 54.1014]`
+- beta 95% bootstrap CI: `[0.9643, 1.0958]`
+- R2 95% bootstrap CI: `[0.99527, 1.00000]`
+
 ## Interpretation
 
 Fit is usable as a rounded/bin-reconstructed Perna et al. Figure 5 response target; strict Figure 6 confidence-interval reproduction still needs raw x/y data.

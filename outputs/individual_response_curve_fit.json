@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T15:33:02Z",
+  "generated_at": "2026-07-02T16:10:44Z",
   "target_csv": "/home/s92137/ant_colony_sim/targets/digitized_curves/perna_2012_individual_pheromone_response.csv",
   "target_id": "individual_pheromone_response_curve",
   "fit": {
@@ -7,6 +7,24 @@
     "beta": 1.0337904157161752,
     "r2_log_space": 0.9976311330751421,
     "n": 6
+  },
+  "bootstrap": {
+    "status": "available",
+    "samples_requested": 2000,
+    "samples_used": 2000,
+    "seed": 99173,
+    "amplitude_A_ci_95": [
+      25.644804680614893,
+      54.10139162862759
+    ],
+    "beta_ci_95": [
+      0.9642773503525394,
+      1.0957540168460371
+    ],
+    "r2_log_space_ci_95": [
+      0.9952695078201317,
+      0.999996555818152
+    ]
   },
   "summary": {
     "status": "pass",

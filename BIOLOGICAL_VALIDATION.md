@@ -712,3 +712,23 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 | model high/low velocity retention | 0.514 |
 
 這使 readiness 從 Level 3.5 推進到 Level 4.0：已有一條 fit-ready primary-source response curve，也有一條獨立 holdout curve。下一階段不是宣稱「完整生物真實」，而是朝 Level 5 補 uncertainty、更多物種曲線、物理單位映射與外部資料驗證。
+
+## 21. Level 5 uncertainty audit
+
+`experiments/level5_uncertainty_audit.py` 會檢查 Level 4 曲線是否具有足夠 uncertainty 資訊。輸出：
+
+- `outputs/level5_uncertainty_audit.csv`
+- `outputs/level5_uncertainty_audit.json`
+- `outputs/level5_uncertainty_audit.md`
+
+目前結果：
+
+| 指標 | 值 |
+| --- | --- |
+| estimated level | 4.2 |
+| fit curve bootstrap CI | true |
+| holdout curve present | true |
+| holdout variance values | true |
+| holdout formal CI available | false |
+
+解讀：Perna response fit 已有 bootstrap 95% CI；John traffic holdout 有 Figure 4 報告的 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。

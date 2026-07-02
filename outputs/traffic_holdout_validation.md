@@ -13,6 +13,9 @@ This report validates the traffic no-jam behavior against John et al. 2009 witho
 - model velocity retention high/low: `0.514`
 - model low flow: `154.1810`
 - model high flow: `396.9503`
+- target low-density speed SD: `1.58`
+- target high-density speed SD: `0.6`
+- formal target CI available: `False`
 
 ## Checks
 
@@ -24,5 +27,7 @@ This report validates the traffic no-jam behavior against John et al. 2009 witho
 ## Interpretation
 
 The independent John 2009 holdout supports the model's qualitative no-jam traffic behavior: speed remains positive and high-density flow does not collapse.
+
+Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed.
 
 Caveat: this is a normalized no-jam holdout, not a physical unit match. The target uses body-length/second velocities from a natural Leptogenys processionalis trail, while the simulator uses internal segment-speed units.

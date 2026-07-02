@@ -36,6 +36,10 @@ def validate(curve_rows, model_metrics):
     high = rows[-1]
     target_low_speed = float(low["y_value"])
     target_high_speed = float(high["y_value"])
+    target_low_sd = float(low["variance_value"]) if low.get("variance_value") else None
+    target_high_sd = float(high["variance_value"]) if high.get("variance_value") else None
+    target_low_n = int(low["n"]) if low.get("n") else None
+    target_high_n = int(high["n"]) if high.get("n") else None
     target_retention = target_high_speed / target_low_speed if target_low_speed else 0
     model_low_speed = float(model_metrics["low_segment_speed"])
     model_high_speed = float(model_metrics["high_segment_speed"])
@@ -59,8 +63,13 @@ def validate(curve_rows, model_metrics):
             "high_density": float(high["x_value"]),
             "low_speed_bl_per_sec": target_low_speed,
             "high_speed_bl_per_sec": target_high_speed,
+            "low_speed_sd": target_low_sd,
+            "high_speed_sd": target_high_sd,
+            "low_n": target_low_n,
+            "high_n": target_high_n,
             "velocity_retention": target_retention,
             "velocity_drop": target_velocity_drop,
+            "formal_ci_available": bool(target_low_sd and target_high_sd and target_low_n and target_high_n),
         },
         "model": {
             "low_segment_density": float(model_metrics["low_segment_density"]),
@@ -77,6 +86,9 @@ def validate(curve_rows, model_metrics):
             if status == "pass"
             else "The model fails the John 2009 no-jam holdout; inspect crowding/contact rules before claiming Level 4."
         ),
+        "uncertainty_note": (
+            "Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed."
+        ),
     }
 
 
@@ -90,6 +102,9 @@ def write_csv(path, result):
         "model_velocity_drop": result["model"]["velocity_drop"],
         "model_low_segment_flow": result["model"]["low_segment_flow"],
         "model_high_segment_flow": result["model"]["high_segment_flow"],
+        "target_low_speed_sd": result["target"]["low_speed_sd"],
+        "target_high_speed_sd": result["target"]["high_speed_sd"],
+        "formal_target_ci_available": result["target"]["formal_ci_available"],
     }
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(row), lineterminator="\n")
@@ -114,6 +129,9 @@ def write_report(path, target_csv, model_source, result):
         f"- model velocity retention high/low: `{result['model']['velocity_retention']:.3f}`",
         f"- model low flow: `{result['model']['low_segment_flow']:.4f}`",
         f"- model high flow: `{result['model']['high_segment_flow']:.4f}`",
+        f"- target low-density speed SD: `{result['target']['low_speed_sd']}`",
+        f"- target high-density speed SD: `{result['target']['high_speed_sd']}`",
+        f"- formal target CI available: `{result['target']['formal_ci_available']}`",
         "",
         "## Checks",
         "",
@@ -125,6 +143,8 @@ def write_report(path, target_csv, model_source, result):
         "## Interpretation",
         "",
         result["interpretation"],
+        "",
+        result["uncertainty_note"],
         "",
         "Caveat: this is a normalized no-jam holdout, not a physical unit match. The target uses body-length/second velocities from a natural Leptogenys processionalis trail, while the simulator uses internal segment-speed units.",
     ])

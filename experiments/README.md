@@ -213,6 +213,34 @@ Current result:
 This is a normalized no-jam holdout. It checks speed retention and non-collapsed
 flow, not an absolute physical-unit speed match.
 
+## Level 5 Uncertainty Audit
+
+Audit whether Level 4 curves have enough uncertainty information for Level
+5-style quantitative claims:
+
+```bash
+python3 ant_colony_sim/experiments/level5_uncertainty_audit.py \
+  --individual-fit ant_colony_sim/outputs/individual_response_curve_fit.json \
+  --traffic-holdout ant_colony_sim/outputs/traffic_holdout_validation.json \
+  --csv-output ant_colony_sim/outputs/level5_uncertainty_audit.csv \
+  --json-output ant_colony_sim/outputs/level5_uncertainty_audit.json \
+  --report-output ant_colony_sim/outputs/level5_uncertainty_audit.md \
+  --fail-on-regression
+```
+
+Current result:
+
+- estimated level: `4.2`
+- fit-curve bootstrap CI: `true`
+- holdout curve present: `true`
+- holdout variance values present: `true`
+- holdout formal CI available: `false`
+
+Interpretation: the model now has bootstrap uncertainty for the fitted Perna
+response curve and SD values for the John traffic holdout. Level 5 remains
+blocked because the holdout target lacks density-bin sample sizes or raw tracking
+data, so formal holdout confidence intervals cannot be computed.
+
 ## Individual-Level Output
 
 Export all ants at the end of each replicate:

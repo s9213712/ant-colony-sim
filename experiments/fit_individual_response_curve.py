@@ -5,6 +5,7 @@ import argparse
 import csv
 import json
 import math
+import random
 import time
 from pathlib import Path
 
@@ -60,6 +61,61 @@ def fit_power_law(rows):
     }
 
 
+def percentile(values, q):
+    values = sorted(values)
+    if not values:
+        return None
+    if len(values) == 1:
+        return values[0]
+    pos = (len(values) - 1) * q
+    lo = math.floor(pos)
+    hi = math.ceil(pos)
+    if lo == hi:
+        return values[lo]
+    return values[lo] * (hi - pos) + values[hi] * (pos - lo)
+
+
+def bootstrap_fit(rows, samples, seed):
+    rng = random.Random(seed)
+    fits = []
+    attempts = 0
+    max_attempts = max(samples * 5, samples + 100)
+    while len(fits) < samples and attempts < max_attempts:
+        attempts += 1
+        draw = [rng.choice(rows) for _ in rows]
+        if len({row["x_value"] for row in draw}) < 3:
+            continue
+        try:
+            fits.append(fit_power_law(draw))
+        except ZeroDivisionError:
+            continue
+    if not fits:
+        return {
+            "status": "unavailable",
+            "samples_requested": samples,
+            "samples_used": 0,
+            "seed": seed,
+        }
+    return {
+        "status": "available",
+        "samples_requested": samples,
+        "samples_used": len(fits),
+        "seed": seed,
+        "amplitude_A_ci_95": [
+            percentile([fit["amplitude_A"] for fit in fits], 0.025),
+            percentile([fit["amplitude_A"] for fit in fits], 0.975),
+        ],
+        "beta_ci_95": [
+            percentile([fit["beta"] for fit in fits], 0.025),
+            percentile([fit["beta"] for fit in fits], 0.975),
+        ],
+        "r2_log_space_ci_95": [
+            percentile([fit["r2_log_space"] for fit in fits], 0.025),
+            percentile([fit["r2_log_space"] for fit in fits], 0.975),
+        ],
+    }
+
+
 def summarize_fit(fit):
     figure6_a_ci = {
         "amplitude_A_low": 36.90,
@@ -103,7 +159,7 @@ def write_csv(path, rows):
             writer.writerow(row)
 
 
-def write_report(path, target_path, fit, summary):
+def write_report(path, target_path, fit, summary, bootstrap):
     lines = [
         "# Individual Pheromone Response Fit",
         "",
@@ -128,6 +184,19 @@ def write_report(path, target_path, fit, summary):
         "- Reported beta = 1.058 with 95% CI [1.037, 1.079].",
         "- Reported R2 = 0.9982.",
         "",
+        "## Bootstrap Uncertainty",
+        "",
+        f"- status: `{bootstrap['status']}`",
+        f"- samples used: `{bootstrap.get('samples_used', 0)}`",
+    ]
+    if bootstrap.get("status") == "available":
+        lines.extend([
+            f"- A 95% bootstrap CI: `[{bootstrap['amplitude_A_ci_95'][0]:.4f}, {bootstrap['amplitude_A_ci_95'][1]:.4f}]`",
+            f"- beta 95% bootstrap CI: `[{bootstrap['beta_ci_95'][0]:.4f}, {bootstrap['beta_ci_95'][1]:.4f}]`",
+            f"- R2 95% bootstrap CI: `[{bootstrap['r2_log_space_ci_95'][0]:.5f}, {bootstrap['r2_log_space_ci_95'][1]:.5f}]`",
+        ])
+    lines.extend([
+        "",
         "## Interpretation",
         "",
         summary["interpretation"],
@@ -135,7 +204,7 @@ def write_report(path, target_path, fit, summary):
         "Caveat: the target CSV reconstructs x-values from the Figure 5 pheromone-bin ranges using geometric midpoints and uses rounded slope values from the figure legend. This is fit-ready for submodel calibration, but exact strict-CI reproduction requires raw figure data or author-provided data.",
         "",
         "This is a quantitative target for the individual pheromone-response submodel. It does not yet validate full colony-level food retrieval, physical pheromone half-life, or a separate holdout curve.",
-    ]
+    ])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -147,11 +216,14 @@ def main():
     parser.add_argument("--csv-output", type=Path, default=ROOT / "outputs" / "individual_response_curve_fit.csv")
     parser.add_argument("--json-output", type=Path, default=ROOT / "outputs" / "individual_response_curve_fit.json")
     parser.add_argument("--report-output", type=Path, default=ROOT / "outputs" / "individual_response_curve_fit.md")
+    parser.add_argument("--bootstrap-samples", type=int, default=2000)
+    parser.add_argument("--bootstrap-seed", type=int, default=99173)
     parser.add_argument("--fail-on-issues", action="store_true")
     args = parser.parse_args()
 
     rows = read_rows(args.target_csv, args.target_id)
     fit = fit_power_law(rows)
+    bootstrap = bootstrap_fit(rows, args.bootstrap_samples, args.bootstrap_seed)
     summary = summarize_fit(fit)
     write_csv(args.csv_output, fit["residual_rows"])
     args.json_output.parent.mkdir(parents=True, exist_ok=True)
@@ -162,6 +234,7 @@ def main():
                 "target_csv": str(args.target_csv),
                 "target_id": args.target_id,
                 "fit": {key: value for key, value in fit.items() if key != "residual_rows"},
+                "bootstrap": bootstrap,
                 "summary": summary,
                 "residual_rows": fit["residual_rows"],
             },
@@ -170,7 +243,7 @@ def main():
         ),
         encoding="utf-8",
     )
-    write_report(args.report_output, args.target_csv, fit, summary)
+    write_report(args.report_output, args.target_csv, fit, summary, bootstrap)
     print(
         f"fit {args.target_id}: status={summary['status']} "
         f"A={fit['amplitude_A']:.4f} beta={fit['beta']:.4f} r2={fit['r2_log_space']:.5f}"
