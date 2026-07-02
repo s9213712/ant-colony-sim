@@ -1,0 +1,95 @@
+{
+  "suite": "quantitative_readiness_audit_v1",
+  "generated_at": "2026-07-02T14:59:37Z",
+  "manifest_id": "quantitative_curve_targets_v1",
+  "claim_level": "readiness_manifest_for_level_4_5_calibration",
+  "summary": {
+    "estimated_level": 3.0,
+    "level_blocker": "Has model/proxy references but no digitized raw biological curve ready for fitting.",
+    "total_targets": 6,
+    "ready_for_fit": 0,
+    "model_reference_only": 1,
+    "qualitative_proxy_only": 1,
+    "missing_digitized_data": 4,
+    "open_p0": 4,
+    "open_p1": 2,
+    "status_counts": {
+      "missing_digitized_data": 4,
+      "model_reference_only": 1,
+      "qualitative_proxy_only": 1
+    }
+  },
+  "required_for_level_4": [
+    "At least one ready_for_fit target for trail dynamics or foraging recruitment.",
+    "At least one independent validation curve not used for parameter fitting.",
+    "Species-specific unit mapping for time, distance and core physiological variables."
+  ],
+  "rows": [
+    {
+      "target_id": "trail_decay_curve",
+      "priority": "P0",
+      "status": "missing_digitized_data",
+      "readiness_level": 2.5,
+      "biological_process": "Pheromone trail decay after food removal or rain/washout.",
+      "current_proxy": "literature_pheromone_constraints_v1 checks qualitative persistence effects only.",
+      "next_action": "Digitize trail decay or trail occupancy time series and map model day to the paper's time axis.",
+      "source_count": 2,
+      "required_data": "time since food removal or washout; trail pheromone proxy or trail occupancy; species/arena conditions; replicate variance or confidence interval"
+    },
+    {
+      "target_id": "food_recruitment_strength_curve",
+      "priority": "P0",
+      "status": "missing_digitized_data",
+      "readiness_level": 2.5,
+      "biological_process": "Food quality or concentration versus recruitment/trail-laying strength.",
+      "current_proxy": "paper_conditions_v5 checks high-quality source bias qualitatively.",
+      "next_action": "Digitize food-quality recruitment curves and add a concentration-to-quality mapping.",
+      "source_count": 1,
+      "required_data": "food concentration or quality; trail-laying event rate or recruitment count; time window; species and colony state"
+    },
+    {
+      "target_id": "double_bridge_branch_choice_curve",
+      "priority": "P0",
+      "status": "model_reference_only",
+      "readiness_level": 3.0,
+      "biological_process": "Branch choice probability/time course under symmetric and biased trails.",
+      "current_proxy": "calibrate_double_bridge.py fits a literature model reference, not raw biological counts.",
+      "next_action": "Replace or supplement the model reference with digitized branch-choice curves from a real double-bridge experiment.",
+      "source_count": 1,
+      "required_data": "time or crossing index; branch choice probability; path length / bridge geometry; replicate count"
+    },
+    {
+      "target_id": "traffic_flow_density_curve",
+      "priority": "P1",
+      "status": "qualitative_proxy_only",
+      "readiness_level": 2.8,
+      "biological_process": "Trail density versus speed/flow under crowding.",
+      "current_proxy": "paper_conditions_v5 exports segment speed/flow-density metrics.",
+      "next_action": "Digitize speed-density or flow-density curves and fit contact/crowding parameters.",
+      "source_count": 2,
+      "required_data": "linear density; mean speed; flow or flux; trail geometry"
+    },
+    {
+      "target_id": "brood_survival_microclimate_curve",
+      "priority": "P0",
+      "status": "missing_digitized_data",
+      "readiness_level": 2.5,
+      "biological_process": "Temperature/humidity stress versus brood survival or development.",
+      "current_proxy": "paper_conditions_v5 checks brood-stage-sensitive microclimate qualitatively.",
+      "next_action": "Digitize brood survival/development curves or collect lab data for the target species.",
+      "source_count": 1,
+      "required_data": "temperature and humidity; brood stage composition; survival or development rate; time horizon"
+    },
+    {
+      "target_id": "founding_worker_emergence_curve",
+      "priority": "P1",
+      "status": "missing_digitized_data",
+      "readiness_level": 2.5,
+      "biological_process": "Queen founding reserves, egg laying and first worker emergence over time.",
+      "current_proxy": "actual_biology_simulation.py has founding_colony viability smoke output only.",
+      "next_action": "Select a target species and add founding-stage laboratory or literature count curves.",
+      "source_count": 0,
+      "required_data": "days since founding; egg/larva/pupa/worker counts; queen survival and reserve state; temperature and feeding regime"
+    }
+  ]
+}

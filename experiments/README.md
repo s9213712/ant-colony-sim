@@ -137,6 +137,32 @@ This means the current qualitative pheromone persistence/diffusion constraint
 screen has no remaining failures. The next calibration level is digitized curve
 fitting for trail decay, recruitment strength, branch choice and brood survival.
 
+## Quantitative Readiness Audit
+
+Audit whether the project has enough digitized biological curves to move toward
+Level 4-5:
+
+```bash
+python3 ant_colony_sim/experiments/quantitative_readiness_audit.py \
+  --targets ant_colony_sim/targets/quantitative_curve_targets.json \
+  --csv-output ant_colony_sim/outputs/quantitative_readiness_audit.csv \
+  --json-output ant_colony_sim/outputs/quantitative_readiness_audit.json \
+  --report-output ant_colony_sim/outputs/quantitative_readiness_audit.md
+```
+
+Current result:
+
+- estimated current level: `3.0`
+- ready_for_fit digitized curves: `0`
+- model_reference_only: `1`
+- qualitative_proxy_only: `1`
+- missing_digitized_data: `4`
+- open P0 targets: `4`
+
+Interpretation: qualitative constraints are currently clean, but Level 4 is
+blocked until at least one real biological target curve is digitized and an
+independent validation curve is held out.
+
 ## Individual-Level Output
 
 Export all ants at the end of each replicate:

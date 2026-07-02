@@ -1,0 +1,148 @@
+{
+  "id": "quantitative_curve_targets_v1",
+  "claim_level": "readiness_manifest_for_level_4_5_calibration",
+  "description": "Target curves required before the simulator can move from qualitative behavior-level ABM toward quantitative species-level biological calibration.",
+  "readiness_scale": {
+    "missing_digitized_data": "A paper or experiment is known, but no digitized numeric target curve is available in the repository.",
+    "model_reference_only": "A mathematical or qualitative literature model exists, but not digitized raw biological measurements.",
+    "qualitative_proxy_only": "A qualitative probe exists, but the curve needed for fitting has not been digitized.",
+    "ready_for_fit": "Digitized x/y target data with units and source metadata are available."
+  },
+  "required_for_level_4": [
+    "At least one ready_for_fit target for trail dynamics or foraging recruitment.",
+    "At least one independent validation curve not used for parameter fitting.",
+    "Species-specific unit mapping for time, distance and core physiological variables."
+  ],
+  "targets": [
+    {
+      "target_id": "trail_decay_curve",
+      "biological_process": "Pheromone trail decay after food removal or rain/washout.",
+      "priority": "P0",
+      "status": "missing_digitized_data",
+      "source_candidates": [
+        {
+          "id": "amorim_2014",
+          "title": "A continuous model of ant foraging with pheromones and trail formation",
+          "url": "https://arxiv.org/abs/1402.5611"
+        },
+        {
+          "id": "perna_2012",
+          "title": "Individual rules for trail pattern formation in Argentine ants",
+          "url": "https://arxiv.org/abs/1201.5827"
+        }
+      ],
+      "required_data": [
+        "time since food removal or washout",
+        "trail pheromone proxy or trail occupancy",
+        "species/arena conditions",
+        "replicate variance or confidence interval"
+      ],
+      "current_proxy": "literature_pheromone_constraints_v1 checks qualitative persistence effects only.",
+      "next_action": "Digitize trail decay or trail occupancy time series and map model day to the paper's time axis."
+    },
+    {
+      "target_id": "food_recruitment_strength_curve",
+      "biological_process": "Food quality or concentration versus recruitment/trail-laying strength.",
+      "priority": "P0",
+      "status": "missing_digitized_data",
+      "source_candidates": [
+        {
+          "id": "jackson_chaline_2007",
+          "title": "Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis",
+          "url": "https://doi.org/10.1016/j.anbehav.2006.11.027"
+        }
+      ],
+      "required_data": [
+        "food concentration or quality",
+        "trail-laying event rate or recruitment count",
+        "time window",
+        "species and colony state"
+      ],
+      "current_proxy": "paper_conditions_v5 checks high-quality source bias qualitatively.",
+      "next_action": "Digitize food-quality recruitment curves and add a concentration-to-quality mapping."
+    },
+    {
+      "target_id": "double_bridge_branch_choice_curve",
+      "biological_process": "Branch choice probability/time course under symmetric and biased trails.",
+      "priority": "P0",
+      "status": "model_reference_only",
+      "source_candidates": [
+        {
+          "id": "deneubourg_choice_reference",
+          "title": "Deneubourg-style reinforced random walk reference",
+          "url": "targets/deneubourg_choice_reference.json"
+        }
+      ],
+      "required_data": [
+        "time or crossing index",
+        "branch choice probability",
+        "path length / bridge geometry",
+        "replicate count"
+      ],
+      "current_proxy": "calibrate_double_bridge.py fits a literature model reference, not raw biological counts.",
+      "next_action": "Replace or supplement the model reference with digitized branch-choice curves from a real double-bridge experiment."
+    },
+    {
+      "target_id": "traffic_flow_density_curve",
+      "biological_process": "Trail density versus speed/flow under crowding.",
+      "priority": "P1",
+      "status": "qualitative_proxy_only",
+      "source_candidates": [
+        {
+          "id": "dussutour_2004",
+          "title": "Optimal traffic organisation in ants under crowded conditions",
+          "url": "https://doi.org/10.1038/nature02585"
+        },
+        {
+          "id": "john_2009",
+          "title": "Trafficlike collective movement of ants on trails: absence of a jammed phase",
+          "url": "https://doi.org/10.1103/physrevlett.102.108001"
+        }
+      ],
+      "required_data": [
+        "linear density",
+        "mean speed",
+        "flow or flux",
+        "trail geometry"
+      ],
+      "current_proxy": "paper_conditions_v5 exports segment speed/flow-density metrics.",
+      "next_action": "Digitize speed-density or flow-density curves and fit contact/crowding parameters."
+    },
+    {
+      "target_id": "brood_survival_microclimate_curve",
+      "biological_process": "Temperature/humidity stress versus brood survival or development.",
+      "priority": "P0",
+      "status": "missing_digitized_data",
+      "source_candidates": [
+        {
+          "id": "baudier_2019",
+          "title": "Plastic collective endothermy in army ant bivouacs",
+          "url": "https://doi.org/10.1111/ecog.04064"
+        }
+      ],
+      "required_data": [
+        "temperature and humidity",
+        "brood stage composition",
+        "survival or development rate",
+        "time horizon"
+      ],
+      "current_proxy": "paper_conditions_v5 checks brood-stage-sensitive microclimate qualitatively.",
+      "next_action": "Digitize brood survival/development curves or collect lab data for the target species."
+    },
+    {
+      "target_id": "founding_worker_emergence_curve",
+      "biological_process": "Queen founding reserves, egg laying and first worker emergence over time.",
+      "priority": "P1",
+      "status": "missing_digitized_data",
+      "source_candidates": [],
+      "required_data": [
+        "days since founding",
+        "egg/larva/pupa/worker counts",
+        "queen survival and reserve state",
+        "temperature and feeding regime"
+      ],
+      "current_proxy": "actual_biology_simulation.py has founding_colony viability smoke output only.",
+      "next_action": "Select a target species and add founding-stage laboratory or literature count curves."
+    }
+  ]
+}

@@ -536,7 +536,42 @@ python3 experiments/actual_biology_sensitivity.py \
 
 解讀：目前第一層 qualitative literature constraints 已無剩餘 fail。下一層問題不是再調同一組 qualitative band，而是把文獻圖表 digitize 成數值曲線，建立真實的 `trail_decay_curve`、`recruitment_curve`、`branch_choice_curve`、`brood_survival_curve`。
 
-## 14. 100+ paper triage corpus
+## 14. Quantitative readiness for Level 4-5
+
+`experiments/quantitative_readiness_audit.py` 會讀取 `targets/quantitative_curve_targets.json`，檢查目前是否有足夠的 digitized biological curves 進入 Level 4-5。
+
+執行方式：
+
+```bash
+python3 experiments/quantitative_readiness_audit.py \
+  --targets targets/quantitative_curve_targets.json \
+  --csv-output outputs/quantitative_readiness_audit.csv \
+  --json-output outputs/quantitative_readiness_audit.json \
+  --report-output outputs/quantitative_readiness_audit.md
+```
+
+目前結果：
+
+| 指標 | 數量 |
+| --- | ---: |
+| estimated current level | 3.0 |
+| target curves | 6 |
+| ready_for_fit | 0 |
+| model_reference_only | 1 |
+| qualitative_proxy_only | 1 |
+| missing_digitized_data | 4 |
+| open P0 targets | 4 |
+
+目前 Level 4 blocker：
+
+- `trail_decay_curve`: 缺 digitized trail decay / occupancy time series。
+- `food_recruitment_strength_curve`: 缺食物品質/濃度對 recruitment 或 trail-laying 的數值曲線。
+- `double_bridge_branch_choice_curve`: 目前只有 model reference，不是 raw biological counts。
+- `brood_survival_microclimate_curve`: 缺溫濕度對 brood survival/development 的數值曲線。
+
+結論：目前可稱為 Level 3 左右的定性/約束式研究輔助工具。往 Level 4 的下一個必要動作不是再增加 UI 或更多 qualitative probes，而是取得或 digitize 至少一條真實生物曲線，並保留另一條曲線作 independent validation。
+
+## 15. 100+ paper triage corpus
 
 `experiments/build_literature_corpus.py` 用 Crossref 查詢與既有 seed papers 建立 100+ 文獻候選池。輸出：
 
@@ -569,7 +604,7 @@ python3 experiments/actual_biology_sensitivity.py \
 - 文獻庫混合三類資料：真實螞蟻行為/生態實驗、ABM/PDE/數學模型、以及受螞蟻啟發的 swarm robotics / ACO 模型。後兩者可提供演算法與測試條件，但不能直接當作生物學真實度證據。
 - 下一批最值得轉成自動測試的主題：nest relocation quorum、brood microclimate、corpse-age/pathogen necrophoresis calibration、active misleading pheromone detractor agents、逐步感知/轉向紀錄。
 
-## 15. 120-paper sequential evaluation
+## 16. 120-paper sequential evaluation
 
 `experiments/evaluate_literature_corpus.py` 逐篇讀取 `outputs/literature_corpus_100.json`，並把每一篇對應到目前 `outputs/paper_conditions_v5.json` 的 simulation evidence。輸出：
 
@@ -599,7 +634,7 @@ python3 experiments/actual_biology_sensitivity.py \
 4. `necrophoresis_calibration`：在現有 corpse cleanup 基礎上加入 corpse-age chemistry、pathogen state、interaction network。
 5. `brood_relocation_calibration`：把 brood microclimate 與 nest relocation 從定性 proxy 推進到物種專屬數值校準。
 
-## 16. Gap backlog for later work
+## 17. Gap backlog for later work
 
 `experiments/generate_literature_gap_backlog.py` 會把逐篇評估中所有非 `pass` 文獻記錄成待辦清單。輸出：
 
