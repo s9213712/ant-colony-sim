@@ -397,7 +397,66 @@ python3 experiments/paper_conditions_probe.py \
 - v4 新增食物品質模型與 necrophoresis cleanup 條件，讓 food quality / concentration 與 corpse-disposal 類文獻從 `not_covered` 轉為可測；但前者仍是品質倍率，不是特定物種的實測蔗糖濃度曲線，後者也還不是病原風險與互動網路的定量模型。
 - v5 新增 brood microclimate、nest relocation/quorum、per-step trajectory/sensing log、segment flow-density、branch-choice timecourse、task-switch/contact metrics 與 misleading-trail avoid learning 的通用規則/量測。實驗腳本只能改參數、初始條件與環境狀態；個體決策、task/state transition、費洛蒙規則必須由同一套基礎模型產生，不能為單篇文獻注入例外行為。
 
-## 11. 100+ paper triage corpus
+## 11. Actual behavior-level biological simulation
+
+`experiments/actual_biology_simulation.py` 是目前第一個「實際生物情境模擬」套件。它不是逐篇文獻審查，也不是為單篇論文寫特殊規則，而是在同一套通用螞蟻行為規則下，固定 seed 並改變初始資源與環境條件，輸出可重跑的時間序列。
+
+執行方式：
+
+```bash
+python3 experiments/actual_biology_simulation.py \
+  --output outputs/actual_biology_simulation.csv \
+  --json-output outputs/actual_biology_simulation.json \
+  --report-output outputs/actual_biology_simulation.md
+```
+
+目前 `v1` 條件：
+
+| scenario | 生物問題 | 改變的條件 |
+| --- | --- | --- |
+| `stable_mature` | 成熟蟻群在穩定補給下是否能正常覓食並維持存活 | 中等巢內庫存、明確食物/水源、穩定溫濕度 |
+| `resource_stress` | 低庫存與遠端有限資源是否造成覓食/能量壓力 | 低 food/water stores、遠端有限資源 |
+| `heat_dry_stress` | 熱乾條件是否造成水分或 brood climate 壓力 | 40°C、20% humidity、有限巢內水分 |
+| `founding_colony` | 創群階段是否以蟻后與 brood 為核心，而非一開始生成成熟工蟻群 | 只有蟻后與早期 brood，無初始 workers |
+
+目前正式輸出：
+
+- `outputs/actual_biology_simulation.csv`
+- `outputs/actual_biology_simulation.json`
+- `outputs/actual_biology_simulation.md`
+
+`v1` 使用 seeds `101-105`、8 個模型日、每 0.25 日取樣。摘要如下：
+
+| scenario | final ants | food trips | water trips | avg energy | avg hydration | brood stress | brood delta | queen health |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `stable_mature` | 430.2 | 68.4 | 43.6 | 88.2 | 92.0 | 0.10 | -7.0 | 100.0 |
+| `resource_stress` | 428.8 | 41.6 | 35.2 | 86.2 | 87.2 | 0.14 | -7.4 | 100.0 |
+| `heat_dry_stress` | 430.0 | 51.0 | 78.8 | 89.0 | 90.2 | 0.60 | -7.0 | 100.0 |
+| `founding_colony` | 0.4 | 0.0 | 0.0 | 90.0 | 93.5 | 0.27 | 3.6 | 100.0 |
+
+定性檢查結果：
+
+- `stable_mature_foraging`: pass，成熟穩定組有 food/water trips。
+- `stable_mature_survival`: pass，短期穩定環境沒有 worker collapse。
+- `resource_pressure_response`: pass，資源壓力組的平均能量與水分低於穩定組。
+- `heat_dry_hydration_stress`: pass，熱乾組 brood stress 明顯高於穩定組。
+- `founding_queen_viability`: pass，創群組仍是 queen-centered，蟻后健康維持。
+
+科學解讀：
+
+- 這一套已經能產生「實際模擬實驗」的資料，而不只是 UI 展示或文獻分類。
+- 它支持目前模型作為 behavior-level ABM 的研究輔助：可用於比較條件、產生時間序列、篩選假說。
+- 它仍不能宣稱物種級定量預測：模型日尚未對應真實日齡，能量/水分是模型單位，brood development 與 queen fecundity 尚未用 Lasius niger 實測曲線校準。
+- `founding_colony` 的 8 模型日結果只能看作 queen/brood viability smoke test；真正創群研究需要校準卵到幼蟲、蛹到工蟻的發育時間。
+
+後續若要提高科學生物學參考價值，應把這個 suite 擴充為：
+
+1. species-specific parameter set：先聚焦 Lasius niger，加入文獻範圍與單位。
+2. digitized target curves：把 food trips、brood survival、trail decay、founding worker emergence 對照實驗曲線。
+3. parameter sweep：只改參數與環境條件，檢查模型能否在同一規則下同時符合多個情境。
+4. individual-level validation：抽樣輸出 worker trajectory、task switching、energy/hydration 分布，對照追蹤實驗。
+
+## 12. 100+ paper triage corpus
 
 `experiments/build_literature_corpus.py` 用 Crossref 查詢與既有 seed papers 建立 100+ 文獻候選池。輸出：
 
@@ -430,7 +489,7 @@ python3 experiments/paper_conditions_probe.py \
 - 文獻庫混合三類資料：真實螞蟻行為/生態實驗、ABM/PDE/數學模型、以及受螞蟻啟發的 swarm robotics / ACO 模型。後兩者可提供演算法與測試條件，但不能直接當作生物學真實度證據。
 - 下一批最值得轉成自動測試的主題：nest relocation quorum、brood microclimate、corpse-age/pathogen necrophoresis calibration、active misleading pheromone detractor agents、逐步感知/轉向紀錄。
 
-## 12. 120-paper sequential evaluation
+## 13. 120-paper sequential evaluation
 
 `experiments/evaluate_literature_corpus.py` 逐篇讀取 `outputs/literature_corpus_100.json`，並把每一篇對應到目前 `outputs/paper_conditions_v5.json` 的 simulation evidence。輸出：
 
@@ -460,7 +519,7 @@ python3 experiments/paper_conditions_probe.py \
 4. `necrophoresis_calibration`：在現有 corpse cleanup 基礎上加入 corpse-age chemistry、pathogen state、interaction network。
 5. `brood_relocation_calibration`：把 brood microclimate 與 nest relocation 從定性 proxy 推進到物種專屬數值校準。
 
-## 13. Gap backlog for later work
+## 14. Gap backlog for later work
 
 `experiments/generate_literature_gap_backlog.py` 會把逐篇評估中所有非 `pass` 文獻記錄成待辦清單。輸出：
 

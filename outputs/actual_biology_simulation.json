@@ -1,0 +1,149 @@
+{
+  "suite": "actual_biology_simulation_v1",
+  "generated_at": "2026-07-02T13:44:37Z",
+  "claim_level": "behavior_level_simulated_experiment_not_quantitative_species_prediction",
+  "rules": [
+    "The suite changes seeds, initial resources, temperature and humidity only.",
+    "It does not patch ant decision rules or force per-ant task/state transitions.",
+    "Results are model-unit time series for qualitative biological interpretation."
+  ],
+  "parameters": {
+    "seeds": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "scenarios": [
+      "stable_mature",
+      "resource_stress",
+      "heat_dry_stress",
+      "founding_colony"
+    ],
+    "days": 8,
+    "sample_days": 0.25,
+    "dt": 9
+  },
+  "time_series_csv": "outputs/actual_biology_simulation.csv",
+  "time_series_rows": 660,
+  "summary": {
+    "founding_colony": {
+      "replicates": 5,
+      "initial_ants_mean": 0,
+      "final_ants_mean": 0.4,
+      "survival_fraction_mean": 1.0,
+      "initial_brood_mean": 12.0,
+      "final_brood_mean": 15.6,
+      "brood_delta_mean": 3.6,
+      "food_trips_mean": 0,
+      "water_trips_mean": 0,
+      "food_collected_mean": 0,
+      "water_collected_mean": 0,
+      "avg_energy_mean": 90.0,
+      "avg_hydration_mean": 93.5,
+      "brood_stress_mean": 0.268,
+      "dead_mean": 0,
+      "food_pheromone_peak_mean": 0,
+      "queen_health_mean": 100.0,
+      "queen_hydration_mean": 100.0,
+      "food_trips_vs_stable": -1.0,
+      "hydration_vs_stable": 0.0163,
+      "brood_stress_vs_stable": 0.172
+    },
+    "heat_dry_stress": {
+      "replicates": 5,
+      "initial_ants_mean": 420.0,
+      "final_ants_mean": 430.0,
+      "survival_fraction_mean": 1.0238,
+      "initial_brood_mean": 70.0,
+      "final_brood_mean": 63.0,
+      "brood_delta_mean": -7.0,
+      "food_trips_mean": 51.0,
+      "water_trips_mean": 78.8,
+      "food_collected_mean": 259.0,
+      "water_collected_mean": 394.8,
+      "avg_energy_mean": 89.0,
+      "avg_hydration_mean": 90.2,
+      "brood_stress_mean": 0.604,
+      "dead_mean": 0,
+      "food_pheromone_peak_mean": 53181.8,
+      "queen_health_mean": 100.0,
+      "queen_hydration_mean": 96.131,
+      "food_trips_vs_stable": -0.2544,
+      "hydration_vs_stable": -0.0196,
+      "brood_stress_vs_stable": 0.508
+    },
+    "resource_stress": {
+      "replicates": 5,
+      "initial_ants_mean": 420.0,
+      "final_ants_mean": 428.8,
+      "survival_fraction_mean": 1.021,
+      "initial_brood_mean": 70.0,
+      "final_brood_mean": 62.6,
+      "brood_delta_mean": -7.4,
+      "food_trips_mean": 41.6,
+      "water_trips_mean": 35.2,
+      "food_collected_mean": 207.8,
+      "water_collected_mean": 174.0,
+      "avg_energy_mean": 86.2,
+      "avg_hydration_mean": 87.2,
+      "brood_stress_mean": 0.138,
+      "dead_mean": 0,
+      "food_pheromone_peak_mean": 35584.4,
+      "queen_health_mean": 100.0,
+      "queen_hydration_mean": 96.006,
+      "food_trips_vs_stable": -0.3918,
+      "hydration_vs_stable": -0.0522,
+      "brood_stress_vs_stable": 0.042
+    },
+    "stable_mature": {
+      "replicates": 5,
+      "initial_ants_mean": 420.0,
+      "final_ants_mean": 430.2,
+      "survival_fraction_mean": 1.0243,
+      "initial_brood_mean": 70.0,
+      "final_brood_mean": 63.0,
+      "brood_delta_mean": -7.0,
+      "food_trips_mean": 68.4,
+      "water_trips_mean": 43.6,
+      "food_collected_mean": 346.6,
+      "water_collected_mean": 212.4,
+      "avg_energy_mean": 88.2,
+      "avg_hydration_mean": 92.0,
+      "brood_stress_mean": 0.096,
+      "dead_mean": 0,
+      "food_pheromone_peak_mean": 62347.0,
+      "queen_health_mean": 100.0,
+      "queen_hydration_mean": 96.015,
+      "comparison_to_stable": "baseline"
+    }
+  },
+  "checks": [
+    {
+      "check": "stable_mature_foraging",
+      "status": "pass",
+      "evidence": "Mature colonies should complete food and water trips under stable resource access."
+    },
+    {
+      "check": "stable_mature_survival",
+      "status": "pass",
+      "evidence": "Short stable runs should not collapse the worker population."
+    },
+    {
+      "check": "resource_pressure_response",
+      "status": "pass",
+      "evidence": "Low stores should produce a measurable foraging or energetic response."
+    },
+    {
+      "check": "heat_dry_hydration_stress",
+      "status": "pass",
+      "evidence": "Hot dry conditions should depress hydration and/or increase brood stress."
+    },
+    {
+      "check": "founding_queen_viability",
+      "status": "pass",
+      "evidence": "Founding mode should be queen-centered and maintain queen viability over the short run."
+    }
+  ]
+}

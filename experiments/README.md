@@ -45,6 +45,38 @@ Use this runner for:
 
 Do not treat a single run as biological evidence.
 
+## Actual Biology Simulation Suite
+
+Run behavior-level biological scenarios with fixed seeds and shared simulator
+rules:
+
+```bash
+python3 ant_colony_sim/experiments/actual_biology_simulation.py \
+  --output ant_colony_sim/outputs/actual_biology_simulation.csv \
+  --json-output ant_colony_sim/outputs/actual_biology_simulation.json \
+  --report-output ant_colony_sim/outputs/actual_biology_simulation.md
+```
+
+The current suite runs four scenarios:
+
+- `stable_mature`: mature Lasius-like colony with nearby food/water access and moderate store pressure.
+- `resource_stress`: mature colony with low stores and limited distant resources.
+- `heat_dry_stress`: mature colony under high temperature and low humidity.
+- `founding_colony`: queen-centered early colony with no initial worker population.
+
+Current `v1` result with seeds `101-105`, 8 simulated days and 0.25-day
+sampling:
+
+- all five qualitative checks pass: stable foraging, stable survival, resource-pressure response, heat/dry hydration or brood stress response, and founding queen viability;
+- stable mature colonies complete food and water trips under explicit resource access;
+- heat/dry stress raises brood stress relative to the stable control;
+- resource stress lowers mean energy/hydration relative to the stable control;
+- founding mode remains queen-centered and produces only early brood/rare first-worker dynamics over this short model-time window.
+
+Use this suite when the question is whether the simulator produces interpretable
+biological time series under controlled conditions. It is not a digitized
+paper-curve fitting suite and it is not a quantitative species predictor.
+
 ## Individual-Level Output
 
 Export all ants at the end of each replicate:
@@ -287,4 +319,3 @@ python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
 Current backlog:
 
 - `total`: 0
-- total: 103
