@@ -6,7 +6,7 @@ Behavior-level ant colony simulation for exploring pheromone-mediated foraging, 
 
 The current model is a qualitative research aid and teaching tool. It is not calibrated for numerical prediction of real ant colonies.
 
-Current scientific validation level: behavior-level ABM with one fit-ready primary-source response curve, one independent traffic holdout, and initial uncertainty reporting, estimated Level 4.2 toward Level 5. The 120-paper corpus separates simulator-condition passes from biological calibration: 86 records still require paper-level quantitative curves or species-specific data, while 34 engineering/ACO references are screened out as non-biological targets.
+Current scientific validation level: behavior-level ABM with one fit-ready primary-source response curve, one independent traffic holdout, fit-curve bootstrap uncertainty, and replicate-level uncertainty for paper-condition probes, estimated Level 4.3 toward Level 5. The 120-paper corpus separates simulator-condition passes from biological calibration: 86 records still require paper-level quantitative curves or species-specific data, while 34 engineering/ACO references are screened out as non-biological targets.
 
 ## Run
 
@@ -30,7 +30,7 @@ python3 experiments/generate_validation_report.py --stochasticity-csv outputs/st
 
 See `BIOLOGICAL_VALIDATION.md`, `PARAMETER_PROVENANCE.md`, and `experiments/README.md` for model boundaries, parameter provenance and reproducible experiment workflows.
 
-Digitized biological curves for Level 4 calibration belong in `targets/digitized_curves/`; run `python3 experiments/digitized_curve_inventory.py` to check whether any curve is fit-ready.
+Digitized biological curves for Level 4+ calibration belong in `targets/digitized_curves/`; run `python3 experiments/digitized_curve_inventory.py` to check fit-ready and holdout-ready curves. Run `python3 experiments/level5_replicate_statistics.py` to attach bootstrap CIs to paper-condition replicate outputs.
 
 ## Continuous Validation
 

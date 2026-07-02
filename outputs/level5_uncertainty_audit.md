@@ -4,7 +4,7 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 
 ## Summary
 
-- estimated level: `4.2`
+- estimated level: `4.3`
 - Level 5 ready: `False`
 - blocker: Holdout has SD values but lacks density-bin sample sizes, so formal holdout CI is not available.
 
@@ -13,6 +13,7 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 - `fit_curve_bootstrap_ci`: `True`
 - `holdout_curve_present`: `True`
 - `holdout_has_variance_values`: `True`
+- `paper_condition_replicate_ci`: `True`
 - `holdout_formal_ci_available`: `False`
 
 ## Fit-Curve Uncertainty
@@ -33,6 +34,15 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 - formal CI available: `False`
 - note: Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed.
 
+## Paper-Condition Replicate Uncertainty
+
+- replicate status: `pass`
+- condition count: `27`
+- summary pass fraction: `1.0`
+- core metrics with CI: `48` / `48`
+- minimum replicate count: `3`
+- underpowered core metrics: `[]`
+
 ## Interpretation
 
-The simulator has moved beyond Level 4 by attaching bootstrap uncertainty to the fitted individual-response curve. The traffic holdout includes reported SD values, but formal confidence intervals require density-bin sample sizes or raw tracking data from the source experiment.
+The simulator has moved beyond Level 4 by attaching bootstrap uncertainty to the fitted individual-response curve and replicate uncertainty to paper-condition probes. The traffic holdout includes reported SD values, but formal confidence intervals require density-bin sample sizes or raw tracking data from the source experiment.

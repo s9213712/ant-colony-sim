@@ -725,10 +725,38 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 
 | 指標 | 值 |
 | --- | --- |
-| estimated level | 4.2 |
+| estimated level | 4.3 |
 | fit curve bootstrap CI | true |
 | holdout curve present | true |
 | holdout variance values | true |
+| paper-condition replicate CI | true |
 | holdout formal CI available | false |
 
-解讀：Perna response fit 已有 bootstrap 95% CI；John traffic holdout 有 Figure 4 報告的 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
+解讀：Perna response fit 已有 bootstrap 95% CI，paper-condition probes 已有跨 seed bootstrap CI；John traffic holdout 有 Figure 4 報告的 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
+
+## 22. Level 5 replicate statistics
+
+`experiments/level5_replicate_statistics.py` 讀取 `outputs/paper_conditions_v5.json` 裡的 `raw_rows`，對每個文獻條件的核心指標計算跨 seed 統計：
+
+- `n`
+- mean
+- sample SD
+- SEM
+- bootstrap 95% CI
+
+輸出：
+
+- `outputs/level5_replicate_statistics.csv`
+- `outputs/level5_replicate_statistics.json`
+- `outputs/level5_replicate_statistics.md`
+
+目前結果：
+
+| 指標 | 值 |
+| --- | ---: |
+| condition count | 27 |
+| summary pass fraction | 1.0 |
+| core metrics with bootstrap CI | 48 / 48 |
+| minimum replicate count | 3 |
+
+解讀：這把 paper-condition matrix 從「單次/平均觀察」推進到「可報告 stochastic replicate uncertainty」。它沒有改變任何螞蟻規則，也不把 qualitative pass 升格成 quantitative reproduction；Level 5 仍需要更多 primary-source digitized curves、文獻端 sample size/raw data、獨立 holdout 與物種單位映射。

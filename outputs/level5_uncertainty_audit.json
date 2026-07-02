@@ -1,15 +1,17 @@
 {
-  "generated_at": "2026-07-02T16:10:50Z",
+  "generated_at": "2026-07-02T16:19:06Z",
   "individual_fit": "/home/s92137/ant_colony_sim/outputs/individual_response_curve_fit.json",
   "traffic_holdout": "/home/s92137/ant_colony_sim/outputs/traffic_holdout_validation.json",
+  "replicate_statistics": "/home/s92137/ant_colony_sim/outputs/level5_replicate_statistics.json",
   "result": {
-    "estimated_level": 4.2,
+    "estimated_level": 4.3,
     "level5_ready": false,
     "blocker": "Holdout has SD values but lacks density-bin sample sizes, so formal holdout CI is not available.",
     "checks": {
       "fit_curve_bootstrap_ci": true,
       "holdout_curve_present": true,
       "holdout_has_variance_values": true,
+      "paper_condition_replicate_ci": true,
       "holdout_formal_ci_available": false
     },
     "fit_uncertainty": {
@@ -36,6 +38,15 @@
       "high_n": null,
       "formal_ci_available": false,
       "uncertainty_note": "Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed."
+    },
+    "replicate_uncertainty": {
+      "status": "pass",
+      "condition_count": 27,
+      "summary_pass_fraction": 1.0,
+      "core_metric_count": 48,
+      "core_metric_ci_ready": 48,
+      "min_n": 3,
+      "underpowered_core_metrics": []
     }
   }
 }

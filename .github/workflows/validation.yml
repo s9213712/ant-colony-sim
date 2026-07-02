@@ -44,6 +44,7 @@ jobs:
             experiments/generate_literature_gap_backlog.py \
             experiments/generate_validation_report.py \
             experiments/level5_uncertainty_audit.py \
+            experiments/level5_replicate_statistics.py \
             experiments/literature_calibration_cycle.py \
             experiments/literature_alignment_probe.py \
             experiments/paper_conditions_probe.py \
@@ -131,16 +132,6 @@ jobs:
             --report-output outputs/ci_traffic_holdout_validation.md \
             --fail-on-issues
 
-      - name: Level 5 uncertainty audit
-        run: |
-          python experiments/level5_uncertainty_audit.py \
-            --individual-fit outputs/ci_individual_response_curve_fit.json \
-            --traffic-holdout outputs/ci_traffic_holdout_validation.json \
-            --csv-output outputs/ci_level5_uncertainty_audit.csv \
-            --json-output outputs/ci_level5_uncertainty_audit.json \
-            --report-output outputs/ci_level5_uncertainty_audit.md \
-            --fail-on-regression
-
       - name: Literature alignment probe
         run: python experiments/literature_alignment_probe.py
 
@@ -152,6 +143,27 @@ jobs:
             --output outputs/ci_paper_conditions_smoke.csv \
             --json-output outputs/ci_paper_conditions_smoke.json \
             --report-output outputs/ci_paper_conditions_smoke.md
+
+      - name: Level 5 replicate statistics
+        run: |
+          python experiments/level5_replicate_statistics.py \
+            --paper-conditions outputs/ci_paper_conditions_smoke.json \
+            --csv-output outputs/ci_level5_replicate_statistics.csv \
+            --json-output outputs/ci_level5_replicate_statistics.json \
+            --report-output outputs/ci_level5_replicate_statistics.md \
+            --min-n 2 \
+            --fail-on-underpowered
+
+      - name: Level 5 uncertainty audit
+        run: |
+          python experiments/level5_uncertainty_audit.py \
+            --individual-fit outputs/ci_individual_response_curve_fit.json \
+            --traffic-holdout outputs/ci_traffic_holdout_validation.json \
+            --replicate-statistics outputs/ci_level5_replicate_statistics.json \
+            --csv-output outputs/ci_level5_uncertainty_audit.csv \
+            --json-output outputs/ci_level5_uncertainty_audit.json \
+            --report-output outputs/ci_level5_uncertainty_audit.md \
+            --fail-on-regression
 
       - name: Stochasticity smoke probe
         run: |
@@ -206,5 +218,8 @@ jobs:
             outputs/ci_paper_conditions_smoke.csv
             outputs/ci_paper_conditions_smoke.json
             outputs/ci_paper_conditions_smoke.md
+            outputs/ci_level5_replicate_statistics.csv
+            outputs/ci_level5_replicate_statistics.json
+            outputs/ci_level5_replicate_statistics.md
             outputs/ci_biological_validation_report.md
             outputs/ci_biological_validation_report.json

@@ -1,0 +1,730 @@
+{
+  "generated_at": "2026-07-02T16:19:06Z",
+  "source": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
+  "summary": {
+    "condition_count": 27,
+    "summary_status_count": 17,
+    "summary_pass_count": 17,
+    "summary_pass_fraction": 1.0,
+    "core_metric_count": 48,
+    "core_metric_ci_ready": 48,
+    "underpowered_core_metrics": [],
+    "min_n": 3,
+    "status": "pass"
+  },
+  "condition_counts": [
+    {
+      "condition": "army_ant_mill_mortality",
+      "raw_rows": 3,
+      "summary_status": "pass"
+    },
+    {
+      "condition": "brood_microclimate_cold_larval",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "brood_microclimate_cold_pupal",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "brood_microclimate_heat_dry_pupal",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "brood_microclimate_stable_pupal",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "crowding_high_density_bridge",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "crowding_low_density_bridge",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "double_bridge_lower_bias",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "double_bridge_unbiased_baseline",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "double_bridge_upper_bias",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "fail_stop_control",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "fail_stop_mass_death",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "food_quality_recruitment",
+      "raw_rows": 6,
+      "summary_status": "pass"
+    },
+    {
+      "condition": "misleading_pheromone_attack",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "misleading_pheromone_caution",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "misleading_pheromone_control",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "necrophoresis_cleanup_latency",
+      "raw_rows": 3,
+      "summary_status": "pass"
+    },
+    {
+      "condition": "negative_pheromone_avoid",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "negative_pheromone_control",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "nest_relocation_quorum_choice",
+      "raw_rows": 3,
+      "summary_status": "pass"
+    },
+    {
+      "condition": "no_jam_high_density",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "no_jam_low_density",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "rain_food_removal_washout",
+      "raw_rows": 3,
+      "summary_status": "pass"
+    },
+    {
+      "condition": "single_food_trail",
+      "raw_rows": 3,
+      "summary_status": "pass"
+    },
+    {
+      "condition": "stochasticity_relocation",
+      "raw_rows": 12,
+      "summary_status": "pass"
+    },
+    {
+      "condition": "task_demand_brood",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "task_demand_resource",
+      "raw_rows": 3,
+      "summary_status": ""
+    }
+  ],
+  "rows": [
+    {
+      "condition": "army_ant_mill_mortality",
+      "metric": "corpse_fraction",
+      "n": 3,
+      "mean": 0.759524,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 0.759524,
+      "ci95_high": 0.759524,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "army_ant_mill_mortality",
+      "metric": "mills",
+      "n": 3,
+      "mean": 1.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 1.0,
+      "ci95_high": 1.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "army_ant_mill_mortality",
+      "metric": "survivor_fraction",
+      "n": 3,
+      "mean": 0.247619,
+      "sd": 0.002381,
+      "sem": 0.001375,
+      "ci95_low": 0.245238,
+      "ci95_high": 0.25,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_high_density_bridge",
+      "metric": "avg_traffic_load",
+      "n": 3,
+      "mean": 0.119,
+      "sd": 0.027495,
+      "sem": 0.015875,
+      "ci95_low": 0.095,
+      "ci95_high": 0.149,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_high_density_bridge",
+      "metric": "lower_segment_flow",
+      "n": 3,
+      "mean": 265.304936,
+      "sd": 52.516104,
+      "sem": 30.320187,
+      "ci95_low": 204.708794,
+      "ci95_high": 297.60846,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_high_density_bridge",
+      "metric": "total_crossings",
+      "n": 3,
+      "mean": 767.0,
+      "sd": 120.465763,
+      "sem": 69.550941,
+      "ci95_low": 663.0,
+      "ci95_high": 899.0,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_high_density_bridge",
+      "metric": "upper_segment_flow",
+      "n": 3,
+      "mean": 119.450362,
+      "sd": 71.433753,
+      "sem": 41.242296,
+      "ci95_low": 70.245906,
+      "ci95_high": 201.384711,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_low_density_bridge",
+      "metric": "avg_traffic_load",
+      "n": 3,
+      "mean": 0.027667,
+      "sd": 0.023245,
+      "sem": 0.013421,
+      "ci95_low": 0.01,
+      "ci95_high": 0.054,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_low_density_bridge",
+      "metric": "lower_segment_flow",
+      "n": 3,
+      "mean": 103.350067,
+      "sd": 35.139764,
+      "sem": 20.287952,
+      "ci95_low": 64.835023,
+      "ci95_high": 133.664106,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_low_density_bridge",
+      "metric": "total_crossings",
+      "n": 3,
+      "mean": 269.666667,
+      "sd": 14.153916,
+      "sem": 8.171767,
+      "ci95_low": 261.0,
+      "ci95_high": 286.0,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "crowding_low_density_bridge",
+      "metric": "upper_segment_flow",
+      "n": 3,
+      "mean": 39.856904,
+      "sd": 29.610799,
+      "sem": 17.095803,
+      "ci95_low": 18.926591,
+      "ci95_high": 73.736606,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_lower_bias",
+      "metric": "return_branch_curve_error",
+      "n": 3,
+      "mean": 0.258367,
+      "sd": 0.089204,
+      "sem": 0.051502,
+      "ci95_low": 0.155642,
+      "ci95_high": 0.316285,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_lower_bias",
+      "metric": "return_dominance",
+      "n": 3,
+      "mean": 0.685759,
+      "sd": 0.33434,
+      "sem": 0.193031,
+      "ci95_low": 0.3,
+      "ci95_high": 0.891892,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_lower_bias",
+      "metric": "seeded_return_crossings",
+      "n": 3,
+      "mean": 90.333333,
+      "sd": 17.953644,
+      "sem": 10.365541,
+      "ci95_low": 70.0,
+      "ci95_high": 101.666667,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_lower_bias",
+      "metric": "seeded_return_fraction",
+      "n": 3,
+      "mean": 0.842879,
+      "sd": 0.16717,
+      "sem": 0.096516,
+      "ci95_low": 0.65,
+      "ci95_high": 0.945946,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_unbiased_baseline",
+      "metric": "return_branch_curve_error",
+      "n": 3,
+      "mean": 0.453008,
+      "sd": 0.257291,
+      "sem": 0.148547,
+      "ci95_low": 0.155916,
+      "ci95_high": 0.60247,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_unbiased_baseline",
+      "metric": "return_dominance",
+      "n": 3,
+      "mean": 0.556366,
+      "sd": 0.415359,
+      "sem": 0.239808,
+      "ci95_low": 0.076923,
+      "ci95_high": 0.807229,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_unbiased_baseline",
+      "metric": "seeded_return_fraction",
+      "n": 3,
+      "mean": 0.247458,
+      "sd": 0.252078,
+      "sem": 0.145537,
+      "ci95_low": 0.096386,
+      "ci95_high": 0.538462,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_upper_bias",
+      "metric": "return_branch_curve_error",
+      "n": 3,
+      "mean": 0.26188,
+      "sd": 0.081678,
+      "sem": 0.047157,
+      "ci95_low": 0.167599,
+      "ci95_high": 0.311167,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_upper_bias",
+      "metric": "return_dominance",
+      "n": 3,
+      "mean": 0.382337,
+      "sd": 0.227077,
+      "sem": 0.131103,
+      "ci95_low": 0.123457,
+      "ci95_high": 0.547826,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_upper_bias",
+      "metric": "seeded_return_crossings",
+      "n": 3,
+      "mean": 48.0,
+      "sd": 37.242449,
+      "sem": 21.501938,
+      "ci95_low": 26.0,
+      "ci95_high": 91.0,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "double_bridge_upper_bias",
+      "metric": "seeded_return_fraction",
+      "n": 3,
+      "mean": 0.349984,
+      "sd": 0.18426,
+      "sem": 0.106383,
+      "ci95_low": 0.226087,
+      "ci95_high": 0.561728,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "food_quality_recruitment",
+      "metric": "avg_collected_food_quality",
+      "n": 6,
+      "mean": 1.334,
+      "sd": 0.433199,
+      "sem": 0.176853,
+      "ci95_low": 1.018333,
+      "ci95_high": 1.633237,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "food_quality_recruitment",
+      "metric": "high_quality_food_trips",
+      "n": 6,
+      "mean": 158.833333,
+      "sd": 170.785733,
+      "sem": 69.722984,
+      "ci95_low": 45.6625,
+      "ci95_high": 272.833333,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "food_quality_recruitment",
+      "metric": "low_quality_food_trips",
+      "n": 6,
+      "mean": 144.0,
+      "sd": 184.323628,
+      "sem": 75.249806,
+      "ci95_low": 19.666667,
+      "ci95_high": 268.333333,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_cleanup_latency",
+      "metric": "corpse_moves",
+      "n": 3,
+      "mean": 34.0,
+      "sd": 2.0,
+      "sem": 1.154701,
+      "ci95_low": 32.0,
+      "ci95_high": 36.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_cleanup_latency",
+      "metric": "disposed_corpses",
+      "n": 3,
+      "mean": 34.333333,
+      "sd": 2.081666,
+      "sem": 1.20185,
+      "ci95_low": 32.0,
+      "ci95_high": 36.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_cleanup_latency",
+      "metric": "final_nest_corpses",
+      "n": 3,
+      "mean": 0.333333,
+      "sd": 0.57735,
+      "sem": 0.333333,
+      "ci95_low": 0.0,
+      "ci95_high": 1.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_cleanup_latency",
+      "metric": "initial_nest_corpses",
+      "n": 3,
+      "mean": 36.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 36.0,
+      "ci95_high": 36.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "nest_relocation_quorum_choice",
+      "metric": "high_quality_site_visits",
+      "n": 3,
+      "mean": 73.973333,
+      "sd": 12.256661,
+      "sem": 7.076386,
+      "ci95_low": 66.54,
+      "ci95_high": 88.12,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "nest_relocation_quorum_choice",
+      "metric": "low_quality_site_visits",
+      "n": 3,
+      "mean": 0.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "nest_relocation_quorum_choice",
+      "metric": "nest_quorum_events",
+      "n": 3,
+      "mean": 1.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 1.0,
+      "ci95_high": 1.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "nest_relocation_quorum_choice",
+      "metric": "nest_relocation_completed",
+      "n": 3,
+      "mean": 1.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 1.0,
+      "ci95_high": 1.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "nest_relocation_quorum_choice",
+      "metric": "nest_relocations",
+      "n": 3,
+      "mean": 1.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 1.0,
+      "ci95_high": 1.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_high_density",
+      "metric": "mean_displacement",
+      "n": 3,
+      "mean": 142.616325,
+      "sd": 12.979128,
+      "sem": 7.493503,
+      "ci95_low": 132.625697,
+      "ci95_high": 157.28626,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_high_density",
+      "metric": "segment_abs_forward_speed",
+      "n": 3,
+      "mean": 3.510933,
+      "sd": 0.435914,
+      "sem": 0.251675,
+      "ci95_low": 3.1494,
+      "ci95_high": 3.995,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_high_density",
+      "metric": "segment_density",
+      "n": 3,
+      "mean": 0.005367,
+      "sd": 0.002475,
+      "sem": 0.001429,
+      "ci95_low": 0.00258,
+      "ci95_high": 0.00731,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_high_density",
+      "metric": "segment_flow",
+      "n": 3,
+      "mean": 396.950267,
+      "sd": 34.451111,
+      "sem": 19.890358,
+      "ci95_low": 362.5602,
+      "ci95_high": 431.4621,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_low_density",
+      "metric": "mean_displacement",
+      "n": 3,
+      "mean": 212.269832,
+      "sd": 17.119855,
+      "sem": 9.884153,
+      "ci95_low": 201.227369,
+      "ci95_high": 231.990974,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_low_density",
+      "metric": "segment_abs_forward_speed",
+      "n": 3,
+      "mean": 6.826467,
+      "sd": 0.700212,
+      "sem": 0.404268,
+      "ci95_low": 6.0183,
+      "ci95_high": 7.2517,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_low_density",
+      "metric": "segment_density",
+      "n": 3,
+      "mean": 0.001077,
+      "sd": 0.0005,
+      "sem": 0.000289,
+      "ci95_low": 0.0005,
+      "ci95_high": 0.00139,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_low_density",
+      "metric": "segment_flow",
+      "n": 3,
+      "mean": 154.181033,
+      "sd": 10.813137,
+      "sem": 6.242968,
+      "ci95_low": 144.4403,
+      "ci95_high": 165.8162,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "rain_food_removal_washout",
+      "metric": "food_pheromone_ratio",
+      "n": 3,
+      "mean": 6.8e-05,
+      "sd": 6e-05,
+      "sem": 3.5e-05,
+      "ci95_low": 1.1e-05,
+      "ci95_high": 0.000131,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "rain_food_removal_washout",
+      "metric": "nest_pheromone_ratio",
+      "n": 3,
+      "mean": 0.003645,
+      "sd": 0.000893,
+      "sem": 0.000515,
+      "ci95_low": 0.002643,
+      "ci95_high": 0.004356,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "single_food_trail",
+      "metric": "food_collected",
+      "n": 3,
+      "mean": 651.333333,
+      "sd": 77.487633,
+      "sem": 44.737506,
+      "ci95_low": 592.0,
+      "ci95_high": 739.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "single_food_trail",
+      "metric": "food_trips",
+      "n": 3,
+      "mean": 131.666667,
+      "sd": 13.428825,
+      "sem": 7.753136,
+      "ci95_low": 122.0,
+      "ci95_high": 147.0,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "single_food_trail",
+      "metric": "gradient_alignment_ratio",
+      "n": 3,
+      "mean": 0.971333,
+      "sd": 0.004041,
+      "sem": 0.002333,
+      "ci95_low": 0.967,
+      "ci95_high": 0.975,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "single_food_trail",
+      "metric": "trail_segment_mean_speed",
+      "n": 3,
+      "mean": 8.530767,
+      "sd": 0.597495,
+      "sem": 0.344964,
+      "ci95_low": 8.1283,
+      "ci95_high": 9.2173,
+      "summary_status": "pass",
+      "is_core_metric": "yes"
+    }
+  ]
+}
