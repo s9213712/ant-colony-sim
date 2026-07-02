@@ -194,12 +194,12 @@ Run a multi-paper validation pass that maps literature claims to explicit simula
 ```bash
 python3 ant_colony_sim/experiments/paper_conditions_probe.py \
   --seeds 1-3 \
-  --output ant_colony_sim/outputs/paper_conditions_v4.csv \
-  --json-output ant_colony_sim/outputs/paper_conditions_v4.json \
-  --report-output ant_colony_sim/outputs/paper_conditions_report_v4.md
+  --output ant_colony_sim/outputs/paper_conditions_v5.csv \
+  --json-output ant_colony_sim/outputs/paper_conditions_v5.json \
+  --report-output ant_colony_sim/outputs/paper_conditions_report_v5.md
 ```
 
-The current `v4` matrix covers:
+The current `v5` matrix covers:
 
 - Perna et al. 2012: local pheromone trail formation and the missing Weber-law turning export;
 - Ramirez et al. 2018: tropotaxis gradient-response proxy and the missing sensing/turning logs;
@@ -215,8 +215,10 @@ The current `v4` matrix covers:
 - Aswale et al. 2022: misleading food pheromone attack and cautionary-pheromone defense proxy.
 - Jackson & Chaline 2007: food quality and trail-recruitment strength.
 - Avanzi, Lisart & Detrain 2024: corpse/death cue response and necrophoresis cleanup latency.
+- Baudier et al. 2019: brood-stage-sensitive nest microclimate and heat/dry brood stress.
+- Pratt et al. 2002: nest-site quality, quorum and colony relocation.
 
-`outputs/paper_conditions_report_v4.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
+`outputs/paper_conditions_report_v5.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
 
 Current `v4` additions show:
 
@@ -226,6 +228,9 @@ Current `v4` additions show:
 - misleading pheromone is only partial because the static fake trail does not reduce food trips; an active detractor-agent mechanism is needed.
 - food-quality recruitment is now testable and qualitatively aligned, but lacks species-specific concentration calibration.
 - necrophoresis cleanup is now testable and qualitatively aligned, but lacks corpse-age chemistry, pathogen state and interaction-network validation.
+- brood microclimate and nest relocation/quorum are now testable through general rules, but still need species-specific numerical calibration.
+
+Experiments may change parameters, initial conditions and environmental state only. They must not inject paper-specific behavior or force ant task/state transitions; run `python experiments/check_validation_boundaries.py` to enforce this boundary.
 
 ## Literature Corpus Builder
 
@@ -251,7 +256,7 @@ Evaluate all 120 corpus records against the current paper-condition probes:
 ```bash
 python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
   --corpus ant_colony_sim/outputs/literature_corpus_100.json \
-  --conditions ant_colony_sim/outputs/paper_conditions_v4.json \
+  --conditions ant_colony_sim/outputs/paper_conditions_v5.json \
   --csv-output ant_colony_sim/outputs/literature_corpus_120_evaluation.csv \
   --json-output ant_colony_sim/outputs/literature_corpus_120_evaluation.json \
   --md-output ant_colony_sim/outputs/literature_corpus_120_evaluation.md
@@ -259,10 +264,9 @@ python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
 
 Current result:
 
-- `pass`: 8
+- `pass`: 13
 - `partial`: 73
-- `not_covered`: 7
-- `not_biological_target`: 32
+- `not_biological_target`: 34
 
 Interpretation: most of the 120 papers are not yet correctly simulated in a strict sense. They are either covered only by a generic proxy, need new validation conditions, or are algorithmic/robotics papers that should not be treated as direct biological targets.
 
@@ -278,8 +282,7 @@ python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
 
 Current backlog:
 
-- `P0_missing_biology_condition`: 7
-- `P1_exact_condition_partial`: 6
-- `P2_proxy_only`: 67
-- `P3_algorithmic_reference_only`: 32
-- total: 112
+- `P1_exact_condition_partial`: 4
+- `P2_proxy_only`: 69
+- `P3_algorithmic_reference_only`: 34
+- total: 107

@@ -1,27 +1,24 @@
 {
-  "generated_at": "2026-07-02T00:43:49Z",
+  "generated_at": "2026-07-02T02:32:20Z",
   "corpus": "outputs/literature_corpus_100.json",
-  "conditions": "outputs/paper_conditions_v4.json",
+  "conditions": "outputs/paper_conditions_v5.json",
   "summary": {
     "count": 120,
     "status": {
       "partial": 73,
-      "not_biological_target": 32,
-      "pass": 8,
-      "not_covered": 7
+      "not_biological_target": 34,
+      "pass": 13
     },
     "scope": {
-      "category_proxy": 72,
-      "algorithmic_or_robotics_analogy": 32,
-      "exact_paper_condition": 14,
-      "unmapped": 2
+      "category_proxy": 69,
+      "algorithmic_or_robotics_analogy": 34,
+      "exact_paper_condition": 17
     },
     "verdict": {
-      "covered_by_generic_proxy": 67,
-      "not_a_direct_biology_validation": 32,
-      "aligned_qualitative": 8,
-      "not_currently_testable": 7,
-      "partial_alignment": 6
+      "covered_by_generic_proxy": 69,
+      "not_a_direct_biology_validation": 34,
+      "aligned_qualitative": 13,
+      "partial_alignment": 4
     }
   },
   "rows": [
@@ -75,8 +72,8 @@
       "url": "https://arxiv.org/abs/1508.06816",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
       "matched_condition": "two-cue adaptation proxy",
       "evidence_paper_id": "malickova_2015",
       "gap": "The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics."
@@ -187,8 +184,8 @@
       "url": "https://arxiv.org/abs/1805.05598",
       "categories": "pheromone_trail_foraging",
       "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
       "matched_condition": "stochasticity_relocation",
       "evidence_paper_id": "shiraishi_2018",
       "gap": "The current check measures relative relocation adaptation. It does not yet fit the paper's environment-dependent optimal stochasticity distribution."
@@ -663,11 +660,11 @@
       "url": "https://doi.org/10.1101/2024.05.13.593812",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor;brood_nest_microclimate;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_current_paper_conditions",
-      "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "brood_microclimate_stage_thermoregulation",
+      "evidence_paper_id": "baudier_2019",
+      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
     },
     {
       "index": 47,
@@ -732,12 +729,12 @@
       "doi": "10.1111/ecog.04064",
       "url": "https://doi.org/10.1111/ecog.04064",
       "categories": "brood_nest_microclimate;army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_current_paper_conditions",
-      "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
+      "scope": "exact_paper_condition",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
+      "matched_condition": "brood_microclimate_stage_thermoregulation",
+      "evidence_paper_id": "baudier_2019",
+      "gap": "The simulator now tests brood microclimate and stage-dependent thermoregulation, but still lacks fitted metabolic heat budgets, nest-site choice geometry and species-specific brood survival curves."
     },
     {
       "index": 52,
@@ -775,11 +772,11 @@
       "url": "https://doi.org/10.1101/101600",
       "categories": "pheromone_trail_foraging;brood_nest_microclimate;army_ant_raids_mills;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_current_paper_conditions",
-      "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "brood_microclimate_stage_thermoregulation",
+      "evidence_paper_id": "baudier_2019",
+      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
     },
     {
       "index": 55,
@@ -788,12 +785,12 @@
       "doi": "10.1007/s00265-002-0487-x",
       "url": "https://doi.org/10.1007/s00265-002-0487-x",
       "categories": "pheromone_trail_foraging;nest_relocation_house_hunting",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "single_food_trail",
-      "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "scope": "exact_paper_condition",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
+      "matched_condition": "nest_relocation_quorum_choice",
+      "evidence_paper_id": "pratt_2002",
+      "gap": "The simulator now has a quorum relocation proxy, but lacks species-specific tandem running, carrying trajectories, site-volume geometry and fitted quorum thresholds."
     },
     {
       "index": 56,
@@ -942,12 +939,12 @@
       "doi": "10.1016/j.anbehav.2012.08.036",
       "url": "https://doi.org/10.1016/j.anbehav.2012.08.036",
       "categories": "pheromone_trail_foraging;nest_relocation_house_hunting",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "single_food_trail",
-      "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "scope": "exact_paper_condition",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
+      "matched_condition": "nest_relocation_quorum_choice",
+      "evidence_paper_id": "pratt_2002",
+      "gap": "The simulator now has a quorum relocation proxy, but lacks species-specific tandem running, carrying trajectories, site-volume geometry and fitted quorum thresholds."
     },
     {
       "index": 67,
@@ -1292,12 +1289,12 @@
       "doi": "10.1109/cec.2019.8789942",
       "url": "https://doi.org/10.1109/cec.2019.8789942",
       "categories": "nest_relocation_house_hunting;computational_swarm_model",
-      "scope": "unmapped",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
+      "scope": "algorithmic_or_robotics_analogy",
+      "status": "not_biological_target",
+      "verdict": "not_a_direct_biology_validation",
       "matched_condition": "",
       "evidence_paper_id": "",
-      "gap": "No simulation condition has been mapped for this paper yet."
+      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
     },
     {
       "index": 92,
@@ -1349,11 +1346,11 @@
       "url": "https://doi.org/10.1101/2021.10.30.466564",
       "categories": "task_allocation_division_labor;brood_nest_microclimate;networks_interactions;computational_swarm_model",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_current_paper_conditions",
-      "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "brood_microclimate_stage_thermoregulation",
+      "evidence_paper_id": "baudier_2019",
+      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
     },
     {
       "index": 96,
@@ -1489,11 +1486,11 @@
       "url": "https://doi.org/10.55730/1300-0179.3265",
       "categories": "pheromone_trail_foraging;brood_nest_microclimate",
       "scope": "category_proxy",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
-      "matched_condition": "brood_microclimate_needed",
-      "evidence_paper_id": "not_in_current_paper_conditions",
-      "gap": "Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet."
+      "status": "partial",
+      "verdict": "covered_by_generic_proxy",
+      "matched_condition": "brood_microclimate_stage_thermoregulation",
+      "evidence_paper_id": "baudier_2019",
+      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
     },
     {
       "index": 106,
@@ -1600,12 +1597,12 @@
       "doi": "10.1162/isal_a_00231",
       "url": "https://doi.org/10.1162/isal_a_00231",
       "categories": "nest_relocation_house_hunting;computational_swarm_model",
-      "scope": "unmapped",
-      "status": "not_covered",
-      "verdict": "not_currently_testable",
+      "scope": "algorithmic_or_robotics_analogy",
+      "status": "not_biological_target",
+      "verdict": "not_a_direct_biology_validation",
       "matched_condition": "",
       "evidence_paper_id": "",
-      "gap": "No simulation condition has been mapped for this paper yet."
+      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
     },
     {
       "index": 114,

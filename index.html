@@ -875,7 +875,7 @@
     };
 
     const MODEL_UNITS = {
-      modelVersion: '0.5-adaptive-stochasticity',
+      modelVersion: '0.6-general-behavior-rules',
       calibrationStatus: 'provisional_behavioral_units',
       pxPerCm: 20,
       simDaySeconds: 86400
@@ -1085,13 +1085,19 @@
       const ambientPull = 0.00058 * dt * nestBuffer;
       const carePull = 0.00082 * dt * care;
       const waterSupport = world.waterStore > 0 ? clamp(world.waterStore / 80, 0.15, 1.2) : 0.05;
+      const broodTotal = Math.max(1, world.eggs + world.larvae + world.pupae);
+      const larvalShare = clamp(world.larvae / broodTotal, 0, 1);
+      const pupalShare = clamp(world.pupae / broodTotal, 0, 1);
+      const coldBias = clamp((species.broodTemp - ambientTemp) / 12, 0, 1);
+      const stageThermalPriority = clamp(0.86 + pupalShare * 0.42 - larvalShare * 0.1, 0.62, 1.35);
+      const stageTargetTemp = species.broodTemp + coldBias * (pupalShare * 1.25 - larvalShare * 0.85);
 
       world.broodClimate.temp += (ambientTemp - world.broodClimate.temp) * ambientPull;
       world.broodClimate.humidity += (ambientHumidity - world.broodClimate.humidity) * ambientPull;
-      world.broodClimate.temp += (species.broodTemp - world.broodClimate.temp) * carePull;
+      world.broodClimate.temp += (stageTargetTemp - world.broodClimate.temp) * carePull * stageThermalPriority;
       world.broodClimate.humidity += (species.broodHumidity - world.broodClimate.humidity) * carePull * waterSupport;
 
-      const tempStress = Math.abs(world.broodClimate.temp - species.broodTemp) / species.broodTempTolerance;
+      const tempStress = Math.abs(world.broodClimate.temp - stageTargetTemp) / species.broodTempTolerance;
       const humidityStress = Math.abs(world.broodClimate.humidity - species.broodHumidity) / species.broodHumidityTolerance;
       world.broodClimate.humidity = clamp(world.broodClimate.humidity, 5, 98);
       world.broodClimate.stress = clamp((tempStress + humidityStress) * 0.5, 0, 1.8);
@@ -1309,6 +1315,17 @@
       world.water = [];
       world.enemies = [];
       world.rocks = [];
+      world.nestSites = [];
+      world.relocation = {
+        active: false,
+        targetId: null,
+        quorum: 0,
+        visits: {},
+        transports: 0,
+        completed: false,
+        oldNestX: world.nest.x,
+        oldNestY: world.nest.y
+      };
       world.selected = null;
       world.foodStore = 0;
       world.waterStore = 0;
@@ -1341,6 +1358,13 @@
         lowQualityFoodTrips: 0,
         foodSourceTrips: {},
         foodSourceCollected: {},
+        eggToLarva: 0,
+        larvaToPupa: 0,
+        pupaToWorker: 0,
+        broodClimateLosses: 0,
+        nestSiteVisits: 0,
+        quorumEvents: 0,
+        nestRelocations: 0,
         waterTrips: 0,
         waterCollected: 0,
         corpseMoves: 0
@@ -1423,6 +1447,37 @@
 
     function addWater(x, y, amount = 70) {
       world.water.push({ x, y, amount, max: amount, r: clamp(10 + amount * 0.05, 12, 24) });
+    }
+
+    function addNestSite(x, y, quality = 1, label = null) {
+      const normalizedQuality = clamp(Number(quality) || 1, 0.2, 2.5);
+      const site = {
+        id: `nest_site_${world.nestSites.length + 1}`,
+        x: clamp(x, 40, world.width - 40),
+        y: clamp(y, 40, world.height - 40),
+        quality: normalizedQuality,
+        label: label || (normalizedQuality >= 1.25 ? 'high_quality_site' : 'candidate_site'),
+        visits: 0,
+        quorumReached: false
+      };
+      world.nestSites.push(site);
+      return site;
+    }
+
+    function triggerNestRelocation(quorumFraction = 0.08) {
+      world.relocation.active = true;
+      world.relocation.targetId = null;
+      world.relocation.quorum = Math.max(8, Math.round(world.ants.length * clamp(Number(quorumFraction) || 0.08, 0.02, 0.3)));
+      world.relocation.visits = {};
+      world.relocation.transports = 0;
+      world.relocation.completed = false;
+      world.relocation.oldNestX = world.nest.x;
+      world.relocation.oldNestY = world.nest.y;
+      for (const site of world.nestSites) {
+        site.visits = 0;
+        site.quorumReached = false;
+      }
+      return world.relocation;
     }
 
     function addEnemy(x, y) {
@@ -1748,7 +1803,7 @@
         if (food.amount <= 0) continue;
         const d = dist(ant.x, ant.y, food.x, food.y);
         const quality = clamp(food.quality ?? 1, 0.2, 3);
-        const utilityDistance = d / Math.pow(quality, 0.82);
+        const utilityDistance = d / Math.pow(quality, 1.35);
         if (utilityDistance < bestScore) {
           bestScore = utilityDistance;
           bestD = d;
@@ -2148,7 +2203,7 @@
           ant.state = 'carrying food';
           const foodTrailReinforcement = 1 + clamp(world.pheromones.food.sample(ant.x, ant.y) / 130, 0, 0.85);
           const carriedQuality = clamp(ant.carryingFoodQuality || 1, 0.2, 3);
-          const qualityRecruitment = clamp(0.58 + carriedQuality * 0.52, 0.45, 2.15);
+          const qualityRecruitment = clamp(0.32 + carriedQuality * 0.82, 0.32, 2.55);
           world.pheromones.food.add(ant.x, ant.y, 7.5 * strength * species.pheromoneDeposit * (0.7 + pressure.hunger) * qualityRecruitment * foodTrailReinforcement * pheromoneDeposit);
           const nestAngle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
           ant.angle += normAngle(nestAngle - ant.angle) * 0.045;
@@ -2223,6 +2278,7 @@
             ant.memory.foodSource = ant.carryingFoodSource;
             ant.memory.foodStrength = Math.min(1, (ant.memory.foodStrength || 0) + 0.34 + foodQuality * 0.2 + exploitBias * 0.16);
             ant.memory.foodAge = 0;
+            world.pheromones.food.add(food.x, food.y, 16 * foodQuality * species.pheromoneDeposit * pheromoneDeposit);
             ant.state = 'carrying food';
             ant.angle = angleTo(ant.x, ant.y, world.nest.x, world.nest.y);
           } else if (food && foodD < resourceScanRange) {
@@ -2393,10 +2449,12 @@
       if (world.eggs > 0 && random() < 0.0018 * dt * careFactor * species.broodRate * climateFactor) {
         world.eggs -= 1;
         world.larvae += 1;
+        world.stats.eggToLarva += 1;
       }
       if (world.larvae > 0 && random() < 0.0012 * dt * careFactor * foodFactor * waterFactor * species.broodRate * climateFactor * (0.6 + pressure.brood)) {
         world.larvae -= 1;
         world.pupae += 1;
+        world.stats.larvaToPupa += 1;
         if (world.foodStore > 0 && world.waterStore > 0) {
           world.foodStore -= 1;
           world.waterStore -= 1;
@@ -2407,14 +2465,95 @@
       }
       if (world.pupae > 0 && random() < 0.0009 * dt * careFactor * species.broodRate * climateFactor) {
         world.pupae -= 1;
+        world.stats.pupaToWorker += 1;
         const firstCohort = world.ants.length < 30;
         const role = firstCohort ? 'nurse' : random() < Number(ui.soldierRatio.value) / 100 ? 'soldier' : 'worker';
         spawnAnts(1, role, true);
       }
       if (world.broodClimate.stress > 1.05 && world.eggs + world.larvae > 0 && random() < 0.00022 * dt * (world.broodClimate.stress - 0.85)) {
-        if (world.eggs > 0 && random() < 0.58) world.eggs = Math.max(0, world.eggs - 1);
-        else if (world.larvae > 0) world.larvae = Math.max(0, world.larvae - 1);
+        if (world.eggs > 0 && random() < 0.58) {
+          world.eggs = Math.max(0, world.eggs - 1);
+          world.stats.broodClimateLosses += 1;
+        } else if (world.larvae > 0) {
+          world.larvae = Math.max(0, world.larvae - 1);
+          world.stats.broodClimateLosses += 1;
+        }
       }
+    }
+
+    function updateNestRelocation(dt) {
+      if (!world.relocation.active || !world.nestSites.length || !world.ants.length) return;
+      const livingAnts = world.ants.filter(ant => ant.health > 0);
+      if (!livingAnts.length) return;
+
+      for (const ant of livingAnts) {
+        const scoutBias = ant.role === 'worker' ? 1 : ant.role === 'soldier' ? 0.55 : 0.35;
+        const canScout = ant.task === 'explore' || ant.task === 'patrol' || ant.state === 'exploring' || ant.state === 'patrolling';
+        if (!canScout || random() > 0.0019 * dt * scoutBias) continue;
+        let best = null;
+        let bestScore = -Infinity;
+        for (const site of world.nestSites) {
+          const d = Math.max(20, dist(ant.x, ant.y, site.x, site.y));
+          const socialSignal = 1 + (site.visits || 0) / Math.max(world.relocation.quorum, 1);
+          const score = Math.pow(site.quality, 1.7) * socialSignal / Math.pow(d / 180, 0.72) + rand(-0.08, 0.08);
+          if (score > bestScore) {
+            bestScore = score;
+            best = site;
+          }
+        }
+        if (!best) continue;
+        const visitStrength = clamp(best.quality * rand(0.65, 1.35), 0.2, 3);
+        best.visits += visitStrength;
+        world.relocation.visits[best.id] = best.visits;
+        world.stats.nestSiteVisits += 1;
+        ant.memory.nestSiteX = best.x;
+        ant.memory.nestSiteY = best.y;
+        ant.state = 'assessing nest site';
+        ant.angle = angleTo(ant.x, ant.y, best.x, best.y);
+        world.pheromones.nest.add(best.x, best.y, 12 * best.quality);
+        if (!best.quorumReached && best.visits >= world.relocation.quorum) {
+          best.quorumReached = true;
+          world.relocation.targetId = best.id;
+          world.stats.quorumEvents += 1;
+        }
+      }
+
+      const target = world.nestSites.find(site => site.id === world.relocation.targetId);
+      if (!target) return;
+      const broodTotal = world.eggs + world.larvae + world.pupae;
+      const transportThreshold = Math.max(35, broodTotal * 0.72 + world.queens.length * 18);
+      const transportRate = livingAnts.length * clamp(target.quality, 0.4, 2.2) * 0.00055 * dt;
+      world.relocation.transports += transportRate;
+      for (const ant of livingAnts) {
+        if (random() < 0.0012 * dt && dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius + 130) {
+          ant.state = 'transporting brood';
+          ant.angle = angleTo(ant.x, ant.y, target.x, target.y);
+        }
+      }
+      if (world.relocation.transports < transportThreshold) return;
+
+      world.nest.x = target.x;
+      world.nest.y = target.y;
+      setupRooms();
+      for (const queen of world.queens) {
+        queen.x = world.nest.x;
+        queen.y = world.nest.y - 18;
+        queen.homeX = queen.x;
+        queen.homeY = queen.y;
+        queen.state = 'relocated';
+      }
+      for (const ant of livingAnts) {
+        if (random() < 0.7) {
+          const a = rand(0, Math.PI * 2);
+          const r = Math.sqrt(random()) * world.nest.radius * 0.85;
+          ant.x = world.nest.x + Math.cos(a) * r;
+          ant.y = world.nest.y + Math.sin(a) * r;
+          ant.state = ant.role === 'nurse' ? 'brood care' : 'settling new nest';
+        }
+      }
+      world.relocation.active = false;
+      world.relocation.completed = true;
+      world.stats.nestRelocations += 1;
     }
 
     function update(dt) {
@@ -2435,6 +2574,7 @@
       updateCorpses(dt);
       updateQueens(dt);
       updateBroodClimate(dt);
+      updateNestRelocation(dt);
       for (let i = world.queens.length - 1; i >= 0; i--) {
         const queen = world.queens[i];
         if (queen.health <= 0) {
@@ -2542,6 +2682,25 @@
         }
       }
       ctx.restore();
+    }
+
+    function drawNestSites() {
+      for (const site of world.nestSites) {
+        const progress = world.relocation.quorum ? clamp(site.visits / world.relocation.quorum, 0, 1) : 0;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(site.x, site.y, 22 + progress * 12, 0, Math.PI * 2);
+        ctx.fillStyle = site.quorumReached ? 'rgba(103,197,135,0.22)' : 'rgba(101,167,232,0.16)';
+        ctx.fill();
+        ctx.strokeStyle = site.quorumReached ? 'rgba(103,197,135,0.9)' : 'rgba(101,167,232,0.72)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(site.x, site.y, 7, 0, Math.PI * 2);
+        ctx.fillStyle = site.quality >= 1.25 ? '#67c587' : '#65a7e8';
+        ctx.fill();
+        ctx.restore();
+      }
     }
 
     function roundRect(x, y, w, h, r) {
@@ -2767,6 +2926,7 @@
       if (ui.layers.death.checked) world.pheromones.death.render([155, 140, 122], 0.5);
       if (ui.layers.avoid.checked) world.pheromones.avoid.render([216, 139, 189], 0.48);
       drawNest();
+      drawNestSites();
       drawRocks();
       drawFood();
       drawWater();
@@ -2806,6 +2966,17 @@
         arena_width_cm: Number((world.width / MODEL_UNITS.pxPerCm).toFixed(2)),
         arena_height_cm: Number((world.height / MODEL_UNITS.pxPerCm).toFixed(2)),
         nest_radius_cm: Number((world.nest.radius / MODEL_UNITS.pxPerCm).toFixed(2)),
+        nest_x: Number(world.nest.x.toFixed(1)),
+        nest_y: Number(world.nest.y.toFixed(1)),
+        nest_site_count: world.nestSites.length,
+        nest_site_visits: world.stats.nestSiteVisits,
+        nest_quorum_events: world.stats.quorumEvents,
+        nest_relocations: world.stats.nestRelocations,
+        nest_relocation_active: world.relocation.active ? 1 : 0,
+        nest_relocation_completed: world.relocation.completed ? 1 : 0,
+        nest_relocation_transports: Number(world.relocation.transports.toFixed(2)),
+        nest_relocation_quorum: world.relocation.quorum,
+        nest_relocation_target: world.relocation.targetId || '',
         sim_day_seconds: MODEL_UNITS.simDaySeconds,
         seed: world.seed,
         random_state: world.randomState,
@@ -2901,6 +3072,10 @@
         brood_temp: Number(world.broodClimate.temp.toFixed(1)),
         brood_humidity: Number(world.broodClimate.humidity.toFixed(1)),
         brood_stress: Number(world.broodClimate.stress.toFixed(2)),
+        egg_to_larva: world.stats.eggToLarva,
+        larva_to_pupa: world.stats.larvaToPupa,
+        pupa_to_worker: world.stats.pupaToWorker,
+        brood_climate_losses: world.stats.broodClimateLosses,
         food_trips: world.stats.foodTrips,
         high_quality_food_trips: world.stats.highQualityFoodTrips,
         low_quality_food_trips: world.stats.lowQualityFoodTrips,
@@ -3321,6 +3496,7 @@
       resetWorld,
       addFood,
       addWater,
+      addNestSite,
       addEnemy,
       addAntAt,
       setupFoundingColony,
@@ -3336,6 +3512,7 @@
       triggerHeatwave,
       triggerFlood,
       triggerMassDeath,
+      triggerNestRelocation,
       setSeed,
       setParam,
       tick,

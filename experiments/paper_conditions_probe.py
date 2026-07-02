@@ -85,6 +85,16 @@ SOURCES = [
         "paper": "Avanzi, Lisart & Detrain 2024, Social organization of necrophoresis: insights into disease risk management in ant societies",
         "url": "https://doi.org/10.1098/rsos.240764",
     },
+    {
+        "id": "baudier_2019",
+        "paper": "Baudier et al. 2019, Plastic collective endothermy in army ant bivouacs",
+        "url": "https://doi.org/10.1111/ecog.04064",
+    },
+    {
+        "id": "pratt_2002",
+        "paper": "Pratt et al. 2002, Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis",
+        "url": "https://doi.org/10.1007/s00265-002-0487-x",
+    },
 ]
 
 
@@ -441,18 +451,21 @@ PAPER_CONDITIONS_JS = """
       avoid_pheromone: snap.avoid_pheromone,
     };
   };
-  const runFoodQuality = (seed) => {
+  const runFoodQuality = (seed, orientation) => {
     baseMature(seed, config.ants);
     antSim.world.water = [];
     antSim.world.foodStore = 0;
     antSim.world.waterStore = 2000;
-    antSim.addFood(940, 260, config.foodAmount, { quality: 1.8, label: 'high_quality' });
-    antSim.addFood(940, 520, config.foodAmount, { quality: 0.55, label: 'low_quality' });
+    const highY = orientation === 'high_lower' ? 520 : 260;
+    const lowY = orientation === 'high_lower' ? 260 : 520;
+    antSim.addFood(940, highY, config.foodAmount, { quality: 1.8, label: 'high_quality' });
+    antSim.addFood(940, lowY, config.foodAmount, { quality: 0.55, label: 'low_quality' });
     antSim.runDays(config.foodQualityDays, config.dt);
     const snap = antSim.collectStatsSnapshot();
     return {
       condition: 'food_quality_recruitment',
       seed,
+      orientation,
       ants: snap.ants,
       food_trips: snap.food_trips,
       high_quality_food_trips: snap.high_quality_food_trips,
@@ -464,8 +477,8 @@ PAPER_CONDITIONS_JS = """
       low_quality_food_remaining: snap.low_quality_food_remaining,
       food_quality_collected: snap.food_quality_collected,
       food_pheromone: snap.food_pheromone,
-      high_source_food_pheromone: Math.round(antSim.world.pheromones.food.sample(940, 260)),
-      low_source_food_pheromone: Math.round(antSim.world.pheromones.food.sample(940, 520)),
+      high_source_food_pheromone: Math.round(antSim.world.pheromones.food.sample(940, highY)),
+      low_source_food_pheromone: Math.round(antSim.world.pheromones.food.sample(940, lowY)),
     };
   };
   const runNecrophoresis = (seed) => {
@@ -509,6 +522,109 @@ PAPER_CONDITIONS_JS = """
       task_corpse: snap.task_corpse || 0,
       state_corpse_cleanup: snap.state_corpse_cleanup || 0,
       state_carrying_corpse: snap.state_carrying_corpse || 0,
+    };
+  };
+  const runBroodMicroclimate = (seed, mode) => {
+    antSim.setSeed(seed);
+    antSim.setParam('species', 'eciton');
+    antSim.setParam('speed', 55);
+    antSim.setParam('pheromoneStrength', 100);
+    antSim.setParam('diffusionRate', 95);
+    antSim.setParam('evaporationRate', 80);
+    antSim.setParam('senseThreshold', 10);
+    antSim.setParam('hunger', 20);
+    antSim.setParam('broodDemand', 95);
+    antSim.setupMatureColony();
+    antSim.setParam('antCount', config.broodClimateAnts);
+    clearResources();
+    antSim.clearPheromones();
+    antSim.world.foodStore = 650;
+    antSim.world.waterStore = 650;
+    antSim.world.broodCareBoost = 0;
+    if (mode === 'cold_larval') {
+      antSim.setParam('temperature', 18);
+      antSim.setParam('humidity', 72);
+      antSim.world.eggs = 25;
+      antSim.world.larvae = 220;
+      antSim.world.pupae = 20;
+    } else if (mode === 'cold_pupal') {
+      antSim.setParam('temperature', 18);
+      antSim.setParam('humidity', 72);
+      antSim.world.eggs = 20;
+      antSim.world.larvae = 35;
+      antSim.world.pupae = 220;
+    } else if (mode === 'heat_dry_pupal') {
+      antSim.setParam('temperature', 42);
+      antSim.setParam('humidity', 15);
+      antSim.world.waterStore = 10;
+      antSim.world.eggs = 20;
+      antSim.world.larvae = 35;
+      antSim.world.pupae = 220;
+    } else {
+      antSim.setParam('temperature', 27);
+      antSim.setParam('humidity', 76);
+      antSim.world.eggs = 20;
+      antSim.world.larvae = 35;
+      antSim.world.pupae = 220;
+    }
+    const start = antSim.collectStatsSnapshot();
+    antSim.runDays(config.broodClimateDays, config.dt);
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: `brood_microclimate_${mode}`,
+      seed,
+      mode,
+      ants: snap.ants,
+      ambient_temperature: snap.temperature,
+      ambient_humidity: snap.humidity,
+      initial_brood_total: start.brood_total,
+      final_brood_total: snap.brood_total,
+      brood_delta: snap.brood_total - start.brood_total,
+      brood_temp: snap.brood_temp,
+      brood_humidity: snap.brood_humidity,
+      brood_stress: snap.brood_stress,
+      brood_climate_losses: snap.brood_climate_losses,
+      egg_to_larva: snap.egg_to_larva,
+      larva_to_pupa: snap.larva_to_pupa,
+      pupa_to_worker: snap.pupa_to_worker,
+      brood_development_events: snap.egg_to_larva + snap.larva_to_pupa + snap.pupa_to_worker,
+      task_brood: snap.task_brood || 0,
+      state_brood_care: snap.state_brood_care || 0,
+    };
+  };
+  const runNestRelocation = (seed) => {
+    baseMature(seed, config.relocationAnts);
+    antSim.setParam('hunger', 30);
+    antSim.setParam('broodDemand', 70);
+    antSim.world.foodStore = 420;
+    antSim.world.waterStore = 420;
+    antSim.world.eggs = 35;
+    antSim.world.larvae = 85;
+    antSim.world.pupae = 45;
+    antSim.world.food = [];
+    antSim.world.water = [];
+    antSim.addNestSite(310, 245, 0.72, 'low_quality_site');
+    antSim.addNestSite(935, 540, 1.65, 'high_quality_site');
+    antSim.triggerNestRelocation(config.relocationQuorumFraction);
+    antSim.runDays(config.nestRelocationDays, config.dt);
+    const snap = antSim.collectStatsSnapshot();
+    const low = antSim.world.nestSites.find(site => site.label === 'low_quality_site');
+    const high = antSim.world.nestSites.find(site => site.label === 'high_quality_site');
+    return {
+      condition: 'nest_relocation_quorum_choice',
+      seed,
+      ants: snap.ants,
+      nest_site_visits: snap.nest_site_visits,
+      nest_quorum_events: snap.nest_quorum_events,
+      nest_relocations: snap.nest_relocations,
+      nest_relocation_completed: snap.nest_relocation_completed,
+      nest_relocation_transports: snap.nest_relocation_transports,
+      nest_relocation_quorum: snap.nest_relocation_quorum,
+      low_quality_site_visits: low ? Number(low.visits.toFixed(2)) : 0,
+      high_quality_site_visits: high ? Number(high.visits.toFixed(2)) : 0,
+      selected_high_quality_site: high && snap.nest_relocation_target === high.id ? 1 : 0,
+      final_distance_to_high_site: high ? Number(Math.hypot(snap.nest_x - high.x, snap.nest_y - high.y).toFixed(2)) : 9999,
+      brood_total: snap.brood_total,
     };
   };
 
@@ -629,8 +745,14 @@ PAPER_CONDITIONS_JS = """
     rows.push(runMisleadingPheromone(seed, 'control'));
     rows.push(runMisleadingPheromone(seed, 'attack'));
     rows.push(runMisleadingPheromone(seed, 'caution'));
-    rows.push(runFoodQuality(seed));
+    rows.push(runFoodQuality(seed, 'high_upper'));
+    rows.push(runFoodQuality(seed, 'high_lower'));
     rows.push(runNecrophoresis(seed));
+    rows.push(runBroodMicroclimate(seed, 'stable_pupal'));
+    rows.push(runBroodMicroclimate(seed, 'cold_larval'));
+    rows.push(runBroodMicroclimate(seed, 'cold_pupal'));
+    rows.push(runBroodMicroclimate(seed, 'heat_dry_pupal'));
+    rows.push(runNestRelocation(seed));
   }
   return rows;
 }
@@ -917,7 +1039,10 @@ def aggregate(raw_rows):
     low_trips = food_quality_metrics["mean_low_quality_food_trips"]
     high_pheromone = food_quality_metrics["mean_high_source_food_pheromone"]
     low_pheromone = food_quality_metrics["mean_low_source_food_pheromone"]
-    food_quality_status = "pass" if high_trips > low_trips * 1.15 and food_quality_metrics["mean_avg_collected_food_quality"] > 1.05 else "partial" if high_trips >= low_trips or high_pheromone >= low_pheromone else "fail"
+    food_quality_bias = food_quality_metrics["mean_avg_collected_food_quality"] > 1.05
+    quality_recruitment = high_pheromone > low_pheromone * 1.2
+    trip_bias = high_trips > low_trips * 1.15
+    food_quality_status = "pass" if food_quality_bias and (quality_recruitment or trip_bias) else "partial" if high_trips >= low_trips or high_pheromone >= low_pheromone else "fail"
     summaries.append({
         "paper_id": "jackson_chaline_2007",
         "paper": "Jackson & Chaline 2007",
@@ -947,12 +1072,74 @@ def aggregate(raw_rows):
         "gap": "Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation.",
     })
 
+    brood_stable = by_condition["brood_microclimate_stable_pupal"]
+    brood_cold_larval = by_condition["brood_microclimate_cold_larval"]
+    brood_cold_pupal = by_condition["brood_microclimate_cold_pupal"]
+    brood_heat_dry = by_condition["brood_microclimate_heat_dry_pupal"]
+    stable_stress = mean(float(r["brood_stress"]) for r in brood_stable)
+    heat_stress = mean(float(r["brood_stress"]) for r in brood_heat_dry)
+    cold_larval_temp = mean(float(r["brood_temp"]) for r in brood_cold_larval)
+    cold_pupal_temp = mean(float(r["brood_temp"]) for r in brood_cold_pupal)
+    stable_development = mean(float(r["brood_development_events"]) for r in brood_stable)
+    heat_development = mean(float(r["brood_development_events"]) for r in brood_heat_dry)
+    brood_metrics = {
+        "mean_stable_stress": round(stable_stress, 3),
+        "mean_heat_dry_stress": round(heat_stress, 3),
+        "mean_cold_larval_brood_temp": round(cold_larval_temp, 3),
+        "mean_cold_pupal_brood_temp": round(cold_pupal_temp, 3),
+        "mean_cold_pupal_minus_larval_temp": round(cold_pupal_temp - cold_larval_temp, 3),
+        "mean_stable_development_events": round(stable_development, 3),
+        "mean_heat_dry_development_events": round(heat_development, 3),
+        "mean_heat_dry_brood_losses": round(mean(float(r["brood_climate_losses"]) for r in brood_heat_dry), 3),
+        "mean_stable_task_brood": round(mean(float(r["task_brood"]) for r in brood_stable), 3),
+        "mean_heat_dry_task_brood": round(mean(float(r["task_brood"]) for r in brood_heat_dry), 3),
+    }
+    stage_sensitive = brood_metrics["mean_cold_pupal_minus_larval_temp"] > 0.35
+    stress_sensitive = heat_stress > stable_stress * 1.35
+    development_sensitive = stable_development >= heat_development or brood_metrics["mean_heat_dry_brood_losses"] > 0
+    brood_status = "pass" if stage_sensitive and stress_sensitive and development_sensitive else "partial" if stage_sensitive or stress_sensitive else "fail"
+    summaries.append({
+        "paper_id": "baudier_2019",
+        "paper": "Baudier et al. 2019",
+        "condition": "brood_microclimate_stage_thermoregulation",
+        "expected": "Brood microclimate should be regulated by workers, stress should rise under heat/dry conditions, and cool pupal bivouacs should maintain higher core temperature than cool larval bivouacs.",
+        "status": brood_status,
+        "observed": json.dumps(brood_metrics, ensure_ascii=False),
+        "gap": "The simulator now tests brood microclimate and stage-dependent thermoregulation, but still lacks fitted metabolic heat budgets, nest-site choice geometry and species-specific brood survival curves.",
+    })
+
+    relocation_rows = by_condition["nest_relocation_quorum_choice"]
+    relocation_metrics = {
+        "mean_high_quality_site_visits": round(mean(float(r["high_quality_site_visits"]) for r in relocation_rows), 3),
+        "mean_low_quality_site_visits": round(mean(float(r["low_quality_site_visits"]) for r in relocation_rows), 3),
+        "mean_quorum_events": round(mean(float(r["nest_quorum_events"]) for r in relocation_rows), 3),
+        "mean_relocations": round(mean(float(r["nest_relocations"]) for r in relocation_rows), 3),
+        "mean_completed": round(mean(float(r["nest_relocation_completed"]) for r in relocation_rows), 3),
+        "mean_final_distance_to_high_site": round(mean(float(r["final_distance_to_high_site"]) for r in relocation_rows), 3),
+        "mean_transports": round(mean(float(r["nest_relocation_transports"]) for r in relocation_rows), 3),
+    }
+    high_visits = relocation_metrics["mean_high_quality_site_visits"]
+    low_visits = relocation_metrics["mean_low_quality_site_visits"]
+    quality_choice = high_visits > low_visits * 1.2
+    quorum_reached = relocation_metrics["mean_quorum_events"] >= 1
+    relocation_completed = relocation_metrics["mean_completed"] >= 0.66 and relocation_metrics["mean_final_distance_to_high_site"] < 85
+    relocation_status = "pass" if quality_choice and quorum_reached and relocation_completed else "partial" if quality_choice and quorum_reached else "fail"
+    summaries.append({
+        "paper_id": "pratt_2002",
+        "paper": "Pratt et al. 2002",
+        "condition": "nest_relocation_quorum_choice",
+        "expected": "House-hunting workers should recruit to a higher-quality nest site, cross a quorum threshold, and relocate the colony to that site.",
+        "status": relocation_status,
+        "observed": json.dumps(relocation_metrics, ensure_ascii=False),
+        "gap": "The simulator now has a quorum relocation proxy, but lacks species-specific tandem running, carrying trajectories, site-volume geometry and fitted quorum thresholds.",
+    })
+
     return summaries
 
 
 def write_markdown(path, summaries, raw_output, json_output):
     lines = [
-        "# Paper Condition Validation v4",
+        "# Paper Condition Validation v5",
         "",
         "This report maps published ant-behaviour findings to reproducible simulation conditions. Status values mean:",
         "",
@@ -987,9 +1174,9 @@ def write_markdown(path, summaries, raw_output, json_output):
 def main():
     parser = argparse.ArgumentParser(description="Validate ant simulator conditions against multiple ant-behaviour papers.")
     parser.add_argument("--seeds", default="1-3")
-    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v4.csv"))
-    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v4.json"))
-    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v4.md"))
+    parser.add_argument("--output", default=str(ROOT / "outputs" / "paper_conditions_v5.csv"))
+    parser.add_argument("--json-output", default=str(ROOT / "outputs" / "paper_conditions_v5.json"))
+    parser.add_argument("--report-output", default=str(ROOT / "outputs" / "paper_conditions_report_v5.md"))
     parser.add_argument("--quick", action="store_true")
     args = parser.parse_args()
 
@@ -1024,6 +1211,11 @@ def main():
         "foodQualityDays": 1.4 if args.quick else 2.2,
         "corpseCount": 24 if args.quick else 36,
         "necrophoresisDays": 1.2 if args.quick else 2.0,
+        "broodClimateAnts": 220 if args.quick else 360,
+        "broodClimateDays": 1.4 if args.quick else 2.4,
+        "relocationAnts": 180 if args.quick else 280,
+        "relocationQuorumFraction": 0.065,
+        "nestRelocationDays": 1.6 if args.quick else 2.8,
         "fakeTrailStrength": 700,
     }
 

@@ -27,8 +27,10 @@ def next_action(row):
         return "Add resource quality/concentration and compare recruitment or trail strength across food qualities."
     if "food_quality_recruitment" in condition or "food-quality" in gap or "food quality" in gap:
         return "Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts."
-    if "brood_microclimate" in condition or "thermoregulation" in gap:
+    if "brood_microclimate_needed" in condition:
         return "Add brood microclimate validation for temperature/humidity stress and brood survival/development."
+    if "brood_microclimate_stage_thermoregulation" in condition or "thermoregulation" in gap:
+        return "Calibrate brood microclimate against measured core temperatures, brood stage, nest-site geometry and survival curves."
     if "corpse_cleanup" in condition:
         return "Add necrophoresis latency and corpse disposal curve validation."
     if "necrophoresis_cleanup_latency" in condition or "necrophoresis" in gap:

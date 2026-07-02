@@ -32,6 +32,7 @@ jobs:
             behavior_probe.py \
             experiments/batch_runner.py \
             experiments/build_literature_corpus.py \
+            experiments/check_validation_boundaries.py \
             experiments/calibrate_double_bridge.py \
             experiments/calibrate_foraging.py \
             experiments/double_bridge_probe.py \
@@ -44,6 +45,9 @@ jobs:
             experiments/qa_report_probe.py \
             experiments/stochasticity_probe.py \
             experiments/summarize_batch.py
+
+      - name: Validation boundary check
+        run: python experiments/check_validation_boundaries.py
 
       - name: Start local simulation server
         run: |

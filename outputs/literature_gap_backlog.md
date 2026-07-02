@@ -8,105 +8,10 @@ This backlog records every literature-corpus paper that is not fully simulated b
 
 ## Summary
 
-- `P0_missing_biology_condition`: 7
-- `P1_exact_condition_partial`: 6
-- `P2_proxy_only`: 67
-- `P3_algorithmic_reference_only`: 32
-- `total`: 112
-
-## P0_missing_biology_condition
-
-### 46. Stop and go: exploring alternative mechanisms for task allocation in social insects - response and satisfaction thresholds trade off cost, accuracy, and speed differently
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2024
-- DOI: 10.1101/2024.05.13.593812
-- URL: https://doi.org/10.1101/2024.05.13.593812
-- Categories: pheromone_trail_foraging;task_allocation_division_labor;brood_nest_microclimate;computational_swarm_model
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
-
-### 51. Plastic collective endothermy in a complex animal society (army ant bivouacs: <i>Eciton burchellii parvispinum</i> )
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2019
-- DOI: 10.1111/ecog.04064
-- URL: https://doi.org/10.1111/ecog.04064
-- Categories: brood_nest_microclimate;army_ant_raids_mills
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
-
-### 54. Reduced foraging investment as an adaptation to patchy food sources: a phasic army ant simulation
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2017
-- DOI: 10.1101/101600
-- URL: https://doi.org/10.1101/101600
-- Categories: pheromone_trail_foraging;brood_nest_microclimate;army_ant_raids_mills;computational_swarm_model
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
-
-### 91. Modeling Ant Nest Relocation at Low Active Ratio by Particle Swarm Optimization
-
-- Status: `not_covered`
-- Scope: `unmapped`
-- Year: 2019
-- DOI: 10.1109/cec.2019.8789942
-- URL: https://doi.org/10.1109/cec.2019.8789942
-- Categories: nest_relocation_house_hunting;computational_swarm_model
-- Matched condition: none
-- Evidence paper id: none
-- Next action: Define a paper-specific simulation condition before claiming alignment.
-- Gap: No simulation condition has been mapped for this paper yet.
-
-### 95. The emergence of a collective sensory response threshold in ant colonies
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2021
-- DOI: 10.1101/2021.10.30.466564
-- URL: https://doi.org/10.1101/2021.10.30.466564
-- Categories: task_allocation_division_labor;brood_nest_microclimate;networks_interactions;computational_swarm_model
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
-
-### 105. Dynamics of ant activity under extreme climatic changes in 2024: effects of temperature and humidity on Formica rufa and Lasius fuliginosus behavior
-
-- Status: `not_covered`
-- Scope: `category_proxy`
-- Year: 2026
-- DOI: 10.55730/1300-0179.3265
-- URL: https://doi.org/10.55730/1300-0179.3265
-- Categories: pheromone_trail_foraging;brood_nest_microclimate
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Next action: Add brood microclimate validation for temperature/humidity stress and brood survival/development.
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
-
-### 113. Modeling Fast and Robust Ant Nest Relocation using Particle Swarm Optimization
-
-- Status: `not_covered`
-- Scope: `unmapped`
-- Year: 2019
-- DOI: 10.1162/isal_a_00231
-- URL: https://doi.org/10.1162/isal_a_00231
-- Categories: nest_relocation_house_hunting;computational_swarm_model
-- Matched condition: none
-- Evidence paper id: none
-- Next action: Define a paper-specific simulation condition before claiming alignment.
-- Gap: No simulation condition has been mapped for this paper yet.
-
+- `P1_exact_condition_partial`: 4
+- `P2_proxy_only`: 69
+- `P3_algorithmic_reference_only`: 34
+- `total`: 107
 
 ## P1_exact_condition_partial
 
@@ -136,19 +41,6 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
 - Gap: The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper.
 
-### 4. A stochastic model of ant trail following with two pheromones
-
-- Status: `partial`
-- Scope: `exact_paper_condition`
-- Year: 2015
-- DOI: 10.48550/arxiv.1508.06816
-- URL: https://arxiv.org/abs/1508.06816
-- Categories: pheromone_trail_foraging;computational_swarm_model
-- Matched condition: two-cue adaptation proxy
-- Evidence paper id: malickova_2015
-- Next action: Define a paper-specific simulation condition before claiming alignment.
-- Gap: The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics.
-
 ### 11. Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It
 
 - Status: `partial`
@@ -161,19 +53,6 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: aswale_2022
 - Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
 - Gap: The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone.
-
-### 12. Diverse Stochasticity Leads a Colony of Ants to Optimal Foraging
-
-- Status: `partial`
-- Scope: `exact_paper_condition`
-- Year: 2018
-- DOI: 10.48550/arxiv.1805.05598
-- URL: https://arxiv.org/abs/1805.05598
-- Categories: pheromone_trail_foraging
-- Matched condition: stochasticity_relocation
-- Evidence paper id: shiraishi_2018
-- Next action: Define a paper-specific simulation condition before claiming alignment.
-- Gap: The current check measures relative relocation adaptation. It does not yet fit the paper's environment-dependent optimal stochasticity distribution.
 
 ### 13. Individual rules for trail pattern formation in Argentine ants (Linepithema humile)
 
@@ -516,6 +395,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
 - Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
+### 46. Stop and go: exploring alternative mechanisms for task allocation in social insects - response and satisfaction thresholds trade off cost, accuracy, and speed differently
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2024
+- DOI: 10.1101/2024.05.13.593812
+- URL: https://doi.org/10.1101/2024.05.13.593812
+- Categories: pheromone_trail_foraging;task_allocation_division_labor;brood_nest_microclimate;computational_swarm_model
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Next action: Calibrate brood microclimate against measured core temperatures, brood stage, nest-site geometry and survival curves.
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
+
 ### 47. Walk This Way: Modeling Foraging Ant Dynamics in Multiple Food Source Environments
 
 - Status: `partial`
@@ -581,18 +473,18 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
 - Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
 
-### 55. Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis
+### 54. Reduced foraging investment as an adaptation to patchy food sources: a phasic army ant simulation
 
 - Status: `partial`
 - Scope: `category_proxy`
-- Year: 2002
-- DOI: 10.1007/s00265-002-0487-x
-- URL: https://doi.org/10.1007/s00265-002-0487-x
-- Categories: pheromone_trail_foraging;nest_relocation_house_hunting
-- Matched condition: single_food_trail
-- Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Year: 2017
+- DOI: 10.1101/101600
+- URL: https://doi.org/10.1101/101600
+- Categories: pheromone_trail_foraging;brood_nest_microclimate;army_ant_raids_mills;computational_swarm_model
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Next action: Calibrate brood microclimate against measured core temperatures, brood stage, nest-site geometry and survival curves.
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
 
 ### 57. From nonlinearity to optimality: pheromone trail foraging by ants
 
@@ -697,19 +589,6 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: jackson_chaline_2007
 - Next action: Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.
 - Gap: Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.
-
-### 66. Consensus decision making in the ant Myrmecina nipponica: house-hunters combine pheromone trails with quorum responses
-
-- Status: `partial`
-- Scope: `category_proxy`
-- Year: 2012
-- DOI: 10.1016/j.anbehav.2012.08.036
-- URL: https://doi.org/10.1016/j.anbehav.2012.08.036
-- Categories: pheromone_trail_foraging;nest_relocation_house_hunting
-- Matched condition: single_food_trail
-- Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
 
 ### 67. Argentine Ant (Hymenoptera: Formicidae) Trail Pheromone Enhances Consumption of Liquid Sucrose Solution
 
@@ -984,6 +863,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
 - Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
 
+### 95. The emergence of a collective sensory response threshold in ant colonies
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2021
+- DOI: 10.1101/2021.10.30.466564
+- URL: https://doi.org/10.1101/2021.10.30.466564
+- Categories: task_allocation_division_labor;brood_nest_microclimate;networks_interactions;computational_swarm_model
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Next action: Calibrate brood microclimate against measured core temperatures, brood stage, nest-site geometry and survival curves.
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
+
 ### 98. Reduced foraging investment as an adaptation to patchy food sources: A phasic army ant simulation
 
 - Status: `partial`
@@ -996,6 +888,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Evidence paper id: literature_alignment_probe
 - Next action: Define a paper-specific simulation condition before claiming alignment.
 - Gap: Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions.
+
+### 105. Dynamics of ant activity under extreme climatic changes in 2024: effects of temperature and humidity on Formica rufa and Lasius fuliginosus behavior
+
+- Status: `partial`
+- Scope: `category_proxy`
+- Year: 2026
+- DOI: 10.55730/1300-0179.3265
+- URL: https://doi.org/10.55730/1300-0179.3265
+- Categories: pheromone_trail_foraging;brood_nest_microclimate
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Next action: Calibrate brood microclimate against measured core temperatures, brood stage, nest-site geometry and survival curves.
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
 
 ### 107. ANTi-JAM solutions for smart roads: Ant-inspired traffic flow rules under CAVs environment
 
@@ -1260,6 +1165,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Next action: Add task-switching rates and worker contact/network metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
+### 91. Modeling Ant Nest Relocation at Low Active Ratio by Particle Swarm Optimization
+
+- Status: `not_biological_target`
+- Scope: `algorithmic_or_robotics_analogy`
+- Year: 2019
+- DOI: 10.1109/cec.2019.8789942
+- URL: https://doi.org/10.1109/cec.2019.8789942
+- Categories: nest_relocation_house_hunting;computational_swarm_model
+- Matched condition: none
+- Evidence paper id: none
+- Next action: Keep as algorithmic inspiration only; do not use as direct biological validation target.
+- Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
+
 ### 96. Optimal A* Path Planning with Ant Colony Optimization on Multi-Robot Task Allocation for Manufacturing Model
 
 - Status: `not_biological_target`
@@ -1414,6 +1332,19 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Next action: Add trail-segment flow-density and velocity measurements.
+- Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
+
+### 113. Modeling Fast and Robust Ant Nest Relocation using Particle Swarm Optimization
+
+- Status: `not_biological_target`
+- Scope: `algorithmic_or_robotics_analogy`
+- Year: 2019
+- DOI: 10.1162/isal_a_00231
+- URL: https://doi.org/10.1162/isal_a_00231
+- Categories: nest_relocation_house_hunting;computational_swarm_model
+- Matched condition: none
+- Evidence paper id: none
+- Next action: Keep as algorithmic inspiration only; do not use as direct biological validation target.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 115. Fault Pheromone Trail Evaporation of Power Distribution Networks using Ant Colony Optimization

@@ -10,7 +10,7 @@ Important interpretation rules:
 - `not_biological_target` means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation.
 
 - Corpus: `outputs/literature_corpus_100.json`
-- Condition source: `outputs/paper_conditions_v4.json`
+- Condition source: `outputs/paper_conditions_v5.json`
 - CSV: `outputs/literature_corpus_120_evaluation.csv`
 - JSON: `outputs/literature_corpus_120_evaluation.json`
 
@@ -19,24 +19,21 @@ Important interpretation rules:
 ### status
 
 - `partial`: 73
-- `not_biological_target`: 32
-- `pass`: 8
-- `not_covered`: 7
+- `not_biological_target`: 34
+- `pass`: 13
 
 ### scope
 
-- `category_proxy`: 72
-- `algorithmic_or_robotics_analogy`: 32
-- `exact_paper_condition`: 14
-- `unmapped`: 2
+- `category_proxy`: 69
+- `algorithmic_or_robotics_analogy`: 34
+- `exact_paper_condition`: 17
 
 ### verdict
 
-- `covered_by_generic_proxy`: 67
-- `not_a_direct_biology_validation`: 32
-- `aligned_qualitative`: 8
-- `not_currently_testable`: 7
-- `partial_alignment`: 6
+- `covered_by_generic_proxy`: 69
+- `not_a_direct_biology_validation`: 34
+- `aligned_qualitative`: 13
+- `partial_alignment`: 4
 
 ## Sequential Results
 
@@ -86,8 +83,8 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1508.06816
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Scope: `exact_paper_condition`
-- Status: `partial`
-- Verdict: `partial_alignment`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
 - Matched condition: two-cue adaptation proxy
 - Evidence paper id: malickova_2015
 - Gap: The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics.
@@ -190,8 +187,8 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1805.05598
 - Categories: pheromone_trail_foraging
 - Scope: `exact_paper_condition`
-- Status: `partial`
-- Verdict: `partial_alignment`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
 - Matched condition: stochasticity_relocation
 - Evidence paper id: shiraishi_2018
 - Gap: The current check measures relative relocation adaptation. It does not yet fit the paper's environment-dependent optimal stochasticity distribution.
@@ -632,11 +629,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1101/2024.05.13.593812
 - Categories: pheromone_trail_foraging;task_allocation_division_labor;brood_nest_microclimate;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
 
 ### 47. Walk This Way: Modeling Foraging Ant Dynamics in Multiple Food Source Environments
 
@@ -696,12 +693,12 @@ Important interpretation rules:
 - DOI: 10.1111/ecog.04064
 - URL: https://doi.org/10.1111/ecog.04064
 - Categories: brood_nest_microclimate;army_ant_raids_mills
-- Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
+- Scope: `exact_paper_condition`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Gap: The simulator now tests brood microclimate and stage-dependent thermoregulation, but still lacks fitted metabolic heat budgets, nest-site choice geometry and species-specific brood survival curves.
 
 ### 52. Multiple-Agent Task Allocation Algorithm Utilizing Ant Colony Optimization
 
@@ -736,11 +733,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1101/101600
 - Categories: pheromone_trail_foraging;brood_nest_microclimate;army_ant_raids_mills;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
 
 ### 55. Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis
 
@@ -748,12 +745,12 @@ Important interpretation rules:
 - DOI: 10.1007/s00265-002-0487-x
 - URL: https://doi.org/10.1007/s00265-002-0487-x
 - Categories: pheromone_trail_foraging;nest_relocation_house_hunting
-- Scope: `category_proxy`
-- Status: `partial`
-- Verdict: `covered_by_generic_proxy`
-- Matched condition: single_food_trail
-- Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Scope: `exact_paper_condition`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
+- Matched condition: nest_relocation_quorum_choice
+- Evidence paper id: pratt_2002
+- Gap: The simulator now has a quorum relocation proxy, but lacks species-specific tandem running, carrying trajectories, site-volume geometry and fitted quorum thresholds.
 
 ### 56. Ant-like task allocation and recruitment in cooperative robots
 
@@ -891,12 +888,12 @@ Important interpretation rules:
 - DOI: 10.1016/j.anbehav.2012.08.036
 - URL: https://doi.org/10.1016/j.anbehav.2012.08.036
 - Categories: pheromone_trail_foraging;nest_relocation_house_hunting
-- Scope: `category_proxy`
-- Status: `partial`
-- Verdict: `covered_by_generic_proxy`
-- Matched condition: single_food_trail
-- Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Scope: `exact_paper_condition`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
+- Matched condition: nest_relocation_quorum_choice
+- Evidence paper id: pratt_2002
+- Gap: The simulator now has a quorum relocation proxy, but lacks species-specific tandem running, carrying trajectories, site-volume geometry and fitted quorum thresholds.
 
 ### 67. Argentine Ant (Hymenoptera: Formicidae) Trail Pheromone Enhances Consumption of Liquid Sucrose Solution
 
@@ -1216,12 +1213,12 @@ Important interpretation rules:
 - DOI: 10.1109/cec.2019.8789942
 - URL: https://doi.org/10.1109/cec.2019.8789942
 - Categories: nest_relocation_house_hunting;computational_swarm_model
-- Scope: `unmapped`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
+- Scope: `algorithmic_or_robotics_analogy`
+- Status: `not_biological_target`
+- Verdict: `not_a_direct_biology_validation`
 - Matched condition: none
 - Evidence paper id: none
-- Gap: No simulation condition has been mapped for this paper yet.
+- Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 92. Novel observation of a raptor, Collared Forest-falcon ( <i>Micrastur semitorquatus</i> ), depredating a fleeing snake at an army ant ( <i>Eciton burchellii parvispinum</i> ) raid front
 
@@ -1269,11 +1266,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.1101/2021.10.30.466564
 - Categories: task_allocation_division_labor;brood_nest_microclimate;networks_interactions;computational_swarm_model
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
 
 ### 96. Optimal A* Path Planning with Ant Colony Optimization on Multi-Robot Task Allocation for Manufacturing Model
 
@@ -1399,11 +1396,11 @@ Important interpretation rules:
 - URL: https://doi.org/10.55730/1300-0179.3265
 - Categories: pheromone_trail_foraging;brood_nest_microclimate
 - Scope: `category_proxy`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
-- Matched condition: brood_microclimate_needed
-- Evidence paper id: not_in_current_paper_conditions
-- Gap: Brood climate exists in the simulator, but no paper-specific thermoregulation or brood-survival validation condition is run yet.
+- Status: `partial`
+- Verdict: `covered_by_generic_proxy`
+- Matched condition: brood_microclimate_stage_thermoregulation
+- Evidence paper id: baudier_2019
+- Gap: Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration.
 
 ### 106. An Ensemble Ant Colony Optimization Algorithm with a Hybrid Pheromone Model for Learning Rule Lists
 
@@ -1502,12 +1499,12 @@ Important interpretation rules:
 - DOI: 10.1162/isal_a_00231
 - URL: https://doi.org/10.1162/isal_a_00231
 - Categories: nest_relocation_house_hunting;computational_swarm_model
-- Scope: `unmapped`
-- Status: `not_covered`
-- Verdict: `not_currently_testable`
+- Scope: `algorithmic_or_robotics_analogy`
+- Status: `not_biological_target`
+- Verdict: `not_a_direct_biology_validation`
 - Matched condition: none
 - Evidence paper id: none
-- Gap: No simulation condition has been mapped for this paper yet.
+- Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 114. Optimal construction of army ant living bridges
 
