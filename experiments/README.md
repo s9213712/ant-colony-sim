@@ -383,16 +383,29 @@ python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
   --md-output ant_colony_sim/outputs/literature_corpus_120_evaluation.md
 ```
 
-Current result:
+Current simulator-condition result:
 
 - `pass`: 120
 - `exact_paper_condition`: 17
 - `validated_family_condition`: 69
 - `algorithmic_or_robotics_analogy`: 34
 
-Interpretation: all 120 corpus records now pass the audit matrix. This does not mean all 120 are quantitatively reproduced biological experiments: 17 have exact paper-condition qualitative alignment, 69 have validated family-level qualitative alignment, and 34 are algorithmic/robotics/ACO references that pass only as screened-out non-biological targets.
+Strict biological interpretation is recorded in `scientific_status` and `validation_tier`. `status=pass` only means the current simulator condition did not fail. It does not mean the paper has been quantitatively reproduced:
 
-Generate the backlog of papers that are not fully simulated yet:
+- exact empirical papers can still be `exact_qualitative_only` until their curves are digitized;
+- mathematical/ABM/PDE references are `model_reference_only` unless backed by raw biological measurements;
+- family-level matches are `family_qualitative_proxy`;
+- algorithmic/robotics/ACO references are `not_biological_target`.
+
+Current strict interpretation:
+
+- `family_qualitative_proxy`: 69
+- `not_biological_target`: 34
+- `model_reference_only`: 9
+- `exact_qualitative_only`: 8
+- `requires_followup=yes`: 86
+
+Generate the backlog of papers that are not fully simulated at paper-level biological calibration:
 
 ```bash
 python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
@@ -402,6 +415,23 @@ python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
   --md-output ant_colony_sim/outputs/literature_gap_backlog.md
 ```
 
-Current backlog:
+Current strict backlog includes every biological paper still requiring quantitative curves, paper-specific measurements or species-specific calibration:
 
-- `total`: 0
+- `P1_needs_quantitative_curve`: 17
+- `P2_family_proxy_needs_paper_data`: 69
+- `total`: 86
+
+## Digitized Curve Inventory
+
+Check whether primary-source numeric biological curves are present and fit-ready:
+
+```bash
+python3 ant_colony_sim/experiments/digitized_curve_inventory.py \
+  --csv-output ant_colony_sim/outputs/digitized_curve_inventory.csv \
+  --json-output ant_colony_sim/outputs/digitized_curve_inventory.json \
+  --report-output ant_colony_sim/outputs/digitized_curve_inventory.md
+```
+
+Curve CSV files belong under `targets/digitized_curves/` and must follow `targets/digitized_curves/curve_schema.csv`.
+
+Current interpretation: source leads exist for trail decay, food-quality recruitment and traffic curves, but no fit-ready digitized biological curve is committed yet. This remains the main Level 4 blocker.

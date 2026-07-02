@@ -37,6 +37,7 @@ jobs:
             experiments/check_validation_boundaries.py \
             experiments/calibrate_double_bridge.py \
             experiments/calibrate_foraging.py \
+            experiments/digitized_curve_inventory.py \
             experiments/double_bridge_probe.py \
             experiments/evaluate_literature_corpus.py \
             experiments/generate_literature_gap_backlog.py \
@@ -104,6 +105,13 @@ jobs:
             --json-output outputs/ci_quantitative_readiness_audit.json \
             --report-output outputs/ci_quantitative_readiness_audit.md
 
+      - name: Digitized curve inventory
+        run: |
+          python experiments/digitized_curve_inventory.py \
+            --csv-output outputs/ci_digitized_curve_inventory.csv \
+            --json-output outputs/ci_digitized_curve_inventory.json \
+            --report-output outputs/ci_digitized_curve_inventory.md
+
       - name: Literature alignment probe
         run: python experiments/literature_alignment_probe.py
 
@@ -154,6 +162,9 @@ jobs:
             outputs/ci_quantitative_readiness_audit.csv
             outputs/ci_quantitative_readiness_audit.json
             outputs/ci_quantitative_readiness_audit.md
+            outputs/ci_digitized_curve_inventory.csv
+            outputs/ci_digitized_curve_inventory.json
+            outputs/ci_digitized_curve_inventory.md
             outputs/ci_paper_conditions_smoke.csv
             outputs/ci_paper_conditions_smoke.json
             outputs/ci_paper_conditions_smoke.md

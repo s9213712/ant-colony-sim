@@ -1,0 +1,18 @@
+column,required,description
+source_id,yes,Stable source key matching quantitative_curve_targets.json where possible.
+target_id,yes,Target curve id such as trail_decay_curve or food_recruitment_strength_curve.
+paper_title,yes,Primary paper or dataset title.
+source_url,yes,DOI URL arXiv URL dataset URL or local citation pointer.
+species,yes,Species measured in the original experiment.
+figure_or_table,yes,Figure table supplementary file or raw dataset field used.
+x_name,yes,Independent variable name.
+x_value,yes,Numeric independent variable value.
+x_unit,yes,Independent variable unit.
+y_name,yes,Dependent variable name.
+y_value,yes,Numeric dependent variable value.
+y_unit,yes,Dependent variable unit.
+variance_type,no,ci sd sem range replicate or none.
+variance_value,no,Numeric variance/error value when available.
+n,no,Sample size or replicate count when available.
+digitization_method,yes,raw_table author_data webplotdigitizer manual_digitization or secondary_lead_only.
+notes,no,Short provenance or caveat.

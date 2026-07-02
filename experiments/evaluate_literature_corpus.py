@@ -171,6 +171,33 @@ FAMILY_REQUIRED_CONDITIONS = {
     "existing_or_extend_ant_mill_probe": ["army_ant_mill_qualitative"],
 }
 
+EMPIRICAL_EVIDENCE_IDS = {
+    "perna_2012",
+    "dussutour_2004",
+    "john_2009",
+    "jackson_chaline_2007",
+    "avanzi_2024",
+    "baudier_2019",
+    "pratt_2002",
+}
+
+QUANTITATIVE_GAP_HINTS = [
+    "digitized",
+    "calibrat",
+    "curve",
+    "species-specific",
+    "species parameters",
+    "paper-specific",
+    "effect sizes",
+    "geometry",
+    "contact",
+    "worker-worker",
+    "trajectory",
+    "timecourse",
+    "counts",
+    "raw biological",
+]
+
 
 def normalize_doi(doi):
     text = (doi or "").strip().lower()
@@ -240,6 +267,96 @@ def family_conditions_pass(mapping, condition_status):
     return bool(required) and all(condition_status.get(item, {}).get("status") == "pass" for item in required)
 
 
+def has_quantitative_gap(gap):
+    text = (gap or "").lower()
+    return any(hint in text for hint in QUANTITATIVE_GAP_HINTS)
+
+
+def scientific_classification(scope, status, verdict, evidence_paper_id, gap, algorithmic=False):
+    if algorithmic or scope == "algorithmic_or_robotics_analogy":
+        return {
+            "scientific_status": "not_biological_target",
+            "validation_tier": "screened_out",
+            "requires_followup": "no",
+            "missing_quantitative_calibration": "no",
+        }
+
+    if status in {"fail", "not_covered"}:
+        return {
+            "scientific_status": "not_currently_testable",
+            "validation_tier": "missing_condition",
+            "requires_followup": "yes",
+            "missing_quantitative_calibration": "yes",
+        }
+
+    if status == "partial":
+        return {
+            "scientific_status": "partial_proxy",
+            "validation_tier": "partial_condition",
+            "requires_followup": "yes",
+            "missing_quantitative_calibration": "yes",
+        }
+
+    if scope == "validated_family_condition":
+        return {
+            "scientific_status": "family_qualitative_proxy",
+            "validation_tier": "family_proxy",
+            "requires_followup": "yes",
+            "missing_quantitative_calibration": "yes",
+        }
+
+    if scope == "exact_paper_condition":
+        if evidence_paper_id not in EMPIRICAL_EVIDENCE_IDS:
+            return {
+                "scientific_status": "model_reference_only",
+                "validation_tier": "model_reference",
+                "requires_followup": "yes",
+                "missing_quantitative_calibration": "yes",
+            }
+        if has_quantitative_gap(gap):
+            return {
+                "scientific_status": "exact_qualitative_only",
+                "validation_tier": "exact_qualitative",
+                "requires_followup": "yes",
+                "missing_quantitative_calibration": "yes",
+            }
+        return {
+            "scientific_status": "exact_quantitative_candidate",
+            "validation_tier": "exact_condition",
+            "requires_followup": "no",
+            "missing_quantitative_calibration": "no",
+        }
+
+    if verdict in {"family_qualitative_alignment", "aligned_qualitative"}:
+        return {
+            "scientific_status": "qualitative_only",
+            "validation_tier": "qualitative_proxy",
+            "requires_followup": "yes",
+            "missing_quantitative_calibration": "yes",
+        }
+
+    return {
+        "scientific_status": "needs_review",
+        "validation_tier": "unclassified",
+        "requires_followup": "yes",
+        "missing_quantitative_calibration": "yes",
+    }
+
+
+def row_with_science(row, algorithmic=False):
+    return {
+        **row,
+        **scientific_classification(
+            row["scope"],
+            row["status"],
+            row["verdict"],
+            row["evidence_paper_id"],
+            row["gap"],
+            algorithmic=algorithmic,
+        ),
+    }
+
+
 def evaluate_work(index, work, condition_status):
     condition_id = exact_condition_id(work)
     algorithmic = is_algorithmic(work)
@@ -258,6 +375,14 @@ def evaluate_work(index, work, condition_status):
             else:
                 verdict = "not_aligned"
             return {
+                **scientific_classification(
+                    "exact_paper_condition",
+                    status,
+                    verdict,
+                    condition_id,
+                    condition["gap"],
+                    algorithmic=algorithmic,
+                ),
                 "index": index,
                 "title": work.get("title", ""),
                 "year": work.get("year", ""),
@@ -275,7 +400,7 @@ def evaluate_work(index, work, condition_status):
     mapping = best_mapping(work)
     evidence = MAPPING_TO_EVIDENCE.get(mapping)
     if algorithmic:
-        return {
+        return row_with_science({
             "index": index,
             "title": work.get("title", ""),
             "year": work.get("year", ""),
@@ -288,7 +413,7 @@ def evaluate_work(index, work, condition_status):
             "matched_condition": evidence["condition"] if evidence else "",
             "evidence_paper_id": evidence["paper_id"] if evidence else "",
             "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.",
-        }
+        }, algorithmic=True)
 
     if evidence:
         family_pass = mapping in FAMILY_VALIDATED_MAPPINGS and family_conditions_pass(mapping, condition_status)
@@ -305,7 +430,7 @@ def evaluate_work(index, work, condition_status):
         else:
             verdict = "aligned_qualitative"
             scope = "category_proxy"
-        return {
+        return row_with_science({
             "index": index,
             "title": work.get("title", ""),
             "year": work.get("year", ""),
@@ -318,9 +443,9 @@ def evaluate_work(index, work, condition_status):
             "matched_condition": evidence["condition"],
             "evidence_paper_id": evidence["paper_id"],
             "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing." if family_pass else evidence["gap"],
-        }
+        })
 
-    return {
+    return row_with_science({
         "index": index,
         "title": work.get("title", ""),
         "year": work.get("year", ""),
@@ -333,7 +458,7 @@ def evaluate_work(index, work, condition_status):
         "matched_condition": "",
         "evidence_paper_id": "",
         "gap": "No simulation condition has been mapped for this paper yet.",
-    }
+    })
 
 
 def summarize(rows):
@@ -342,12 +467,15 @@ def summarize(rows):
         "status": {},
         "scope": {},
         "verdict": {},
+        "scientific_status": {},
+        "validation_tier": {},
+        "requires_followup": {},
     }
     for row in rows:
-        for key in ["status", "scope", "verdict"]:
+        for key in ["status", "scope", "verdict", "scientific_status", "validation_tier", "requires_followup"]:
             value = row[key]
             summary[key][value] = summary[key].get(value, 0) + 1
-    for key in ["status", "scope", "verdict"]:
+    for key in ["status", "scope", "verdict", "scientific_status", "validation_tier", "requires_followup"]:
         summary[key] = dict(sorted(summary[key].items(), key=lambda item: (-item[1], item[0])))
     return summary
 
@@ -364,6 +492,10 @@ def write_csv(path, rows):
         "scope",
         "status",
         "verdict",
+        "scientific_status",
+        "validation_tier",
+        "requires_followup",
+        "missing_quantitative_calibration",
         "matched_condition",
         "evidence_paper_id",
         "gap",
@@ -382,7 +514,8 @@ def write_markdown(path, rows, summary, corpus_path, conditions_path, csv_path, 
         "",
         "Important interpretation rules:",
         "",
-        "- `pass` means either qualitative biological alignment under an exact/family condition or a successful screen-out of non-biological algorithmic references; inspect `scope` and `verdict` before interpreting it as biology.",
+        "- `status=pass` is a simulator-condition result, not a claim that the paper is fully reproduced.",
+        "- `scientific_status` is the stricter biological interpretation. Treat `exact_qualitative_only`, `family_qualitative_proxy`, and `model_reference_only` as follow-up items until digitized quantitative curves are fitted.",
         "- `partial` means a generic proxy exists, but key paper-specific measurements are missing.",
         "- `not_covered` means the simulator or validation suite lacks the condition required by that paper.",
         "- `algorithmic_or_robotics_analogy` scope means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation even when its audit status is `pass`.",
@@ -395,7 +528,7 @@ def write_markdown(path, rows, summary, corpus_path, conditions_path, csv_path, 
         "## Summary",
         "",
     ]
-    for group in ["status", "scope", "verdict"]:
+    for group in ["status", "scope", "verdict", "scientific_status", "validation_tier", "requires_followup"]:
         lines.append(f"### {group}")
         lines.append("")
         for key, value in summary[group].items():
@@ -414,6 +547,9 @@ def write_markdown(path, rows, summary, corpus_path, conditions_path, csv_path, 
             f"- Scope: `{row['scope']}`",
             f"- Status: `{row['status']}`",
             f"- Verdict: `{row['verdict']}`",
+            f"- Scientific status: `{row['scientific_status']}`",
+            f"- Validation tier: `{row['validation_tier']}`",
+            f"- Requires follow-up: `{row['requires_followup']}`",
             f"- Matched condition: {row['matched_condition'] or 'none'}",
             f"- Evidence paper id: {row['evidence_paper_id'] or 'none'}",
             f"- Gap: {row['gap']}",

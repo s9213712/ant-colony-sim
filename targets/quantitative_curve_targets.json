@@ -21,6 +21,11 @@
       "status": "missing_digitized_data",
       "source_candidates": [
         {
+          "id": "robinson_2008_decay_rates_lead",
+          "title": "Decay rates of attractive and repellent pheromones in an ant foraging trail network",
+          "url": "targets/digitized_curves/source_leads.json"
+        },
+        {
           "id": "amorim_2014",
           "title": "A continuous model of ant foraging with pheromones and trail formation",
           "url": "https://arxiv.org/abs/1402.5611"

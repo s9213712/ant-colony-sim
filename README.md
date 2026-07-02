@@ -6,6 +6,8 @@ Behavior-level ant colony simulation for exploring pheromone-mediated foraging, 
 
 The current model is a qualitative research aid and teaching tool. It is not calibrated for numerical prediction of real ant colonies.
 
+Current scientific validation level: qualitative behavior-level ABM, estimated Level 3.0. The 120-paper corpus now separates simulator-condition passes from biological calibration: 86 records still require paper-level quantitative curves or species-specific data, while 34 engineering/ACO references are screened out as non-biological targets.
+
 ## Run
 
 Open `index.html` directly in a browser, or serve the folder:
@@ -27,6 +29,8 @@ python3 experiments/generate_validation_report.py --stochasticity-csv outputs/st
 ```
 
 See `BIOLOGICAL_VALIDATION.md`, `PARAMETER_PROVENANCE.md`, and `experiments/README.md` for model boundaries, parameter provenance and reproducible experiment workflows.
+
+Digitized biological curves for Level 4 calibration belong in `targets/digitized_curves/`; run `python3 experiments/digitized_curve_inventory.py` to check whether any curve is fit-ready.
 
 ## Continuous Validation
 

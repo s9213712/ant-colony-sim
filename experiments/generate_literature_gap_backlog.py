@@ -9,10 +9,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def priority(row):
+    scientific_status = row.get("scientific_status", "")
+    validation_tier = row.get("validation_tier", "")
+    if scientific_status == "not_biological_target":
+        return "P4_screened_out_non_biology"
     if row["status"] == "not_covered" and row["scope"] != "algorithmic_or_robotics_analogy":
         return "P0_missing_biology_condition"
+    if scientific_status in {"model_reference_only", "exact_qualitative_only"}:
+        return "P1_needs_quantitative_curve"
     if row["status"] == "partial" and row["scope"] == "exact_paper_condition":
         return "P1_exact_condition_partial"
+    if validation_tier == "family_proxy" or scientific_status == "family_qualitative_proxy":
+        return "P2_family_proxy_needs_paper_data"
     if row["status"] == "partial":
         return "P2_proxy_only"
     if row["status"] == "not_biological_target":
@@ -45,8 +53,10 @@ def next_action(row):
         return "Add worker contact matrices and network-calibrated task allocation metrics."
     if "trail" in condition or "tropotaxis" in condition:
         return "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves."
-    if row["status"] == "not_biological_target":
+    if row.get("scientific_status") == "not_biological_target" or row["status"] == "not_biological_target":
         return "Keep as algorithmic inspiration only; do not use as direct biological validation target."
+    if row.get("requires_followup") == "yes" and row.get("missing_quantitative_calibration") == "yes":
+        return "Add digitized paper-level biological measurements and fit only shared model parameters, not paper-specific exception rules."
     return "Define a paper-specific simulation condition before claiming alignment."
 
 
@@ -58,6 +68,10 @@ def write_csv(path, rows):
         "status",
         "scope",
         "verdict",
+        "scientific_status",
+        "validation_tier",
+        "requires_followup",
+        "missing_quantitative_calibration",
         "title",
         "year",
         "doi",
@@ -78,7 +92,7 @@ def write_markdown(path, rows, summary, source, csv_path, json_path):
     lines = [
         "# Literature Gap Backlog",
         "",
-        "This backlog records every literature-corpus paper that is not fully simulated by the current validation matrix.",
+        "This backlog records every literature-corpus paper that is not fully simulated at paper-level biological calibration.",
         "",
         f"- Source evaluation: `{source}`",
         f"- CSV: `{csv_path}`",
@@ -99,6 +113,8 @@ def write_markdown(path, rows, summary, source, csv_path, json_path):
             "",
             f"- Status: `{row['status']}`",
             f"- Scope: `{row['scope']}`",
+            f"- Scientific status: `{row.get('scientific_status', 'unknown')}`",
+            f"- Validation tier: `{row.get('validation_tier', 'unknown')}`",
             f"- Year: {row['year']}",
             f"- DOI: {row['doi'] or 'none'}",
             f"- URL: {row['url']}",
@@ -124,7 +140,7 @@ def main():
     evaluation = json.loads(Path(args.evaluation).read_text(encoding="utf-8"))
     rows = []
     for row in evaluation["rows"]:
-        if row["status"] == "pass":
+        if row.get("requires_followup") != "yes":
             continue
         item = {
             "priority": priority(row),
@@ -134,10 +150,13 @@ def main():
         rows.append(item)
     priority_order = {
         "P0_missing_biology_condition": 0,
-        "P1_exact_condition_partial": 1,
-        "P2_proxy_only": 2,
-        "P3_algorithmic_reference_only": 3,
-        "P4_other": 4,
+        "P1_needs_quantitative_curve": 1,
+        "P1_exact_condition_partial": 2,
+        "P2_family_proxy_needs_paper_data": 3,
+        "P2_proxy_only": 4,
+        "P3_algorithmic_reference_only": 5,
+        "P4_screened_out_non_biology": 6,
+        "P4_other": 7,
     }
     rows.sort(key=lambda row: (priority_order.get(row["priority"], 99), int(row["index"])))
     summary = {}

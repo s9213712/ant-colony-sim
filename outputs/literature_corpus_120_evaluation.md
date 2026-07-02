@@ -4,7 +4,8 @@ This file evaluates every paper in the 120-paper corpus against the simulator's 
 
 Important interpretation rules:
 
-- `pass` means either qualitative biological alignment under an exact/family condition or a successful screen-out of non-biological algorithmic references; inspect `scope` and `verdict` before interpreting it as biology.
+- `status=pass` is a simulator-condition result, not a claim that the paper is fully reproduced.
+- `scientific_status` is the stricter biological interpretation. Treat `exact_qualitative_only`, `family_qualitative_proxy`, and `model_reference_only` as follow-up items until digitized quantitative curves are fitted.
 - `partial` means a generic proxy exists, but key paper-specific measurements are missing.
 - `not_covered` means the simulator or validation suite lacks the condition required by that paper.
 - `algorithmic_or_robotics_analogy` scope means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation even when its audit status is `pass`.
@@ -32,6 +33,25 @@ Important interpretation rules:
 - `screened_out_not_direct_biology`: 34
 - `aligned_qualitative`: 17
 
+### scientific_status
+
+- `family_qualitative_proxy`: 69
+- `not_biological_target`: 34
+- `model_reference_only`: 9
+- `exact_qualitative_only`: 8
+
+### validation_tier
+
+- `family_proxy`: 69
+- `screened_out`: 34
+- `model_reference`: 9
+- `exact_qualitative`: 8
+
+### requires_followup
+
+- `yes`: 86
+- `no`: 34
+
 ## Sequential Results
 
 ### 1. Modeling tropotaxis in ant colonies: recruitment and trail formation
@@ -43,6 +63,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: tropotaxis_gradient_response_proxy
 - Evidence paper id: ramirez_2018
 - Gap: The model uses left/right/front sampling and exports per-step trajectory/sensing plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.
@@ -56,6 +79,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: negative_pheromone_forbidden_path
 - Evidence paper id: jimenez_romero_2015
 - Gap: The simulator now pairs avoid pheromone with short-term individual avoid memory, but it is still an ABM rule rather than the paper's spiking-neural-controller implementation.
@@ -69,6 +95,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: rain_food_removal_washout
 - Evidence paper id: amorim_2014
 - Gap: Trail formation and decay are represented, but the simulator is an ABM with heuristic field units rather than Amorim's calibrated PDE chemotaxis variables.
@@ -82,6 +111,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: two-cue adaptation proxy
 - Evidence paper id: malickova_2015
 - Gap: The simulator separates food/nest/water fields, but it is not yet the exact two-pheromone mathematical model and lacks direct synchronization metrics.
@@ -95,6 +127,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: no_jam_density_speed
 - Evidence paper id: john_2009
 - Gap: The validation now uses segment-level speed/flow-density metrics. It still lacks calibrated body-contact rules and digitized no-jam flow curves.
@@ -108,6 +143,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -121,6 +159,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -134,6 +175,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: fail_stop_foraging_resilience
 - Evidence paper id: afek_2015
 - Gap: Afek et al. is an algorithmic pheromone model; this ABM only tests biological-style degradation, not asymptotic pheromone lower bounds or proof-level optimality.
@@ -147,6 +191,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift
 - Evidence paper id: dussutour_2004
 - Gap: The model now exports segment-level density, speed and flow. It still lacks explicit antennal-contact mechanics and lane-discipline calibration from crowded trail experiments.
@@ -160,6 +207,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: necrophoresis_cleanup_latency
 - Evidence paper id: avanzi_2024
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -173,6 +223,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: misleading_pheromone_attack_and_caution
 - Evidence paper id: aswale_2022
 - Gap: The probe now uses sustained external fake-pheromone perturbation and generic avoid learning, but still lacks explicit attacker agents and calibrated attack/defense effect sizes.
@@ -186,6 +239,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: stochasticity_relocation
 - Evidence paper id: shiraishi_2018
 - Gap: The current check measures relative relocation adaptation. It does not yet fit the paper's environment-dependent optimal stochasticity distribution.
@@ -199,6 +255,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Trail reinforcement, per-step trajectory/sensing samples and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.
@@ -212,6 +271,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -225,6 +287,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -238,6 +303,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -251,6 +319,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -264,6 +335,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -277,6 +351,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -290,6 +367,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: The model has response-threshold-like task switching and exports switch rates/contact summaries, but it still lacks calibrated worker-worker contact matrices.
@@ -303,6 +383,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -316,6 +399,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -329,6 +415,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -342,6 +431,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -355,6 +447,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -368,6 +463,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -381,6 +479,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: The simulator now has food quality and quality-weighted recruitment, but it still lacks species-specific sucrose concentration calibration and direct trail-laying event counts.
@@ -394,6 +495,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -407,6 +511,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -420,6 +527,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -433,6 +543,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -446,6 +559,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -459,6 +575,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -472,6 +591,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -485,6 +607,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -498,6 +623,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -511,6 +639,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -524,6 +655,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `model_reference_only`
+- Validation tier: `model_reference`
+- Requires follow-up: `yes`
 - Matched condition: rain_food_removal_washout
 - Evidence paper id: amorim_2014
 - Gap: Trail formation and decay are represented, but the simulator is an ABM with heuristic field units rather than Amorim's calibrated PDE chemotaxis variables.
@@ -537,6 +671,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -550,6 +687,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -563,6 +703,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -576,6 +719,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -589,6 +735,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -602,6 +751,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -615,6 +767,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -628,6 +783,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: brood_microclimate_stage_thermoregulation
 - Evidence paper id: baudier_2019
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -641,6 +799,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -654,6 +815,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -667,6 +831,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -680,6 +847,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -693,6 +863,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: brood_microclimate_stage_thermoregulation
 - Evidence paper id: baudier_2019
 - Gap: The simulator now tests brood microclimate and stage-dependent thermoregulation, but still lacks fitted metabolic heat budgets, nest-site choice geometry and species-specific brood survival curves.
@@ -706,6 +879,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -719,6 +895,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -732,6 +911,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: brood_microclimate_stage_thermoregulation
 - Evidence paper id: baudier_2019
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -745,6 +927,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: nest_relocation_quorum_choice
 - Evidence paper id: pratt_2002
 - Gap: The simulator now has a quorum relocation proxy, but lacks species-specific tandem running, carrying trajectories, site-volume geometry and fitted quorum thresholds.
@@ -758,6 +943,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -771,6 +959,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -784,6 +975,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -797,6 +991,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -810,6 +1007,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -823,6 +1023,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -836,6 +1039,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -849,6 +1055,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -862,6 +1071,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -875,6 +1087,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -888,6 +1103,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: nest_relocation_quorum_choice
 - Evidence paper id: pratt_2002
 - Gap: The simulator now has a quorum relocation proxy, but lacks species-specific tandem running, carrying trajectories, site-volume geometry and fitted quorum thresholds.
@@ -901,6 +1119,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -914,6 +1135,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -927,6 +1151,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -940,6 +1167,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -953,6 +1183,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -966,6 +1199,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -979,6 +1215,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -992,6 +1231,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1005,6 +1247,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1018,6 +1263,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1031,6 +1279,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1044,6 +1295,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1057,6 +1311,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1070,6 +1327,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1083,6 +1343,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1096,6 +1359,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1109,6 +1375,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1122,6 +1391,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1135,6 +1407,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1148,6 +1423,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1161,6 +1439,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1174,6 +1455,9 @@ Important interpretation rules:
 - Scope: `exact_paper_condition`
 - Status: `pass`
 - Verdict: `aligned_qualitative`
+- Scientific status: `exact_qualitative_only`
+- Validation tier: `exact_qualitative`
+- Requires follow-up: `yes`
 - Matched condition: necrophoresis_cleanup_latency
 - Evidence paper id: avanzi_2024
 - Gap: Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation.
@@ -1187,6 +1471,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1200,6 +1487,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1213,6 +1503,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: none
 - Evidence paper id: none
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1226,6 +1519,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1239,6 +1535,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: food_quality_recruitment
 - Evidence paper id: jackson_chaline_2007
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1252,6 +1551,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1265,6 +1567,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: brood_microclimate_stage_thermoregulation
 - Evidence paper id: baudier_2019
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1278,6 +1583,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1291,6 +1599,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1304,6 +1615,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1317,6 +1631,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1330,6 +1647,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1343,6 +1663,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1356,6 +1679,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1369,6 +1695,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1382,6 +1711,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1395,6 +1727,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: brood_microclimate_stage_thermoregulation
 - Evidence paper id: baudier_2019
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1408,6 +1743,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1421,6 +1759,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1434,6 +1775,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1447,6 +1791,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1460,6 +1807,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1473,6 +1823,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1486,6 +1839,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1499,6 +1855,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: none
 - Evidence paper id: none
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1512,6 +1871,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.
@@ -1525,6 +1887,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1538,6 +1903,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1551,6 +1919,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1564,6 +1935,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1577,6 +1951,9 @@ Important interpretation rules:
 - Scope: `algorithmic_or_robotics_analogy`
 - Status: `pass`
 - Verdict: `screened_out_not_direct_biology`
+- Scientific status: `not_biological_target`
+- Validation tier: `screened_out`
+- Requires follow-up: `no`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
 - Gap: Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.
@@ -1590,6 +1967,9 @@ Important interpretation rules:
 - Scope: `validated_family_condition`
 - Status: `pass`
 - Verdict: `family_qualitative_alignment`
+- Scientific status: `family_qualitative_proxy`
+- Validation tier: `family_proxy`
+- Requires follow-up: `yes`
 - Matched condition: army_ant_mill_mortality
 - Evidence paper id: army_ant_mill_qualitative
 - Gap: Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing.

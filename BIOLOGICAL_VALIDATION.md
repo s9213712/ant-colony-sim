@@ -612,11 +612,11 @@ python3 experiments/quantitative_readiness_audit.py \
 - `outputs/literature_corpus_120_evaluation.json`
 - `outputs/literature_corpus_120_evaluation.md`
 
-目前逐篇結果：
+目前逐篇結果分成兩層解讀：`status` 是 simulator-condition 層級，`scientific_status` 是生物學驗證層級。
 
 | 狀態 | 數量 | 解讀 |
 | --- | ---: | --- |
-| pass | 120 | 包含 exact biology、validated family qualitative alignment，以及非生物工程文獻的 scope screen-out |
+| pass | 120 | 目前條件矩陣沒有失敗，但不代表 120 篇都已定量重現 |
 
 範圍統計：
 
@@ -626,7 +626,18 @@ python3 experiments/quantitative_readiness_audit.py \
 | algorithmic_or_robotics_analogy | 34 |
 | exact_paper_condition | 17 |
 
-直接結論：目前 120 筆 corpus 全部通過「審查矩陣」，但意義分三層：17 筆 exact biological condition 定性通過；69 筆 validated family condition 由通用規則覆蓋到行為家族層級；34 筆 robotics / ACO / 工程類比文獻通過的是 scope screen-out，不算直接生物學驗證。下一輪優先順序應是：
+直接結論：目前 120 筆 corpus 全部通過「條件矩陣」，但不是「完美模擬」。新的嚴格欄位會把結果分成：exact qualitative、family qualitative proxy、model reference only、not biological target。只要缺 paper-specific digitized curve、物種參數或獨立 holdout validation，就會標成 `requires_followup=yes`。下一輪優先順序應是：
+
+嚴格生物學分級：
+
+| scientific_status | 數量 | 解讀 |
+| --- | ---: | --- |
+| family_qualitative_proxy | 69 | 通用規則覆蓋行為家族，但缺 paper-specific 數值 |
+| not_biological_target | 34 | 工程/ACO/robotics 類比，不列入直接生物驗證 |
+| model_reference_only | 9 | 數學/ABM/PDE 參考，缺原始生物曲線 |
+| exact_qualitative_only | 8 | exact paper condition 定性通過，但缺數位化曲線 fit |
+
+目前 `requires_followup=yes`: 86。
 
 1. `branch_choice_curve_fitting`：digitize double-bridge branch-choice curves，校準 probability/time course。
 2. `species_parameter_ranges`：把速度、感知半徑、費洛蒙半衰期、代謝/水分消耗轉成物種專屬範圍。
@@ -636,18 +647,30 @@ python3 experiments/quantitative_readiness_audit.py \
 
 ## 17. Gap backlog for later work
 
-`experiments/generate_literature_gap_backlog.py` 會把逐篇評估中所有非 `pass` 文獻記錄成待辦清單。輸出：
+`experiments/generate_literature_gap_backlog.py` 會把逐篇評估中所有 `requires_followup=yes` 的文獻記錄成待辦清單。這比「非 pass」更嚴格，因為定性 family pass 與 exact qualitative pass 仍然不能宣稱完成 paper-level biological calibration。輸出：
 
 - `outputs/literature_gap_backlog.csv`
 - `outputs/literature_gap_backlog.json`
 - `outputs/literature_gap_backlog.md`
 
-目前 backlog：
+目前 backlog 的解讀方式：
 
 | 優先級 | 數量 | 用途 |
 | --- | ---: | --- |
-| total | 0 | 目前沒有未通過審查矩陣的文獻 |
+| P1_needs_quantitative_curve | 17 | exact/model reference 需要 digitized curve 或原始測量 |
+| P2_family_proxy_needs_paper_data | 69 | 通用行為家族可對上，但缺 paper-specific data |
+| total | 86 | 仍需後續處理的生物學/模型參考文獻 |
 
-目前沒有 `P0_missing_biology_condition`、`P1_exact_condition_partial` 或 proxy-only backlog。剩下工作不是讓矩陣 pass，而是把 69 筆 family pass 逐步提高到 paper-specific quantitative calibration；演算法/機器人文獻則保留為靈感來源，不列入生物真實度。
+剩下工作不是讓矩陣 pass，而是把 exact qualitative / family qualitative proxy 逐步提高到 paper-specific quantitative calibration；演算法/機器人文獻則保留為靈感來源，不列入生物真實度。
 
 後續改模型時，應先從 P0 做起；每補一個 condition，就重跑 `paper_conditions_probe.py`、`evaluate_literature_corpus.py`、`generate_literature_gap_backlog.py`，讓 backlog 數量逐步下降。
+
+## 18. Digitized curve inventory
+
+Level 4 需要至少一條 primary-source digitized biological curve，且另有一條獨立 validation curve。`experiments/digitized_curve_inventory.py` 會檢查 `targets/digitized_curves/*.csv` 是否符合欄位、數值與來源要求。輸出：
+
+- `outputs/digitized_curve_inventory.csv`
+- `outputs/digitized_curve_inventory.json`
+- `outputs/digitized_curve_inventory.md`
+
+`targets/digitized_curves/source_leads.json` 只記錄候選來源，不可直接用於 fitting。若只找到二手摘要，必須標為 lead，不能填入 target value。這避免為了配合文獻而製造例外規則或虛假數值。

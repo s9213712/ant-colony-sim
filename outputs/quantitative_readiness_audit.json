@@ -1,6 +1,6 @@
 {
   "suite": "quantitative_readiness_audit_v1",
-  "generated_at": "2026-07-02T14:59:37Z",
+  "generated_at": "2026-07-02T15:18:28Z",
   "manifest_id": "quantitative_curve_targets_v1",
   "claim_level": "readiness_manifest_for_level_4_5_calibration",
   "summary": {
@@ -33,7 +33,7 @@
       "biological_process": "Pheromone trail decay after food removal or rain/washout.",
       "current_proxy": "literature_pheromone_constraints_v1 checks qualitative persistence effects only.",
       "next_action": "Digitize trail decay or trail occupancy time series and map model day to the paper's time axis.",
-      "source_count": 2,
+      "source_count": 3,
       "required_data": "time since food removal or washout; trail pheromone proxy or trail occupancy; species/arena conditions; replicate variance or confidence interval"
     },
     {

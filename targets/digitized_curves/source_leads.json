@@ -1,0 +1,56 @@
+{
+  "id": "digitized_curve_source_leads_v1",
+  "purpose": "Track primary-source candidates for Level 4 quantitative biological calibration. Entries are leads, not fit-ready data.",
+  "rules": [
+    "Do not fit against a lead unless numeric x/y rows are present in a curve CSV with primary-source provenance.",
+    "Secondary summaries can help locate papers but cannot define target values.",
+    "Prefer empirical ant biology papers over pure mathematical, robotics or ant-colony-optimization references."
+  ],
+  "leads": [
+    {
+      "target_id": "trail_decay_curve",
+      "source_id": "robinson_2008_decay_rates_lead",
+      "title": "Decay rates of attractive and repellent pheromones in an ant foraging trail network",
+      "species": "Monomorium pharaonis",
+      "status": "primary_numeric_data_needed",
+      "source_url": "",
+      "notes": "Search found this as a likely primary Insectes Sociaux paper through secondary reference lists. Do not enter decay values until the primary paper, figure or table is available."
+    },
+    {
+      "target_id": "trail_decay_curve",
+      "source_id": "perna_2012",
+      "title": "Individual rules for trail pattern formation in Argentine ants",
+      "species": "Linepithema humile",
+      "status": "candidate_for_response_curve_digitization",
+      "source_url": "https://arxiv.org/abs/1201.5827",
+      "notes": "Useful for pheromone-response geometry and Weber-law style response, not a direct decay-rate curve unless figure data are digitized."
+    },
+    {
+      "target_id": "food_recruitment_strength_curve",
+      "source_id": "jackson_chaline_2007",
+      "title": "Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis",
+      "species": "Monomorium pharaonis",
+      "status": "primary_numeric_data_needed",
+      "source_url": "https://doi.org/10.1016/j.anbehav.2006.11.027",
+      "notes": "High-priority empirical candidate for food-quality to recruitment/trail-laying calibration."
+    },
+    {
+      "target_id": "traffic_flow_density_curve",
+      "source_id": "dussutour_2004",
+      "title": "Optimal traffic organisation in ants under crowded conditions",
+      "species": "Lasius niger",
+      "status": "candidate_for_curve_digitization",
+      "source_url": "https://doi.org/10.1038/nature02585",
+      "notes": "Candidate for speed-density or flow-density target curves."
+    },
+    {
+      "target_id": "traffic_flow_density_curve",
+      "source_id": "john_2009",
+      "title": "Trafficlike collective movement of ants on trails: absence of a jammed phase",
+      "species": "Leptogenys processionalis",
+      "status": "candidate_for_curve_digitization",
+      "source_url": "https://doi.org/10.1103/physrevlett.102.108001",
+      "notes": "Candidate independent holdout for no-jam traffic validation after Dussutour-style fitting."
+    }
+  ]
+}
