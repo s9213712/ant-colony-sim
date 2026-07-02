@@ -117,7 +117,7 @@ This backlog records every literature-corpus paper that is not fully simulated a
 - Matched condition: crowding_bridge_density_shift
 - Evidence paper id: dussutour_2004
 - Next action: Add digitized paper-level biological measurements and fit only shared model parameters, not paper-specific exception rules.
-- Gap: The model now exports segment-level density, speed and flow. It still lacks explicit antennal-contact mechanics and lane-discipline calibration from crowded trail experiments.
+- Gap: The model now exports segment-level density, speed, flow and traffic-redirect probability. It still lacks calibrated body-contact/pushing mechanics from crowded trail experiments.
 
 ### 11. Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It
 

@@ -76,7 +76,7 @@ JSON: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - Paper: John et al. 2009
 - Status: `pass`
 - Expected: Increasing trail density should not create a hard jammed phase; movement should degrade mildly, not collapse.
-- Observed: `{"low_mean_displacement": 204.3842, "high_mean_displacement": 140.1763, "high_vs_low_displacement_ratio": 0.6858, "low_food_trips": 4.0, "high_food_trips": 0.333, "low_segment_density": 0.00094, "high_segment_density": 0.00533, "low_segment_speed": 5.4303, "high_segment_speed": 3.6518, "low_segment_flow": 102.8966, "high_segment_flow": 394.2192, "high_bidirectional_fraction": 0.3979, "low_redirect_probability": 0.2335, "high_redirect_probability": 0.2533, "high_redirect_per_encounter": 0.6765}`
+- Observed: `{"low_mean_displacement": 204.3842, "medium_mean_displacement": 161.8995, "high_mean_displacement": 140.1763, "high_vs_low_displacement_ratio": 0.6858, "low_food_trips": 4.0, "medium_food_trips": 2.333, "high_food_trips": 0.333, "low_segment_density": 0.00094, "medium_segment_density": 0.0027, "high_segment_density": 0.00533, "low_segment_speed": 5.4303, "medium_segment_speed": 4.4715, "high_segment_speed": 3.6518, "low_segment_flow": 102.8966, "medium_segment_flow": 261.1257, "high_segment_flow": 394.2192, "high_bidirectional_fraction": 0.3979, "low_redirect_probability": 0.2335, "medium_redirect_probability": 0.2492, "high_redirect_probability": 0.2533, "high_redirect_per_encounter": 0.6765}`
 - Gap: The validation now uses segment-level speed/flow-density metrics. It still lacks calibrated body-contact rules and digitized no-jam flow curves.
 
 ### shiraishi_2018 - stochasticity_relocation

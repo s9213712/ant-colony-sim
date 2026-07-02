@@ -6,9 +6,9 @@ This report adds replicate-level uncertainty to literature-condition probes with
 
 - source: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - status: `pass`
-- condition count: `27`
+- condition count: `28`
 - summary pass fraction: `1.0`
-- core metrics with bootstrap CI: `50` / `50`
+- core metrics with bootstrap CI: `54` / `54`
 - minimum replicate count required: `3`
 
 ## Core Metric CI
@@ -59,6 +59,10 @@ This report adds replicate-level uncertainty to literature-condition probes with
 | `no_jam_low_density` | `segment_abs_forward_speed` | 3 | 5.430267 | 0.098101 | [5.3709, 5.5435] |
 | `no_jam_low_density` | `segment_density` | 3 | 0.00094 | 0.000548 | [0.00033, 0.00139] |
 | `no_jam_low_density` | `segment_flow` | 3 | 102.8966 | 25.722673 | [77.6092, 129.0335] |
+| `no_jam_medium_density` | `mean_displacement` | 3 | 161.899532 | 11.247294 | [153.42563, 174.659766] |
+| `no_jam_medium_density` | `segment_abs_forward_speed` | 3 | 4.471467 | 0.482961 | [4.0565, 5.0016] |
+| `no_jam_medium_density` | `segment_density` | 3 | 0.002703 | 0.001097 | [0.00144, 0.00342] |
+| `no_jam_medium_density` | `segment_flow` | 3 | 261.125667 | 33.826415 | [239.3308, 300.0938] |
 | `rain_food_removal_washout` | `food_pheromone_ratio` | 3 | 3.1e-05 | 2.5e-05 | [1.2e-05, 5.9e-05] |
 | `rain_food_removal_washout` | `nest_pheromone_ratio` | 3 | 0.003503 | 0.000313 | [0.003147, 0.003734] |
 | `single_food_trail` | `food_collected` | 3 | 658.0 | 133.225373 | [513.0, 775.0] |

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T17:34:29Z",
+  "generated_at": "2026-07-02T20:02:32Z",
   "target_csv": "/home/s92137/ant_colony_sim/targets/digitized_curves/john_2009_traffic_velocity_density_holdout.csv",
   "target_id": "traffic_velocity_density_holdout",
   "model_summary": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
@@ -9,30 +9,84 @@
       "target_no_jam_retention_at_least_0_70": true,
       "model_high_density_speed_positive": true,
       "model_high_density_flow_exceeds_low_density": true,
-      "model_velocity_retention_within_holdout_margin": true
+      "model_velocity_retention_within_holdout_margin": true,
+      "model_three_point_curve_rmse_within_0_25": true
     },
     "target": {
       "low_density": 0.1,
+      "medium_density": 0.3,
       "high_density": 0.6,
       "low_speed_bl_per_sec": 6.2,
+      "medium_speed_bl_per_sec": 5.1,
       "high_speed_bl_per_sec": 4.64,
       "low_speed_sd": 1.58,
+      "medium_speed_sd": 0.95,
       "high_speed_sd": 0.6,
       "low_n": null,
+      "medium_n": null,
       "high_n": null,
       "velocity_retention": 0.7483870967741935,
       "velocity_drop": 0.25161290322580654,
-      "formal_ci_available": false
+      "formal_ci_available": false,
+      "normalized_speed_curve": [
+        1.0,
+        0.8225806451612903,
+        0.7483870967741935
+      ]
     },
     "model": {
       "low_segment_density": 0.00094,
+      "medium_segment_density": 0.0027,
       "high_segment_density": 0.00533,
       "low_segment_speed": 5.4303,
+      "medium_segment_speed": 4.4715,
       "high_segment_speed": 3.6518,
       "velocity_retention": 0.6724858663425594,
       "velocity_drop": 0.32751413365744064,
       "low_segment_flow": 102.8966,
-      "high_segment_flow": 394.2192
+      "medium_segment_flow": 261.1257,
+      "high_segment_flow": 394.2192,
+      "normalized_speed_curve": [
+        1.0,
+        0.8234351693276615,
+        0.6724858663425594
+      ],
+      "normalized_speed_rmse": 0.04382437294697602,
+      "curve": [
+        {
+          "density_bin_midpoint": 0.1,
+          "target_speed": 6.2,
+          "target_normalized_speed": 1.0,
+          "target_sd": 1.58,
+          "target_n": null,
+          "model_segment_density": 0.00094,
+          "model_segment_speed": 5.4303,
+          "model_normalized_speed": 1.0,
+          "model_segment_flow": 102.8966
+        },
+        {
+          "density_bin_midpoint": 0.3,
+          "target_speed": 5.1,
+          "target_normalized_speed": 0.8225806451612903,
+          "target_sd": 0.95,
+          "target_n": null,
+          "model_segment_density": 0.0027,
+          "model_segment_speed": 4.4715,
+          "model_normalized_speed": 0.8234351693276615,
+          "model_segment_flow": 261.1257
+        },
+        {
+          "density_bin_midpoint": 0.6,
+          "target_speed": 4.64,
+          "target_normalized_speed": 0.7483870967741935,
+          "target_sd": 0.6,
+          "target_n": null,
+          "model_segment_density": 0.00533,
+          "model_segment_speed": 3.6518,
+          "model_normalized_speed": 0.6724858663425594,
+          "model_segment_flow": 394.2192
+        }
+      ]
     },
     "interpretation": "The independent John 2009 holdout supports the model's qualitative no-jam traffic behavior: speed remains positive and high-density flow does not collapse.",
     "uncertainty_note": "Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed."

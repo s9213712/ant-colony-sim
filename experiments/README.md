@@ -209,9 +209,11 @@ Current result:
 - status: `pass`
 - target high/low velocity retention: `0.748`
 - model high/low velocity retention: `0.672`
+- normalized three-point speed curve RMSE: `0.044`
 
 This is a normalized no-jam holdout. It checks speed retention and non-collapsed
-flow, not an absolute physical-unit speed match.
+flow across low, medium and high density bins, not an absolute physical-unit
+speed match.
 
 ## Level 5 Uncertainty Audit
 
@@ -232,9 +234,10 @@ python3 ant_colony_sim/experiments/level5_uncertainty_audit.py \
 
 Current result:
 
-- estimated level: `4.4`
+- estimated level: `4.5`
 - fit-curve bootstrap CI: `true`
 - holdout curve present: `true`
+- traffic three-point curve: `true`
 - holdout variance values present: `true`
 - paper-condition replicate CI: `true`
 - independent pushing redirect holdout: `true`
@@ -242,10 +245,10 @@ Current result:
 
 Interpretation: the model now has bootstrap uncertainty for the fitted Perna
 response curve, replicate uncertainty for paper-condition probes, an independent
-Dussutour pushing/redirect holdout and SD values for the John traffic holdout.
-Level 5 remains blocked because the John speed holdout target lacks density-bin
-sample sizes or raw tracking data, so formal holdout confidence intervals cannot
-be computed.
+Dussutour pushing/redirect holdout and a three-point normalized speed curve for
+the John traffic holdout. Level 5 remains blocked because the John speed holdout
+target lacks density-bin sample sizes or raw tracking data, so formal holdout
+confidence intervals cannot be computed.
 
 ## Pushing Redirect Holdout
 
@@ -284,9 +287,9 @@ python3 ant_colony_sim/experiments/level5_replicate_statistics.py \
 
 Current result from `paper_conditions_v5.json`:
 
-- condition count: `27`
+- condition count: `28`
 - summary pass fraction: `1.0`
-- core metrics with bootstrap CI: `50 / 50`
+- core metrics with bootstrap CI: `54 / 54`
 - minimum replicate count: `3`
 
 Interpretation: this moves the simulator toward Level 5 by reporting stochastic-run uncertainty for the qualitative paper-condition matrix. It does not make qualitative paper matches quantitative; paper-specific digitized curves and independent holdouts are still required for biological calibration claims.

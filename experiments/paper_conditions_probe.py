@@ -933,57 +933,37 @@ PAPER_CONDITIONS_JS = """
     const highTraffic = runDoubleBridge(seed, config.highDensityAnts, null, 0);
     rows.push({ condition: 'crowding_high_density_bridge', ...highTraffic });
 
-    baseMature(seed, config.lowDensityAnts);
-    antSim.addFood(980, 390, config.foodAmount);
-    const lowSpeed = displacementProbe(config.speedProbeDays, config.dt);
-    const lowSnap = antSim.collectStatsSnapshot();
-    const lowSegment = antSim.collectSegmentMetrics(antSim.world.nest.x, antSim.world.nest.y, 980, 390, 110);
-    rows.push({
-      condition: 'no_jam_low_density',
-      seed,
-      ants: config.lowDensityAnts,
-      mean_displacement: lowSpeed,
-      food_trips: lowSnap.food_trips,
-      avg_traffic_load: lowSnap.avg_traffic_load,
-      traffic_max_cell: lowSnap.traffic_max_cell,
-      traffic_redirect_opportunities: lowSnap.traffic_redirect_opportunities,
-      traffic_redirect_encounters: lowSnap.traffic_redirect_encounters,
-      traffic_redirects: lowSnap.traffic_redirects,
-      traffic_encounter_redirects: lowSnap.traffic_encounter_redirects,
-      traffic_redirect_probability: lowSnap.traffic_redirect_probability,
-      traffic_redirect_per_encounter: lowSnap.traffic_redirect_per_encounter,
-      segment_density: lowSegment.density,
-      segment_mean_speed: lowSegment.mean_speed,
-      segment_abs_forward_speed: lowSegment.mean_abs_forward_speed,
-      segment_flow: lowSegment.forward_flow + lowSegment.reverse_flow,
-      segment_bidirectional_fraction: lowSegment.bidirectional_fraction,
-    });
+    const runNoJamProbe = (condition, ants) => {
+      baseMature(seed, ants);
+      antSim.addFood(980, 390, config.foodAmount);
+      const displacement = displacementProbe(config.speedProbeDays, config.dt);
+      const snap = antSim.collectStatsSnapshot();
+      const segment = antSim.collectSegmentMetrics(antSim.world.nest.x, antSim.world.nest.y, 980, 390, 110);
+      rows.push({
+        condition,
+        seed,
+        ants,
+        mean_displacement: displacement,
+        food_trips: snap.food_trips,
+        avg_traffic_load: snap.avg_traffic_load,
+        traffic_max_cell: snap.traffic_max_cell,
+        traffic_redirect_opportunities: snap.traffic_redirect_opportunities,
+        traffic_redirect_encounters: snap.traffic_redirect_encounters,
+        traffic_redirects: snap.traffic_redirects,
+        traffic_encounter_redirects: snap.traffic_encounter_redirects,
+        traffic_redirect_probability: snap.traffic_redirect_probability,
+        traffic_redirect_per_encounter: snap.traffic_redirect_per_encounter,
+        segment_density: segment.density,
+        segment_mean_speed: segment.mean_speed,
+        segment_abs_forward_speed: segment.mean_abs_forward_speed,
+        segment_flow: segment.forward_flow + segment.reverse_flow,
+        segment_bidirectional_fraction: segment.bidirectional_fraction,
+      });
+    };
 
-    baseMature(seed, config.highDensityAnts);
-    antSim.addFood(980, 390, config.foodAmount);
-    const highSpeed = displacementProbe(config.speedProbeDays, config.dt);
-    const highSnap = antSim.collectStatsSnapshot();
-    const highSegment = antSim.collectSegmentMetrics(antSim.world.nest.x, antSim.world.nest.y, 980, 390, 110);
-    rows.push({
-      condition: 'no_jam_high_density',
-      seed,
-      ants: config.highDensityAnts,
-      mean_displacement: highSpeed,
-      food_trips: highSnap.food_trips,
-      avg_traffic_load: highSnap.avg_traffic_load,
-      traffic_max_cell: highSnap.traffic_max_cell,
-      traffic_redirect_opportunities: highSnap.traffic_redirect_opportunities,
-      traffic_redirect_encounters: highSnap.traffic_redirect_encounters,
-      traffic_redirects: highSnap.traffic_redirects,
-      traffic_encounter_redirects: highSnap.traffic_encounter_redirects,
-      traffic_redirect_probability: highSnap.traffic_redirect_probability,
-      traffic_redirect_per_encounter: highSnap.traffic_redirect_per_encounter,
-      segment_density: highSegment.density,
-      segment_mean_speed: highSegment.mean_speed,
-      segment_abs_forward_speed: highSegment.mean_abs_forward_speed,
-      segment_flow: highSegment.forward_flow + highSegment.reverse_flow,
-      segment_bidirectional_fraction: highSegment.bidirectional_fraction,
-    });
+    runNoJamProbe('no_jam_low_density', config.lowDensityAnts);
+    runNoJamProbe('no_jam_medium_density', config.mediumDensityAnts);
+    runNoJamProbe('no_jam_high_density', config.highDensityAnts);
 
     for (const profile of config.noiseProfiles) {
       baseMature(seed, config.ants);
@@ -1207,24 +1187,32 @@ def aggregate(raw_rows):
     })
 
     low_speed_rows = by_condition["no_jam_low_density"]
+    medium_speed_rows = by_condition["no_jam_medium_density"]
     high_speed_rows = by_condition["no_jam_high_density"]
     low_disp = mean(float(r["mean_displacement"]) for r in low_speed_rows)
+    medium_disp = mean(float(r["mean_displacement"]) for r in medium_speed_rows)
     high_disp = mean(float(r["mean_displacement"]) for r in high_speed_rows)
     speed_ratio = high_disp / low_disp if low_disp else 0
     speed_metrics = {
         "low_mean_displacement": round(low_disp, 4),
+        "medium_mean_displacement": round(medium_disp, 4),
         "high_mean_displacement": round(high_disp, 4),
         "high_vs_low_displacement_ratio": round(speed_ratio, 4),
         "low_food_trips": round(mean(float(r["food_trips"]) for r in low_speed_rows), 3),
+        "medium_food_trips": round(mean(float(r["food_trips"]) for r in medium_speed_rows), 3),
         "high_food_trips": round(mean(float(r["food_trips"]) for r in high_speed_rows), 3),
         "low_segment_density": round(mean(float(r["segment_density"]) for r in low_speed_rows), 5),
+        "medium_segment_density": round(mean(float(r["segment_density"]) for r in medium_speed_rows), 5),
         "high_segment_density": round(mean(float(r["segment_density"]) for r in high_speed_rows), 5),
         "low_segment_speed": round(mean(float(r["segment_abs_forward_speed"]) for r in low_speed_rows), 4),
+        "medium_segment_speed": round(mean(float(r["segment_abs_forward_speed"]) for r in medium_speed_rows), 4),
         "high_segment_speed": round(mean(float(r["segment_abs_forward_speed"]) for r in high_speed_rows), 4),
         "low_segment_flow": round(mean(float(r["segment_flow"]) for r in low_speed_rows), 4),
+        "medium_segment_flow": round(mean(float(r["segment_flow"]) for r in medium_speed_rows), 4),
         "high_segment_flow": round(mean(float(r["segment_flow"]) for r in high_speed_rows), 4),
         "high_bidirectional_fraction": round(mean(float(r["segment_bidirectional_fraction"]) for r in high_speed_rows), 4),
         "low_redirect_probability": round(mean(float(r["traffic_redirect_probability"]) for r in low_speed_rows), 4),
+        "medium_redirect_probability": round(mean(float(r["traffic_redirect_probability"]) for r in medium_speed_rows), 4),
         "high_redirect_probability": round(mean(float(r["traffic_redirect_probability"]) for r in high_speed_rows), 4),
         "high_redirect_per_encounter": round(mean(float(r["traffic_redirect_per_encounter"]) for r in high_speed_rows), 4),
     }
@@ -1586,6 +1574,7 @@ def main():
         "seeds": seeds,
         "ants": 180 if args.quick else 280,
         "lowDensityAnts": 90 if args.quick else 160,
+        "mediumDensityAnts": 160 if args.quick else 320,
         "highDensityAnts": 260 if args.quick else 520,
         "foodAmount": 1200,
         "dt": 9,

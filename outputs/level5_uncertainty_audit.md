@@ -4,7 +4,7 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 
 ## Summary
 
-- estimated level: `4.4`
+- estimated level: `4.5`
 - Level 5 ready: `False`
 - blocker: Holdout has SD values but lacks density-bin sample sizes, so formal holdout CI is not available.
 
@@ -12,6 +12,7 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 
 - `fit_curve_bootstrap_ci`: `True`
 - `holdout_curve_present`: `True`
+- `traffic_three_point_curve`: `True`
 - `holdout_has_variance_values`: `True`
 - `paper_condition_replicate_ci`: `True`
 - `independent_pushing_redirect_holdout`: `True`
@@ -31,16 +32,21 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 - low-density speed SD: `1.58`
 - high-density speed SD: `0.6`
 - low-density n: `None`
+- medium-density speed SD: `0.95`
+- medium-density n: `None`
 - high-density n: `None`
+- normalized speed RMSE: `0.04382437294697602`
+- target normalized speed curve: `[1.0, 0.8225806451612903, 0.7483870967741935]`
+- model normalized speed curve: `[1.0, 0.8234351693276615, 0.6724858663425594]`
 - formal CI available: `False`
 - note: Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed.
 
 ## Paper-Condition Replicate Uncertainty
 
 - replicate status: `pass`
-- condition count: `27`
+- condition count: `28`
 - summary pass fraction: `1.0`
-- core metrics with CI: `50` / `50`
+- core metrics with CI: `54` / `54`
 - minimum replicate count: `3`
 - underpowered core metrics: `[]`
 

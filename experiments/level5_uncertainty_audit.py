@@ -25,15 +25,18 @@ def audit(individual_fit, traffic_holdout, replicate_statistics=None, pushing_re
     target = traffic.get("target", {})
     replicate_summary = (replicate_statistics or {}).get("summary", {})
     pushing_result = (pushing_redirect or {}).get("result", {})
+    traffic_curve_rmse = traffic.get("model", {}).get("normalized_speed_rmse")
     replicate_ci_ready = (
         replicate_summary.get("core_metric_count", 0) > 0
         and replicate_summary.get("core_metric_ci_ready") == replicate_summary.get("core_metric_count")
         and not replicate_summary.get("underpowered_core_metrics")
     )
     pushing_holdout_pass = pushing_result.get("status") == "pass"
+    traffic_three_point_curve = traffic.get("status") == "pass" and traffic_curve_rmse is not None and traffic_curve_rmse <= 0.25
     checks = {
         "fit_curve_bootstrap_ci": bootstrap.get("status") == "available",
         "holdout_curve_present": traffic.get("status") == "pass",
+        "traffic_three_point_curve": traffic_three_point_curve,
         "holdout_has_variance_values": target.get("low_speed_sd") is not None and target.get("high_speed_sd") is not None,
         "paper_condition_replicate_ci": replicate_ci_ready,
         "independent_pushing_redirect_holdout": pushing_holdout_pass,
@@ -41,6 +44,14 @@ def audit(individual_fit, traffic_holdout, replicate_statistics=None, pushing_re
     }
     level5_ready = all(checks.values())
     if (
+        checks["fit_curve_bootstrap_ci"]
+        and checks["holdout_has_variance_values"]
+        and checks["traffic_three_point_curve"]
+        and checks["paper_condition_replicate_ci"]
+        and checks["independent_pushing_redirect_holdout"]
+    ):
+        estimated_level = 4.5
+    elif (
         checks["fit_curve_bootstrap_ci"]
         and checks["holdout_has_variance_values"]
         and checks["paper_condition_replicate_ci"]
@@ -76,9 +87,14 @@ def audit(individual_fit, traffic_holdout, replicate_statistics=None, pushing_re
             "low_speed_sd": target.get("low_speed_sd"),
             "high_speed_sd": target.get("high_speed_sd"),
             "low_n": target.get("low_n"),
+            "medium_speed_sd": target.get("medium_speed_sd"),
+            "medium_n": target.get("medium_n"),
             "high_n": target.get("high_n"),
             "formal_ci_available": target.get("formal_ci_available"),
             "uncertainty_note": traffic.get("uncertainty_note"),
+            "normalized_speed_rmse": traffic_curve_rmse,
+            "target_normalized_speed_curve": target.get("normalized_speed_curve"),
+            "model_normalized_speed_curve": traffic.get("model", {}).get("normalized_speed_curve"),
         },
         "replicate_uncertainty": {
             "status": replicate_summary.get("status", "missing"),
@@ -154,7 +170,12 @@ def write_report(path, result):
         f"- low-density speed SD: `{holdout['low_speed_sd']}`",
         f"- high-density speed SD: `{holdout['high_speed_sd']}`",
         f"- low-density n: `{holdout['low_n']}`",
+        f"- medium-density speed SD: `{holdout['medium_speed_sd']}`",
+        f"- medium-density n: `{holdout['medium_n']}`",
         f"- high-density n: `{holdout['high_n']}`",
+        f"- normalized speed RMSE: `{holdout['normalized_speed_rmse']}`",
+        f"- target normalized speed curve: `{holdout['target_normalized_speed_curve']}`",
+        f"- model normalized speed curve: `{holdout['model_normalized_speed_curve']}`",
         f"- formal CI available: `{holdout['formal_ci_available']}`",
         f"- note: {holdout['uncertainty_note']}",
         "",

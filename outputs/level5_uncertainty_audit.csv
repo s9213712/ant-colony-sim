@@ -1,6 +1,7 @@
 check,pass
 fit_curve_bootstrap_ci,yes
 holdout_curve_present,yes
+traffic_three_point_curve,yes
 holdout_has_variance_values,yes
 paper_condition_replicate_ci,yes
 independent_pushing_redirect_holdout,yes

@@ -65,6 +65,12 @@ CORE_METRICS = {
         "segment_abs_forward_speed",
         "segment_flow",
     ],
+    "no_jam_medium_density": [
+        "mean_displacement",
+        "segment_density",
+        "segment_abs_forward_speed",
+        "segment_flow",
+    ],
     "no_jam_high_density": [
         "mean_displacement",
         "segment_density",

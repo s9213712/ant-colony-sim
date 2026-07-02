@@ -1,16 +1,17 @@
 {
-  "generated_at": "2026-07-02T17:34:39Z",
+  "generated_at": "2026-07-02T20:03:01Z",
   "individual_fit": "/home/s92137/ant_colony_sim/outputs/individual_response_curve_fit.json",
   "traffic_holdout": "/home/s92137/ant_colony_sim/outputs/traffic_holdout_validation.json",
   "replicate_statistics": "/home/s92137/ant_colony_sim/outputs/level5_replicate_statistics.json",
   "pushing_redirect": "/home/s92137/ant_colony_sim/outputs/pushing_redirect_validation.json",
   "result": {
-    "estimated_level": 4.4,
+    "estimated_level": 4.5,
     "level5_ready": false,
     "blocker": "Holdout has SD values but lacks density-bin sample sizes, so formal holdout CI is not available.",
     "checks": {
       "fit_curve_bootstrap_ci": true,
       "holdout_curve_present": true,
+      "traffic_three_point_curve": true,
       "holdout_has_variance_values": true,
       "paper_condition_replicate_ci": true,
       "independent_pushing_redirect_holdout": true,
@@ -37,16 +38,29 @@
       "low_speed_sd": 1.58,
       "high_speed_sd": 0.6,
       "low_n": null,
+      "medium_speed_sd": 0.95,
+      "medium_n": null,
       "high_n": null,
       "formal_ci_available": false,
-      "uncertainty_note": "Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed."
+      "uncertainty_note": "Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed.",
+      "normalized_speed_rmse": 0.04382437294697602,
+      "target_normalized_speed_curve": [
+        1.0,
+        0.8225806451612903,
+        0.7483870967741935
+      ],
+      "model_normalized_speed_curve": [
+        1.0,
+        0.8234351693276615,
+        0.6724858663425594
+      ]
     },
     "replicate_uncertainty": {
       "status": "pass",
-      "condition_count": 27,
+      "condition_count": 28,
       "summary_pass_fraction": 1.0,
-      "core_metric_count": 50,
-      "core_metric_ci_ready": 50,
+      "core_metric_count": 54,
+      "core_metric_ci_ready": 54,
       "min_n": 3,
       "underpowered_core_metrics": []
     },

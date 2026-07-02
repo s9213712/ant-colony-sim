@@ -43,6 +43,10 @@ no_jam_low_density,mean_displacement,3,204.384212,18.779185,10.842167,191.961161
 no_jam_low_density,segment_abs_forward_speed,3,5.430267,0.098101,0.056639,5.3709,5.5435,,yes
 no_jam_low_density,segment_density,3,0.00094,0.000548,0.000316,0.00033,0.00139,,yes
 no_jam_low_density,segment_flow,3,102.8966,25.722673,14.850992,77.6092,129.0335,,yes
+no_jam_medium_density,mean_displacement,3,161.899532,11.247294,6.493628,153.42563,174.659766,,yes
+no_jam_medium_density,segment_abs_forward_speed,3,4.471467,0.482961,0.278837,4.0565,5.0016,,yes
+no_jam_medium_density,segment_density,3,0.002703,0.001097,0.000634,0.00144,0.00342,,yes
+no_jam_medium_density,segment_flow,3,261.125667,33.826415,19.52969,239.3308,300.0938,,yes
 rain_food_removal_washout,food_pheromone_ratio,3,3.1e-05,2.5e-05,1.4e-05,1.2e-05,5.9e-05,pass,yes
 rain_food_removal_washout,nest_pheromone_ratio,3,0.003503,0.000313,0.000181,0.003147,0.003734,pass,yes
 single_food_trail,food_collected,3,658.0,133.225373,76.917705,513.0,775.0,pass,yes

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-02T17:31:58Z",
+  "generated_at": "2026-07-02T20:02:32Z",
   "source": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
   "summary": {
-    "condition_count": 27,
+    "condition_count": 28,
     "summary_status_count": 17,
     "summary_pass_count": 17,
     "summary_pass_fraction": 1.0,
-    "core_metric_count": 50,
-    "core_metric_ci_ready": 50,
+    "core_metric_count": 54,
+    "core_metric_ci_ready": 54,
     "underpowered_core_metrics": [],
     "min_n": 3,
     "status": "pass"
@@ -120,6 +120,11 @@
     },
     {
       "condition": "no_jam_low_density",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "no_jam_medium_density",
       "raw_rows": 3,
       "summary_status": ""
     },
@@ -675,6 +680,54 @@
       "sem": 14.850992,
       "ci95_low": 77.6092,
       "ci95_high": 129.0335,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_medium_density",
+      "metric": "mean_displacement",
+      "n": 3,
+      "mean": 161.899532,
+      "sd": 11.247294,
+      "sem": 6.493628,
+      "ci95_low": 153.42563,
+      "ci95_high": 174.659766,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_medium_density",
+      "metric": "segment_abs_forward_speed",
+      "n": 3,
+      "mean": 4.471467,
+      "sd": 0.482961,
+      "sem": 0.278837,
+      "ci95_low": 4.0565,
+      "ci95_high": 5.0016,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_medium_density",
+      "metric": "segment_density",
+      "n": 3,
+      "mean": 0.002703,
+      "sd": 0.001097,
+      "sem": 0.000634,
+      "ci95_low": 0.00144,
+      "ci95_high": 0.00342,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "no_jam_medium_density",
+      "metric": "segment_flow",
+      "n": 3,
+      "mean": 261.125667,
+      "sd": 33.826415,
+      "sem": 19.52969,
+      "ci95_low": 239.3308,
+      "ci95_high": 300.0938,
       "summary_status": "",
       "is_core_metric": "yes"
     },

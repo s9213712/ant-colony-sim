@@ -710,8 +710,9 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 | status | pass |
 | target high/low velocity retention | 0.748 |
 | model high/low velocity retention | 0.672 |
+| normalized three-point speed curve RMSE | 0.044 |
 
-這使 readiness 從 Level 3.5 推進到 Level 4.0：已有一條 fit-ready primary-source response curve，也有一條獨立 holdout curve。下一階段不是宣稱「完整生物真實」，而是朝 Level 5 補 uncertainty、更多物種曲線、物理單位映射與外部資料驗證。
+這使 readiness 從 Level 3.5 推進到 Level 4.0：已有一條 fit-ready primary-source response curve，也有一條獨立三點 velocity-density holdout curve。下一階段不是宣稱「完整生物真實」，而是朝 Level 5 補 uncertainty、更多物種曲線、物理單位映射與外部資料驗證。
 
 ## 21. Level 5 uncertainty audit
 
@@ -725,15 +726,16 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 
 | 指標 | 值 |
 | --- | --- |
-| estimated level | 4.4 |
+| estimated level | 4.5 |
 | fit curve bootstrap CI | true |
 | holdout curve present | true |
+| traffic three-point curve | true |
 | holdout variance values | true |
 | paper-condition replicate CI | true |
 | independent pushing redirect holdout | true |
 | holdout formal CI available | false |
 
-解讀：Perna response fit 已有 bootstrap 95% CI，paper-condition probes 已有跨 seed bootstrap CI，Dussutour pushing/redirect probability 已有獨立數值 holdout；John traffic holdout 有 Figure 4 報告的 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
+解讀：Perna response fit 已有 bootstrap 95% CI，paper-condition probes 已有跨 seed bootstrap CI，Dussutour pushing/redirect probability 已有獨立數值 holdout，John traffic holdout 已升級為三點 normalized speed-density curve；John Figure 4 有 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
 
 ## 22. Level 5 replicate statistics
 
@@ -755,9 +757,9 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 
 | 指標 | 值 |
 | --- | ---: |
-| condition count | 27 |
+| condition count | 28 |
 | summary pass fraction | 1.0 |
-| core metrics with bootstrap CI | 50 / 50 |
+| core metrics with bootstrap CI | 54 / 54 |
 | minimum replicate count | 3 |
 
 解讀：這把 paper-condition matrix 從「單次/平均觀察」推進到「可報告 stochastic replicate uncertainty」。它沒有改變任何螞蟻規則，也不把 qualitative pass 升格成 quantitative reproduction；Level 5 仍需要更多 primary-source digitized curves、文獻端 sample size/raw data、獨立 holdout 與物種單位映射。

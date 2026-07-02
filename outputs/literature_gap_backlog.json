@@ -144,7 +144,7 @@
       "verdict": "aligned_qualitative",
       "matched_condition": "crowding_bridge_density_shift",
       "evidence_paper_id": "dussutour_2004",
-      "gap": "The model now exports segment-level density, speed and flow. It still lacks explicit antennal-contact mechanics and lane-discipline calibration from crowded trail experiments."
+      "gap": "The model now exports segment-level density, speed, flow and traffic-redirect probability. It still lacks calibrated body-contact/pushing mechanics from crowded trail experiments."
     },
     {
       "priority": "P1_needs_quantitative_curve",

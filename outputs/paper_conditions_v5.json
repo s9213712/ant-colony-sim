@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T17:31:41Z",
+  "generated_at": "2026-07-02T20:02:23Z",
   "config": {
     "seeds": [
       1,
@@ -8,6 +8,7 @@
     ],
     "ants": 280,
     "lowDensityAnts": 160,
+    "mediumDensityAnts": 320,
     "highDensityAnts": 520,
     "foodAmount": 1200,
     "dt": 9,
@@ -201,7 +202,7 @@
       "condition": "no_jam_density_speed",
       "expected": "Increasing trail density should not create a hard jammed phase; movement should degrade mildly, not collapse.",
       "status": "pass",
-      "observed": "{\"low_mean_displacement\": 204.3842, \"high_mean_displacement\": 140.1763, \"high_vs_low_displacement_ratio\": 0.6858, \"low_food_trips\": 4.0, \"high_food_trips\": 0.333, \"low_segment_density\": 0.00094, \"high_segment_density\": 0.00533, \"low_segment_speed\": 5.4303, \"high_segment_speed\": 3.6518, \"low_segment_flow\": 102.8966, \"high_segment_flow\": 394.2192, \"high_bidirectional_fraction\": 0.3979, \"low_redirect_probability\": 0.2335, \"high_redirect_probability\": 0.2533, \"high_redirect_per_encounter\": 0.6765}",
+      "observed": "{\"low_mean_displacement\": 204.3842, \"medium_mean_displacement\": 161.8995, \"high_mean_displacement\": 140.1763, \"high_vs_low_displacement_ratio\": 0.6858, \"low_food_trips\": 4.0, \"medium_food_trips\": 2.333, \"high_food_trips\": 0.333, \"low_segment_density\": 0.00094, \"medium_segment_density\": 0.0027, \"high_segment_density\": 0.00533, \"low_segment_speed\": 5.4303, \"medium_segment_speed\": 4.4715, \"high_segment_speed\": 3.6518, \"low_segment_flow\": 102.8966, \"medium_segment_flow\": 261.1257, \"high_segment_flow\": 394.2192, \"high_bidirectional_fraction\": 0.3979, \"low_redirect_probability\": 0.2335, \"medium_redirect_probability\": 0.2492, \"high_redirect_probability\": 0.2533, \"high_redirect_per_encounter\": 0.6765}",
       "gap": "The validation now uses segment-level speed/flow-density metrics. It still lacks calibrated body-contact rules and digitized no-jam flow curves."
     },
     {
@@ -579,6 +580,26 @@
       "segment_abs_forward_speed": 5.5435,
       "segment_flow": 77.60919999999999,
       "segment_bidirectional_fraction": 0.1743
+    },
+    {
+      "condition": "no_jam_medium_density",
+      "seed": 1,
+      "ants": 320,
+      "mean_displacement": 174.65976639281763,
+      "food_trips": 0,
+      "avg_traffic_load": 0.167,
+      "traffic_max_cell": 13,
+      "traffic_redirect_opportunities": 7277,
+      "traffic_redirect_encounters": 1356,
+      "traffic_redirects": 1844,
+      "traffic_encounter_redirects": 942,
+      "traffic_redirect_probability": 0.2534,
+      "traffic_redirect_per_encounter": 0.6947,
+      "segment_density": 0.00144,
+      "segment_mean_speed": 7.1241,
+      "segment_abs_forward_speed": 5.0016,
+      "segment_flow": 300.0938,
+      "segment_bidirectional_fraction": 0.2302
     },
     {
       "condition": "no_jam_high_density",
@@ -1223,6 +1244,26 @@
       "segment_bidirectional_fraction": 0.2526
     },
     {
+      "condition": "no_jam_medium_density",
+      "seed": 2,
+      "ants": 320,
+      "mean_displacement": 157.6132000713232,
+      "food_trips": 3,
+      "avg_traffic_load": 0.2,
+      "traffic_max_cell": 9,
+      "traffic_redirect_opportunities": 6222,
+      "traffic_redirect_encounters": 1110,
+      "traffic_redirects": 1554,
+      "traffic_encounter_redirects": 745,
+      "traffic_redirect_probability": 0.2498,
+      "traffic_redirect_per_encounter": 0.6712,
+      "segment_density": 0.00325,
+      "segment_mean_speed": 6.7357,
+      "segment_abs_forward_speed": 4.3563,
+      "segment_flow": 243.9524,
+      "segment_bidirectional_fraction": 0.293
+    },
+    {
       "condition": "no_jam_high_density",
       "seed": 2,
       "ants": 520,
@@ -1863,6 +1904,26 @@
       "segment_abs_forward_speed": 5.3764,
       "segment_flow": 129.0335,
       "segment_bidirectional_fraction": 0.4072
+    },
+    {
+      "condition": "no_jam_medium_density",
+      "seed": 3,
+      "ants": 320,
+      "mean_displacement": 153.42563026596366,
+      "food_trips": 4,
+      "avg_traffic_load": 0.241,
+      "traffic_max_cell": 11,
+      "traffic_redirect_opportunities": 7142,
+      "traffic_redirect_encounters": 1236,
+      "traffic_redirects": 1746,
+      "traffic_encounter_redirects": 826,
+      "traffic_redirect_probability": 0.2445,
+      "traffic_redirect_per_encounter": 0.6683,
+      "segment_density": 0.00342,
+      "segment_mean_speed": 5.8135,
+      "segment_abs_forward_speed": 4.0565,
+      "segment_flow": 239.3308,
+      "segment_bidirectional_fraction": 0.4055
     },
     {
       "condition": "no_jam_high_density",
