@@ -47,7 +47,7 @@ Important interpretation rules:
 - Verdict: `aligned_qualitative`
 - Matched condition: tropotaxis_gradient_response_proxy
 - Evidence paper id: ramirez_2018
-- Gap: The model uses left/right/front sampling and exports gradient-turn plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.
+- Gap: The model uses left/right/front sampling and exports per-step trajectory/sensing plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.
 
 ### 2. A Model for Foraging Ants, Controlled by Spiking Neural Networks and Double Pheromones
 
@@ -203,7 +203,7 @@ Important interpretation rules:
 - Verdict: `aligned_qualitative`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Trail reinforcement, local gradient-turn logging and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.
+- Gap: Trail reinforcement, per-step trajectory/sensing samples and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.
 
 ### 14. Heterogeneous multi-agent task allocation based on graph neural network ant colony optimization algorithms
 
@@ -242,7 +242,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 17. A Pheromone-Based Utility Model for Collaborative Foraging
 
@@ -320,7 +320,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 23. Trail traffic flow prediction by contact frequency among individual ants
 
@@ -333,7 +333,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 24. Congestion-Free Ant Traffic: Jam Absorption Mechanism in Multiple Platoons
 
@@ -346,7 +346,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 25. Interactions and information: Exploring task allocation in ant colonies using network analysis
 
@@ -359,7 +359,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 26. The Neuro-ethology of Collective Decision-Making in Ant Colonies: A Case Study on Formica Rufa
 
@@ -372,7 +372,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 27. Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis
 
@@ -411,7 +411,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 30. Trail Pheromone Disruption of Argentine Ant Trail Formation and Foraging
 
@@ -424,7 +424,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 31. The foraging ecology of the army ant Eciton rapax: an ergonomic enigma?
 
@@ -476,7 +476,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 35. Formal analysis in a cellular automata ant model using swarm intelligence in robotics foraging task
 
@@ -515,7 +515,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 38. A continuous model of ant foraging with pheromones and trail formation
 
@@ -554,7 +554,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 41. Effect of trail pheromones and weather on the moving behaviour of the army ant Eciton burchellii
 
@@ -580,7 +580,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 43. Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger
 
@@ -645,7 +645,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 48. Ant traffic flow: Raiding swarms with few rules avoid gridlock
 
@@ -658,7 +658,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 49. MODELING AND SIMULATION OF ANT COLONY'S LABOR DIVISION WITH CONSTRAINTS FOR TASK ALLOCATION OF RESILIENT SUPPLY CHAINS
 
@@ -775,7 +775,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 58. Trail geometry gives polarity to ant foraging networks
 
@@ -788,7 +788,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 59. The blind leading the blind in army ant raid patterns: Testing a model of self-organization (Hymenoptera: Formicidae)
 
@@ -840,7 +840,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 63. A connectionist type model of self-organized foraging and emergent behavior in ant swarms
 
@@ -853,7 +853,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 64. Pheromone Disruption of Argentine Ant Trail Integrity
 
@@ -866,7 +866,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 65. Colony size does not predict foraging distance in the ant Temnothorax rugatulus: a puzzle for standard scaling models
 
@@ -918,7 +918,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 69. Response thresholds to recruitment signals and the regulation of foraging intensity in the ant Myrmica sabuleti (Hymenoptera, Formicidae)
 
@@ -996,7 +996,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 75. Evolving neural networks using ant colony optimization with pheromone trail limits
 
@@ -1022,7 +1022,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 77. Food recruitment as a component of the trunk-trail foraging behaviour of Lasius fuliginosus (Hymenoptera: Formicidae)
 
@@ -1035,7 +1035,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 78. An Improvement in ant Algorithm Method for Optimizing a Transport Route with Regard to Traffic Flow
 
@@ -1048,7 +1048,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 79. Elevational and geographic variation in army ant swarm raid rates
 
@@ -1087,7 +1087,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 82. Research on task allocation in multiple logistics robots based on an improved ant colony algorithm
 
@@ -1113,7 +1113,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 84. Trail Pheromone Does Not Modulate Subjective Reward Evaluation in Lasius niger Ants
 
@@ -1152,7 +1152,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 87. Algorithms for task allocation in ants. (A study of temporal polyethism: Theory)
 
@@ -1256,7 +1256,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 95. The emergence of a collective sensory response threshold in ant colonies
 
@@ -1425,7 +1425,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 108. Pheromone representation in the ant antennal lobe changes with age
 
@@ -1490,7 +1490,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 113. Modeling Fast and Robust Ant Nest Relocation using Particle Swarm Optimization
 

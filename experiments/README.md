@@ -201,10 +201,10 @@ python3 ant_colony_sim/experiments/paper_conditions_probe.py \
 
 The current `v5` matrix covers:
 
-- Perna et al. 2012: local pheromone trail formation, aggregate gradient-turn alignment and segment-flow metrics;
-- Ramirez et al. 2018: tropotaxis gradient-response proxy using the same gradient-turn and segment-flow metrics;
+- Perna et al. 2012: local pheromone trail formation, per-step trajectory/sensing logs, aggregate gradient-turn alignment and segment-flow metrics;
+- Ramirez et al. 2018: tropotaxis gradient-response proxy using the same per-step trajectory/sensing and segment-flow metrics;
 - Amorim 2014: trail formation plus food-removal/rain washout;
-- Deneubourg/Goss/Beckers double bridge: branch bias and positive-feedback sensitivity;
+- Deneubourg/Goss/Beckers double bridge: branch bias, branch-choice timecourse and positive-feedback sensitivity;
 - Dussutour et al. 2004: crowded traffic and alternate route use;
 - John et al. 2009: no hard jammed phase using displacement plus segment speed/flow-density metrics;
 - Shiraishi et al. 2018: diverse stochasticity after food relocation;
@@ -223,6 +223,8 @@ The current `v5` matrix covers:
 Current `v5` additions show:
 
 - task-demand reallocation aligns qualitatively with response-threshold task organization;
+- per-step trajectory/sensing logs are exported through the shared `antSim.startTrajectoryLog()` / `collectTrajectoryLog()` API;
+- double-bridge probes now export seeded-branch fraction, branch-choice timecourse and generic curve error;
 - task-switch rate, contact-pair summaries and segment speed/flow-density are exported as general metrics;
 - fail-stop foraging is qualitatively aligned in the full probe, but remains algorithmic rather than proof-level validation;
 - negative pheromone is qualitatively aligned through shared avoid pheromone plus short-term avoid memory, not a paper-specific exception;
@@ -269,7 +271,7 @@ Current result:
 - `partial`: 69
 - `not_biological_target`: 34
 
-Interpretation: all exact biological conditions currently represented in the validation matrix pass qualitatively, but most of the 120 corpus papers are still not fully simulated in a strict sense. The remaining biological papers are category proxies that need per-paper conditions, digitized reference data or species-specific calibration. Algorithmic/robotics papers should not be treated as direct biological targets.
+Interpretation: exact biological conditions currently represented in the validation matrix are mostly qualitatively aligned, with double-bridge remaining partial. Most of the 120 corpus papers are still not fully simulated in a strict sense. The remaining biological papers are category proxies that need per-paper conditions, digitized reference data or species-specific calibration. Algorithmic/robotics papers should not be treated as direct biological targets.
 
 Generate the backlog of papers that are not fully simulated yet:
 

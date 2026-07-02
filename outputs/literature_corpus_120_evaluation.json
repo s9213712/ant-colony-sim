@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T04:42:13Z",
+  "generated_at": "2026-07-02T06:20:04Z",
   "corpus": "/home/s92137/ant_colony_sim/outputs/literature_corpus_100.json",
   "conditions": "outputs/paper_conditions_v5.json",
   "summary": {
@@ -33,7 +33,7 @@
       "verdict": "aligned_qualitative",
       "matched_condition": "tropotaxis_gradient_response_proxy",
       "evidence_paper_id": "ramirez_2018",
-      "gap": "The model uses left/right/front sampling and exports gradient-turn plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories."
+      "gap": "The model uses left/right/front sampling and exports per-step trajectory/sensing plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories."
     },
     {
       "index": 2,
@@ -201,7 +201,7 @@
       "verdict": "aligned_qualitative",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Trail reinforcement, local gradient-turn logging and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed."
+      "gap": "Trail reinforcement, per-step trajectory/sensing samples and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed."
     },
     {
       "index": 14,
@@ -243,7 +243,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 17,
@@ -327,7 +327,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 23,
@@ -341,7 +341,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 24,
@@ -355,7 +355,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 25,
@@ -369,7 +369,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 26,
@@ -383,7 +383,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 27,
@@ -425,7 +425,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 30,
@@ -439,7 +439,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "index": 31,
@@ -495,7 +495,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "index": 35,
@@ -537,7 +537,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 38,
@@ -579,7 +579,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 41,
@@ -607,7 +607,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 43,
@@ -677,7 +677,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 48,
@@ -691,7 +691,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 49,
@@ -817,7 +817,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 58,
@@ -831,7 +831,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 59,
@@ -887,7 +887,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 63,
@@ -901,7 +901,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 64,
@@ -915,7 +915,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "index": 65,
@@ -971,7 +971,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 69,
@@ -1055,7 +1055,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 75,
@@ -1083,7 +1083,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "index": 77,
@@ -1097,7 +1097,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 78,
@@ -1111,7 +1111,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 79,
@@ -1153,7 +1153,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 82,
@@ -1181,7 +1181,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 84,
@@ -1223,7 +1223,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 87,
@@ -1335,7 +1335,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 95,
@@ -1517,7 +1517,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "index": 108,
@@ -1587,7 +1587,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "index": 113,

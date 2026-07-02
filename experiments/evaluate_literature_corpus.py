@@ -103,13 +103,13 @@ MAPPING_TO_EVIDENCE = {
         "condition": "single_food_trail",
         "paper_id": "perna_2012",
         "default_status": "partial",
-        "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.",
+        "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.",
     },
     "existing_traffic_density_probe": {
         "condition": "crowding_bridge_density_shift + no_jam_density_speed",
         "paper_id": "dussutour_2004/john_2009",
         "default_status": "partial",
-        "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.",
+        "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.",
     },
     "existing_task_demand_probe": {
         "condition": "task_demand_reallocation",
@@ -121,7 +121,7 @@ MAPPING_TO_EVIDENCE = {
         "condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
         "paper_id": "jimenez_romero_2015/aswale_2022",
         "default_status": "partial",
-        "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.",
+        "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.",
     },
     "existing_or_extend_ant_mill_probe": {
         "condition": "ant_mill/death_spiral qualitative probe",

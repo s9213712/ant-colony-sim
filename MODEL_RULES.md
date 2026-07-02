@@ -7,6 +7,7 @@ This simulator should be calibrated through general biological rules, not paper-
 - Resource value changes foraging utility, memory strength and recruitment signal strength. A food source with higher quality should tend to produce stronger recruitment, but path geometry and early discovery can still affect trip counts.
 - Pheromone fields are shared chemical signals with diffusion, evaporation and thresholded sensing. Validation conditions may place sources differently, but the pheromone update equations must stay common.
 - Pheromone following uses the same left/right/front sensing rule for all trail conditions. Logs of local signal, side contrast and turn response are measurements of this rule, not alternative behaviour.
+- Per-step trajectory/sensing logs may sample ant position, velocity, task, state and current pheromone response. Logging must not alter movement, sensing, task choice or pheromone deposition.
 - Trail and traffic validation may measure any line segment with the shared `collectSegmentMetrics()` API. Segment choice is an experimental measurement window, not a behaviour rule.
 - Traffic and worker interaction summaries are derived from the same spatial traffic grid. Contact-pair and cross-task contact metrics are observations, not pair-specific steering exceptions.
 - Brood care regulates nest microclimate through worker presence, stored water and brood-stage thermal demand. Pupal-heavy brood can justify stronger thermoregulation than larval-heavy brood under cold stress.

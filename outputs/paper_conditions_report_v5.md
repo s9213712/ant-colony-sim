@@ -35,16 +35,16 @@ JSON: `outputs/paper_conditions_v5.json`
 - Paper: Perna et al. 2012
 - Status: `pass`
 - Expected: Local pheromone following should create food-trail recruitment and measurable trail reinforcement.
-- Observed: `{"mean_food_trips": 123.333, "mean_food_collected": 620.333, "mean_food_pheromone": 86018.0, "mean_following_food_trail": 70.333, "mean_detectable_sensing_samples": 81731.667, "mean_gradient_alignment_ratio": 0.998, "mean_abs_side_contrast": 0.1918, "mean_abs_turn": 0.0863, "mean_turn_contrast_product": 0.02931, "mean_trail_segment_count": 30.0, "mean_trail_segment_density": 0.0015, "mean_trail_segment_speed": 8.6991, "mean_trail_segment_flow": 165.6976}`
-- Gap: Trail reinforcement, local gradient-turn logging and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.
+- Observed: `{"mean_food_trips": 123.333, "mean_food_collected": 620.333, "mean_food_pheromone": 86018.0, "mean_following_food_trail": 70.333, "mean_detectable_sensing_samples": 81731.667, "mean_gradient_alignment_ratio": 0.998, "mean_abs_side_contrast": 0.1918, "mean_abs_turn": 0.0863, "mean_turn_contrast_product": 0.02931, "mean_trajectory_rows": 16000.0, "mean_trajectory_sensing_rows": 8039.0, "mean_trajectory_food_sensing_rows": 2839.333, "mean_trajectory_alignment_ratio": 1.0, "mean_trajectory_move": 9.1114, "mean_trail_segment_count": 30.0, "mean_trail_segment_density": 0.0015, "mean_trail_segment_speed": 8.6991, "mean_trail_segment_flow": 165.6976}`
+- Gap: Trail reinforcement, per-step trajectory/sensing samples and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.
 
 ### ramirez_2018 - tropotaxis_gradient_response_proxy
 
 - Paper: Ramirez et al. 2018
 - Status: `pass`
 - Expected: A gradient-sensitive pheromone response should yield recruitment to newly found food sources and colony-level trail networks.
-- Observed: `{"mean_food_trips": 123.333, "mean_food_collected": 620.333, "mean_food_pheromone": 86018.0, "mean_following_food_trail": 70.333, "mean_detectable_sensing_samples": 81731.667, "mean_gradient_alignment_ratio": 0.998, "mean_abs_side_contrast": 0.1918, "mean_abs_turn": 0.0863, "mean_turn_contrast_product": 0.02931, "mean_trail_segment_count": 30.0, "mean_trail_segment_density": 0.0015, "mean_trail_segment_speed": 8.6991, "mean_trail_segment_flow": 165.6976}`
-- Gap: The model uses left/right/front sampling and exports gradient-turn plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.
+- Observed: `{"mean_food_trips": 123.333, "mean_food_collected": 620.333, "mean_food_pheromone": 86018.0, "mean_following_food_trail": 70.333, "mean_detectable_sensing_samples": 81731.667, "mean_gradient_alignment_ratio": 0.998, "mean_abs_side_contrast": 0.1918, "mean_abs_turn": 0.0863, "mean_turn_contrast_product": 0.02931, "mean_trajectory_rows": 16000.0, "mean_trajectory_sensing_rows": 8039.0, "mean_trajectory_food_sensing_rows": 2839.333, "mean_trajectory_alignment_ratio": 1.0, "mean_trajectory_move": 9.1114, "mean_trail_segment_count": 30.0, "mean_trail_segment_density": 0.0015, "mean_trail_segment_speed": 8.6991, "mean_trail_segment_flow": 165.6976}`
+- Gap: The model uses left/right/front sampling and exports per-step trajectory/sensing plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.
 
 ### amorim_2014 - rain_food_removal_washout
 
@@ -59,8 +59,8 @@ JSON: `outputs/paper_conditions_v5.json`
 - Paper: Deneubourg/Goss/Beckers double-bridge paradigm
 - Status: `partial`
 - Expected: A connected initial trail bias should increase selection of the biased bridge through positive feedback.
-- Observed: `{"upper_selected_fraction": 0.0, "mean_dominance": 0.4678, "mean_food_trips": 80.0}`
-- Gap: Direction is testable, but validation still lacks digitized branch-choice probability curves from the original experiments.
+- Observed: `{"upper_selected_fraction": 0.0, "mean_dominance": 0.4678, "mean_seeded_crossing_fraction": 0.2661, "mean_seeded_return_fraction": 0.1426, "mean_branch_curve_error": 0.4214, "mean_food_trips": 80.0}`
+- Gap: Branch-choice timecourse and seeded-branch curve error are now exported. Remaining gap is digitizing the original branch-choice curves and fitting geometry/time-scale rather than relying on a generic reference curve.
 
 ### dussutour_2004 - crowding_bridge_density_shift
 

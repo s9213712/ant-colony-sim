@@ -56,7 +56,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 16,
       "title": "Analysis of Cooperative Perception in Ant Traffic and Its Effects on Transportation System by Using a Congestion-Free Ant-Trail Model",
       "year": 2021,
@@ -68,7 +68,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
@@ -120,7 +120,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 22,
       "title": "Spatiotemporal chemotactic model for ant foraging",
       "year": 2014,
@@ -132,11 +132,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 23,
       "title": "Trail traffic flow prediction by contact frequency among individual ants",
       "year": 2013,
@@ -148,11 +148,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 24,
       "title": "Congestion-Free Ant Traffic: Jam Absorption Mechanism in Multiple Platoons",
       "year": 2019,
@@ -164,11 +164,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 25,
       "title": "Interactions and information: Exploring task allocation in ant colonies using network analysis",
       "year": 2021,
@@ -180,11 +180,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 26,
       "title": "The Neuro-ethology of Collective Decision-Making in Ant Colonies: A Case Study on Formica Rufa",
       "year": 2025,
@@ -196,11 +196,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 29,
       "title": "An agent-based model to investigate the roles of attractive and repellent pheromones in ant decision making during foraging",
       "year": 2008,
@@ -212,11 +212,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.",
+      "next_action": "Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.",
       "index": 30,
       "title": "Trail Pheromone Disruption of Argentine Ant Trail Formation and Foraging",
       "year": 2010,
@@ -228,7 +228,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "priority": "P2_proxy_only",
@@ -264,7 +264,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.",
+      "next_action": "Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.",
       "index": 34,
       "title": "Aerosol delivery of trail pheromone disrupts the foraging of the red imported fire ant, <i>Solenopsis invicta</i>",
       "year": 2012,
@@ -276,11 +276,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 37,
       "title": "Walk this way: modeling foraging ant dynamics in multiple food source environments",
       "year": 2024,
@@ -292,7 +292,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
@@ -312,7 +312,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 40,
       "title": "Avoiding traffic jams: Hitchhiking behavior as a strategy to reduce ant workers’ traffic on the foraging trail",
       "year": 2018,
@@ -324,7 +324,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
@@ -344,7 +344,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 42,
       "title": "Delay-Induced Hopf Bifurcation and Entropy-Based Distributional Uncertainty in a Stochastic Time-Delay Pheromone Feedback Model of Ant Foraging Dynamics",
       "year": 2026,
@@ -356,7 +356,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
@@ -424,7 +424,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 47,
       "title": "Walk This Way: Modeling Foraging Ant Dynamics in Multiple Food Source Environments",
       "year": 2024,
@@ -436,11 +436,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 48,
       "title": "Ant traffic flow: Raiding swarms with few rules avoid gridlock",
       "year": 2002,
@@ -452,7 +452,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
@@ -520,7 +520,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 57,
       "title": "From nonlinearity to optimality: pheromone trail foraging by ants",
       "year": 2003,
@@ -532,11 +532,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 58,
       "title": "Trail geometry gives polarity to ant foraging networks",
       "year": 2004,
@@ -548,7 +548,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
@@ -584,7 +584,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 62,
       "title": "Spatial and temporal variation in pheromone composition of ant foraging trails",
       "year": 2007,
@@ -596,11 +596,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 63,
       "title": "A connectionist type model of self-organized foraging and emergent behavior in ant swarms",
       "year": 1992,
@@ -612,11 +612,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.",
+      "next_action": "Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.",
       "index": 64,
       "title": "Pheromone Disruption of Argentine Ant Trail Integrity",
       "year": 2008,
@@ -628,7 +628,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "priority": "P2_proxy_only",
@@ -664,7 +664,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 68,
       "title": "Movement, Encounter Rate, and Collective Behavior in Ant Colonies",
       "year": 2021,
@@ -676,7 +676,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
@@ -760,7 +760,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 74,
       "title": "Effect of Trail Bifurcation Asymmetry and Pheromone Presence or Absence on Trail Choice by <i>Lasius niger</i> Ants",
       "year": 2014,
@@ -772,11 +772,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.",
+      "next_action": "Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.",
       "index": 76,
       "title": "Argentine Ant Trail Pheromone Disruption is Mediated by Trail Concentration",
       "year": 2011,
@@ -788,11 +788,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning."
+      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 77,
       "title": "Food recruitment as a component of the trunk-trail foraging behaviour of Lasius fuliginosus (Hymenoptera: Formicidae)",
       "year": 1997,
@@ -804,11 +804,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 78,
       "title": "An Improvement in ant Algorithm Method for Optimizing a Transport Route with Regard to Traffic Flow",
       "year": 2017,
@@ -820,7 +820,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
@@ -856,7 +856,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 81,
       "title": "Decentralized communication, trail connectivity and emergent benefits of ant pheromone trail networks",
       "year": 2011,
@@ -868,11 +868,11 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 83,
       "title": "Multi-Agent Cooperation Using the Ant Algorithm with Variable Pheromone Placement",
       "year": 2005,
@@ -884,7 +884,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
@@ -904,7 +904,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 86,
       "title": "A single-pheromone model accounts for empirical patterns of ant colony foraging previously modeled using two pheromones",
       "year": 2023,
@@ -916,7 +916,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
@@ -968,7 +968,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 94,
       "title": "Deterministic Model for Analyzing the Dynamics of Ant System Algorithm and Performance Amelioration through a New Pheromone Deposition Approach",
       "year": 2008,
@@ -980,7 +980,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
@@ -1032,7 +1032,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 107,
       "title": "ANTi-JAM solutions for smart roads: Ant-inspired traffic flow rules under CAVs environment",
       "year": 2025,
@@ -1044,7 +1044,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves."
+      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
     },
     {
       "priority": "P2_proxy_only",
@@ -1064,7 +1064,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 112,
       "title": "Role of the pheromone for orientation in the group foraging ant, Veromessor pergandei",
       "year": 2020,
@@ -1076,7 +1076,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data."
+      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
     },
     {
       "priority": "P2_proxy_only",
@@ -1160,7 +1160,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 28,
       "title": "A cellular automata ant memory model of foraging in a swarm of robots",
       "year": 2017,
@@ -1176,7 +1176,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 32,
       "title": "A probabilistic cellular automata ant memory model for a swarm of foraging robots",
       "year": 2016,
@@ -1192,7 +1192,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 35,
       "title": "Formal analysis in a cellular automata ant model using swarm intelligence in robotics foraging task",
       "year": 2017,
@@ -1208,7 +1208,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 36,
       "title": "Ant Colony Optimization Based Model Checking Extended by Smell-like Pheromone",
       "year": 2016,
@@ -1272,7 +1272,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 75,
       "title": "Evolving neural networks using ant colony optimization with pheromone trail limits",
       "year": 2013,
@@ -1320,7 +1320,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 89,
       "title": "Improved Intelligent Method for Traffic Flow Prediction Based on Artificial Neural Networks and Ant Colony Optimization",
       "year": 2012,
@@ -1400,7 +1400,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 99,
       "title": "Ant Colony Algorithm in Traffic Flow Control",
       "year": 2024,
@@ -1432,7 +1432,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 101,
       "title": "Ant Colony Optimization Algorithm for Traffic Flow Estimation",
       "year": 2017,
@@ -1448,7 +1448,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 102,
       "title": "Traffic Flow Estimation Using Ant Colony Optimization Algorithms",
       "year": 2014,
@@ -1480,7 +1480,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.",
+      "next_action": "Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.",
       "index": 104,
       "title": "Ant System Algorithm with Negative Pheromone for Course Scheduling Problem",
       "year": 2008,
@@ -1496,7 +1496,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 106,
       "title": "An Ensemble Ant Colony Optimization Algorithm with a Hybrid Pheromone Model for Learning Rule Lists",
       "year": 2025,
@@ -1512,7 +1512,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 109,
       "title": "Anti-Jam Solutions for Smart Roads: Ant-Inspired Traffic Flow Rules Under Cooperative Automated Vehicles Environment",
       "year": 2024,
@@ -1528,7 +1528,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 110,
       "title": "Research on Improved Ant Colony Path Planning Algorithm for Updating Pheromone of Subway Inspection Mobile Robot",
       "year": 2023,
@@ -1544,7 +1544,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 111,
       "title": "Optimization Design of Expressway Traffic Flow Guidance System Based on GIS and Improved Ant Colony Optimization Algorithms",
       "year": 2023,
@@ -1576,7 +1576,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 115,
       "title": "Fault Pheromone Trail Evaporation of Power Distribution Networks using Ant Colony Optimization",
       "year": 2014,
@@ -1592,7 +1592,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 116,
       "title": "Traffic Flow Estimation Using Ant Colony Optimization Algorithms",
       "year": 2014,
@@ -1608,7 +1608,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 117,
       "title": "Pheromone-Based Ant Colony Algorithm for Optimal Proliferation of Research",
       "year": 2013,
@@ -1624,7 +1624,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
+      "next_action": "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.",
       "index": 118,
       "title": "Ant Colony Algorithm Based on Dynamic Adaptive Pheromone Updating and Its Simulation",
       "year": 2013,
@@ -1640,7 +1640,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add trail-segment flow-density and velocity measurements.",
+      "next_action": "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.",
       "index": 119,
       "title": "Traffic flow forecasting based on ant colony neural network",
       "year": 2010,

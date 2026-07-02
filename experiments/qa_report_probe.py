@@ -26,7 +26,10 @@ def main():
                 namespacedTick: typeof antSim.tick,
                 globalResetWorld: typeof window.resetWorld,
                 globalTriggerAlert: typeof window.triggerAlert,
-                syncUi: typeof antSim.syncUi
+                syncUi: typeof antSim.syncUi,
+                startTrajectoryLog: typeof antSim.startTrajectoryLog,
+                collectTrajectoryLog: typeof antSim.collectTrajectoryLog,
+                collectSegmentMetrics: typeof antSim.collectSegmentMetrics
               };
 
               antSim.resetWorld();
@@ -52,11 +55,20 @@ def main():
               antSim.addFood(760, 390, 400);
               antSim.addWater(820, 390, 400);
               antSim.runSteps(80, 9);
+              antSim.startTrajectoryLog({ sampleEverySteps: 1, antLimit: 5, maxRows: 200 });
+              antSim.runSteps(20, 9);
+              const trajectoryRows = antSim.stopTrajectoryLog();
+              const segment = antSim.collectSegmentMetrics(100, 150, 760, 390, 120);
               out.movement = {
                 start,
                 end: { x: Number(mover.x.toFixed(2)), y: Number(mover.y.toFixed(2)) },
                 moved: Number(Math.hypot(mover.x - start.x, mover.y - start.y).toFixed(2)),
-                state: mover.state
+                state: mover.state,
+                trajectoryRows: trajectoryRows.length,
+                trajectoryHasPosition: trajectoryRows.some(row => Number.isFinite(row.x) && Number.isFinite(row.y)),
+                trajectoryHasSensingColumns: trajectoryRows.some(row => 'sensing_left' in row && 'sensing_turn' in row),
+                segmentCount: segment.count,
+                segmentMeanSpeed: segment.mean_speed
               };
 
               antSim.setupMatureColony();
@@ -107,7 +119,10 @@ def main():
             and results["api"]["namespacedTick"] == "function"
             and results["api"]["globalResetWorld"] == "function"
             and results["api"]["globalTriggerAlert"] == "function"
-            and results["api"]["syncUi"] == "function",
+            and results["api"]["syncUi"] == "function"
+            and results["api"]["startTrajectoryLog"] == "function"
+            and results["api"]["collectTrajectoryLog"] == "function"
+            and results["api"]["collectSegmentMetrics"] == "function",
             results["api"],
         )
         check(
@@ -119,7 +134,10 @@ def main():
         )
         check(
             "manual worker moves under tick/runSteps",
-            results["movement"]["moved"] > 5,
+            results["movement"]["moved"] > 5
+            and results["movement"]["trajectoryRows"] > 0
+            and results["movement"]["trajectoryHasPosition"]
+            and results["movement"]["trajectoryHasSensingColumns"],
             results["movement"],
         )
         check(

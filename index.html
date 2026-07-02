@@ -836,6 +836,7 @@
       larvae: 42,
       pupae: 8,
       day: 0,
+      step: 0,
       rainTimer: 0,
       disturbanceTimer: 0,
       broodCareBoost: 0,
@@ -846,6 +847,13 @@
       },
       statsHistory: [],
       lastStatsDay: 0,
+      trajectoryLog: {
+        enabled: false,
+        rows: [],
+        maxRows: 50000,
+        sampleEverySteps: 1,
+        antLimit: 80
+      },
       stats: {
         foodTrips: 0,
         foodCollected: 0,
@@ -1342,6 +1350,7 @@
       world.larvae = 0;
       world.pupae = 0;
       world.day = 0;
+      world.step = 0;
       world.randomState = world.seed;
       world.rainTimer = 0;
       world.disturbanceTimer = 0;
@@ -1354,6 +1363,11 @@
       };
       world.statsHistory = [];
       world.lastStatsDay = 0;
+      world.trajectoryLog.enabled = false;
+      world.trajectoryLog.rows = [];
+      world.trajectoryLog.maxRows = 50000;
+      world.trajectoryLog.sampleEverySteps = 1;
+      world.trajectoryLog.antLimit = 80;
       world.traffic.counts = [];
       world.traffic.max = 0;
       world.traffic.meanOccupied = 0;
@@ -2038,6 +2052,7 @@
       ant.taskLock = Math.max(0, ant.taskLock - dt);
       ant.taskAge = (ant.taskAge || 0) + dt / 900;
       ant.trailFocus = 0;
+      ant.lastSensing = null;
       const resourcePressure = Number(ui.foodSpawn.value) / 100;
       const heatStress = Number(ui.temperature.value) > 32 ? 1 + (Number(ui.temperature.value) - 32) * 0.045 : 1;
       const dryStress = Number(ui.humidity.value) < 45 ? 1 + (45 - Number(ui.humidity.value)) * 0.012 : 1;
@@ -2697,6 +2712,7 @@
     }
 
     function update(dt) {
+      world.step += 1;
       world.day += dt / 900;
       world.rainTimer = Math.max(0, world.rainTimer - dt / 900);
       world.disturbanceTimer = Math.max(0, world.disturbanceTimer - dt / 900);
@@ -2715,6 +2731,7 @@
       updateQueens(dt);
       updateBroodClimate(dt);
       updateNestRelocation(dt);
+      recordTrajectorySample();
       for (let i = world.queens.length - 1; i >= 0; i--) {
         const queen = world.queens[i];
         if (queen.health <= 0) {
@@ -3299,6 +3316,106 @@
       }));
     }
 
+    function trajectoryRow(ant) {
+      const sensing = ant.lastSensing;
+      return {
+        step: world.step,
+        day: Number(world.day.toFixed(4)),
+        seed: world.seed,
+        id: ant.id,
+        role: ant.role,
+        task: ant.task || 'none',
+        state: ant.state || 'none',
+        x: Number(ant.x.toFixed(3)),
+        y: Number(ant.y.toFixed(3)),
+        angle: Number(ant.angle.toFixed(5)),
+        dx: Number((ant.lastDX || 0).toFixed(5)),
+        dy: Number((ant.lastDY || 0).toFixed(5)),
+        move: Number((ant.lastMove || 0).toFixed(5)),
+        energy: Number(ant.energy.toFixed(3)),
+        hydration: Number(ant.hydration.toFixed(3)),
+        health: Number(ant.health.toFixed(3)),
+        traffic_load: Number((ant.trafficLoad || 0).toFixed(4)),
+        trail_focus: Number((ant.trailFocus || 0).toFixed(4)),
+        sensing_field: sensing?.field || '',
+        sensing_left: sensing ? Number(sensing.left.toFixed(5)) : 0,
+        sensing_right: sensing ? Number(sensing.right.toFixed(5)) : 0,
+        sensing_forward: sensing ? Number(sensing.forward.toFixed(5)) : 0,
+        sensing_total: sensing ? Number(sensing.total.toFixed(5)) : 0,
+        sensing_side_contrast: sensing ? Number(sensing.sideContrast.toFixed(6)) : 0,
+        sensing_turn: sensing ? Number(sensing.turn.toFixed(6)) : 0,
+        sensing_inverted: sensing?.inverted || 0
+      };
+    }
+
+    function recordTrajectorySample() {
+      const log = world.trajectoryLog;
+      if (!log.enabled || world.step % Math.max(1, log.sampleEverySteps) !== 0) return;
+      const limit = Math.max(0, Math.floor(log.antLimit));
+      const ants = limit ? world.ants.slice(0, limit) : world.ants;
+      for (const ant of ants) {
+        if (ant.health <= 0) continue;
+        log.rows.push(trajectoryRow(ant));
+      }
+      if (log.rows.length > log.maxRows) log.rows.splice(0, log.rows.length - log.maxRows);
+    }
+
+    function startTrajectoryLog(options = {}) {
+      const log = world.trajectoryLog;
+      log.enabled = true;
+      log.rows = [];
+      log.maxRows = Math.max(1, Math.floor(Number(options.maxRows ?? log.maxRows)));
+      log.sampleEverySteps = Math.max(1, Math.floor(Number(options.sampleEverySteps ?? log.sampleEverySteps)));
+      log.antLimit = Math.max(0, Math.floor(Number(options.antLimit ?? log.antLimit)));
+      return {
+        enabled: log.enabled,
+        maxRows: log.maxRows,
+        sampleEverySteps: log.sampleEverySteps,
+        antLimit: log.antLimit
+      };
+    }
+
+    function stopTrajectoryLog() {
+      world.trajectoryLog.enabled = false;
+      return collectTrajectoryLog();
+    }
+
+    function clearTrajectoryLog() {
+      world.trajectoryLog.rows = [];
+      return collectTrajectoryLog();
+    }
+
+    function collectTrajectoryLog(limit = Infinity) {
+      const rows = world.trajectoryLog.rows;
+      const maxRows = Number.isFinite(Number(limit)) ? Math.max(0, Math.floor(Number(limit))) : rows.length;
+      const start = Math.max(0, rows.length - maxRows);
+      return rows.slice(start);
+    }
+
+    function exportTrajectoryCsv() {
+      const rows = collectTrajectoryLog();
+      if (!rows.length) return '';
+      const headers = Object.keys(rows[0]);
+      const csv = [
+        headers.join(','),
+        ...rows.map(row => headers.map(header => {
+          const value = row[header] ?? '';
+          const text = String(value);
+          return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+        }).join(','))
+      ].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `ant_colony_trajectory_day_${Math.floor(world.day)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      return csv;
+    }
+
     function collectSegmentMetrics(x1, y1, x2, y2, width = 60) {
       const ax = Number(x1);
       const ay = Number(y1);
@@ -3762,6 +3879,11 @@
       collectStatsSnapshot,
       collectIndividualSnapshot,
       collectSegmentMetrics,
+      startTrajectoryLog,
+      stopTrajectoryLog,
+      clearTrajectoryLog,
+      collectTrajectoryLog,
+      exportTrajectoryCsv,
       exportCsv
     };
     window.tick = tick;

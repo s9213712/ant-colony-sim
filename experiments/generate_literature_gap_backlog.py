@@ -38,13 +38,13 @@ def next_action(row):
     if "nest" in condition and "relocation" in condition:
         return "Add nest relocation and quorum decision condition."
     if "misleading" in condition or "negative_pheromone" in condition or "avoid" in condition:
-        return "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths."
+        return "Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes."
     if "traffic" in condition or "no_jam" in condition:
-        return "Add trail-segment flow-density and velocity measurements."
+        return "Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves."
     if "task" in condition:
         return "Add worker contact matrices and network-calibrated task allocation metrics."
     if "trail" in condition or "tropotaxis" in condition:
-        return "Add per-step local pheromone samples, gradient vectors and turn-angle logs."
+        return "Define paper-specific geometry/species parameters and fit digitized trajectory or response curves."
     if row["status"] == "not_biological_target":
         return "Keep as algorithmic inspiration only; do not use as direct biological validation target."
     return "Define a paper-specific simulation condition before claiming alignment."

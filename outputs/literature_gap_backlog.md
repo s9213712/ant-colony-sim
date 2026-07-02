@@ -63,8 +63,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 17. A Pheromone-Based Utility Model for Collaborative Foraging
 
@@ -115,8 +115,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 23. Trail traffic flow prediction by contact frequency among individual ants
 
@@ -128,8 +128,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;traffic_collective_motion;networks_interactions;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 24. Congestion-Free Ant Traffic: Jam Absorption Mechanism in Multiple Platoons
 
@@ -141,8 +141,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 25. Interactions and information: Exploring task allocation in ant colonies using network analysis
 
@@ -154,8 +154,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;traffic_collective_motion;task_allocation_division_labor;networks_interactions
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 26. The Neuro-ethology of Collective Decision-Making in Ant Colonies: A Case Study on Formica Rufa
 
@@ -167,8 +167,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 29. An agent-based model to investigate the roles of attractive and repellent pheromones in ant decision making during foraging
 
@@ -180,8 +180,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 30. Trail Pheromone Disruption of Argentine Ant Trail Formation and Foraging
 
@@ -193,8 +193,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: misleading_negative_pheromone;pheromone_trail_foraging
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Next action: Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 31. The foraging ecology of the army ant Eciton rapax: an ergonomic enigma?
 
@@ -232,8 +232,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: misleading_negative_pheromone;pheromone_trail_foraging
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Next action: Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 37. Walk this way: modeling foraging ant dynamics in multiple food source environments
 
@@ -245,8 +245,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 39. Distributed Task Allocation in Network of Agents Based on Ant Colony Foraging Behavior
 
@@ -271,8 +271,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;traffic_collective_motion
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 41. Effect of trail pheromones and weather on the moving behaviour of the army ant Eciton burchellii
 
@@ -297,8 +297,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 43. Pheromone trail following is not modulated by previous visit to food location, distance travelled, or travel direction in the ant Lasius niger
 
@@ -362,8 +362,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 48. Ant traffic flow: Raiding swarms with few rules avoid gridlock
 
@@ -375,8 +375,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;army_ant_raids_mills;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 49. MODELING AND SIMULATION OF ANT COLONY'S LABOR DIVISION WITH CONSTRAINTS FOR TASK ALLOCATION OF RESILIENT SUPPLY CHAINS
 
@@ -440,8 +440,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 58. Trail geometry gives polarity to ant foraging networks
 
@@ -453,8 +453,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 59. The blind leading the blind in army ant raid patterns: Testing a model of self-organization (Hymenoptera: Formicidae)
 
@@ -492,8 +492,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 63. A connectionist type model of self-organized foraging and emergent behavior in ant swarms
 
@@ -505,8 +505,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 64. Pheromone Disruption of Argentine Ant Trail Integrity
 
@@ -518,8 +518,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: misleading_negative_pheromone;pheromone_trail_foraging
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Next action: Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 65. Colony size does not predict foraging distance in the ant Temnothorax rugatulus: a puzzle for standard scaling models
 
@@ -557,8 +557,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;task_allocation_division_labor;networks_interactions
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 69. Response thresholds to recruitment signals and the regulation of foraging intensity in the ant Myrmica sabuleti (Hymenoptera, Formicidae)
 
@@ -635,8 +635,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 76. Argentine Ant Trail Pheromone Disruption is Mediated by Trail Concentration
 
@@ -648,8 +648,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: misleading_negative_pheromone;pheromone_trail_foraging
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
-- Gap: Avoid/fake pheromone effects are measurable but lack active detractor agents and individual learning.
+- Next action: Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.
+- Gap: Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.
 
 ### 77. Food recruitment as a component of the trunk-trail foraging behaviour of Lasius fuliginosus (Hymenoptera: Formicidae)
 
@@ -661,8 +661,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 78. An Improvement in ant Algorithm Method for Optimizing a Transport Route with Regard to Traffic Flow
 
@@ -674,8 +674,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 79. Elevational and geographic variation in army ant swarm raid rates
 
@@ -713,8 +713,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 83. Multi-Agent Cooperation Using the Ant Algorithm with Variable Pheromone Placement
 
@@ -726,8 +726,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 84. Trail Pheromone Does Not Modulate Subjective Reward Evaluation in Lasius niger Ants
 
@@ -752,8 +752,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 87. Algorithms for task allocation in ants. (A study of temporal polyethism: Theory)
 
@@ -804,8 +804,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 95. The emergence of a collective sensory response threshold in ant colonies
 
@@ -856,8 +856,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
-- Gap: Traffic direction is covered, but paper-specific validation needs segment-level flow-density and speed curves.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
+- Gap: Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves.
 
 ### 108. Pheromone representation in the ant antennal lobe changes with age
 
@@ -882,8 +882,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Generic trail formation is covered, but paper-specific curve fitting usually needs individual trajectories, local gradients or digitized reference data.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
+- Gap: Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data.
 
 ### 114. Optimal construction of army ant living bridges
 
@@ -963,7 +963,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 32. A probabilistic cellular automata ant memory model for a swarm of foraging robots
@@ -976,7 +976,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 35. Formal analysis in a cellular automata ant model using swarm intelligence in robotics foraging task
@@ -989,7 +989,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 36. Ant Colony Optimization Based Model Checking Extended by Smell-like Pheromone
@@ -1002,7 +1002,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 52. Multiple-Agent Task Allocation Algorithm Utilizing Ant Colony Optimization
@@ -1054,7 +1054,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 82. Research on task allocation in multiple logistics robots based on an improved ant colony algorithm
@@ -1093,7 +1093,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;networks_interactions
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 90. Research on Improvement of Ant Colony Algorithm for Multi-Robot Task Allocation
@@ -1158,7 +1158,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 100. Graph Convolutional Network Based Ant Colony Optimization for Robot Task Allocation
@@ -1184,7 +1184,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 102. Traffic Flow Estimation Using Ant Colony Optimization Algorithms
@@ -1197,7 +1197,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 103. Hybrid Algorithm Based on Ant and Genetic Algorithms for Task Allocation on a Network of Homogeneous Processors
@@ -1223,7 +1223,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: misleading_negative_pheromone;pheromone_trail_foraging;computational_swarm_model
 - Matched condition: negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution
 - Evidence paper id: jimenez_romero_2015/aswale_2022
-- Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
+- Next action: Add active detractor/cautionary pheromone agents and calibrate attack/defense effect sizes.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 106. An Ensemble Ant Colony Optimization Algorithm with a Hybrid Pheromone Model for Learning Rule Lists
@@ -1236,7 +1236,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 109. Anti-Jam Solutions for Smart Roads: Ant-Inspired Traffic Flow Rules Under Cooperative Automated Vehicles Environment
@@ -1249,7 +1249,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 110. Research on Improved Ant Colony Path Planning Algorithm for Updating Pheromone of Subway Inspection Mobile Robot
@@ -1262,7 +1262,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 111. Optimization Design of Expressway Traffic Flow Guidance System Based on GIS and Improved Ant Colony Optimization Algorithms
@@ -1275,7 +1275,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 113. Modeling Fast and Robust Ant Nest Relocation using Particle Swarm Optimization
@@ -1301,7 +1301,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;networks_interactions
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 116. Traffic Flow Estimation Using Ant Colony Optimization Algorithms
@@ -1314,7 +1314,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;computational_swarm_model
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 117. Pheromone-Based Ant Colony Algorithm for Optimal Proliferation of Research
@@ -1327,7 +1327,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 118. Ant Colony Algorithm Based on Dynamic Adaptive Pheromone Updating and Its Simulation
@@ -1340,7 +1340,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
+- Next action: Define paper-specific geometry/species parameters and fit digitized trajectory or response curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 119. Traffic flow forecasting based on ant colony neural network
@@ -1353,5 +1353,5 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: traffic_collective_motion;networks_interactions
 - Matched condition: crowding_bridge_density_shift + no_jam_density_speed
 - Evidence paper id: dussutour_2004/john_2009
-- Next action: Add trail-segment flow-density and velocity measurements.
+- Next action: Calibrate trail geometry, body-contact/lane rules and digitized flow-density curves.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.

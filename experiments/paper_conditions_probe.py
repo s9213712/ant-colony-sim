@@ -260,6 +260,7 @@ PAPER_CONDITIONS_JS = """
     const previous = new Map();
     for (const ant of antSim.world.ants) previous.set(ant.id, { x: ant.x, y: ant.y });
     const counts = { upper: 0, lower: 0, upperReturn: 0, lowerReturn: 0 };
+    const history = [];
     const segmentSums = {
       upperDensity: 0,
       lowerDensity: 0,
@@ -281,6 +282,7 @@ PAPER_CONDITIONS_JS = """
       segmentSums.upperFlow += upperSegment.forward_flow + upperSegment.reverse_flow;
       segmentSums.lowerFlow += lowerSegment.forward_flow + lowerSegment.reverse_flow;
       segmentSums.samples += 1;
+      const before = { ...counts };
       for (const ant of antSim.world.ants) {
         const prev = previous.get(ant.id);
         if (prev && ((prev.x < gateX && ant.x >= gateX) || (prev.x > gateX && ant.x <= gateX))) {
@@ -290,9 +292,40 @@ PAPER_CONDITIONS_JS = """
         }
         previous.set(ant.id, { x: ant.x, y: ant.y });
       }
+      const windowUpper = counts.upper - before.upper;
+      const windowLower = counts.lower - before.lower;
+      const windowTotal = windowUpper + windowLower;
+      const cumulativeTotal = counts.upper + counts.lower;
+      const seededCount = biasBranch === 'lower' ? counts.lower : counts.upper;
+      history.push({
+        sample: i + 1,
+        day: Number(antSim.world.day.toFixed(3)),
+        window_upper_crossings: windowUpper,
+        window_lower_crossings: windowLower,
+        window_seeded_fraction: windowTotal ? (biasBranch === 'lower' ? windowLower : windowUpper) / windowTotal : null,
+        cumulative_upper_crossings: counts.upper,
+        cumulative_lower_crossings: counts.lower,
+        cumulative_seeded_fraction: cumulativeTotal ? seededCount / cumulativeTotal : null,
+        upper_segment_density: upperSegment.density,
+        lower_segment_density: lowerSegment.density,
+        upper_segment_flow: upperSegment.forward_flow + upperSegment.reverse_flow,
+        lower_segment_flow: lowerSegment.forward_flow + lowerSegment.reverse_flow,
+      });
     }
     const total = counts.upper + counts.lower;
     const returnTotal = counts.upperReturn + counts.lowerReturn;
+    const seededCrossings = biasBranch === 'lower' ? counts.lower : counts.upper;
+    const seededReturnCrossings = biasBranch === 'lower' ? counts.lowerReturn : counts.upperReturn;
+    const finalSeededFraction = total ? seededCrossings / total : 0;
+    const finalSeededReturnFraction = returnTotal ? seededReturnCrossings / returnTotal : 0;
+    const referenceCurve = config.bridgeReferenceCurve || [0.58, 0.62, 0.66, 0.69, 0.72, 0.74];
+    const comparableHistory = history.filter(item => item.cumulative_seeded_fraction !== null);
+    const curveError = comparableHistory.length
+      ? comparableHistory.reduce((sum, item, index) => {
+        const target = referenceCurve[Math.min(referenceCurve.length - 1, Math.floor(index * referenceCurve.length / comparableHistory.length))];
+        return sum + Math.abs(item.cumulative_seeded_fraction - target);
+      }, 0) / comparableHistory.length
+      : null;
     return {
       seed,
       ants,
@@ -303,6 +336,13 @@ PAPER_CONDITIONS_JS = """
       lower_return_crossings: counts.lowerReturn,
       return_crossings: returnTotal,
       selected_branch: counts.upper === counts.lower ? 'tie' : counts.upper > counts.lower ? 'upper' : 'lower',
+      seeded_branch: biasBranch || 'none',
+      seeded_crossings: seededCrossings,
+      seeded_return_crossings: seededReturnCrossings,
+      seeded_crossing_fraction: finalSeededFraction,
+      seeded_return_fraction: finalSeededReturnFraction,
+      branch_curve_error: curveError,
+      branch_history_json: JSON.stringify(history),
       dominance: total ? Math.abs(counts.upper - counts.lower) / total : 0,
       return_dominance: returnTotal ? Math.abs(counts.upperReturn - counts.lowerReturn) / returnTotal : 0,
       food_trips: antSim.world.stats.foodTrips,
@@ -661,13 +701,33 @@ PAPER_CONDITIONS_JS = """
       brood_total: snap.brood_total,
     };
   };
+  const summarizeTrajectory = (rows) => {
+    const sensingRows = rows.filter(row => row.sensing_field);
+    const foodRows = sensingRows.filter(row => row.sensing_field === 'food');
+    const alignedRows = sensingRows.filter(row => {
+      const expected = row.sensing_inverted ? -row.sensing_side_contrast : row.sensing_side_contrast;
+      return Math.sign(expected) !== 0 && Math.sign(row.sensing_turn) === Math.sign(expected);
+    });
+    const mean = (items, field) => items.length ? items.reduce((sum, row) => sum + Number(row[field] || 0), 0) / items.length : 0;
+    const meanAbs = (items, field) => items.length ? items.reduce((sum, row) => sum + Math.abs(Number(row[field] || 0)), 0) / items.length : 0;
+    return {
+      trajectory_rows: rows.length,
+      trajectory_sensing_rows: sensingRows.length,
+      trajectory_food_sensing_rows: foodRows.length,
+      trajectory_alignment_ratio: sensingRows.length ? alignedRows.length / sensingRows.length : 0,
+      trajectory_mean_abs_turn: meanAbs(sensingRows, 'sensing_turn'),
+      trajectory_mean_move: mean(rows, 'move'),
+    };
+  };
 
   const rows = [];
 
   for (const seed of config.seeds) {
     baseMature(seed, config.ants);
     antSim.addFood(980, 390, config.foodAmount);
+    antSim.startTrajectoryLog({ sampleEverySteps: config.trajectorySampleEverySteps, antLimit: config.trajectoryAntLimit, maxRows: config.trajectoryMaxRows });
     antSim.runDays(config.trailDays, config.dt);
+    const trajectoryMetrics = summarizeTrajectory(antSim.stopTrajectoryLog());
     const trail = antSim.collectStatsSnapshot();
     const trailSegment = antSim.collectSegmentMetrics(antSim.world.nest.x, antSim.world.nest.y, 980, 390, 92);
     rows.push({
@@ -686,6 +746,7 @@ PAPER_CONDITIONS_JS = """
       mean_abs_side_contrast: trail.mean_abs_side_contrast,
       mean_abs_turn: trail.mean_abs_turn,
       mean_turn_contrast_product: trail.mean_turn_contrast_product,
+      ...trajectoryMetrics,
       trail_segment_count: trailSegment.count,
       trail_segment_density: trailSegment.density,
       trail_segment_mean_speed: trailSegment.mean_speed,
@@ -717,7 +778,7 @@ PAPER_CONDITIONS_JS = """
       food_collected: washout.food_collected,
     });
 
-    const biased = runDoubleBridge(seed, config.ants, 'upper', 350);
+    const biased = runDoubleBridge(seed, config.ants, 'upper', config.bridgeBiasStrength);
     rows.push({ condition: 'double_bridge_upper_bias', ...biased });
 
     const lowTraffic = runDoubleBridge(seed, config.lowDensityAnts, null, 0);
@@ -837,6 +898,11 @@ def aggregate(raw_rows):
         "mean_abs_side_contrast": round(mean(float(r["mean_abs_side_contrast"]) for r in trail_rows), 4),
         "mean_abs_turn": round(mean(float(r["mean_abs_turn"]) for r in trail_rows), 4),
         "mean_turn_contrast_product": round(mean(float(r["mean_turn_contrast_product"]) for r in trail_rows), 5),
+        "mean_trajectory_rows": round(mean(float(r["trajectory_rows"]) for r in trail_rows), 3),
+        "mean_trajectory_sensing_rows": round(mean(float(r["trajectory_sensing_rows"]) for r in trail_rows), 3),
+        "mean_trajectory_food_sensing_rows": round(mean(float(r["trajectory_food_sensing_rows"]) for r in trail_rows), 3),
+        "mean_trajectory_alignment_ratio": round(mean(float(r["trajectory_alignment_ratio"]) for r in trail_rows), 3),
+        "mean_trajectory_move": round(mean(float(r["trajectory_mean_move"]) for r in trail_rows), 4),
         "mean_trail_segment_count": round(mean(float(r["trail_segment_count"]) for r in trail_rows), 3),
         "mean_trail_segment_density": round(mean(float(r["trail_segment_density"]) for r in trail_rows), 5),
         "mean_trail_segment_speed": round(mean(float(r["trail_segment_mean_speed"]) for r in trail_rows), 4),
@@ -852,6 +918,8 @@ def aggregate(raw_rows):
         and trail_metrics["mean_gradient_alignment_ratio"] >= 0.92
         and trail_metrics["mean_abs_side_contrast"] > 0
         and trail_metrics["mean_abs_turn"] > 0
+        and trail_metrics["mean_trajectory_sensing_rows"] >= 80
+        and trail_metrics["mean_trajectory_alignment_ratio"] >= 0.92
         and trail_metrics["mean_trail_segment_count"] >= 8
         and trail_metrics["mean_trail_segment_flow"] > 0
     )
@@ -862,7 +930,7 @@ def aggregate(raw_rows):
         "expected": "Local pheromone following should create food-trail recruitment and measurable trail reinforcement.",
         "status": "pass" if trail_pass and sensing_pass else "partial" if trail_pass else "fail",
         "observed": json.dumps(trail_metrics, ensure_ascii=False),
-        "gap": "Trail reinforcement, local gradient-turn logging and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.",
+        "gap": "Trail reinforcement, per-step trajectory/sensing samples and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.",
     })
 
     summaries.append({
@@ -872,7 +940,7 @@ def aggregate(raw_rows):
         "expected": "A gradient-sensitive pheromone response should yield recruitment to newly found food sources and colony-level trail networks.",
         "status": "pass" if trail_pass and sensing_pass else "partial" if trail_pass else "fail",
         "observed": json.dumps(trail_metrics, ensure_ascii=False),
-        "gap": "The model uses left/right/front sampling and exports gradient-turn plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.",
+        "gap": "The model uses left/right/front sampling and exports per-step trajectory/sensing plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.",
     })
 
     washout_rows = by_condition["rain_food_removal_washout"]
@@ -896,9 +964,17 @@ def aggregate(raw_rows):
     bridge_metrics = {
         "upper_selected_fraction": round(upper_fraction, 3),
         "mean_dominance": round(mean(float(r["dominance"]) for r in bridge_rows), 4),
+        "mean_seeded_crossing_fraction": round(mean(float(r["seeded_crossing_fraction"]) for r in bridge_rows), 4),
+        "mean_seeded_return_fraction": round(mean(float(r["seeded_return_fraction"]) for r in bridge_rows), 4),
+        "mean_branch_curve_error": round(mean(float(r["branch_curve_error"]) for r in bridge_rows if r["branch_curve_error"] is not None), 4),
         "mean_food_trips": round(mean(float(r["food_trips"]) for r in bridge_rows), 3),
     }
-    bridge_status = "pass" if upper_fraction >= 0.67 and bridge_metrics["mean_dominance"] >= 0.2 else "partial"
+    bridge_status = "pass" if (
+        upper_fraction >= 0.67
+        and bridge_metrics["mean_dominance"] >= 0.2
+        and bridge_metrics["mean_seeded_crossing_fraction"] >= 0.6
+        and bridge_metrics["mean_branch_curve_error"] <= 0.22
+    ) else "partial"
     summaries.append({
         "paper_id": "deneubourg_goss_bridge",
         "paper": "Deneubourg/Goss/Beckers double-bridge paradigm",
@@ -906,7 +982,7 @@ def aggregate(raw_rows):
         "expected": "A connected initial trail bias should increase selection of the biased bridge through positive feedback.",
         "status": bridge_status,
         "observed": json.dumps(bridge_metrics, ensure_ascii=False),
-        "gap": "Direction is testable, but validation still lacks digitized branch-choice probability curves from the original experiments.",
+        "gap": "Branch-choice timecourse and seeded-branch curve error are now exported. Remaining gap is digitizing the original branch-choice curves and fitting geometry/time-scale rather than relying on a generic reference curve.",
     })
 
     low_rows = by_condition["crowding_low_density_bridge"]
@@ -1288,8 +1364,13 @@ def main():
         "foodAmount": 1200,
         "dt": 9,
         "trailDays": 2.2 if args.quick else 4,
+        "trajectorySampleEverySteps": 2,
+        "trajectoryAntLimit": 80,
+        "trajectoryMaxRows": 50000,
         "washoutDays": 0.7,
         "bridgeDays": 1.8 if args.quick else 3.5,
+        "bridgeBiasStrength": 1800,
+        "bridgeReferenceCurve": [0.58, 0.62, 0.66, 0.69, 0.72, 0.74],
         "sampleDays": 0.2 if args.quick else 0.1,
         "speedProbeDays": 0.45,
         "noiseProfiles": ["low", "medium", "high", "diverse"],
