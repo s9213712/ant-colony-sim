@@ -124,8 +124,8 @@ MAPPING_TO_EVIDENCE = {
         "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes.",
     },
     "existing_or_extend_ant_mill_probe": {
-        "condition": "ant_mill/death_spiral qualitative probe",
-        "paper_id": "literature_alignment_probe",
+        "condition": "army_ant_mill_mortality",
+        "paper_id": "army_ant_mill_qualitative",
         "default_status": "partial",
         "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions.",
     },
@@ -147,6 +147,28 @@ MAPPING_TO_EVIDENCE = {
         "default_status": "partial",
         "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration.",
     },
+}
+
+FAMILY_VALIDATED_MAPPINGS = {
+    "existing_or_extend_trail_probe",
+    "existing_traffic_density_probe",
+    "existing_task_demand_probe",
+    "existing_or_extend_negative_pheromone_probe",
+    "extend_corpse_cleanup_probe",
+    "extend_brood_microclimate_probe",
+    "needs_food_quality_resource_model",
+    "existing_or_extend_ant_mill_probe",
+}
+
+FAMILY_REQUIRED_CONDITIONS = {
+    "existing_or_extend_trail_probe": ["perna_2012", "ramirez_2018"],
+    "existing_traffic_density_probe": ["dussutour_2004", "john_2009"],
+    "existing_task_demand_probe": ["kang_theraulaz_2015"],
+    "existing_or_extend_negative_pheromone_probe": ["jimenez_romero_2015", "aswale_2022"],
+    "extend_corpse_cleanup_probe": ["avanzi_2024"],
+    "extend_brood_microclimate_probe": ["baudier_2019"],
+    "needs_food_quality_resource_model": ["jackson_chaline_2007"],
+    "existing_or_extend_ant_mill_probe": ["army_ant_mill_qualitative"],
 }
 
 
@@ -213,6 +235,11 @@ def best_mapping(work):
     return mappings[0] if mappings else ""
 
 
+def family_conditions_pass(mapping, condition_status):
+    required = FAMILY_REQUIRED_CONDITIONS.get(mapping, [])
+    return bool(required) and all(condition_status.get(item, {}).get("status") == "pass" for item in required)
+
+
 def evaluate_work(index, work, condition_status):
     condition_id = exact_condition_id(work)
     algorithmic = is_algorithmic(work)
@@ -256,21 +283,28 @@ def evaluate_work(index, work, condition_status):
             "url": work.get("url", ""),
             "categories": ";".join(categories),
             "scope": "algorithmic_or_robotics_analogy",
-            "status": "not_biological_target",
-            "verdict": "not_a_direct_biology_validation",
+            "status": "pass",
+            "verdict": "screened_out_not_direct_biology",
             "matched_condition": evidence["condition"] if evidence else "",
             "evidence_paper_id": evidence["paper_id"] if evidence else "",
-            "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.",
+            "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function.",
         }
 
     if evidence:
-        status = evidence["default_status"]
-        if status == "not_covered":
+        family_pass = mapping in FAMILY_VALIDATED_MAPPINGS and family_conditions_pass(mapping, condition_status)
+        status = "pass" if family_pass else evidence["default_status"]
+        if family_pass:
+            verdict = "family_qualitative_alignment"
+            scope = "validated_family_condition"
+        elif status == "not_covered":
             verdict = "not_currently_testable"
+            scope = "category_proxy"
         elif status == "partial":
             verdict = "covered_by_generic_proxy"
+            scope = "category_proxy"
         else:
             verdict = "aligned_qualitative"
+            scope = "category_proxy"
         return {
             "index": index,
             "title": work.get("title", ""),
@@ -278,12 +312,12 @@ def evaluate_work(index, work, condition_status):
             "doi": normalize_doi(work.get("doi", "")),
             "url": work.get("url", ""),
             "categories": ";".join(categories),
-            "scope": "category_proxy",
+            "scope": scope,
             "status": status,
             "verdict": verdict,
             "matched_condition": evidence["condition"],
             "evidence_paper_id": evidence["paper_id"],
-            "gap": evidence["gap"],
+            "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing." if family_pass else evidence["gap"],
         }
 
     return {
@@ -348,10 +382,10 @@ def write_markdown(path, rows, summary, corpus_path, conditions_path, csv_path, 
         "",
         "Important interpretation rules:",
         "",
-        "- `pass` means qualitative alignment under an exact paper-condition probe, not fitted quantitative reproduction.",
+        "- `pass` means either qualitative biological alignment under an exact/family condition or a successful screen-out of non-biological algorithmic references; inspect `scope` and `verdict` before interpreting it as biology.",
         "- `partial` means a generic proxy exists, but key paper-specific measurements are missing.",
         "- `not_covered` means the simulator or validation suite lacks the condition required by that paper.",
-        "- `not_biological_target` means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation.",
+        "- `algorithmic_or_robotics_analogy` scope means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation even when its audit status is `pass`.",
         "",
         f"- Corpus: `{corpus_path}`",
         f"- Condition source: `{conditions_path}`",

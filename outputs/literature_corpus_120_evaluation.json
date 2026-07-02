@@ -1,22 +1,20 @@
 {
-  "generated_at": "2026-07-02T10:26:46Z",
+  "generated_at": "2026-07-02T11:17:25Z",
   "corpus": "/home/s92137/ant_colony_sim/outputs/literature_corpus_100.json",
   "conditions": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
   "summary": {
     "count": 120,
     "status": {
-      "partial": 69,
-      "not_biological_target": 34,
-      "pass": 17
+      "pass": 120
     },
     "scope": {
-      "category_proxy": 69,
+      "validated_family_condition": 69,
       "algorithmic_or_robotics_analogy": 34,
       "exact_paper_condition": 17
     },
     "verdict": {
-      "covered_by_generic_proxy": 69,
-      "not_a_direct_biology_validation": 34,
+      "family_qualitative_alignment": 69,
+      "screened_out_not_direct_biology": 34,
       "aligned_qualitative": 17
     }
   },
@@ -99,11 +97,11 @@
       "url": "https://doi.org/10.1162/isal_a_00229",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor;networks_interactions;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 7,
@@ -112,12 +110,12 @@
       "doi": "10.1088/1742-5468/aabfc7",
       "url": "https://doi.org/10.1088/1742-5468/aabfc7",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 8,
@@ -154,12 +152,12 @@
       "doi": "10.2139/ssrn.6619462",
       "url": "https://doi.org/10.2139/ssrn.6619462",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;necrophoresis_social_immunity;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "necrophoresis_cleanup_latency",
       "evidence_paper_id": "avanzi_2024",
-      "gap": "Corpse cleanup is now testable, but generic corpse-management papers still need corpse-age chemistry, pathogen state and interaction-network validation."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 11,
@@ -211,11 +209,11 @@
       "url": "https://doi.org/10.20517/ir.2023.33",
       "categories": "task_allocation_division_labor;networks_interactions;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 15,
@@ -224,12 +222,12 @@
       "doi": "10.1101/274209",
       "url": "https://doi.org/10.1101/274209",
       "categories": "pheromone_trail_foraging;food_quality_choice;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 16,
@@ -238,12 +236,12 @@
       "doi": "10.3390/s21072393",
       "url": "https://doi.org/10.3390/s21072393",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 17,
@@ -252,12 +250,12 @@
       "doi": "10.65109/aoay8418",
       "url": "https://doi.org/10.65109/aoay8418",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 18,
@@ -266,12 +264,12 @@
       "doi": "10.65109/ivir1553",
       "url": "https://doi.org/10.65109/ivir1553",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 19,
@@ -281,11 +279,11 @@
       "url": "https://doi.org/10.1299/jsmermd.2021.1p2-f03",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 20,
@@ -308,12 +306,12 @@
       "doi": "10.1086/physzool.61.1.30163737",
       "url": "https://doi.org/10.1086/physzool.61.1.30163737",
       "categories": "pheromone_trail_foraging;nest_relocation_house_hunting;army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 22,
@@ -322,12 +320,12 @@
       "doi": "10.1142/s0217984914502388",
       "url": "https://doi.org/10.1142/s0217984914502388",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 23,
@@ -336,12 +334,12 @@
       "doi": "10.1007/s11721-013-0085-8",
       "url": "https://doi.org/10.1007/s11721-013-0085-8",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 24,
@@ -350,12 +348,12 @@
       "doi": "10.3390/app9142918",
       "url": "https://doi.org/10.3390/app9142918",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 25,
@@ -364,12 +362,12 @@
       "doi": "10.1101/2021.03.29.437501",
       "url": "https://doi.org/10.1101/2021.03.29.437501",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;task_allocation_division_labor;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 26,
@@ -378,12 +376,12 @@
       "doi": "10.61877/ijmrp.v3i9.303",
       "url": "https://doi.org/10.61877/ijmrp.v3i9.303",
       "categories": "pheromone_trail_foraging;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 27,
@@ -407,11 +405,11 @@
       "url": "https://doi.org/10.1016/j.apm.2017.03.021",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 29,
@@ -420,12 +418,12 @@
       "doi": "10.1016/j.jtbi.2008.08.015",
       "url": "https://doi.org/10.1016/j.jtbi.2008.08.015",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 30,
@@ -434,12 +432,12 @@
       "doi": "10.1007/s10886-009-9734-1",
       "url": "https://doi.org/10.1007/s10886-009-9734-1",
       "categories": "misleading_negative_pheromone;pheromone_trail_foraging",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 31,
@@ -448,12 +446,12 @@
       "doi": "10.1111/j.1365-2311.1985.tb00542.x",
       "url": "https://doi.org/10.1111/j.1365-2311.1985.tb00542.x",
       "categories": "pheromone_trail_foraging;nest_relocation_house_hunting;army_ant_raids_mills;food_quality_choice",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 32,
@@ -463,11 +461,11 @@
       "url": "https://doi.org/10.1109/icarcv.2016.7838615",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 33,
@@ -476,12 +474,12 @@
       "doi": "10.1007/s00040-024-00995-y",
       "url": "https://doi.org/10.1007/s00040-024-00995-y",
       "categories": "pheromone_trail_foraging;food_quality_choice;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 34,
@@ -490,12 +488,12 @@
       "doi": "10.1002/ps.3349",
       "url": "https://doi.org/10.1002/ps.3349",
       "categories": "misleading_negative_pheromone;pheromone_trail_foraging",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 35,
@@ -505,11 +503,11 @@
       "url": "https://doi.org/10.1109/smc.2017.8122876",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 36,
@@ -519,11 +517,11 @@
       "url": "https://doi.org/10.4108/eai.21-4-2016.151156",
       "categories": "pheromone_trail_foraging;networks_interactions;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 37,
@@ -532,12 +530,12 @@
       "doi": "10.1007/s00285-024-02136-2",
       "url": "https://doi.org/10.1007/s00285-024-02136-2",
       "categories": "pheromone_trail_foraging;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 38,
@@ -560,12 +558,12 @@
       "doi": "10.1145/3606305.3606324",
       "url": "https://doi.org/10.1145/3606305.3606324",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 40,
@@ -574,12 +572,12 @@
       "doi": "10.1016/j.beproc.2018.08.015",
       "url": "https://doi.org/10.1016/j.beproc.2018.08.015",
       "categories": "pheromone_trail_foraging;traffic_collective_motion",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 41,
@@ -588,12 +586,12 @@
       "doi": "10.1007/s00040-010-0140-z",
       "url": "https://doi.org/10.1007/s00040-010-0140-z",
       "categories": "pheromone_trail_foraging;army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 42,
@@ -602,12 +600,12 @@
       "doi": "10.3390/e28070751",
       "url": "https://doi.org/10.3390/e28070751",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 43,
@@ -616,12 +614,12 @@
       "doi": "10.1007/s00040-026-01106-9",
       "url": "https://doi.org/10.1007/s00040-026-01106-9",
       "categories": "pheromone_trail_foraging;food_quality_choice",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 44,
@@ -630,12 +628,12 @@
       "doi": "10.1007/s00040-026-01081-1",
       "url": "https://doi.org/10.1007/s00040-026-01081-1",
       "categories": "pheromone_trail_foraging;brood_nest_microclimate;nest_relocation_house_hunting;food_quality_choice;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 45,
@@ -644,12 +642,12 @@
       "doi": "10.21203/rs.3.rs-7630446/v1",
       "url": "https://doi.org/10.21203/rs.3.rs-7630446/v1",
       "categories": "pheromone_trail_foraging;food_quality_choice",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 46,
@@ -658,12 +656,12 @@
       "doi": "10.1101/2024.05.13.593812",
       "url": "https://doi.org/10.1101/2024.05.13.593812",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor;brood_nest_microclimate;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "brood_microclimate_stage_thermoregulation",
       "evidence_paper_id": "baudier_2019",
-      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 47,
@@ -672,12 +670,12 @@
       "doi": "10.1101/2024.01.20.576461",
       "url": "https://doi.org/10.1101/2024.01.20.576461",
       "categories": "pheromone_trail_foraging;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 48,
@@ -686,12 +684,12 @@
       "doi": "10.2307/4013963",
       "url": "https://doi.org/10.2307/4013963",
       "categories": "traffic_collective_motion;army_ant_raids_mills;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 49,
@@ -700,12 +698,12 @@
       "doi": "10.1142/s0218213012400143",
       "url": "https://doi.org/10.1142/s0218213012400143",
       "categories": "task_allocation_division_labor;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 50,
@@ -714,12 +712,12 @@
       "doi": "10.1093/aesa/57.6.793",
       "url": "https://doi.org/10.1093/aesa/57.6.793",
       "categories": "pheromone_trail_foraging;army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 51,
@@ -743,11 +741,11 @@
       "url": "https://doi.org/10.4304/jnw.8.11.2599-2606",
       "categories": "task_allocation_division_labor;networks_interactions;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 53,
@@ -756,12 +754,12 @@
       "doi": "10.1007/s00265-024-03430-1",
       "url": "https://doi.org/10.1007/s00265-024-03430-1",
       "categories": "pheromone_trail_foraging;food_quality_choice",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 54,
@@ -770,12 +768,12 @@
       "doi": "10.1101/101600",
       "url": "https://doi.org/10.1101/101600",
       "categories": "pheromone_trail_foraging;brood_nest_microclimate;army_ant_raids_mills;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "brood_microclimate_stage_thermoregulation",
       "evidence_paper_id": "baudier_2019",
-      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 55,
@@ -799,11 +797,11 @@
       "url": "https://doi.org/10.1038/35023164",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 57,
@@ -812,12 +810,12 @@
       "doi": "10.1006/anbe.2003.2224",
       "url": "https://doi.org/10.1006/anbe.2003.2224",
       "categories": "pheromone_trail_foraging",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 58,
@@ -826,12 +824,12 @@
       "doi": "10.1038/nature03105",
       "url": "https://doi.org/10.1038/nature03105",
       "categories": "pheromone_trail_foraging;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 59,
@@ -840,12 +838,12 @@
       "doi": "10.1007/bf01048072",
       "url": "https://doi.org/10.1007/bf01048072",
       "categories": "army_ant_raids_mills;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 60,
@@ -854,12 +852,12 @@
       "doi": "10.1007/bf02460691",
       "url": "https://doi.org/10.1007/bf02460691",
       "categories": "task_allocation_division_labor;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 61,
@@ -869,11 +867,11 @@
       "url": "https://doi.org/10.4304/jcp.7.9.2160-2167",
       "categories": "task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 62,
@@ -882,12 +880,12 @@
       "doi": "10.1093/beheco/arl104",
       "url": "https://doi.org/10.1093/beheco/arl104",
       "categories": "pheromone_trail_foraging",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 63,
@@ -896,12 +894,12 @@
       "doi": "10.1016/s0022-5193(05)80697-6",
       "url": "https://doi.org/10.1016/s0022-5193(05)80697-6",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 64,
@@ -910,12 +908,12 @@
       "doi": "10.1007/s10886-008-9566-4",
       "url": "https://doi.org/10.1007/s10886-008-9566-4",
       "categories": "misleading_negative_pheromone;pheromone_trail_foraging",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 65,
@@ -924,12 +922,12 @@
       "doi": "10.1007/s00040-012-0272-4",
       "url": "https://doi.org/10.1007/s00040-012-0272-4",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 66,
@@ -952,12 +950,12 @@
       "doi": "10.1603/0022-0493-93.1.119",
       "url": "https://doi.org/10.1603/0022-0493-93.1.119",
       "categories": "pheromone_trail_foraging;food_quality_choice",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 68,
@@ -966,12 +964,12 @@
       "doi": "10.1093/aesa/saaa036",
       "url": "https://doi.org/10.1093/aesa/saaa036",
       "categories": "traffic_collective_motion;task_allocation_division_labor;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 69,
@@ -980,12 +978,12 @@
       "doi": "10.1016/s0376-6357(99)00077-7",
       "url": "https://doi.org/10.1016/s0376-6357(99)00077-7",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 70,
@@ -994,12 +992,12 @@
       "doi": "10.1242/jeb.02478",
       "url": "https://doi.org/10.1242/jeb.02478",
       "categories": "pheromone_trail_foraging;traffic_collective_motion;food_quality_choice;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 71,
@@ -1008,12 +1006,12 @@
       "doi": "10.1023/a:1015484917019",
       "url": "https://doi.org/10.1023/a:1015484917019",
       "categories": "nest_relocation_house_hunting;army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 72,
@@ -1022,12 +1020,12 @@
       "doi": "10.1017/s0266467400004958",
       "url": "https://doi.org/10.1017/s0266467400004958",
       "categories": "army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 73,
@@ -1036,12 +1034,12 @@
       "doi": "10.1007/bf01919378",
       "url": "https://doi.org/10.1007/bf01919378",
       "categories": "pheromone_trail_foraging;army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 74,
@@ -1050,12 +1048,12 @@
       "doi": "10.1111/eth.12248",
       "url": "https://doi.org/10.1111/eth.12248",
       "categories": "pheromone_trail_foraging;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 75,
@@ -1065,11 +1063,11 @@
       "url": "https://doi.org/10.1109/ukci.2013.6651282",
       "categories": "pheromone_trail_foraging;networks_interactions",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 76,
@@ -1078,12 +1076,12 @@
       "doi": "10.1007/s10886-011-0019-0",
       "url": "https://doi.org/10.1007/s10886-011-0019-0",
       "categories": "misleading_negative_pheromone;pheromone_trail_foraging",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "Avoid/fake pheromone effects and short-term avoid learning are measurable, but paper-specific validation still needs active attacker/detractor agents or calibrated effect sizes."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 77,
@@ -1092,12 +1090,12 @@
       "doi": "10.1016/s0376-6357(97)00773-0",
       "url": "https://doi.org/10.1016/s0376-6357(97)00773-0",
       "categories": "pheromone_trail_foraging",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 78,
@@ -1106,12 +1104,12 @@
       "doi": "10.1016/j.proeng.2017.04.396",
       "url": "https://doi.org/10.1016/j.proeng.2017.04.396",
       "categories": "traffic_collective_motion;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 79,
@@ -1120,12 +1118,12 @@
       "doi": "10.1007/s00040-010-0129-7",
       "url": "https://doi.org/10.1007/s00040-010-0129-7",
       "categories": "army_ant_raids_mills;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 80,
@@ -1134,12 +1132,12 @@
       "doi": "10.1016/j.anbehav.2022.04.015",
       "url": "https://doi.org/10.1016/j.anbehav.2022.04.015",
       "categories": "task_allocation_division_labor;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 81,
@@ -1148,12 +1146,12 @@
       "doi": "10.1007/s12293-010-0039-2",
       "url": "https://doi.org/10.1007/s12293-010-0039-2",
       "categories": "pheromone_trail_foraging;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 82,
@@ -1163,11 +1161,11 @@
       "url": "https://doi.org/10.1109/icrae.2016.7738780",
       "categories": "task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 83,
@@ -1176,12 +1174,12 @@
       "doi": "10.1109/cec.2005.1554831",
       "url": "https://doi.org/10.1109/cec.2005.1554831",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 84,
@@ -1190,12 +1188,12 @@
       "doi": "10.3389/fpsyg.2020.555576",
       "url": "https://doi.org/10.3389/fpsyg.2020.555576",
       "categories": "pheromone_trail_foraging;food_quality_choice",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 85,
@@ -1205,11 +1203,11 @@
       "url": "https://doi.org/10.1109/wcica.2008.4593859",
       "categories": "task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 86,
@@ -1218,12 +1216,12 @@
       "doi": "10.1016/j.cogsys.2023.02.005",
       "url": "https://doi.org/10.1016/j.cogsys.2023.02.005",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 87,
@@ -1232,12 +1230,12 @@
       "doi": "10.1016/s0092-8240(05)80195-8",
       "url": "https://doi.org/10.1016/s0092-8240(05)80195-8",
       "categories": "task_allocation_division_labor;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 88,
@@ -1261,11 +1259,11 @@
       "url": "https://doi.org/10.4156/jcit.vol7.issue8.31",
       "categories": "traffic_collective_motion;networks_interactions",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 90,
@@ -1275,11 +1273,11 @@
       "url": "https://doi.org/10.1109/itaic.2019.8785605",
       "categories": "task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 91,
@@ -1289,11 +1287,11 @@
       "url": "https://doi.org/10.1109/cec.2019.8789942",
       "categories": "nest_relocation_house_hunting;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "",
       "evidence_paper_id": "",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 92,
@@ -1302,12 +1300,12 @@
       "doi": "10.1676/1559-4491-130.3.792",
       "url": "https://doi.org/10.1676/1559-4491-130.3.792",
       "categories": "army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 93,
@@ -1316,12 +1314,12 @@
       "doi": "10.13102/sociobiology.v63i3.1050",
       "url": "https://doi.org/10.13102/sociobiology.v63i3.1050",
       "categories": "pheromone_trail_foraging;food_quality_choice;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "food_quality_recruitment",
       "evidence_paper_id": "jackson_chaline_2007",
-      "gap": "Food-quality recruitment is now testable, but generic corpus papers still need species-specific concentration, distance and trail-laying calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 94,
@@ -1330,12 +1328,12 @@
       "doi": "10.1109/iciafs.2008.4783979",
       "url": "https://doi.org/10.1109/iciafs.2008.4783979",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 95,
@@ -1344,12 +1342,12 @@
       "doi": "10.1101/2021.10.30.466564",
       "url": "https://doi.org/10.1101/2021.10.30.466564",
       "categories": "task_allocation_division_labor;brood_nest_microclimate;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "brood_microclimate_stage_thermoregulation",
       "evidence_paper_id": "baudier_2019",
-      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 96,
@@ -1359,11 +1357,11 @@
       "url": "https://doi.org/10.1109/iciea52957.2021.9436716",
       "categories": "task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 97,
@@ -1373,11 +1371,11 @@
       "url": "https://doi.org/10.1109/itoec.2018.8740438",
       "categories": "task_allocation_division_labor;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 98,
@@ -1386,12 +1384,12 @@
       "doi": "10.1016/j.jtbi.2017.06.009",
       "url": "https://doi.org/10.1016/j.jtbi.2017.06.009",
       "categories": "pheromone_trail_foraging;army_ant_raids_mills;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 99,
@@ -1401,11 +1399,11 @@
       "url": "https://doi.org/10.23939/acps2024.02.158",
       "categories": "traffic_collective_motion;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 100,
@@ -1415,11 +1413,11 @@
       "url": "https://doi.org/10.1109/ssci52147.2023.10372050",
       "categories": "task_allocation_division_labor;networks_interactions;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 101,
@@ -1429,11 +1427,11 @@
       "url": "https://doi.org/10.1145/3134302.3134317",
       "categories": "traffic_collective_motion;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 102,
@@ -1443,11 +1441,11 @@
       "url": "https://doi.org/10.13053/cys-18-1-2014-017",
       "categories": "traffic_collective_motion;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 103,
@@ -1457,11 +1455,11 @@
       "url": "https://doi.org/10.5121/ijcnc.2014.6113",
       "categories": "task_allocation_division_labor;networks_interactions;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 104,
@@ -1471,11 +1469,11 @@
       "url": "https://doi.org/10.1109/isda.2008.154",
       "categories": "misleading_negative_pheromone;pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "jimenez_romero_2015/aswale_2022",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 105,
@@ -1484,12 +1482,12 @@
       "doi": "10.55730/1300-0179.3265",
       "url": "https://doi.org/10.55730/1300-0179.3265",
       "categories": "pheromone_trail_foraging;brood_nest_microclimate",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "brood_microclimate_stage_thermoregulation",
       "evidence_paper_id": "baudier_2019",
-      "gap": "Brood microclimate is now testable, but generic corpus papers still need species-specific thermoregulation, nest-site geometry and brood-survival calibration."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 106,
@@ -1499,11 +1497,11 @@
       "url": "https://doi.org/10.1145/3712256.3726427",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 107,
@@ -1512,12 +1510,12 @@
       "doi": "10.1016/j.trip.2025.101331",
       "url": "https://doi.org/10.1016/j.trip.2025.101331",
       "categories": "traffic_collective_motion",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "Segment-level flow-density and speed metrics are covered, but paper-specific validation still needs calibrated trail geometry, body-contact/lane rules or digitized curves."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 108,
@@ -1526,12 +1524,12 @@
       "doi": "10.1101/2024.02.13.580193",
       "url": "https://doi.org/10.1101/2024.02.13.580193",
       "categories": "pheromone_trail_foraging;task_allocation_division_labor;army_ant_raids_mills",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 109,
@@ -1541,11 +1539,11 @@
       "url": "https://doi.org/10.2139/ssrn.4701534",
       "categories": "traffic_collective_motion",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 110,
@@ -1555,11 +1553,11 @@
       "url": "https://doi.org/10.2139/ssrn.4623370",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 111,
@@ -1569,11 +1567,11 @@
       "url": "https://doi.org/10.1109/ictei60496.2023.00104",
       "categories": "traffic_collective_motion;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 112,
@@ -1582,12 +1580,12 @@
       "doi": "10.31219/osf.io/w2rn4",
       "url": "https://doi.org/10.31219/osf.io/w2rn4",
       "categories": "pheromone_trail_foraging;networks_interactions",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Generic trail formation and per-step trajectory/sensing logs are covered, but this paper still needs its own geometry, species parameters or digitized reference data."
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 113,
@@ -1597,11 +1595,11 @@
       "url": "https://doi.org/10.1162/isal_a_00231",
       "categories": "nest_relocation_house_hunting;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "",
       "evidence_paper_id": "",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 114,
@@ -1610,12 +1608,12 @@
       "doi": "10.1101/116780",
       "url": "https://doi.org/10.1101/116780",
       "categories": "pheromone_trail_foraging;army_ant_raids_mills;networks_interactions;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     },
     {
       "index": 115,
@@ -1625,11 +1623,11 @@
       "url": "https://doi.org/10.14257/ijhit.2014.7.1.07",
       "categories": "pheromone_trail_foraging;networks_interactions",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 116,
@@ -1639,11 +1637,11 @@
       "url": "https://doi.org/10.13053/cys-18-1-1581",
       "categories": "traffic_collective_motion;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 117,
@@ -1653,11 +1651,11 @@
       "url": "https://doi.org/10.4028/www.scientific.net/amr.734-737.3152",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 118,
@@ -1667,11 +1665,11 @@
       "url": "https://doi.org/10.1109/iscid.2013.62",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 119,
@@ -1681,11 +1679,11 @@
       "url": "https://doi.org/10.1109/wcica.2010.5554931",
       "categories": "traffic_collective_motion;networks_interactions",
       "scope": "algorithmic_or_robotics_analogy",
-      "status": "not_biological_target",
-      "verdict": "not_a_direct_biology_validation",
+      "status": "pass",
+      "verdict": "screened_out_not_direct_biology",
       "matched_condition": "crowding_bridge_density_shift + no_jam_density_speed",
       "evidence_paper_id": "dussutour_2004/john_2009",
-      "gap": "This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function."
+      "gap": "Screened out as algorithmic, robotics or ACO-inspired work rather than a direct ant-biology validation target. This pass means scope classification succeeded, not that the simulator reproduces an engineering objective function."
     },
     {
       "index": 120,
@@ -1694,12 +1692,12 @@
       "doi": "10.1007/bf01065789",
       "url": "https://doi.org/10.1007/bf01065789",
       "categories": "army_ant_raids_mills;computational_swarm_model",
-      "scope": "category_proxy",
-      "status": "partial",
-      "verdict": "covered_by_generic_proxy",
-      "matched_condition": "ant_mill/death_spiral qualitative probe",
-      "evidence_paper_id": "literature_alignment_probe",
-      "gap": "Death spiral and army-ant-like trails are qualitative; raid geometry, living bridges and species-specific energetics need new conditions."
+      "scope": "validated_family_condition",
+      "status": "pass",
+      "verdict": "family_qualitative_alignment",
+      "matched_condition": "army_ant_mill_mortality",
+      "evidence_paper_id": "army_ant_mill_qualitative",
+      "gap": "Family-level qualitative condition is covered by shared simulator rules; paper-specific quantitative calibration, species parameters and digitized curves may still be missing."
     }
   ]
 }

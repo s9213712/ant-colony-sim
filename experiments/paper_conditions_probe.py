@@ -91,6 +91,11 @@ SOURCES = [
         "url": "https://doi.org/10.1111/ecog.04064",
     },
     {
+        "id": "army_ant_mill_qualitative",
+        "paper": "Army-ant trail-following and death-spiral qualitative family condition",
+        "url": "https://doi.org/10.1007/bf01065789",
+    },
+    {
         "id": "pratt_2002",
         "paper": "Pratt et al. 2002, Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis",
         "url": "https://doi.org/10.1007/s00265-002-0487-x",
@@ -799,6 +804,39 @@ PAPER_CONDITIONS_JS = """
       brood_total: snap.brood_total,
     };
   };
+  const runArmyAntMill = (seed) => {
+    antSim.setSeed(seed);
+    antSim.setParam('species', 'eciton');
+    antSim.setParam('speed', 60);
+    antSim.setParam('pheromoneStrength', 120);
+    antSim.setParam('diffusionRate', 110);
+    antSim.setParam('evaporationRate', 80);
+    antSim.setParam('senseThreshold', 10);
+    antSim.setParam('temperature', 27);
+    antSim.setParam('humidity', 76);
+    antSim.setupMatureColony();
+    antSim.setParam('antCount', config.armyAntMillAnts);
+    clearResources();
+    antSim.world.foodStore = 260;
+    antSim.world.waterStore = 260;
+    antSim.clearPheromones();
+    const startAnts = antSim.world.ants.length;
+    antSim.createAntMill(antSim.world.nest.x - 210, antSim.world.nest.y + 95, config.armyAntMillRadius);
+    antSim.runDays(config.armyAntMillDays, config.dt);
+    const snap = antSim.collectStatsSnapshot();
+    return {
+      condition: 'army_ant_mill_mortality',
+      seed,
+      start_ants: startAnts,
+      ants: snap.ants,
+      corpses: snap.dead,
+      mills: antSim.world.mills.length,
+      death_pheromone: pheroSum('death'),
+      food_pheromone: pheroSum('food'),
+      survivor_fraction: startAnts ? snap.ants / startAnts : 0,
+      corpse_fraction: startAnts ? snap.dead / startAnts : 0,
+    };
+  };
   const summarizeTrajectory = (rows) => {
     const sensingRows = rows.filter(row => row.sensing_field);
     const foodRows = sensingRows.filter(row => row.sensing_field === 'food');
@@ -975,6 +1013,7 @@ PAPER_CONDITIONS_JS = """
     rows.push(runBroodMicroclimate(seed, 'cold_larval'));
     rows.push(runBroodMicroclimate(seed, 'cold_pupal'));
     rows.push(runBroodMicroclimate(seed, 'heat_dry_pupal'));
+    rows.push(runArmyAntMill(seed));
     rows.push(runNestRelocation(seed));
   }
   return rows;
@@ -1411,6 +1450,33 @@ def aggregate(raw_rows):
         "gap": "The simulator now tests brood microclimate and stage-dependent thermoregulation, but still lacks fitted metabolic heat budgets, nest-site choice geometry and species-specific brood survival curves.",
     })
 
+    mill_rows = by_condition["army_ant_mill_mortality"]
+    mill_metrics = {
+        "mean_start_ants": round(mean(float(r["start_ants"]) for r in mill_rows), 3),
+        "mean_final_ants": round(mean(float(r["ants"]) for r in mill_rows), 3),
+        "mean_corpses": round(mean(float(r["corpses"]) for r in mill_rows), 3),
+        "mean_mills": round(mean(float(r["mills"]) for r in mill_rows), 3),
+        "mean_survivor_fraction": round(mean(float(r["survivor_fraction"]) for r in mill_rows), 4),
+        "mean_corpse_fraction": round(mean(float(r["corpse_fraction"]) for r in mill_rows), 4),
+        "mean_death_pheromone": round(mean(float(r["death_pheromone"]) for r in mill_rows), 3),
+        "mean_food_pheromone": round(mean(float(r["food_pheromone"]) for r in mill_rows), 3),
+    }
+    mill_status = "pass" if (
+        mill_metrics["mean_mills"] >= 1
+        and mill_metrics["mean_survivor_fraction"] <= 0.72
+        and mill_metrics["mean_corpse_fraction"] >= 0.18
+        and mill_metrics["mean_death_pheromone"] >= 1000
+    ) else "partial"
+    summaries.append({
+        "paper_id": "army_ant_mill_qualitative",
+        "paper": "Army-ant trail-following/death-spiral family",
+        "condition": "army_ant_mill_mortality",
+        "expected": "Army-ant-like trail-following under closed-loop chemical guidance should form a persistent mill, causing energetic exhaustion, mortality and death-cue accumulation.",
+        "status": mill_status,
+        "observed": json.dumps(mill_metrics, ensure_ascii=False),
+        "gap": "This is a qualitative army-ant trail failure condition. It does not yet model raid fronts, living bridges, prey encounter geometry or species-specific field energetics.",
+    })
+
     relocation_rows = by_condition["nest_relocation_quorum_choice"]
     relocation_metrics = {
         "mean_high_quality_site_visits": round(mean(float(r["high_quality_site_visits"]) for r in relocation_rows), 3),
@@ -1486,6 +1552,8 @@ def main():
     parser.add_argument("--bridge-seed-foragers", type=int, default=70)
     parser.add_argument("--bridge-branch-offset", type=float, default=105)
     parser.add_argument("--bridge-obstacle-radius", type=float, default=82)
+    parser.add_argument("--army-ant-mill-ants", type=int, default=420)
+    parser.add_argument("--army-ant-mill-radius", type=float, default=72)
     args = parser.parse_args()
 
     seeds = parse_seeds(args.seeds)
@@ -1533,6 +1601,9 @@ def main():
         "relocationAnts": 180 if args.quick else 280,
         "relocationQuorumFraction": 0.065,
         "nestRelocationDays": 1.6 if args.quick else 2.8,
+        "armyAntMillAnts": min(args.army_ant_mill_ants, 260) if args.quick else args.army_ant_mill_ants,
+        "armyAntMillRadius": args.army_ant_mill_radius,
+        "armyAntMillDays": 3.4 if args.quick else 5,
         "fakeTrailStrength": 1100,
     }
 

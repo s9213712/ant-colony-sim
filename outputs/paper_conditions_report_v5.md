@@ -26,6 +26,7 @@ JSON: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - jackson_chaline_2007: Jackson & Chaline 2007, Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis (https://doi.org/10.1016/j.anbehav.2006.11.027)
 - avanzi_2024: Avanzi, Lisart & Detrain 2024, Social organization of necrophoresis: insights into disease risk management in ant societies (https://doi.org/10.1098/rsos.240764)
 - baudier_2019: Baudier et al. 2019, Plastic collective endothermy in army ant bivouacs (https://doi.org/10.1111/ecog.04064)
+- army_ant_mill_qualitative: Army-ant trail-following and death-spiral qualitative family condition (https://doi.org/10.1007/bf01065789)
 - pratt_2002: Pratt et al. 2002, Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis (https://doi.org/10.1007/s00265-002-0487-x)
 
 ## Results
@@ -149,6 +150,14 @@ JSON: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - Expected: Brood microclimate should be regulated by workers, stress should rise under heat/dry conditions, and cool pupal bivouacs should maintain higher core temperature than cool larval bivouacs.
 - Observed: `{"mean_stable_stress": 0.0, "mean_heat_dry_stress": 1.8, "mean_cold_larval_brood_temp": 23.8, "mean_cold_pupal_brood_temp": 25.3, "mean_cold_pupal_minus_larval_temp": 1.5, "mean_stable_development_events": 22.333, "mean_heat_dry_development_events": 2.667, "mean_heat_dry_brood_losses": 0.667, "mean_stable_task_brood": 290.333, "mean_heat_dry_task_brood": 0.0}`
 - Gap: The simulator now tests brood microclimate and stage-dependent thermoregulation, but still lacks fitted metabolic heat budgets, nest-site choice geometry and species-specific brood survival curves.
+
+### army_ant_mill_qualitative - army_ant_mill_mortality
+
+- Paper: Army-ant trail-following/death-spiral family
+- Status: `pass`
+- Expected: Army-ant-like trail-following under closed-loop chemical guidance should form a persistent mill, causing energetic exhaustion, mortality and death-cue accumulation.
+- Observed: `{"mean_start_ants": 420.0, "mean_final_ants": 104.0, "mean_corpses": 319.0, "mean_mills": 1.0, "mean_survivor_fraction": 0.2476, "mean_corpse_fraction": 0.7595, "mean_death_pheromone": 15032.667, "mean_food_pheromone": 0.0}`
+- Gap: This is a qualitative army-ant trail failure condition. It does not yet model raid fronts, living bridges, prey encounter geometry or species-specific field energetics.
 
 ### pratt_2002 - nest_relocation_quorum_choice
 

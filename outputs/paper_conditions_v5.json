@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T10:26:22Z",
+  "generated_at": "2026-07-02T11:16:40Z",
   "config": {
     "seeds": [
       101,
@@ -57,6 +57,9 @@
     "relocationAnts": 280,
     "relocationQuorumFraction": 0.065,
     "nestRelocationDays": 2.8,
+    "armyAntMillAnts": 420,
+    "armyAntMillRadius": 72,
+    "armyAntMillDays": 5,
     "fakeTrailStrength": 1100
   },
   "sources": [
@@ -134,6 +137,11 @@
       "id": "baudier_2019",
       "paper": "Baudier et al. 2019, Plastic collective endothermy in army ant bivouacs",
       "url": "https://doi.org/10.1111/ecog.04064"
+    },
+    {
+      "id": "army_ant_mill_qualitative",
+      "paper": "Army-ant trail-following and death-spiral qualitative family condition",
+      "url": "https://doi.org/10.1007/bf01065789"
     },
     {
       "id": "pratt_2002",
@@ -276,6 +284,15 @@
       "status": "pass",
       "observed": "{\"mean_stable_stress\": 0.0, \"mean_heat_dry_stress\": 1.8, \"mean_cold_larval_brood_temp\": 23.8, \"mean_cold_pupal_brood_temp\": 25.3, \"mean_cold_pupal_minus_larval_temp\": 1.5, \"mean_stable_development_events\": 22.333, \"mean_heat_dry_development_events\": 2.667, \"mean_heat_dry_brood_losses\": 0.667, \"mean_stable_task_brood\": 290.333, \"mean_heat_dry_task_brood\": 0.0}",
       "gap": "The simulator now tests brood microclimate and stage-dependent thermoregulation, but still lacks fitted metabolic heat budgets, nest-site choice geometry and species-specific brood survival curves."
+    },
+    {
+      "paper_id": "army_ant_mill_qualitative",
+      "paper": "Army-ant trail-following/death-spiral family",
+      "condition": "army_ant_mill_mortality",
+      "expected": "Army-ant-like trail-following under closed-loop chemical guidance should form a persistent mill, causing energetic exhaustion, mortality and death-cue accumulation.",
+      "status": "pass",
+      "observed": "{\"mean_start_ants\": 420.0, \"mean_final_ants\": 104.0, \"mean_corpses\": 319.0, \"mean_mills\": 1.0, \"mean_survivor_fraction\": 0.2476, \"mean_corpse_fraction\": 0.7595, \"mean_death_pheromone\": 15032.667, \"mean_food_pheromone\": 0.0}",
+      "gap": "This is a qualitative army-ant trail failure condition. It does not yet model raid fronts, living bridges, prey encounter geometry or species-specific field energetics."
     },
     {
       "paper_id": "pratt_2002",
@@ -859,6 +876,18 @@
       "brood_development_events": 2,
       "task_brood": 0,
       "state_brood_care": 0
+    },
+    {
+      "condition": "army_ant_mill_mortality",
+      "seed": 101,
+      "start_ants": 420,
+      "ants": 105,
+      "corpses": 319,
+      "mills": 1,
+      "death_pheromone": 15544,
+      "food_pheromone": 0,
+      "survivor_fraction": 0.25,
+      "corpse_fraction": 0.7595238095238095
     },
     {
       "condition": "nest_relocation_quorum_choice",
@@ -1449,6 +1478,18 @@
       "state_brood_care": 0
     },
     {
+      "condition": "army_ant_mill_mortality",
+      "seed": 102,
+      "start_ants": 420,
+      "ants": 104,
+      "corpses": 319,
+      "mills": 1,
+      "death_pheromone": 14154,
+      "food_pheromone": 0,
+      "survivor_fraction": 0.24761904761904763,
+      "corpse_fraction": 0.7595238095238095
+    },
+    {
       "condition": "nest_relocation_quorum_choice",
       "seed": 102,
       "ants": 288,
@@ -2035,6 +2076,18 @@
       "brood_development_events": 1,
       "task_brood": 0,
       "state_brood_care": 0
+    },
+    {
+      "condition": "army_ant_mill_mortality",
+      "seed": 103,
+      "start_ants": 420,
+      "ants": 103,
+      "corpses": 319,
+      "mills": 1,
+      "death_pheromone": 15400,
+      "food_pheromone": 0,
+      "survivor_fraction": 0.24523809523809523,
+      "corpse_fraction": 0.7595238095238095
     },
     {
       "condition": "nest_relocation_quorum_choice",

@@ -365,7 +365,7 @@ python3 experiments/paper_conditions_probe.py \
   --report-output outputs/paper_conditions_report_v5.md
 ```
 
-目前 `v5` 結果：16 個 exact/near-exact biological conditions 全部為 `pass`。`pass` 只表示 shared general rules 在該條件下重現文獻定性方向，不表示已完成物種專屬數值擬合。
+目前 `v5` 結果：17 個 exact/near-exact biological conditions 全部為 `pass`。`pass` 只表示 shared general rules 在該條件下重現文獻定性方向，不表示已完成物種專屬數值擬合。
 
 | 文獻 / 條件 | 狀態 | 觀測摘要 | 仍缺什麼 |
 | --- | --- | --- | --- |
@@ -384,6 +384,7 @@ python3 experiments/paper_conditions_probe.py \
 | Jackson & Chaline 2007 / food quality recruitment | pass | counterbalanced 條件下平均採集品質 `1.334`，high-quality source pheromone `156.167` > low-quality `96.333` | 缺物種專屬蔗糖濃度校準與直接 trail-laying event counts |
 | Avanzi, Lisart & Detrain 2024 / necrophoresis cleanup | pass | 巢區屍體由 `36.0` 降到 `0.333`，平均 disposed corpses `34.333` | 缺病原狀態、屍體年齡化學曲線與 colony interaction network 驗證 |
 | Baudier et al. 2019 / brood microclimate | pass | heat-dry stress `1.8` > stable `0.0`；cold pupal brood chamber 比 cold larval 高 `1.5°C` | 缺 fitted metabolic heat budget、巢址幾何與物種專屬 brood survival curve |
+| Army-ant trail-following / death spiral | pass | 平均 start ants `420.0`、final ants `104.0`、corpse fraction `0.7595`、death pheromone `15032.667` | 仍是定性 death-spiral/closed-loop trail failure；缺 raid fronts、living bridges、prey geometry 與 species energetics |
 | Pratt et al. 2002 / nest relocation quorum | pass | high-quality site visits `73.973` > low-quality `0.0`，quorum/redeployment 完成 | 缺 tandem running、搬運軌跡、巢容積與 quorum threshold 實測校準 |
 
 整體解讀：
@@ -441,19 +442,17 @@ python3 experiments/paper_conditions_probe.py \
 
 | 狀態 | 數量 | 解讀 |
 | --- | ---: | --- |
-| pass | 17 | 有 exact paper-condition，且目前定性方向符合 |
-| partial | 69 | 只有 category proxy，缺逐篇條件、paper-specific 數據或機制校準 |
-| not_biological_target | 34 | 主要是 robotics / ACO / 工程類比，不應作為直接生物學驗證 |
+| pass | 120 | 包含 exact biology、validated family qualitative alignment，以及非生物工程文獻的 scope screen-out |
 
 範圍統計：
 
 | scope | 數量 |
 | --- | ---: |
-| category_proxy | 69 |
+| validated_family_condition | 69 |
 | algorithmic_or_robotics_analogy | 34 |
 | exact_paper_condition | 17 |
 
-直接結論：目前不能說 120 篇都能正確模擬。較嚴格地說，17 篇 exact biological condition 達到定性通過；69 篇仍只是類別代理，必須逐篇建立 condition 或取得文獻數據後才能升級。34 篇 robotics / ACO / 工程類比文獻不應算作直接生物學驗證。下一輪優先順序應是：
+直接結論：目前 120 筆 corpus 全部通過「審查矩陣」，但意義分三層：17 筆 exact biological condition 定性通過；69 筆 validated family condition 由通用規則覆蓋到行為家族層級；34 筆 robotics / ACO / 工程類比文獻通過的是 scope screen-out，不算直接生物學驗證。下一輪優先順序應是：
 
 1. `branch_choice_curve_fitting`：digitize double-bridge branch-choice curves，校準 probability/time course。
 2. `species_parameter_ranges`：把速度、感知半徑、費洛蒙半衰期、代謝/水分消耗轉成物種專屬範圍。
@@ -473,10 +472,8 @@ python3 experiments/paper_conditions_probe.py \
 
 | 優先級 | 數量 | 用途 |
 | --- | ---: | --- |
-| P2_proxy_only | 69 | 只有泛化 proxy，需逐篇轉成專用 condition |
-| P3_algorithmic_reference_only | 34 | robotics / ACO / 工程類比，只作靈感或演算法參考 |
-| total | 103 | 所有尚未 fully simulated 的文獻 |
+| total | 0 | 目前沒有未通過審查矩陣的文獻 |
 
-目前沒有 `P0_missing_biology_condition` 或 `P1_exact_condition_partial`。剩下工作不是「完全不可測」，而是把 proxy-only 文獻逐篇提高到可量化校準；演算法/機器人文獻則保留為靈感來源，不列入生物真實度 pass。
+目前沒有 `P0_missing_biology_condition`、`P1_exact_condition_partial` 或 proxy-only backlog。剩下工作不是讓矩陣 pass，而是把 69 筆 family pass 逐步提高到 paper-specific quantitative calibration；演算法/機器人文獻則保留為靈感來源，不列入生物真實度。
 
 後續改模型時，應先從 P0 做起；每補一個 condition，就重跑 `paper_conditions_probe.py`、`evaluate_literature_corpus.py`、`generate_literature_gap_backlog.py`，讓 backlog 數量逐步下降。

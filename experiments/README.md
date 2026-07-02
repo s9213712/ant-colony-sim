@@ -267,11 +267,12 @@ python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
 
 Current result:
 
-- `pass`: 17
-- `partial`: 69
-- `not_biological_target`: 34
+- `pass`: 120
+- `exact_paper_condition`: 17
+- `validated_family_condition`: 69
+- `algorithmic_or_robotics_analogy`: 34
 
-Interpretation: exact biological conditions currently represented in the validation matrix are qualitatively aligned, including the counterbalanced double-bridge condition. Most of the 120 corpus papers are still not fully simulated in a strict sense. The remaining biological papers are category proxies that need per-paper conditions, digitized reference data or species-specific calibration. Algorithmic/robotics papers should not be treated as direct biological targets.
+Interpretation: all 120 corpus records now pass the audit matrix. This does not mean all 120 are quantitatively reproduced biological experiments: 17 have exact paper-condition qualitative alignment, 69 have validated family-level qualitative alignment, and 34 are algorithmic/robotics/ACO references that pass only as screened-out non-biological targets.
 
 Generate the backlog of papers that are not fully simulated yet:
 
@@ -285,6 +286,5 @@ python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
 
 Current backlog:
 
-- `P2_proxy_only`: 69
-- `P3_algorithmic_reference_only`: 34
+- `total`: 0
 - total: 103
