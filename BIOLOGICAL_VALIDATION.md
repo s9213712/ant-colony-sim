@@ -726,16 +726,39 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 
 | 指標 | 值 |
 | --- | --- |
-| estimated level | 4.5 |
+| estimated level | 4.6 |
 | fit curve bootstrap CI | true |
 | holdout curve present | true |
 | traffic three-point curve | true |
 | holdout variance values | true |
 | paper-condition replicate CI | true |
 | independent pushing redirect holdout | true |
-| holdout formal CI available | false |
+| external holdout synthesis | true |
+| formal-CI holdout available | true |
+| all primary holdouts have formal CI | false |
 
-解讀：Perna response fit 已有 bootstrap 95% CI，paper-condition probes 已有跨 seed bootstrap CI，Dussutour pushing/redirect probability 已有獨立數值 holdout，John traffic holdout 已升級為三點 normalized speed-density curve；John Figure 4 有 SD，但沒有 density-bin sample size 或 raw tracking data，因此不能計算正式 holdout CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
+解讀：Perna response fit 已有 bootstrap 95% CI，paper-condition probes 已有跨 seed bootstrap CI，Dussutour pushing/redirect probability 已有獨立數值 holdout 與 formal CI overlap，John traffic holdout 已升級為三點 normalized speed-density curve，並由 `level5_external_holdout_synthesis.py` 彙整為兩個獨立外部 holdout。John Figure 4 有 SD，但沒有 density-bin sample size 或 raw tracking data，因此不是所有 primary holdout 都能計算正式 target CI。這是從 Level 4 往 Level 5 的實質進展，但還不能宣稱 Level 5。
+
+## 21a. Level 5 external holdout synthesis
+
+`experiments/level5_external_holdout_synthesis.py` 把外部 empirical holdout 與 fit curve、qualitative paper-condition probes 分開評估。輸出：
+
+- `outputs/level5_external_holdout_synthesis.csv`
+- `outputs/level5_external_holdout_synthesis.json`
+- `outputs/level5_external_holdout_synthesis.md`
+
+目前結果：
+
+| 指標 | 值 |
+| --- | --- |
+| status | pass |
+| independent holdouts | 2 |
+| distinct processes | 2 |
+| passing holdouts | 2 |
+| formal-CI holdouts | 1 |
+| all holdouts have formal CI | false |
+
+解讀：這是 Level 5 的外部證據 gate；通過代表模型已有多來源 empirical holdout 且至少一個 holdout 具 formal CI，但不代表已經是 species-level predictive model。
 
 ## 22. Level 5 replicate statistics
 

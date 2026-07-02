@@ -43,6 +43,7 @@ jobs:
             experiments/fit_individual_response_curve.py \
             experiments/generate_literature_gap_backlog.py \
             experiments/generate_validation_report.py \
+            experiments/level5_external_holdout_synthesis.py \
             experiments/level5_uncertainty_audit.py \
             experiments/level5_replicate_statistics.py \
             experiments/literature_calibration_cycle.py \
@@ -164,6 +165,16 @@ jobs:
             --report-output outputs/ci_pushing_redirect_validation.md \
             --fail-on-issues
 
+      - name: Level 5 external holdout synthesis
+        run: |
+          python experiments/level5_external_holdout_synthesis.py \
+            --traffic-holdout outputs/ci_traffic_holdout_validation.json \
+            --pushing-redirect outputs/ci_pushing_redirect_validation.json \
+            --csv-output outputs/ci_level5_external_holdout_synthesis.csv \
+            --json-output outputs/ci_level5_external_holdout_synthesis.json \
+            --report-output outputs/ci_level5_external_holdout_synthesis.md \
+            --fail-on-issues
+
       - name: Level 5 uncertainty audit
         run: |
           python experiments/level5_uncertainty_audit.py \
@@ -171,6 +182,7 @@ jobs:
             --traffic-holdout outputs/ci_traffic_holdout_validation.json \
             --replicate-statistics outputs/ci_level5_replicate_statistics.json \
             --pushing-redirect outputs/ci_pushing_redirect_validation.json \
+            --external-holdouts outputs/ci_level5_external_holdout_synthesis.json \
             --csv-output outputs/ci_level5_uncertainty_audit.csv \
             --json-output outputs/ci_level5_uncertainty_audit.json \
             --report-output outputs/ci_level5_uncertainty_audit.md \
@@ -235,5 +247,8 @@ jobs:
             outputs/ci_pushing_redirect_validation.csv
             outputs/ci_pushing_redirect_validation.json
             outputs/ci_pushing_redirect_validation.md
+            outputs/ci_level5_external_holdout_synthesis.csv
+            outputs/ci_level5_external_holdout_synthesis.json
+            outputs/ci_level5_external_holdout_synthesis.md
             outputs/ci_biological_validation_report.md
             outputs/ci_biological_validation_report.json

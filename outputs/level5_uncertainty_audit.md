@@ -4,9 +4,9 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 
 ## Summary
 
-- estimated level: `4.5`
+- estimated level: `4.6`
 - Level 5 ready: `False`
-- blocker: Holdout has SD values but lacks density-bin sample sizes, so formal holdout CI is not available.
+- blocker: External holdout synthesis passes, but not every primary holdout has formal target confidence intervals.
 
 ## Checks
 
@@ -16,7 +16,9 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 - `holdout_has_variance_values`: `True`
 - `paper_condition_replicate_ci`: `True`
 - `independent_pushing_redirect_holdout`: `True`
-- `holdout_formal_ci_available`: `False`
+- `external_holdout_synthesis`: `True`
+- `formal_ci_holdout_available`: `True`
+- `all_primary_holdouts_have_formal_ci`: `False`
 
 ## Fit-Curve Uncertainty
 
@@ -60,6 +62,17 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 - model 95% CI: `[0.595, 0.6234]`
 - replicates: `3`
 
+## External Holdout Synthesis
+
+- synthesis status: `pass`
+- holdout count: `2`
+- independent source count: `2`
+- distinct process count: `2`
+- pass count: `2`
+- formal-CI holdout count: `1`
+- all holdouts have formal CI: `False`
+- blocker: External holdout synthesis passes; Level 5 still needs more paper-level quantitative curves across behavior classes.
+
 ## Interpretation
 
-The simulator has moved beyond Level 4 by attaching bootstrap uncertainty to the fitted individual-response curve, replicate uncertainty to paper-condition probes, and an independent crowded-traffic pushing holdout. The traffic speed holdout includes reported SD values, but formal confidence intervals require density-bin sample sizes or raw tracking data from the source experiment.
+The simulator has moved beyond Level 4 by attaching bootstrap uncertainty to the fitted individual-response curve, replicate uncertainty to paper-condition probes, a multi-source external holdout synthesis, and an independent crowded-traffic pushing holdout with formal CI overlap. It is still not Level 5 because not every primary holdout has formal target confidence intervals and broader paper-level quantitative curves are still needed.

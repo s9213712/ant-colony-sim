@@ -226,6 +226,7 @@ python3 ant_colony_sim/experiments/level5_uncertainty_audit.py \
   --traffic-holdout ant_colony_sim/outputs/traffic_holdout_validation.json \
   --replicate-statistics ant_colony_sim/outputs/level5_replicate_statistics.json \
   --pushing-redirect ant_colony_sim/outputs/pushing_redirect_validation.json \
+  --external-holdouts ant_colony_sim/outputs/level5_external_holdout_synthesis.json \
   --csv-output ant_colony_sim/outputs/level5_uncertainty_audit.csv \
   --json-output ant_colony_sim/outputs/level5_uncertainty_audit.json \
   --report-output ant_colony_sim/outputs/level5_uncertainty_audit.md \
@@ -234,21 +235,52 @@ python3 ant_colony_sim/experiments/level5_uncertainty_audit.py \
 
 Current result:
 
-- estimated level: `4.5`
+- estimated level: `4.6`
 - fit-curve bootstrap CI: `true`
 - holdout curve present: `true`
 - traffic three-point curve: `true`
 - holdout variance values present: `true`
 - paper-condition replicate CI: `true`
 - independent pushing redirect holdout: `true`
-- holdout formal CI available: `false`
+- external holdout synthesis: `true`
+- formal-CI holdout available: `true`
+- all primary holdouts have formal CI: `false`
 
 Interpretation: the model now has bootstrap uncertainty for the fitted Perna
-response curve, replicate uncertainty for paper-condition probes, an independent
-Dussutour pushing/redirect holdout and a three-point normalized speed curve for
-the John traffic holdout. Level 5 remains blocked because the John speed holdout
-target lacks density-bin sample sizes or raw tracking data, so formal holdout
-confidence intervals cannot be computed.
+response curve, replicate uncertainty for paper-condition probes, a multi-source
+external holdout synthesis, an independent Dussutour pushing/redirect holdout
+with formal CI overlap, and a three-point normalized speed curve for the John
+traffic holdout. Level 5 remains blocked because not every primary holdout has
+formal target confidence intervals and broader paper-level quantitative curves
+are still needed.
+
+## Level 5 External Holdout Synthesis
+
+Synthesize independent empirical holdouts separately from fitted curves and
+qualitative paper-condition probes:
+
+```bash
+python3 ant_colony_sim/experiments/level5_external_holdout_synthesis.py \
+  --traffic-holdout ant_colony_sim/outputs/traffic_holdout_validation.json \
+  --pushing-redirect ant_colony_sim/outputs/pushing_redirect_validation.json \
+  --csv-output ant_colony_sim/outputs/level5_external_holdout_synthesis.csv \
+  --json-output ant_colony_sim/outputs/level5_external_holdout_synthesis.json \
+  --report-output ant_colony_sim/outputs/level5_external_holdout_synthesis.md \
+  --fail-on-issues
+```
+
+Current result:
+
+- status: `pass`
+- independent holdouts: `2`
+- distinct processes: `2`
+- passing holdouts: `2`
+- formal-CI holdouts: `1`
+- all holdouts have formal CI: `false`
+
+Interpretation: this is a Level 5 evidence gate. Passing means there is more
+than one independent empirical holdout and at least one formal-CI holdout; it
+does not mean the simulator is already a species-level predictive model.
 
 ## Pushing Redirect Holdout
 

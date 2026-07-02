@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-07-02T20:14:05Z",
+  "traffic_holdout": "/home/s92137/ant_colony_sim/outputs/traffic_holdout_validation.json",
+  "pushing_redirect": "/home/s92137/ant_colony_sim/outputs/pushing_redirect_validation.json",
+  "result": {
+    "status": "pass",
+    "checks": {
+      "independent_holdouts_at_least_2": true,
+      "holdout_pass_fraction_1_0": true,
+      "formal_ci_holdouts_at_least_1": true,
+      "distinct_processes_at_least_2": true,
+      "source_limitations_documented": true
+    },
+    "summary": {
+      "holdout_count": 2,
+      "source_count": 2,
+      "process_count": 2,
+      "pass_count": 2,
+      "formal_ci_count": 1,
+      "all_holdouts_have_formal_ci": false,
+      "blocker": "External holdout synthesis passes; Level 5 still needs more paper-level quantitative curves across behavior classes."
+    },
+    "holdouts": [
+      {
+        "holdout_id": "john_2009_traffic_velocity_density",
+        "source": "John et al. 2009",
+        "species": "Leptogenys processionalis",
+        "process": "traffic_velocity_density",
+        "source_path": "/home/s92137/ant_colony_sim/outputs/traffic_holdout_validation.json",
+        "status": "pass",
+        "target_metric": "normalized_speed_curve_rmse",
+        "target_value": 0,
+        "model_value": 0.04382437294697602,
+        "pass": true,
+        "formal_ci_available": false,
+        "ci_source": "missing_density_bin_sample_sizes",
+        "limitation": "Figure 4 reports Gaussian-fit SD values, but the density-bin sample sizes are not present in the committed target rows; formal confidence intervals are therefore not computed."
+      },
+      {
+        "holdout_id": "dussutour_2004_pushing_redirect",
+        "source": "Dussutour et al. 2004",
+        "species": "Lasius niger",
+        "process": "crowded_traffic_contact_redirect",
+        "source_path": "/home/s92137/ant_colony_sim/outputs/pushing_redirect_validation.json",
+        "status": "pass",
+        "target_metric": "redirect_probability_per_encounter",
+        "target_value": 0.571,
+        "model_value": 0.6121666666666666,
+        "pass": true,
+        "formal_ci_available": true,
+        "ci_source": "published_target_ci_and_model_bootstrap_ci",
+        "limitation": "Mechanism-level body-contact holdout; not the full bridge-width flow-density transition."
+      }
+    ]
+  }
+}

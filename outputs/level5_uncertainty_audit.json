@@ -1,13 +1,14 @@
 {
-  "generated_at": "2026-07-02T20:03:01Z",
+  "generated_at": "2026-07-02T20:14:05Z",
   "individual_fit": "/home/s92137/ant_colony_sim/outputs/individual_response_curve_fit.json",
   "traffic_holdout": "/home/s92137/ant_colony_sim/outputs/traffic_holdout_validation.json",
   "replicate_statistics": "/home/s92137/ant_colony_sim/outputs/level5_replicate_statistics.json",
   "pushing_redirect": "/home/s92137/ant_colony_sim/outputs/pushing_redirect_validation.json",
+  "external_holdouts": "/home/s92137/ant_colony_sim/outputs/level5_external_holdout_synthesis.json",
   "result": {
-    "estimated_level": 4.5,
+    "estimated_level": 4.6,
     "level5_ready": false,
-    "blocker": "Holdout has SD values but lacks density-bin sample sizes, so formal holdout CI is not available.",
+    "blocker": "External holdout synthesis passes, but not every primary holdout has formal target confidence intervals.",
     "checks": {
       "fit_curve_bootstrap_ci": true,
       "holdout_curve_present": true,
@@ -15,7 +16,9 @@
       "holdout_has_variance_values": true,
       "paper_condition_replicate_ci": true,
       "independent_pushing_redirect_holdout": true,
-      "holdout_formal_ci_available": false
+      "external_holdout_synthesis": true,
+      "formal_ci_holdout_available": true,
+      "all_primary_holdouts_have_formal_ci": false
     },
     "fit_uncertainty": {
       "bootstrap_status": "available",
@@ -76,6 +79,23 @@
       ],
       "replicates": 3,
       "source": "Dussutour et al. 2004"
+    },
+    "external_holdout_synthesis": {
+      "status": "pass",
+      "holdout_count": 2,
+      "source_count": 2,
+      "process_count": 2,
+      "pass_count": 2,
+      "formal_ci_count": 1,
+      "all_holdouts_have_formal_ci": false,
+      "checks": {
+        "independent_holdouts_at_least_2": true,
+        "holdout_pass_fraction_1_0": true,
+        "formal_ci_holdouts_at_least_1": true,
+        "distinct_processes_at_least_2": true,
+        "source_limitations_documented": true
+      },
+      "blocker": "External holdout synthesis passes; Level 5 still needs more paper-level quantitative curves across behavior classes."
     }
   }
 }
