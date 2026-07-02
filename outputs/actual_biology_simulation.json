@@ -1,6 +1,6 @@
 {
   "suite": "actual_biology_simulation_v1",
-  "generated_at": "2026-07-02T13:57:10Z",
+  "generated_at": "2026-07-02T14:30:50Z",
   "claim_level": "behavior_level_simulated_experiment_not_quantitative_species_prediction",
   "rules": [
     "The suite changes seeds, initial resources, temperature and humidity only.",

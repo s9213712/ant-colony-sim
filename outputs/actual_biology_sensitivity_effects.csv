@@ -5,6 +5,9 @@ baseline:stable_mature,baseline,stable_mature,3,43.667,24.667,88.0,91.667,0.103,
 brood_demand_high:heat_dry_stress,brood_demand_high,heat_dry_stress,3,27.0,70.333,89.0,90.333,0.387,-1.0,23876.0,-0.05815,0.076531,0.0,0.0,-0.071942,0.82354,-0.345115,0.08815
 brood_demand_high:resource_stress,brood_demand_high,resource_stress,3,37.0,18.667,86.333,87.333,0.11,-5.667,36158.0,-0.00892,-0.050847,0.003872,-0.00381,0.028037,-0.062629,-0.01813,0.01573
 brood_demand_high:stable_mature,brood_demand_high,stable_mature,3,45.667,26.667,88.0,92.333,0.1,-4.0,65859.0,0.045801,0.08108,0.0,0.007265,-0.029126,0.333333,0.041622,0.056067
+calibrated_persistent_pheromone:heat_dry_stress,calibrated_persistent_pheromone,heat_dry_stress,3,33.0,57.667,89.0,89.0,0.443,-2.0,58302.667,0.151149,-0.117337,0.0,-0.014757,0.06235,0.64708,0.599159,0.191906
+calibrated_persistent_pheromone:resource_stress,calibrated_persistent_pheromone,resource_stress,3,36.333,29.0,86.667,90.667,0.1,-4.0,28337.667,-0.026786,0.474551,0.007756,0.03422,-0.065421,0.249953,-0.230491,0.068006
+calibrated_persistent_pheromone:stable_mature,calibrated_persistent_pheromone,stable_mature,3,42.333,21.667,88.0,92.333,0.1,-4.0,63449.0,-0.030549,-0.12162,0.0,0.007265,-0.029126,0.333333,0.003506,0.040815
 fast_pheromone_loss:heat_dry_stress,fast_pheromone_loss,heat_dry_stress,3,29.0,68.0,88.667,91.0,0.387,-3.667,16190.0,0.011616,0.040822,-0.003742,0.007384,-0.071942,0.35292,-0.555931,0.049
 fast_pheromone_loss:resource_stress,fast_pheromone_loss,resource_stress,3,36.0,22.0,86.0,89.0,0.11,-2.333,23321.0,-0.035706,0.118625,0.0,0.015205,0.028037,0.562535,-0.366719,0.053911
 fast_pheromone_loss:stable_mature,fast_pheromone_loss,stable_mature,3,44.333,24.0,88.0,91.667,0.097,-2.333,38980.333,0.015252,-0.02704,0.0,0.0,-0.058252,0.611167,-0.383489,0.021252

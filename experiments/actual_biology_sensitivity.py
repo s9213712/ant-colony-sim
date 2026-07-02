@@ -31,6 +31,11 @@ DEFAULT_TREATMENTS = [
         "set": ["evaporationRate=55", "senseThreshold=7"],
     },
     {
+        "name": "calibrated_persistent_pheromone",
+        "description": "Moderately persistent trail candidate after the first literature-constraint cycle.",
+        "set": ["evaporationRate=70", "senseThreshold=8"],
+    },
+    {
         "name": "high_diffusion",
         "description": "Higher diffusion; tests whether broadened gradients reduce trail precision.",
         "set": ["diffusionRate=170"],
@@ -237,7 +242,6 @@ def main():
     if args.quick:
         args.seeds = "101"
         args.days = min(args.days, 1.5)
-        treatments = DEFAULT_TREATMENTS[:3]
 
     rows = []
     for treatment in treatments:

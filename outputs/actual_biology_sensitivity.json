@@ -1,6 +1,6 @@
 {
   "suite": "actual_biology_sensitivity_v1",
-  "generated_at": "2026-07-02T13:55:32Z",
+  "generated_at": "2026-07-02T14:18:09Z",
   "claim_level": "parameter_sensitivity_screen_not_parameter_fit",
   "rules": [
     "Treatments use the same simulator decision rules.",
@@ -45,6 +45,14 @@
       ]
     },
     {
+      "name": "calibrated_persistent_pheromone",
+      "description": "Moderately persistent trail candidate after the first literature-constraint cycle.",
+      "set": [
+        "evaporationRate=70",
+        "senseThreshold=8"
+      ]
+    },
+    {
       "name": "high_diffusion",
       "description": "Higher diffusion; tests whether broadened gradients reduce trail precision.",
       "set": [
@@ -61,6 +69,6 @@
   ],
   "time_series_csv": "outputs/actual_biology_sensitivity.csv",
   "effects_csv": "outputs/actual_biology_sensitivity_effects.csv",
-  "time_series_rows": 765,
-  "effect_rows": 15
+  "time_series_rows": 918,
+  "effect_rows": 18
 }

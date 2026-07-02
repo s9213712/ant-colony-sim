@@ -274,15 +274,18 @@ def run_suite(args):
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
-            page = browser.new_page(viewport={"width": 1280, "height": 720})
             errors = []
-            page.on("pageerror", lambda exc: errors.append(str(exc)))
-            page.goto(url)
-            page.wait_for_timeout(250)
             for scenario in scenarios:
                 for seed in seeds:
+                    page = browser.new_page(viewport={"width": 1280, "height": 720})
+                    page.on("pageerror", lambda exc: errors.append(str(exc)))
+                    page.goto(url)
+                    page.wait_for_timeout(120)
                     payload = scenario_payload(scenario, seed, args)
-                    rows.extend(page.evaluate(ACTUAL_BIOLOGY_JS, payload))
+                    try:
+                        rows.extend(page.evaluate(ACTUAL_BIOLOGY_JS, payload))
+                    finally:
+                        page.close()
             browser.close()
             if errors:
                 raise RuntimeError("page errors: " + "; ".join(errors))

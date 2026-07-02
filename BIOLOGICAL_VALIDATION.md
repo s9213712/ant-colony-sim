@@ -484,6 +484,7 @@ python3 experiments/actual_biology_sensitivity.py \
 | `baseline` | 無 | 目前 behavior-level 預設 |
 | `fast_pheromone_loss` | `evaporationRate=130`, `senseThreshold=16` | 較快氣味消退與較高感知門檻是否破壞路徑 |
 | `persistent_pheromone` | `evaporationRate=55`, `senseThreshold=7` | 較持久/易感知氣味是否造成過度路徑承諾 |
+| `calibrated_persistent_pheromone` | `evaporationRate=70`, `senseThreshold=8` | 第一輪文獻約束後的較溫和持久氣味候選 |
 | `high_diffusion` | `diffusionRate=170` | 擴散較高是否改變梯度精度與採集 |
 | `brood_demand_high` | `broodDemand=85` | 育幼需求是否改變覓食/育幼 tradeoff |
 
@@ -493,17 +494,49 @@ python3 experiments/actual_biology_sensitivity.py \
 | --- | --- | ---: | ---: | ---: | ---: |
 | `persistent_pheromone` | `heat_dry_stress` | -0.221 | -0.026 | +0.175 | +0.686 |
 | `persistent_pheromone` | `resource_stress` | -0.259 | -0.011 | +0.056 | +0.012 |
+| `calibrated_persistent_pheromone` | `heat_dry_stress` | +0.151 | -0.015 | +0.062 | +0.599 |
+| `calibrated_persistent_pheromone` | `resource_stress` | -0.027 | +0.034 | -0.065 | -0.230 |
 | `high_diffusion` | `heat_dry_stress` | +0.244 | +0.004 | -0.048 | +0.140 |
 | `brood_demand_high` | `heat_dry_stress` | -0.058 | 0.000 | -0.072 | -0.345 |
 
 科學解讀：
 
-- 目前模型對 `persistent_pheromone` 最敏感，尤其在熱乾與資源壓力下會降低 food trips，並提高或改變 brood stress / food pheromone peak。這暗示費洛蒙半衰期、感知閾值、氣味持久性是下一個最需要文獻校準的參數群。
+- 目前模型對極端 `persistent_pheromone` 最敏感，尤其在熱乾與資源壓力下會降低 food trips，並提高或改變 brood stress / food pheromone peak。這暗示費洛蒙半衰期、感知閾值、氣味持久性是下一個最需要文獻校準的參數群。
+- 第一輪文獻約束後的 `calibrated_persistent_pheromone` 把 P0 fail 清除：熱乾 food trips effect `+0.151`、brood stress effect `+0.062`；資源壓力 food trips effect `-0.027`。因此 `evaporationRate=70`、`senseThreshold=8` 暫列為較合理的模型單位候選範圍。
 - `high_diffusion` 在熱乾條件下提高 food trips，表示擴散不只是視覺效果，會影響行為輸出；後續應把 diffusion/evaporation 從任意 UI 參數改成可報告的模型單位與合理範圍。
 - `brood_demand_high` 的效應較小但方向可測，適合作為 nurse/forager tradeoff 的後續校準入口。
 - 此 screen 只回答「模型對哪些參數敏感」，不回答「哪個參數是真實值」。下一步要用 digitized trail decay、food recruitment、brood survival 曲線做 parameter fitting。
 
-## 13. 100+ paper triage corpus
+## 13. Literature calibration cycle
+
+`experiments/literature_calibration_cycle.py` 會讀取 `targets/literature_pheromone_constraints.json` 與 `outputs/actual_biology_sensitivity_effects.csv`，把文獻導向的 qualitative constraints 轉成自動 backlog。
+
+目前使用的文獻依據：
+
+| source | 用途 | URL |
+| --- | --- | --- |
+| Perna et al. 2012 | 個體對局部費洛蒙梯度的反應應是穩健規則，不應靠極端場參數才形成路徑 | https://arxiv.org/abs/1201.5827 |
+| Malickova/Yates/Bodova 2015 | diffusion properties 會改變群體運動，因此 diffusion sensitivity 必須被記錄並設邊界 | https://arxiv.org/abs/1508.06816 |
+| Amorim 2014 | 路徑形成與資源移除/採集效率耦合，持久費洛蒙不能阻止適應 | https://arxiv.org/abs/1402.5611 |
+
+目前輸出：
+
+- `outputs/literature_calibration_cycle.csv`
+- `outputs/literature_calibration_cycle.json`
+- `outputs/literature_calibration_cycle.md`
+
+目前結果：
+
+| 指標 | 數量 |
+| --- | ---: |
+| total constraints | 6 |
+| pass | 6 |
+| fail | 0 |
+| missing | 0 |
+
+解讀：目前第一層 qualitative literature constraints 已無剩餘 fail。下一層問題不是再調同一組 qualitative band，而是把文獻圖表 digitize 成數值曲線，建立真實的 `trail_decay_curve`、`recruitment_curve`、`branch_choice_curve`、`brood_survival_curve`。
+
+## 14. 100+ paper triage corpus
 
 `experiments/build_literature_corpus.py` 用 Crossref 查詢與既有 seed papers 建立 100+ 文獻候選池。輸出：
 
@@ -536,7 +569,7 @@ python3 experiments/actual_biology_sensitivity.py \
 - 文獻庫混合三類資料：真實螞蟻行為/生態實驗、ABM/PDE/數學模型、以及受螞蟻啟發的 swarm robotics / ACO 模型。後兩者可提供演算法與測試條件，但不能直接當作生物學真實度證據。
 - 下一批最值得轉成自動測試的主題：nest relocation quorum、brood microclimate、corpse-age/pathogen necrophoresis calibration、active misleading pheromone detractor agents、逐步感知/轉向紀錄。
 
-## 14. 120-paper sequential evaluation
+## 15. 120-paper sequential evaluation
 
 `experiments/evaluate_literature_corpus.py` 逐篇讀取 `outputs/literature_corpus_100.json`，並把每一篇對應到目前 `outputs/paper_conditions_v5.json` 的 simulation evidence。輸出：
 
@@ -566,7 +599,7 @@ python3 experiments/actual_biology_sensitivity.py \
 4. `necrophoresis_calibration`：在現有 corpse cleanup 基礎上加入 corpse-age chemistry、pathogen state、interaction network。
 5. `brood_relocation_calibration`：把 brood microclimate 與 nest relocation 從定性 proxy 推進到物種專屬數值校準。
 
-## 15. Gap backlog for later work
+## 16. Gap backlog for later work
 
 `experiments/generate_literature_gap_backlog.py` 會把逐篇評估中所有非 `pass` 文獻記錄成待辦清單。輸出：
 

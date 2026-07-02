@@ -41,6 +41,7 @@ jobs:
             experiments/evaluate_literature_corpus.py \
             experiments/generate_literature_gap_backlog.py \
             experiments/generate_validation_report.py \
+            experiments/literature_calibration_cycle.py \
             experiments/literature_alignment_probe.py \
             experiments/paper_conditions_probe.py \
             experiments/performance_probe.py \
@@ -83,6 +84,16 @@ jobs:
             --effects-output outputs/ci_actual_biology_sensitivity_smoke_effects.csv \
             --json-output outputs/ci_actual_biology_sensitivity_smoke.json \
             --report-output outputs/ci_actual_biology_sensitivity_smoke.md
+
+      - name: Literature calibration cycle
+        run: |
+          python experiments/literature_calibration_cycle.py \
+            --targets targets/literature_pheromone_constraints.json \
+            --effects outputs/actual_biology_sensitivity_effects.csv \
+            --csv-output outputs/ci_literature_calibration_cycle.csv \
+            --json-output outputs/ci_literature_calibration_cycle.json \
+            --report-output outputs/ci_literature_calibration_cycle.md \
+            --fail-on-issues
 
       - name: Literature alignment probe
         run: python experiments/literature_alignment_probe.py
@@ -128,6 +139,9 @@ jobs:
             outputs/ci_actual_biology_sensitivity_smoke_effects.csv
             outputs/ci_actual_biology_sensitivity_smoke.json
             outputs/ci_actual_biology_sensitivity_smoke.md
+            outputs/ci_literature_calibration_cycle.csv
+            outputs/ci_literature_calibration_cycle.json
+            outputs/ci_literature_calibration_cycle.md
             outputs/ci_paper_conditions_smoke.csv
             outputs/ci_paper_conditions_smoke.json
             outputs/ci_paper_conditions_smoke.md

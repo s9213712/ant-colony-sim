@@ -97,6 +97,7 @@ Treatments:
 - `baseline`: current behavior-level defaults.
 - `fast_pheromone_loss`: `evaporationRate=130`, `senseThreshold=16`.
 - `persistent_pheromone`: `evaporationRate=55`, `senseThreshold=7`.
+- `calibrated_persistent_pheromone`: `evaporationRate=70`, `senseThreshold=8`.
 - `high_diffusion`: `diffusionRate=170`.
 - `brood_demand_high`: `broodDemand=85`.
 
@@ -104,12 +105,37 @@ Current largest effects:
 
 - `persistent_pheromone` under `heat_dry_stress`: food trips `-0.221`, hydration `-0.026`, brood stress `+0.175`, peak food pheromone `+0.686`.
 - `persistent_pheromone` under `resource_stress`: food trips `-0.259`, hydration `-0.011`, brood stress `+0.056`.
+- `calibrated_persistent_pheromone` under `heat_dry_stress`: food trips `+0.151`, brood stress `+0.062`, peak food pheromone `+0.599`.
 - `high_diffusion` under `heat_dry_stress`: food trips `+0.244`, peak food pheromone `+0.140`.
 
 Interpretation: the next biological calibration priority is pheromone
 persistence/sensing, because those parameters move foraging and brood-stress
 outputs across multiple stress scenarios. Treat this as a sensitivity screen,
 not a fitted optimum.
+
+## Literature Calibration Cycle
+
+Evaluate the latest sensitivity effects against literature-guided constraints:
+
+```bash
+python3 ant_colony_sim/experiments/literature_calibration_cycle.py \
+  --targets ant_colony_sim/targets/literature_pheromone_constraints.json \
+  --effects ant_colony_sim/outputs/actual_biology_sensitivity_effects.csv \
+  --csv-output ant_colony_sim/outputs/literature_calibration_cycle.csv \
+  --json-output ant_colony_sim/outputs/literature_calibration_cycle.json \
+  --report-output ant_colony_sim/outputs/literature_calibration_cycle.md
+```
+
+Current cycle result:
+
+- total constraints: `6`
+- pass: `6`
+- fail: `0`
+- missing: `0`
+
+This means the current qualitative pheromone persistence/diffusion constraint
+screen has no remaining failures. The next calibration level is digitized curve
+fitting for trail decay, recruitment strength, branch choice and brood survival.
 
 ## Individual-Level Output
 
