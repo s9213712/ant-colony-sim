@@ -15,6 +15,27 @@
   ],
   "targets": [
     {
+      "target_id": "traffic_velocity_density_holdout",
+      "biological_process": "Independent no-jam traffic validation: density versus mean velocity on a natural ant trail.",
+      "priority": "P0",
+      "status": "ready_for_holdout",
+      "source_candidates": [
+        {
+          "id": "john_2009",
+          "title": "Trafficlike collective movement of ants on trails: absence of a jammed phase",
+          "url": "https://arxiv.org/abs/0903.2717"
+        }
+      ],
+      "required_data": [
+        "density bin",
+        "mean velocity",
+        "velocity variance or distribution width",
+        "species and trail geometry"
+      ],
+      "current_proxy": "paper_conditions_v5 exports no-jam speed and flow metrics; validate_traffic_holdout.py compares normalized speed retention without fitting.",
+      "next_action": "Use as independent holdout while fitting traffic/contact parameters to a separate curve."
+    },
+    {
       "target_id": "individual_pheromone_response_curve",
       "biological_process": "Individual turning response as a function of local pheromone difference and total pheromone.",
       "priority": "P0",

@@ -4,19 +4,28 @@ This report checks whether the repository contains primary-source numeric biolog
 
 ## Summary
 
-- `curve_files`: 1
-- `fit_ready_files`: 1
-- `target_ids_with_digitized_files`: 1
-- `source_leads`: 6
-- `level_4_blocker`: Needs independent holdout validation before Level 4.
+- `curve_files`: 2
+- `fit_ready_files`: 2
+- `target_ids_with_digitized_files`: 2
+- `source_leads`: 7
+- `level_4_blocker`: Level 4 curve prerequisites are present; next blocker is broader external validation and uncertainty for Level 5.
 
 ## Curve Files
 
 | Fit ready | Rows | Targets | Methods | Missing columns | File |
 |---|---:|---|---|---|---|
+| `yes` | 3 | traffic_velocity_density_holdout | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/john_2009_traffic_velocity_density_holdout.csv` |
 | `yes` | 6 | individual_pheromone_response_curve | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/perna_2012_individual_pheromone_response.csv` |
 
 ## Source Leads
+
+### john_2009_velocity_density
+
+- Target: `traffic_velocity_density_holdout`
+- Status: `ready_for_holdout_curve_committed`
+- Species: Leptogenys processionalis
+- Source: https://arxiv.org/abs/0903.2717
+- Notes: Figure 4 reports Gaussian-fit mean velocities for low, intermediate and high density regimes. The committed CSV uses those values as an independent no-jam holdout.
 
 ### perna_2012_individual_response
 

@@ -19,6 +19,24 @@
         "Tracking intervals are reported in 0.4 s windows; pheromone map correlations use a map 16 s before the tracking event.",
         "The target curve fits individual turning response, not full colony food retrieval or physical pheromone half-life."
       ]
+    },
+    {
+      "species_id": "leptogenys_processionalis_john_2009",
+      "species": "Leptogenys processionalis",
+      "source_id": "john_2009",
+      "source_url": "https://arxiv.org/abs/0903.2717",
+      "targets": [
+        "traffic_velocity_density_holdout"
+      ],
+      "time_unit": "second",
+      "distance_unit": "body length",
+      "angle_unit": "not applicable",
+      "pheromone_unit": "not measured in the traffic holdout",
+      "notes": [
+        "The observed trail section length is L = 17 body lengths.",
+        "The paper reports 1 body length is approximately 18 mm for Leptogenys processionalis.",
+        "The target curve uses the Figure 4 density-regime Gaussian velocity fits and validates no-jam speed retention, not absolute simulator speed units."
+      ]
     }
   ]
 }

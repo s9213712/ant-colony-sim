@@ -82,12 +82,20 @@ def summarize(rows, leads):
     target_ids = set()
     for row in rows:
         target_ids.update(item for item in row["target_ids"].split(";") if item)
+    has_fit_target = "individual_pheromone_response_curve" in target_ids
+    has_holdout_target = "traffic_velocity_density_holdout" in target_ids
+    if ready == 0:
+        blocker = "No fit-ready digitized biological curve is available."
+    elif has_fit_target and has_holdout_target:
+        blocker = "Level 4 curve prerequisites are present; next blocker is broader external validation and uncertainty for Level 5."
+    else:
+        blocker = "Needs independent holdout validation before Level 4."
     return {
         "curve_files": len(rows),
         "fit_ready_files": ready,
         "target_ids_with_digitized_files": len(target_ids),
         "source_leads": len(leads),
-        "level_4_blocker": "No fit-ready digitized biological curve is available." if ready == 0 else "Needs independent holdout validation before Level 4.",
+        "level_4_blocker": blocker,
     }
 
 

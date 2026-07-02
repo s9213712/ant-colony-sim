@@ -8,6 +8,15 @@
   ],
   "leads": [
     {
+      "target_id": "traffic_velocity_density_holdout",
+      "source_id": "john_2009_velocity_density",
+      "title": "Trafficlike collective movement of ants on trails: absence of a jammed phase",
+      "species": "Leptogenys processionalis",
+      "status": "ready_for_holdout_curve_committed",
+      "source_url": "https://arxiv.org/abs/0903.2717",
+      "notes": "Figure 4 reports Gaussian-fit mean velocities for low, intermediate and high density regimes. The committed CSV uses those values as an independent no-jam holdout."
+    },
+    {
       "target_id": "individual_pheromone_response_curve",
       "source_id": "perna_2012_individual_response",
       "title": "Individual rules for trail pattern formation in Argentine ants",

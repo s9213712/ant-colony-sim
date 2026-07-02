@@ -53,6 +53,8 @@ def effective_status(target, fit_ready_targets):
     status = target["status"]
     if status == "ready_for_fit" and target["target_id"] not in fit_ready_targets:
         return "missing_digitized_data"
+    if status == "ready_for_holdout" and target["target_id"] not in fit_ready_targets:
+        return "missing_digitized_data"
     if target["target_id"] in fit_ready_targets and status == "missing_digitized_data":
         return "ready_for_fit"
     return status
@@ -90,7 +92,7 @@ def summarize(rows):
     )
     if ready >= 1 and holdout >= 1 and species_mapped_ready >= 2:
         level = 4.0
-        blocker = "Needs independent holdout validation and species-unit mapping before Level 5."
+        blocker = "Level 4 prerequisites are present; Level 5 needs broader external validation, uncertainty estimates and more species-unit mappings."
     elif ready >= 1:
         level = 3.5
         blocker = "Has a fit-ready biological curve; needs an independent holdout curve before Level 4."

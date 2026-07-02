@@ -693,4 +693,22 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 | fitted beta | 1.0338 |
 | log-space R2 | 0.99763 |
 
-解讀：這是第一條可用於共享 response submodel calibration 的 primary-source quantitative target，因此 readiness 從 Level 3.0 推進到 Level 3.5。它仍不是 Level 4，因為 strict Figure 6 CI reproduction 需要原始 x/y 資料，且還缺一條獨立 holdout validation curve。
+解讀：這是第一條可用於共享 response submodel calibration 的 primary-source quantitative target。strict Figure 6 CI reproduction 仍需要原始 x/y 資料，但 rounded/bin-reconstructed target 已可作為 Level 4 的 fit target。
+
+## 20. Independent traffic holdout
+
+`experiments/validate_traffic_holdout.py` 使用 John et al. 2009 的 Figure 4 速度-密度資料作為獨立 holdout。這條曲線沒有用來調參，只用來檢查高密度交通是否沒有 jam collapse。輸出：
+
+- `outputs/traffic_holdout_validation.csv`
+- `outputs/traffic_holdout_validation.json`
+- `outputs/traffic_holdout_validation.md`
+
+目前結果：
+
+| 指標 | 值 |
+| --- | ---: |
+| status | pass |
+| target high/low velocity retention | 0.748 |
+| model high/low velocity retention | 0.514 |
+
+這使 readiness 從 Level 3.5 推進到 Level 4.0：已有一條 fit-ready primary-source response curve，也有一條獨立 holdout curve。下一階段不是宣稱「完整生物真實」，而是朝 Level 5 補 uncertainty、更多物種曲線、物理單位映射與外部資料驗證。

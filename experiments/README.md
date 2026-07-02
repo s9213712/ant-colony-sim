@@ -152,17 +152,19 @@ python3 ant_colony_sim/experiments/quantitative_readiness_audit.py \
 
 Current result:
 
-- estimated current level: `3.5`
+- estimated current level: `4.0`
 - ready_for_fit digitized curves: `1`
-- ready_for_holdout curves: `0`
+- ready_for_holdout curves: `1`
 - model_reference_only: `1`
 - qualitative_proxy_only: `1`
 - missing_digitized_data: `4`
 - open P0 targets: `4`
 
 Interpretation: the Perna 2012 individual pheromone-response curve is now a
-fit-ready primary-source target with species-unit mapping. Level 4 is still
-blocked until an independent holdout curve is digitized and kept out of the fit.
+fit-ready primary-source target with species-unit mapping, and John 2009 provides
+an independent traffic no-jam holdout curve. This reaches the current Level 4
+bar. Level 5 remains blocked by broader external validation, uncertainty
+estimates and more species-level unit mappings.
 
 ## Individual Pheromone Response Fit
 
@@ -188,6 +190,28 @@ The target uses Figure 5 legend slope values and geometric midpoints of the
 published pheromone bins. It is fit-ready for shared response-submodel
 calibration, but exact Figure 6 confidence-interval reproduction still needs raw
 x/y data or author-provided data.
+
+## Traffic Holdout Validation
+
+Validate the John 2009 no-jam velocity-density holdout without fitting model
+parameters to that paper:
+
+```bash
+python3 ant_colony_sim/experiments/validate_traffic_holdout.py \
+  --csv-output ant_colony_sim/outputs/traffic_holdout_validation.csv \
+  --json-output ant_colony_sim/outputs/traffic_holdout_validation.json \
+  --report-output ant_colony_sim/outputs/traffic_holdout_validation.md \
+  --fail-on-issues
+```
+
+Current result:
+
+- status: `pass`
+- target high/low velocity retention: `0.748`
+- model high/low velocity retention: `0.514`
+
+This is a normalized no-jam holdout. It checks speed retention and non-collapsed
+flow, not an absolute physical-unit speed match.
 
 ## Individual-Level Output
 

@@ -1,0 +1,2 @@
+status,target_velocity_retention,model_velocity_retention,target_velocity_drop,model_velocity_drop,model_low_segment_flow,model_high_segment_flow
+pass,0.7483870967741935,0.5143045484508899,0.25161290322580654,0.4856954515491101,154.181,396.9503

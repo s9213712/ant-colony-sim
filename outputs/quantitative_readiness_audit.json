@@ -1,21 +1,22 @@
 {
   "suite": "quantitative_readiness_audit_v1",
-  "generated_at": "2026-07-02T15:33:14Z",
+  "generated_at": "2026-07-02T15:41:44Z",
   "manifest_id": "quantitative_curve_targets_v1",
   "claim_level": "readiness_manifest_for_level_4_5_calibration",
   "summary": {
-    "estimated_level": 3.5,
-    "level_blocker": "Has a fit-ready biological curve; needs an independent holdout curve before Level 4.",
-    "total_targets": 7,
+    "estimated_level": 4.0,
+    "level_blocker": "Level 4 prerequisites are present; Level 5 needs broader external validation, uncertainty estimates and more species-unit mappings.",
+    "total_targets": 8,
     "ready_for_fit": 1,
-    "ready_for_holdout": 0,
+    "ready_for_holdout": 1,
     "model_reference_only": 1,
     "qualitative_proxy_only": 1,
     "missing_digitized_data": 4,
-    "species_mapped_ready_targets": 1,
-    "open_p0": 4,
+    "species_mapped_ready_targets": 2,
+    "open_p0": 5,
     "open_p1": 2,
     "status_counts": {
+      "ready_for_holdout": 1,
       "ready_for_fit": 1,
       "missing_digitized_data": 4,
       "model_reference_only": 1,
@@ -28,6 +29,20 @@
     "Species-specific unit mapping for time, distance and core physiological variables."
   ],
   "rows": [
+    {
+      "target_id": "traffic_velocity_density_holdout",
+      "priority": "P0",
+      "status": "ready_for_holdout",
+      "manifest_status": "ready_for_holdout",
+      "readiness_level": 4.0,
+      "biological_process": "Independent no-jam traffic validation: density versus mean velocity on a natural ant trail.",
+      "current_proxy": "paper_conditions_v5 exports no-jam speed and flow metrics; validate_traffic_holdout.py compares normalized speed retention without fitting.",
+      "next_action": "Use as independent holdout while fitting traffic/contact parameters to a separate curve.",
+      "source_count": 1,
+      "fit_ready_curve_file": "yes",
+      "species_unit_mapping": "yes",
+      "required_data": "density bin; mean velocity; velocity variance or distribution width; species and trail geometry"
+    },
     {
       "target_id": "individual_pheromone_response_curve",
       "priority": "P0",

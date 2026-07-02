@@ -4,16 +4,16 @@ This audit tracks what is still required before the simulator can be treated as 
 
 ## Summary
 
-- estimated current level: `3.5`
-- blocker: Has a fit-ready biological curve; needs an independent holdout curve before Level 4.
-- total target curves: `7`
+- estimated current level: `4.0`
+- blocker: Level 4 prerequisites are present; Level 5 needs broader external validation, uncertainty estimates and more species-unit mappings.
+- total target curves: `8`
 - ready_for_fit: `1`
-- ready_for_holdout: `0`
+- ready_for_holdout: `1`
 - model_reference_only: `1`
 - qualitative_proxy_only: `1`
 - missing_digitized_data: `4`
-- species-mapped ready targets: `1`
-- open P0 targets: `4`
+- species-mapped ready targets: `2`
+- open P0 targets: `5`
 
 ## Required For Level 4
 
@@ -25,6 +25,7 @@ This audit tracks what is still required before the simulator can be treated as 
 
 | Priority | Status | Manifest | Target | Fit CSV | Unit map | Readiness | Current proxy | Next action |
 |---|---|---|---|---|---|---:|---|---|
+| `P0` | `ready_for_holdout` | `ready_for_holdout` | `traffic_velocity_density_holdout` | `yes` | `yes` | 4.0 | paper_conditions_v5 exports no-jam speed and flow metrics; validate_traffic_holdout.py compares normalized speed retention without fitting. | Use as independent holdout while fitting traffic/contact parameters to a separate curve. |
 | `P0` | `ready_for_fit` | `ready_for_fit` | `individual_pheromone_response_curve` | `yes` | `yes` | 4.0 | paper_conditions_v5 exports per-step sensing and turning logs but previously lacked a numeric target curve. | Use the Perna 2012 response curve to calibrate shared Weber-style turn-response parameters, then validate against an independent holdout curve. |
 | `P0` | `missing_digitized_data` | `missing_digitized_data` | `trail_decay_curve` | `no` | `no` | 2.5 | literature_pheromone_constraints_v1 checks qualitative persistence effects only. | Digitize trail decay or trail occupancy time series and map model day to the paper's time axis. |
 | `P0` | `missing_digitized_data` | `missing_digitized_data` | `food_recruitment_strength_curve` | `no` | `no` | 2.5 | paper_conditions_v5 checks high-quality source bias qualitatively. | Digitize food-quality recruitment curves and add a concentration-to-quality mapping. |
