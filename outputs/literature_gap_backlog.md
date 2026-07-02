@@ -8,65 +8,9 @@ This backlog records every literature-corpus paper that is not fully simulated b
 
 ## Summary
 
-- `P1_exact_condition_partial`: 4
 - `P2_proxy_only`: 69
 - `P3_algorithmic_reference_only`: 34
-- `total`: 107
-
-## P1_exact_condition_partial
-
-### 1. Modeling tropotaxis in ant colonies: recruitment and trail formation
-
-- Status: `partial`
-- Scope: `exact_paper_condition`
-- Year: 2018
-- DOI: 10.48550/arxiv.1811.00590
-- URL: https://arxiv.org/abs/1811.00590
-- Categories: pheromone_trail_foraging;computational_swarm_model
-- Matched condition: tropotaxis_gradient_response_proxy
-- Evidence paper id: ramirez_2018
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: The model uses left/right/front sampling and forms trails, but does not yet export local gradient vectors or per-step orientation changes needed to fit the tropotaxis equations.
-
-### 2. A Model for Foraging Ants, Controlled by Spiking Neural Networks and Double Pheromones
-
-- Status: `partial`
-- Scope: `exact_paper_condition`
-- Year: 2015
-- DOI: 10.48550/arxiv.1507.08467
-- URL: https://arxiv.org/abs/1507.08467
-- Categories: pheromone_trail_foraging;networks_interactions;computational_swarm_model
-- Matched condition: negative_pheromone_forbidden_path
-- Evidence paper id: jimenez_romero_2015
-- Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
-- Gap: The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper.
-
-### 11. Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It
-
-- Status: `partial`
-- Scope: `exact_paper_condition`
-- Year: 2022
-- DOI: 10.48550/arxiv.2202.01808
-- URL: https://arxiv.org/abs/2202.01808
-- Categories: misleading_negative_pheromone;pheromone_trail_foraging
-- Matched condition: misleading_pheromone_attack_and_caution
-- Evidence paper id: aswale_2022
-- Next action: Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.
-- Gap: The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone.
-
-### 13. Individual rules for trail pattern formation in Argentine ants (Linepithema humile)
-
-- Status: `partial`
-- Scope: `exact_paper_condition`
-- Year: 2012
-- DOI: 10.1371/journal.pcbi.1002592
-- URL: https://arxiv.org/abs/1201.5827
-- Categories: pheromone_trail_foraging
-- Matched condition: single_food_trail
-- Evidence paper id: perna_2012
-- Next action: Add per-step local pheromone samples, gradient vectors and turn-angle logs.
-- Gap: Matches trail reinforcement qualitatively, but the model does not yet export turn-angle vs. local left/right pheromone samples, so Weber-law response cannot be quantitatively tested.
-
+- `total`: 103
 
 ## P2_proxy_only
 
@@ -314,8 +258,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;task_allocation_division_labor;networks_interactions;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 40. Avoiding traffic jams: Hitchhiking behavior as a strategy to reduce ant workers’ traffic on the foraging trail
 
@@ -444,8 +388,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 50. Chemical Releasers of Social Behavior—IV. The Hindgut as the Source of the Odor Trail Pheromone in the Neotropical Army Ant Genus Eciton1
 
@@ -535,8 +479,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 62. Spatial and temporal variation in pheromone composition of ant foraging trails
 
@@ -626,8 +570,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;task_allocation_division_labor
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 70. Foraging energetics of a nectar-feeding ant: metabolic expenditure as a function of food-source profitability
 
@@ -756,8 +700,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;networks_interactions
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 81. Decentralized communication, trail connectivity and emergent benefits of ant pheromone trail networks
 
@@ -821,8 +765,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 92. Novel observation of a raptor, Collared Forest-falcon ( <i>Micrastur semitorquatus</i> ), depredating a fleeing snake at an army ant ( <i>Eciton burchellii parvispinum</i> ) raid front
 
@@ -925,8 +869,8 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;task_allocation_division_labor;army_ant_raids_mills
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 112. Role of the pheromone for orientation in the group foraging ant, Veromessor pergandei
 
@@ -980,7 +924,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;task_allocation_division_labor;networks_interactions;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 14. Heterogeneous multi-agent task allocation based on graph neural network ant colony optimization algorithms
@@ -993,7 +937,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;networks_interactions;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 19. Development of Task Allocation Method for Swarm Robotic Systems Using Optimal Foraging Theory and Ant Colony Labor Division Model
@@ -1006,7 +950,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 28. A cellular automata ant memory model of foraging in a swarm of robots
@@ -1071,7 +1015,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;networks_interactions;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 56. Ant-like task allocation and recruitment in cooperative robots
@@ -1084,7 +1028,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: pheromone_trail_foraging;task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 61. Multi-robot Task Allocation Based on Ant Colony Algorithm
@@ -1097,7 +1041,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 75. Evolving neural networks using ant colony optimization with pheromone trail limits
@@ -1123,7 +1067,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 85. Optimal ant colony algorithm based multi-robot task allocation and processing sequence scheduling
@@ -1136,7 +1080,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 89. Improved Intelligent Method for Traffic Flow Prediction Based on Artificial Neural Networks and Ant Colony Optimization
@@ -1162,7 +1106,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 91. Modeling Ant Nest Relocation at Low Active Ratio by Particle Swarm Optimization
@@ -1188,7 +1132,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 97. A Novel Improved Ant Colony Algorithm for Multi-Robot Task Allocation
@@ -1201,7 +1145,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 99. Ant Colony Algorithm in Traffic Flow Control
@@ -1227,7 +1171,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;networks_interactions;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 101. Ant Colony Optimization Algorithm for Traffic Flow Estimation
@@ -1266,7 +1210,7 @@ This backlog records every literature-corpus paper that is not fully simulated b
 - Categories: task_allocation_division_labor;networks_interactions;computational_swarm_model
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Next action: Add task-switching rates and worker contact/network metrics.
+- Next action: Add worker contact matrices and network-calibrated task allocation metrics.
 - Gap: This is an algorithmic, robotics or ACO-inspired paper. It may inspire simulation tests, but the ant biology simulator should not be judged as reproducing its engineering objective function.
 
 ### 104. Ant System Algorithm with Negative Pheromone for Course Scheduling Problem

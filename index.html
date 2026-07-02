@@ -860,7 +860,9 @@
         counts: [],
         max: 0,
         meanOccupied: 0,
-        congestedCells: 0
+        congestedCells: 0,
+        contactPairs: 0,
+        crossTaskContactPairs: 0
       },
       nest: { x: 600, y: 390, radius: 72 },
       rooms: [],
@@ -1104,8 +1106,9 @@
     }
 
     class Field {
-      constructor(size) {
+      constructor(size, name = 'field') {
         this.size = size;
+        this.name = name;
         this.cols = Math.ceil(world.width / size);
         this.rows = Math.ceil(world.height / size);
         this.data = new Float32Array(this.cols * this.rows);
@@ -1247,6 +1250,11 @@
         retreatTimer: 0,
         recruitTimer: 0,
         taskLock: rand(0, 160),
+        taskAge: 0,
+        lastDX: 0,
+        lastDY: 0,
+        lastMove: 0,
+        lastSensing: null,
         memory: {
           foodX: null,
           foodY: null,
@@ -1284,16 +1292,17 @@
       ant.speed = (role === 'soldier' ? rand(0.55, 0.85) : rand(0.75, 1.15)) * species.speed;
       ant.thresholds = taskThresholds(role, ant.age);
       ant.task = role === 'soldier' ? 'patrol' : role === 'nurse' ? 'brood' : 'explore';
+      ant.taskAge = 0;
       ant.state = role === 'nurse' ? 'brood care' : 'exploring';
     }
 
     function setupFields() {
-      world.pheromones.food = new Field(world.grid);
-      world.pheromones.water = new Field(world.grid);
-      world.pheromones.nest = new Field(world.grid);
-      world.pheromones.alarm = new Field(world.grid);
-      world.pheromones.death = new Field(world.grid);
-      world.pheromones.avoid = new Field(world.grid);
+      world.pheromones.food = new Field(world.grid, 'food');
+      world.pheromones.water = new Field(world.grid, 'water');
+      world.pheromones.nest = new Field(world.grid, 'nest');
+      world.pheromones.alarm = new Field(world.grid, 'alarm');
+      world.pheromones.death = new Field(world.grid, 'death');
+      world.pheromones.avoid = new Field(world.grid, 'avoid');
     }
 
     function setupRooms() {
@@ -1349,6 +1358,8 @@
       world.traffic.max = 0;
       world.traffic.meanOccupied = 0;
       world.traffic.congestedCells = 0;
+      world.traffic.contactPairs = 0;
+      world.traffic.crossTaskContactPairs = 0;
       world.nextFoodId = 1;
       world.stats = {
         foodTrips: 0,
@@ -1365,6 +1376,20 @@
         nestSiteVisits: 0,
         quorumEvents: 0,
         nestRelocations: 0,
+        taskSwitches: 0,
+        contactSamples: 0,
+        contactPairsSum: 0,
+        crossTaskContactPairsSum: 0,
+        moveSamples: 0,
+        moveDistanceSum: 0,
+        trailMoveSamples: 0,
+        trailMoveDistanceSum: 0,
+        sensingSamples: 0,
+        detectableSensingSamples: 0,
+        gradientAlignedTurns: 0,
+        absSideContrastSum: 0,
+        absTurnSum: 0,
+        turnContrastProductSum: 0,
         waterTrips: 0,
         waterCollected: 0,
         corpseMoves: 0
@@ -1705,6 +1730,15 @@
         if (nearNest && random() < 0.32) victims.push(ant);
       }
       for (const ant of victims) ant.health = 0;
+      world.disturbanceTimer = Math.max(world.disturbanceTimer, 0.9);
+      for (const ant of world.ants) {
+        if (ant.health <= 0) continue;
+        const nearNest = dist(ant.x, ant.y, world.nest.x, world.nest.y) < 300;
+        if (!nearNest) continue;
+        ant.retreatTimer = Math.max(ant.retreatTimer, rand(60, 160));
+        ant.taskLock = Math.min(ant.taskLock, rand(20, 90));
+        ant.energy = Math.max(0, ant.energy - rand(1.5, 5.5));
+      }
       for (let i = 0; i < 45; i++) {
         const a = rand(0, Math.PI * 2);
         const r = rand(0, 260);
@@ -1845,6 +1879,18 @@
       return dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius;
     }
 
+    function taskIndex(task) {
+      switch (task) {
+        case 'food': return 1;
+        case 'water': return 2;
+        case 'brood': return 3;
+        case 'corpse': return 4;
+        case 'patrol':
+        case 'defense': return 5;
+        default: return 0;
+      }
+    }
+
     function rebuildTrafficMap() {
       const traffic = world.traffic;
       traffic.cols = Math.ceil(world.width / traffic.cell);
@@ -1852,26 +1898,50 @@
       const totalCells = traffic.cols * traffic.rows;
       if (traffic.counts.length !== totalCells) traffic.counts = new Uint16Array(totalCells);
       else traffic.counts.fill(0);
+      const taskBuckets = 6;
+      if (!traffic.taskCounts || traffic.taskCounts.length !== taskBuckets || traffic.taskCounts[0].length !== totalCells) {
+        traffic.taskCounts = Array.from({ length: taskBuckets }, () => new Uint16Array(totalCells));
+      } else {
+        for (const bucket of traffic.taskCounts) bucket.fill(0);
+      }
       for (const ant of world.ants) {
         if (ant.health <= 0) continue;
         const gx = clamp(Math.floor(ant.x / traffic.cell), 0, traffic.cols - 1);
         const gy = clamp(Math.floor(ant.y / traffic.cell), 0, traffic.rows - 1);
-        traffic.counts[gy * traffic.cols + gx] += 1;
+        const index = gy * traffic.cols + gx;
+        traffic.counts[index] += 1;
+        traffic.taskCounts[taskIndex(ant.task)][index] += 1;
       }
       let occupied = 0;
       let sumOccupied = 0;
       let congestedCells = 0;
       let max = 0;
-      for (const count of traffic.counts) {
+      let contactPairs = 0;
+      let crossTaskContactPairs = 0;
+      for (let i = 0; i < traffic.counts.length; i++) {
+        const count = traffic.counts[i];
         if (!count) continue;
         occupied += 1;
         sumOccupied += count;
         if (count > max) max = count;
         if (count >= 7) congestedCells += 1;
+        const pairs = count * (count - 1) / 2;
+        contactPairs += pairs;
+        let sameTaskPairs = 0;
+        for (const bucket of traffic.taskCounts) {
+          const taskCount = bucket[i];
+          sameTaskPairs += taskCount * (taskCount - 1) / 2;
+        }
+        crossTaskContactPairs += pairs - sameTaskPairs;
       }
       traffic.max = max;
       traffic.meanOccupied = occupied ? sumOccupied / occupied : 0;
       traffic.congestedCells = congestedCells;
+      traffic.contactPairs = contactPairs;
+      traffic.crossTaskContactPairs = crossTaskContactPairs;
+      world.stats.contactSamples += 1;
+      world.stats.contactPairsSum += contactPairs;
+      world.stats.crossTaskContactPairsSum += crossTaskContactPairs;
     }
 
     function trafficAt(x, y) {
@@ -1920,6 +1990,7 @@
       const right = field.sense(ant.x, ant.y, ant.angle + side, senseDistance);
       const total = left + right + forward;
       const detectionThreshold = Number(ui.senseThreshold.value);
+      world.stats.sensingSamples += 1;
       if (total < detectionThreshold) return Math.max(forward, left, right);
       const responseExponent = 1 + clamp((total - detectionThreshold) / (detectionThreshold * 8 + 260), 0, 0.7);
       const contrastFloor = detectionThreshold * 0.35;
@@ -1929,7 +2000,25 @@
       const aheadBias = forward < Math.max(left, right) ? 1.35 : 0.82;
       const trailFocus = clamp((total - detectionThreshold) / (detectionThreshold * 4 + 120), 0, 1);
       let turn = clamp(sideContrast * (0.26 + trailFocus * 0.18) * aheadBias, -0.3, 0.3);
-      ant.angle += invert ? -turn : turn;
+      if (invert) turn = -turn;
+      ant.angle += turn;
+      const expectedTurnSign = Math.sign(invert ? -sideContrast : sideContrast);
+      const actualTurnSign = Math.sign(turn);
+      world.stats.detectableSensingSamples += 1;
+      world.stats.absSideContrastSum += Math.abs(sideContrast);
+      world.stats.absTurnSum += Math.abs(turn);
+      world.stats.turnContrastProductSum += Math.abs(sideContrast * turn);
+      if (expectedTurnSign !== 0 && actualTurnSign === expectedTurnSign) world.stats.gradientAlignedTurns += 1;
+      ant.lastSensing = {
+        field: field.name || 'field',
+        forward,
+        left,
+        right,
+        total,
+        sideContrast,
+        turn,
+        inverted: invert ? 1 : 0
+      };
       ant.trailFocus = Math.max(ant.trailFocus || 0, trailFocus);
       return Math.max(forward, left, right);
     }
@@ -1947,6 +2036,7 @@
       ant.retreatTimer = Math.max(0, ant.retreatTimer - dt);
       ant.recruitTimer = Math.max(0, ant.recruitTimer - dt);
       ant.taskLock = Math.max(0, ant.taskLock - dt);
+      ant.taskAge = (ant.taskAge || 0) + dt / 900;
       ant.trailFocus = 0;
       const resourcePressure = Number(ui.foodSpawn.value) / 100;
       const heatStress = Number(ui.temperature.value) > 32 ? 1 + (Number(ui.temperature.value) - 32) * 0.045 : 1;
@@ -1978,6 +2068,15 @@
       const pheromoneDeposit = (rainActive ? 0.03 : 1) * (1 - trafficLoad * 0.38);
       if (ant.baseTurnNoise == null) ant.baseTurnNoise = ant.turnNoise;
       const foodMemoryStrength = ant.memory?.foodStrength || 0;
+      if (ant.memory?.avoidStrength > 0) {
+        ant.memory.avoidAge = (ant.memory.avoidAge || 0) + dt / 900;
+        ant.memory.avoidStrength *= Math.pow(0.965, dt / 9);
+        if (ant.memory.avoidStrength < 0.02 || ant.memory.avoidAge > 1.5) {
+          ant.memory.avoidStrength = 0;
+          ant.memory.avoidX = null;
+          ant.memory.avoidY = null;
+        }
+      }
       const staleFoodMemory = ant.memory?.foodX != null
         && foodMemoryStrength > 0.01
         && !world.food.some(item => dist(item.x, item.y, ant.memory.foodX, ant.memory.foodY) < 55);
@@ -2022,7 +2121,18 @@
 
       if (avoidHere > 16) {
         steerByField(ant, world.pheromones.avoid, true);
+        ant.memory.avoidX = ant.x;
+        ant.memory.avoidY = ant.y;
+        ant.memory.avoidAge = 0;
+        ant.memory.avoidStrength = Math.min(1, (ant.memory.avoidStrength || 0) + clamp(avoidHere / 220, 0.08, 0.35));
         ant.angle += rand(-0.08, 0.08);
+      } else if (ant.memory?.avoidStrength > 0.06 && ant.memory.avoidX != null) {
+        const avoidD = dist(ant.x, ant.y, ant.memory.avoidX, ant.memory.avoidY);
+        if (avoidD < 145) {
+          const away = angleTo(ant.memory.avoidX, ant.memory.avoidY, ant.x, ant.y);
+          ant.angle += normAngle(away - ant.angle) * clamp(ant.memory.avoidStrength * 0.16, 0.02, 0.16);
+          ant.state = ant.state === 'exploring' ? 'avoiding learned cue' : ant.state;
+        }
       }
 
       const recoveryNeeded = ant.role !== 'soldier'
@@ -2117,11 +2227,13 @@
         } else {
           const deathCue = world.pheromones.death.sample(ant.x, ant.y);
           const [corpse, corpseD] = nearestCorpse(ant);
+          const disruption = clamp(world.disturbanceTimer / 0.9, 0, 1);
           const broodStimulus = clamp((world.larvae / 75 + world.eggs / 120 + world.pupae / 140) * (0.45 + pressure.brood), 0, 1.6);
-          const foodStimulus = clamp((68 - ant.energy) / 58 + (34 - world.foodStore) / 42 + pressure.hunger * 0.65, 0, 1.7);
-          const waterStimulus = clamp((68 - ant.hydration) / 52 + (28 - world.waterStore) / 38 + (waterStress - 1) * 0.78, 0, 1.8);
-          const corpseStimulus = clamp(deathCue / 82 + (corpseD < 130 ? (130 - corpseD) / 120 : 0), 0, 1.7);
-          const defenseStimulus = clamp(alarmHere / 82 + (enemyD < 160 ? (160 - enemyD) / 150 : 0) + pressure.threat * 0.24, 0, 1.8);
+          const foragingSuppression = 1 - disruption * 0.58;
+          const foodStimulus = clamp(((68 - ant.energy) / 58 + (34 - world.foodStore) / 42 + pressure.hunger * 0.65) * foragingSuppression, 0, 1.7);
+          const waterStimulus = clamp(((68 - ant.hydration) / 52 + (28 - world.waterStore) / 38 + (waterStress - 1) * 0.78) * foragingSuppression, 0, 1.8);
+          const corpseStimulus = clamp(deathCue / 82 + (corpseD < 130 ? (130 - corpseD) / 120 : 0) + disruption * 0.5, 0, 1.7);
+          const defenseStimulus = clamp(alarmHere / 82 + (enemyD < 160 ? (160 - enemyD) / 150 : 0) + pressure.threat * 0.24 + disruption * 0.18, 0, 1.8);
           const urgentTask = corpseStimulus > 0.95 || waterStimulus > 1.15 || foodStimulus > 1.2;
           if ((ant.taskLock <= 0 || urgentTask) && !ant.carrying && !ant.carryingWater && ant.role !== 'soldier') {
             const oldTask = ant.task;
@@ -2132,6 +2244,10 @@
               corpse: corpseStimulus,
               defense: defenseStimulus
             });
+            if (ant.task !== oldTask) {
+              world.stats.taskSwitches += 1;
+              ant.taskAge = 0;
+            }
             ant.taskLock = ant.task === oldTask ? rand(130, 300) : rand(240, 520);
           }
           const canClean = ant.role !== 'soldier' && !ant.carrying && ant.task === 'corpse' && (deathCue > 8 || corpseD < 95);
@@ -2305,6 +2421,19 @@
             }
             const foodTrail = world.pheromones.food.sample(ant.x, ant.y);
             const waterTrail = world.pheromones.water.sample(ant.x, ant.y);
+            const nearbyFoodOnTrail = world.food.some(item => item.amount > 0 && dist(ant.x, ant.y, item.x, item.y) < 115);
+            if (foodTrail > Number(ui.senseThreshold.value) * 3.2 && !nearbyFoodOnTrail && !memoryPull) {
+              ant.memory.unrewardedTrail = (ant.memory.unrewardedTrail || 0) + 0.006 * dt * clamp(foodTrail / 160, 0.2, 1.4);
+              if (ant.memory.unrewardedTrail > 0.28) {
+                ant.memory.avoidX = ant.x;
+                ant.memory.avoidY = ant.y;
+                ant.memory.avoidAge = 0;
+                ant.memory.avoidStrength = Math.min(1, (ant.memory.avoidStrength || 0) + 0.12);
+                world.pheromones.avoid.add(ant.x, ant.y, 2.8 * strength * species.pheromoneDeposit * pheromoneDeposit);
+              }
+            } else {
+              ant.memory.unrewardedTrail = Math.max(0, (ant.memory.unrewardedTrail || 0) - 0.012 * dt);
+            }
             const waterTrailThreshold = waterPriority > foodPriority + 0.25 ? 0.35 : 0.7;
             const targetField = needWater && waterTrail >= foodTrail * waterTrailThreshold ? world.pheromones.water : world.pheromones.food;
             const trailStrength = Math.max(foodTrail, waterTrail);
@@ -2340,8 +2469,19 @@
       const alarmBoost = ant.retreatTimer > 0 || ant.recruitTimer > 0 ? 1.18 : 1;
       const trafficFactor = 1 - (ant.trafficLoad || 0) * 0.54;
       const move = base * energyFactor * activity * alarmBoost * trafficFactor * dt;
-      ant.x += Math.cos(ant.angle) * move;
-      ant.y += Math.sin(ant.angle) * move;
+      const dx = Math.cos(ant.angle) * move;
+      const dy = Math.sin(ant.angle) * move;
+      ant.x += dx;
+      ant.y += dy;
+      ant.lastDX = dx;
+      ant.lastDY = dy;
+      ant.lastMove = Math.hypot(dx, dy);
+      world.stats.moveSamples += 1;
+      world.stats.moveDistanceSum += ant.lastMove;
+      if (onTrailState) {
+        world.stats.trailMoveSamples += 1;
+        world.stats.trailMoveDistanceSum += ant.lastMove;
+      }
 
       avoidRocks(ant);
 
@@ -3036,6 +3176,10 @@
       const params = parameterSnapshot();
       const broodTotal = Math.round(world.eggs + world.larvae + world.pupae);
       const foragingTrips = world.stats.foodTrips + world.stats.waterTrips;
+      const detectableSensing = world.stats.detectableSensingSamples || 0;
+      const contactSamples = world.stats.contactSamples || 0;
+      const moveSamples = world.stats.moveSamples || 0;
+      const trailMoveSamples = world.stats.trailMoveSamples || 0;
       return {
         day: Number(world.day.toFixed(2)),
         ...params,
@@ -3065,6 +3209,14 @@
         traffic_max_cell: world.traffic.max,
         traffic_mean_occupied_cell: Number(world.traffic.meanOccupied.toFixed(2)),
         traffic_congested_cells: world.traffic.congestedCells,
+        traffic_contact_pairs: Number((world.traffic.contactPairs || 0).toFixed(2)),
+        traffic_cross_task_contact_pairs: Number((world.traffic.crossTaskContactPairs || 0).toFixed(2)),
+        mean_contact_pairs: contactSamples ? Number((world.stats.contactPairsSum / contactSamples).toFixed(3)) : 0,
+        mean_cross_task_contact_pairs: contactSamples ? Number((world.stats.crossTaskContactPairsSum / contactSamples).toFixed(3)) : 0,
+        task_switches: world.stats.taskSwitches,
+        task_switch_rate: world.day > 0 ? Number((world.stats.taskSwitches / world.day).toFixed(3)) : 0,
+        mean_move_per_tick: moveSamples ? Number((world.stats.moveDistanceSum / moveSamples).toFixed(4)) : 0,
+        mean_trail_move_per_tick: trailMoveSamples ? Number((world.stats.trailMoveDistanceSum / trailMoveSamples).toFixed(4)) : 0,
         ants_with_food_memory: antsWithFoodMemory,
         avg_food_memory_strength: avgFoodMemoryStrength,
         low_noise_ants: world.ants.filter(ant => ant.turnNoise < 0.035).length,
@@ -3076,6 +3228,13 @@
         larva_to_pupa: world.stats.larvaToPupa,
         pupa_to_worker: world.stats.pupaToWorker,
         brood_climate_losses: world.stats.broodClimateLosses,
+        sensing_samples: world.stats.sensingSamples,
+        detectable_sensing_samples: detectableSensing,
+        gradient_aligned_turns: world.stats.gradientAlignedTurns,
+        gradient_alignment_ratio: detectableSensing ? Number((world.stats.gradientAlignedTurns / detectableSensing).toFixed(3)) : 0,
+        mean_abs_side_contrast: detectableSensing ? Number((world.stats.absSideContrastSum / detectableSensing).toFixed(4)) : 0,
+        mean_abs_turn: detectableSensing ? Number((world.stats.absTurnSum / detectableSensing).toFixed(4)) : 0,
+        mean_turn_contrast_product: detectableSensing ? Number((world.stats.turnContrastProductSum / detectableSensing).toFixed(5)) : 0,
         food_trips: world.stats.foodTrips,
         high_quality_food_trips: world.stats.highQualityFoodTrips,
         low_quality_food_trips: world.stats.lowQualityFoodTrips,
@@ -3123,11 +3282,86 @@
         base_turn_noise: Number((ant.baseTurnNoise ?? ant.turnNoise).toFixed(4)),
         exploration_drive: Number((ant.explorationDrive || 0).toFixed(3)),
         traffic_load: Number((ant.trafficLoad || 0).toFixed(3)),
+        task_age: Number((ant.taskAge || 0).toFixed(3)),
+        last_dx: Number((ant.lastDX || 0).toFixed(4)),
+        last_dy: Number((ant.lastDY || 0).toFixed(4)),
+        last_move: Number((ant.lastMove || 0).toFixed(4)),
+        sensing_field: ant.lastSensing?.field || '',
+        sensing_left: ant.lastSensing ? Number(ant.lastSensing.left.toFixed(4)) : 0,
+        sensing_right: ant.lastSensing ? Number(ant.lastSensing.right.toFixed(4)) : 0,
+        sensing_forward: ant.lastSensing ? Number(ant.lastSensing.forward.toFixed(4)) : 0,
+        sensing_side_contrast: ant.lastSensing ? Number(ant.lastSensing.sideContrast.toFixed(5)) : 0,
+        sensing_turn: ant.lastSensing ? Number(ant.lastSensing.turn.toFixed(5)) : 0,
         food_memory_strength: Number((ant.memory?.foodStrength || 0).toFixed(3)),
         carrying_food: ant.carrying || 0,
         carrying_water: ant.carryingWater || 0,
         carrying_corpse: ant.carryingCorpse ? 1 : 0
       }));
+    }
+
+    function collectSegmentMetrics(x1, y1, x2, y2, width = 60) {
+      const ax = Number(x1);
+      const ay = Number(y1);
+      const bx = Number(x2);
+      const by = Number(y2);
+      const halfWidth = Math.max(1, Number(width) / 2);
+      const vx = bx - ax;
+      const vy = by - ay;
+      const length = Math.hypot(vx, vy);
+      if (!Number.isFinite(length) || length <= 0) {
+        return {
+          day: Number(world.day.toFixed(2)),
+          seed: world.seed,
+          count: 0,
+          density: 0,
+          mean_speed: 0,
+          mean_abs_forward_speed: 0,
+          forward_flow: 0,
+          reverse_flow: 0,
+          bidirectional_fraction: 0
+        };
+      }
+      const ux = vx / length;
+      const uy = vy / length;
+      let count = 0;
+      let speedSum = 0;
+      let absForwardSpeedSum = 0;
+      let forwardFlow = 0;
+      let reverseFlow = 0;
+      for (const ant of world.ants) {
+        if (ant.health <= 0) continue;
+        const px = ant.x - ax;
+        const py = ant.y - ay;
+        const along = px * ux + py * uy;
+        if (along < 0 || along > length) continue;
+        const lateral = Math.abs(px * (-uy) + py * ux);
+        if (lateral > halfWidth) continue;
+        count += 1;
+        const speed = ant.lastMove || 0;
+        const forwardSpeed = (ant.lastDX || 0) * ux + (ant.lastDY || 0) * uy;
+        speedSum += speed;
+        absForwardSpeedSum += Math.abs(forwardSpeed);
+        if (forwardSpeed >= 0) forwardFlow += forwardSpeed;
+        else reverseFlow += Math.abs(forwardSpeed);
+      }
+      const activeFlow = forwardFlow + reverseFlow;
+      return {
+        day: Number(world.day.toFixed(2)),
+        seed: world.seed,
+        x1: ax,
+        y1: ay,
+        x2: bx,
+        y2: by,
+        width: halfWidth * 2,
+        length: Number(length.toFixed(2)),
+        count,
+        density: Number((count / Math.max(1, length * halfWidth * 2)).toFixed(5)),
+        mean_speed: count ? Number((speedSum / count).toFixed(4)) : 0,
+        mean_abs_forward_speed: count ? Number((absForwardSpeedSum / count).toFixed(4)) : 0,
+        forward_flow: Number(forwardFlow.toFixed(4)),
+        reverse_flow: Number(reverseFlow.toFixed(4)),
+        bidirectional_fraction: activeFlow ? Number((Math.min(forwardFlow, reverseFlow) / activeFlow).toFixed(4)) : 0
+      };
     }
 
     function recordStatsSnapshot() {
@@ -3527,6 +3761,7 @@
       getExperimentConfig,
       collectStatsSnapshot,
       collectIndividualSnapshot,
+      collectSegmentMetrics,
       exportCsv
     };
     window.tick = tick;

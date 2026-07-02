@@ -201,12 +201,12 @@ python3 ant_colony_sim/experiments/paper_conditions_probe.py \
 
 The current `v5` matrix covers:
 
-- Perna et al. 2012: local pheromone trail formation and the missing Weber-law turning export;
-- Ramirez et al. 2018: tropotaxis gradient-response proxy and the missing sensing/turning logs;
+- Perna et al. 2012: local pheromone trail formation, aggregate gradient-turn alignment and segment-flow metrics;
+- Ramirez et al. 2018: tropotaxis gradient-response proxy using the same gradient-turn and segment-flow metrics;
 - Amorim 2014: trail formation plus food-removal/rain washout;
 - Deneubourg/Goss/Beckers double bridge: branch bias and positive-feedback sensitivity;
 - Dussutour et al. 2004: crowded traffic and alternate route use;
-- John et al. 2009: no hard jammed phase using a displacement proxy;
+- John et al. 2009: no hard jammed phase using displacement plus segment speed/flow-density metrics;
 - Shiraishi et al. 2018: diverse stochasticity after food relocation;
 - Malickova/Yates/Bodova 2015: random motion plus pheromone signalling under external change.
 - Kang & Theraulaz 2015: external task-demand changes and task reallocation;
@@ -220,12 +220,13 @@ The current `v5` matrix covers:
 
 `outputs/paper_conditions_report_v5.md` is the human-readable summary. Treat `pass` as qualitative alignment only; it is not a claim of fitted quantitative agreement with the original experiments.
 
-Current `v4` additions show:
+Current `v5` additions show:
 
 - task-demand reallocation aligns qualitatively with response-threshold task organization;
+- task-switch rate, contact-pair summaries and segment speed/flow-density are exported as general metrics;
 - fail-stop foraging is qualitatively aligned in the full probe, but remains algorithmic rather than proof-level validation;
-- negative pheromone is only partial because it reduces hazard-region occupancy weakly and lacks individual learning.
-- misleading pheromone is only partial because the static fake trail does not reduce food trips; an active detractor-agent mechanism is needed.
+- negative pheromone is qualitatively aligned through shared avoid pheromone plus short-term avoid memory, not a paper-specific exception;
+- misleading pheromone is qualitatively aligned when fake trails are sustained as an environmental perturbation and caution/avoid cues are enabled, but active attacker agents and calibrated effect sizes are still missing;
 - food-quality recruitment is now testable and qualitatively aligned, but lacks species-specific concentration calibration.
 - necrophoresis cleanup is now testable and qualitatively aligned, but lacks corpse-age chemistry, pathogen state and interaction-network validation.
 - brood microclimate and nest relocation/quorum are now testable through general rules, but still need species-specific numerical calibration.
@@ -264,11 +265,11 @@ python3 ant_colony_sim/experiments/evaluate_literature_corpus.py \
 
 Current result:
 
-- `pass`: 13
-- `partial`: 73
+- `pass`: 17
+- `partial`: 69
 - `not_biological_target`: 34
 
-Interpretation: most of the 120 papers are not yet correctly simulated in a strict sense. They are either covered only by a generic proxy, need new validation conditions, or are algorithmic/robotics papers that should not be treated as direct biological targets.
+Interpretation: all exact biological conditions currently represented in the validation matrix pass qualitatively, but most of the 120 corpus papers are still not fully simulated in a strict sense. The remaining biological papers are category proxies that need per-paper conditions, digitized reference data or species-specific calibration. Algorithmic/robotics papers should not be treated as direct biological targets.
 
 Generate the backlog of papers that are not fully simulated yet:
 
@@ -282,7 +283,6 @@ python3 ant_colony_sim/experiments/generate_literature_gap_backlog.py \
 
 Current backlog:
 
-- `P1_exact_condition_partial`: 4
 - `P2_proxy_only`: 69
 - `P3_algorithmic_reference_only`: 34
-- total: 107
+- total: 103

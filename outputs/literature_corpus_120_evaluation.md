@@ -9,7 +9,7 @@ Important interpretation rules:
 - `not_covered` means the simulator or validation suite lacks the condition required by that paper.
 - `not_biological_target` means the paper is mainly algorithmic/robotics/ACO and should not be treated as direct biological validation.
 
-- Corpus: `outputs/literature_corpus_100.json`
+- Corpus: `/home/s92137/ant_colony_sim/outputs/literature_corpus_100.json`
 - Condition source: `outputs/paper_conditions_v5.json`
 - CSV: `outputs/literature_corpus_120_evaluation.csv`
 - JSON: `outputs/literature_corpus_120_evaluation.json`
@@ -18,9 +18,9 @@ Important interpretation rules:
 
 ### status
 
-- `partial`: 73
+- `partial`: 69
 - `not_biological_target`: 34
-- `pass`: 13
+- `pass`: 17
 
 ### scope
 
@@ -32,8 +32,7 @@ Important interpretation rules:
 
 - `covered_by_generic_proxy`: 69
 - `not_a_direct_biology_validation`: 34
-- `aligned_qualitative`: 13
-- `partial_alignment`: 4
+- `aligned_qualitative`: 17
 
 ## Sequential Results
 
@@ -44,11 +43,11 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1811.00590
 - Categories: pheromone_trail_foraging;computational_swarm_model
 - Scope: `exact_paper_condition`
-- Status: `partial`
-- Verdict: `partial_alignment`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
 - Matched condition: tropotaxis_gradient_response_proxy
 - Evidence paper id: ramirez_2018
-- Gap: The model uses left/right/front sampling and forms trails, but does not yet export local gradient vectors or per-step orientation changes needed to fit the tropotaxis equations.
+- Gap: The model uses left/right/front sampling and exports gradient-turn plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories.
 
 ### 2. A Model for Foraging Ants, Controlled by Spiking Neural Networks and Double Pheromones
 
@@ -57,11 +56,11 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1507.08467
 - Categories: pheromone_trail_foraging;networks_interactions;computational_swarm_model
 - Scope: `exact_paper_condition`
-- Status: `partial`
-- Verdict: `partial_alignment`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
 - Matched condition: negative_pheromone_forbidden_path
 - Evidence paper id: jimenez_romero_2015
-- Gap: The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper.
+- Gap: The simulator now pairs avoid pheromone with short-term individual avoid memory, but it is still an ABM rule rather than the paper's spiking-neural-controller implementation.
 
 ### 3. A continuous model of ant foraging with pheromones and trail formation
 
@@ -100,7 +99,7 @@ Important interpretation rules:
 - Verdict: `aligned_qualitative`
 - Matched condition: no_jam_density_speed
 - Evidence paper id: john_2009
-- Gap: This is only a displacement proxy. Proper validation needs trail-segment speed/flow-density measurements and body-contact rules.
+- Gap: The validation now uses segment-level speed/flow-density metrics. It still lacks calibrated body-contact rules and digitized no-jam flow curves.
 
 ### 6. Applying Social Network Analysis to Agent-Based Models: A Case Study of Task Allocation in Swarm Robotics Inspired by Ant Foraging Behavior
 
@@ -152,7 +151,7 @@ Important interpretation rules:
 - Verdict: `aligned_qualitative`
 - Matched condition: crowding_bridge_density_shift
 - Evidence paper id: dussutour_2004
-- Gap: The model has traffic load and detours, but lacks explicit antennal contacts, lane discipline and collision-avoidance rules measured in crowded ant trails.
+- Gap: The model now exports segment-level density, speed and flow. It still lacks explicit antennal-contact mechanics and lane-discipline calibration from crowded trail experiments.
 
 ### 10. Phase Transitions in Ant Traffic Driven by Density-Dependent Pheromone Feedback
 
@@ -174,11 +173,11 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/2202.01808
 - Categories: misleading_negative_pheromone;pheromone_trail_foraging
 - Scope: `exact_paper_condition`
-- Status: `partial`
-- Verdict: `partial_alignment`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
 - Matched condition: misleading_pheromone_attack_and_caution
 - Evidence paper id: aswale_2022
-- Gap: The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone.
+- Gap: The probe now uses sustained external fake-pheromone perturbation and generic avoid learning, but still lacks explicit attacker agents and calibrated attack/defense effect sizes.
 
 ### 12. Diverse Stochasticity Leads a Colony of Ants to Optimal Foraging
 
@@ -200,11 +199,11 @@ Important interpretation rules:
 - URL: https://arxiv.org/abs/1201.5827
 - Categories: pheromone_trail_foraging
 - Scope: `exact_paper_condition`
-- Status: `partial`
-- Verdict: `partial_alignment`
+- Status: `pass`
+- Verdict: `aligned_qualitative`
 - Matched condition: single_food_trail
 - Evidence paper id: perna_2012
-- Gap: Matches trail reinforcement qualitatively, but the model does not yet export turn-angle vs. local left/right pheromone samples, so Weber-law response cannot be quantitatively tested.
+- Gap: Trail reinforcement, local gradient-turn logging and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed.
 
 ### 14. Heterogeneous multi-agent task allocation based on graph neural network ant colony optimization algorithms
 
@@ -295,7 +294,7 @@ Important interpretation rules:
 - Verdict: `aligned_qualitative`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: The model has response-threshold-like task switching, but does not yet estimate worker-worker contact matrices or explicit task-switching rates.
+- Gap: The model has response-threshold-like task switching and exports switch rates/contact summaries, but it still lacks calibrated worker-worker contact matrices.
 
 ### 21. Energetics of Trail Running, Load Carriage, and Emigration in the Column-Raiding Army Ant Eciton hamatum
 
@@ -542,7 +541,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 40. Avoiding traffic jams: Hitchhiking behavior as a strategy to reduce ant workers’ traffic on the foraging trail
 
@@ -672,7 +671,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 50. Chemical Releasers of Social Behavior—IV. The Hindgut as the Source of the Odor Trail Pheromone in the Neotropical Army Ant Genus Eciton1
 
@@ -815,7 +814,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 61. Multi-robot Task Allocation Based on Ant Colony Algorithm
 
@@ -932,7 +931,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 70. Foraging energetics of a nectar-feeding ant: metabolic expenditure as a function of food-source profitability
 
@@ -1075,7 +1074,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 81. Decentralized communication, trail connectivity and emergent benefits of ant pheromone trail networks
 
@@ -1166,7 +1165,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 88. Social organization of necrophoresis: insights into disease risk management in ant societies
 
@@ -1439,7 +1438,7 @@ Important interpretation rules:
 - Verdict: `covered_by_generic_proxy`
 - Matched condition: task_demand_reallocation
 - Evidence paper id: kang_theraulaz_2015
-- Gap: Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.
+- Gap: Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.
 
 ### 109. Anti-Jam Solutions for Smart Roads: Ant-Inspired Traffic Flow Rules Under Cooperative Automated Vehicles Environment
 

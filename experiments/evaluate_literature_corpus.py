@@ -115,7 +115,7 @@ MAPPING_TO_EVIDENCE = {
         "condition": "task_demand_reallocation",
         "paper_id": "kang_theraulaz_2015",
         "default_status": "partial",
-        "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported.",
+        "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available.",
     },
     "existing_or_extend_negative_pheromone_probe": {
         "condition": "negative_pheromone_forbidden_path + misleading_pheromone_attack_and_caution",
@@ -335,7 +335,7 @@ def write_csv(path, rows):
         "gap",
     ]
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=headers)
+        writer = csv.DictWriter(handle, fieldnames=headers, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 

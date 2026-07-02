@@ -42,7 +42,7 @@ def next_action(row):
     if "traffic" in condition or "no_jam" in condition:
         return "Add trail-segment flow-density and velocity measurements."
     if "task" in condition:
-        return "Add task-switching rates and worker contact/network metrics."
+        return "Add worker contact matrices and network-calibrated task allocation metrics."
     if "trail" in condition or "tropotaxis" in condition:
         return "Add per-step local pheromone samples, gradient vectors and turn-angle logs."
     if row["status"] == "not_biological_target":
@@ -69,7 +69,7 @@ def write_csv(path, rows):
         "gap",
     ]
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=headers)
+        writer = csv.DictWriter(handle, fieldnames=headers, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 

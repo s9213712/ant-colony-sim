@@ -1,76 +1,11 @@
 {
   "source": "outputs/literature_corpus_120_evaluation.json",
   "summary": {
-    "P1_exact_condition_partial": 4,
     "P2_proxy_only": 69,
     "P3_algorithmic_reference_only": 34,
-    "total": 107
+    "total": 103
   },
   "rows": [
-    {
-      "priority": "P1_exact_condition_partial",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
-      "index": 1,
-      "title": "Modeling tropotaxis in ant colonies: recruitment and trail formation",
-      "year": 2018,
-      "doi": "10.48550/arxiv.1811.00590",
-      "url": "https://arxiv.org/abs/1811.00590",
-      "categories": "pheromone_trail_foraging;computational_swarm_model",
-      "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
-      "matched_condition": "tropotaxis_gradient_response_proxy",
-      "evidence_paper_id": "ramirez_2018",
-      "gap": "The model uses left/right/front sampling and forms trails, but does not yet export local gradient vectors or per-step orientation changes needed to fit the tropotaxis equations."
-    },
-    {
-      "priority": "P1_exact_condition_partial",
-      "next_action": "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.",
-      "index": 2,
-      "title": "A Model for Foraging Ants, Controlled by Spiking Neural Networks and Double Pheromones",
-      "year": 2015,
-      "doi": "10.48550/arxiv.1507.08467",
-      "url": "https://arxiv.org/abs/1507.08467",
-      "categories": "pheromone_trail_foraging;networks_interactions;computational_swarm_model",
-      "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
-      "matched_condition": "negative_pheromone_forbidden_path",
-      "evidence_paper_id": "jimenez_romero_2015",
-      "gap": "The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper."
-    },
-    {
-      "priority": "P1_exact_condition_partial",
-      "next_action": "Add active detractor/cautionary pheromone agents and individual learning around forbidden paths.",
-      "index": 11,
-      "title": "Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It",
-      "year": 2022,
-      "doi": "10.48550/arxiv.2202.01808",
-      "url": "https://arxiv.org/abs/2202.01808",
-      "categories": "misleading_negative_pheromone;pheromone_trail_foraging",
-      "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
-      "matched_condition": "misleading_pheromone_attack_and_caution",
-      "evidence_paper_id": "aswale_2022",
-      "gap": "The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone."
-    },
-    {
-      "priority": "P1_exact_condition_partial",
-      "next_action": "Add per-step local pheromone samples, gradient vectors and turn-angle logs.",
-      "index": 13,
-      "title": "Individual rules for trail pattern formation in Argentine ants (Linepithema humile)",
-      "year": 2012,
-      "doi": "10.1371/journal.pcbi.1002592",
-      "url": "https://arxiv.org/abs/1201.5827",
-      "categories": "pheromone_trail_foraging",
-      "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
-      "matched_condition": "single_food_trail",
-      "evidence_paper_id": "perna_2012",
-      "gap": "Matches trail reinforcement qualitatively, but the model does not yet export turn-angle vs. local left/right pheromone samples, so Weber-law response cannot be quantitatively tested."
-    },
     {
       "priority": "P2_proxy_only",
       "next_action": "Calibrate resource quality against paper-specific sucrose/protein concentration, distance and trail-laying counts.",
@@ -361,7 +296,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 39,
       "title": "Distributed Task Allocation in Network of Agents Based on Ant Colony Foraging Behavior",
       "year": 2023,
@@ -373,7 +308,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "priority": "P2_proxy_only",
@@ -521,7 +456,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 49,
       "title": "MODELING AND SIMULATION OF ANT COLONY'S LABOR DIVISION WITH CONSTRAINTS FOR TASK ALLOCATION OF RESILIENT SUPPLY CHAINS",
       "year": 2012,
@@ -533,7 +468,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "priority": "P2_proxy_only",
@@ -633,7 +568,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 60,
       "title": "Algorithms for task allocation in ants. (A study of temporal polyethism: Theory)",
       "year": 1993,
@@ -645,7 +580,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "priority": "P2_proxy_only",
@@ -745,7 +680,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 69,
       "title": "Response thresholds to recruitment signals and the regulation of foraging intensity in the ant Myrmica sabuleti (Hymenoptera, Formicidae)",
       "year": 2000,
@@ -757,7 +692,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "priority": "P2_proxy_only",
@@ -905,7 +840,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 80,
       "title": "Interactions and information: exploring task allocation in ant colonies using network analysis",
       "year": 2022,
@@ -917,7 +852,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "priority": "P2_proxy_only",
@@ -985,7 +920,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 87,
       "title": "Algorithms for task allocation in ants. (A study of temporal polyethism: Theory)",
       "year": 1993,
@@ -997,7 +932,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "priority": "P2_proxy_only",
@@ -1113,7 +1048,7 @@
     },
     {
       "priority": "P2_proxy_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 108,
       "title": "Pheromone representation in the ant antennal lobe changes with age",
       "year": 2024,
@@ -1125,7 +1060,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "priority": "P2_proxy_only",
@@ -1177,7 +1112,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 6,
       "title": "Applying Social Network Analysis to Agent-Based Models: A Case Study of Task Allocation in Swarm Robotics Inspired by Ant Foraging Behavior",
       "year": 2019,
@@ -1193,7 +1128,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 14,
       "title": "Heterogeneous multi-agent task allocation based on graph neural network ant colony optimization algorithms",
       "year": 2023,
@@ -1209,7 +1144,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 19,
       "title": "Development of Task Allocation Method for Swarm Robotic Systems Using Optimal Foraging Theory and Ant Colony Labor Division Model",
       "year": 2021,
@@ -1289,7 +1224,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 52,
       "title": "Multiple-Agent Task Allocation Algorithm Utilizing Ant Colony Optimization",
       "year": 2013,
@@ -1305,7 +1240,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 56,
       "title": "Ant-like task allocation and recruitment in cooperative robots",
       "year": 2000,
@@ -1321,7 +1256,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 61,
       "title": "Multi-robot Task Allocation Based on Ant Colony Algorithm",
       "year": 2012,
@@ -1353,7 +1288,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 82,
       "title": "Research on task allocation in multiple logistics robots based on an improved ant colony algorithm",
       "year": 2016,
@@ -1369,7 +1304,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 85,
       "title": "Optimal ant colony algorithm based multi-robot task allocation and processing sequence scheduling",
       "year": 2008,
@@ -1401,7 +1336,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 90,
       "title": "Research on Improvement of Ant Colony Algorithm for Multi-Robot Task Allocation",
       "year": 2019,
@@ -1433,7 +1368,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 96,
       "title": "Optimal A* Path Planning with Ant Colony Optimization on Multi-Robot Task Allocation for Manufacturing Model",
       "year": 2021,
@@ -1449,7 +1384,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 97,
       "title": "A Novel Improved Ant Colony Algorithm for Multi-Robot Task Allocation",
       "year": 2018,
@@ -1481,7 +1416,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 100,
       "title": "Graph Convolutional Network Based Ant Colony Optimization for Robot Task Allocation",
       "year": 2023,
@@ -1529,7 +1464,7 @@
     },
     {
       "priority": "P3_algorithmic_reference_only",
-      "next_action": "Add task-switching rates and worker contact/network metrics.",
+      "next_action": "Add worker contact matrices and network-calibrated task allocation metrics.",
       "index": 103,
       "title": "Hybrid Algorithm Based on Ant and Genetic Algorithms for Task Allocation on a Network of Homogeneous Processors",
       "year": 2014,

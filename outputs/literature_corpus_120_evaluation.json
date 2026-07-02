@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-02T02:32:20Z",
-  "corpus": "outputs/literature_corpus_100.json",
+  "generated_at": "2026-07-02T04:42:13Z",
+  "corpus": "/home/s92137/ant_colony_sim/outputs/literature_corpus_100.json",
   "conditions": "outputs/paper_conditions_v5.json",
   "summary": {
     "count": 120,
     "status": {
-      "partial": 73,
+      "partial": 69,
       "not_biological_target": 34,
-      "pass": 13
+      "pass": 17
     },
     "scope": {
       "category_proxy": 69,
@@ -17,8 +17,7 @@
     "verdict": {
       "covered_by_generic_proxy": 69,
       "not_a_direct_biology_validation": 34,
-      "aligned_qualitative": 13,
-      "partial_alignment": 4
+      "aligned_qualitative": 17
     }
   },
   "rows": [
@@ -30,11 +29,11 @@
       "url": "https://arxiv.org/abs/1811.00590",
       "categories": "pheromone_trail_foraging;computational_swarm_model",
       "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
       "matched_condition": "tropotaxis_gradient_response_proxy",
       "evidence_paper_id": "ramirez_2018",
-      "gap": "The model uses left/right/front sampling and forms trails, but does not yet export local gradient vectors or per-step orientation changes needed to fit the tropotaxis equations."
+      "gap": "The model uses left/right/front sampling and exports gradient-turn plus segment-flow metrics; exact tropotaxis equation fitting still needs digitized paper trajectories."
     },
     {
       "index": 2,
@@ -44,11 +43,11 @@
       "url": "https://arxiv.org/abs/1507.08467",
       "categories": "pheromone_trail_foraging;networks_interactions;computational_swarm_model",
       "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
       "matched_condition": "negative_pheromone_forbidden_path",
       "evidence_paper_id": "jimenez_romero_2015",
-      "gap": "The simulator has an avoid field, but it is not yet paired with individual learning or neural-controller adaptation as in the paper."
+      "gap": "The simulator now pairs avoid pheromone with short-term individual avoid memory, but it is still an ABM rule rather than the paper's spiking-neural-controller implementation."
     },
     {
       "index": 3,
@@ -90,7 +89,7 @@
       "verdict": "aligned_qualitative",
       "matched_condition": "no_jam_density_speed",
       "evidence_paper_id": "john_2009",
-      "gap": "This is only a displacement proxy. Proper validation needs trail-segment speed/flow-density measurements and body-contact rules."
+      "gap": "The validation now uses segment-level speed/flow-density metrics. It still lacks calibrated body-contact rules and digitized no-jam flow curves."
     },
     {
       "index": 6,
@@ -146,7 +145,7 @@
       "verdict": "aligned_qualitative",
       "matched_condition": "crowding_bridge_density_shift",
       "evidence_paper_id": "dussutour_2004",
-      "gap": "The model has traffic load and detours, but lacks explicit antennal contacts, lane discipline and collision-avoidance rules measured in crowded ant trails."
+      "gap": "The model now exports segment-level density, speed and flow. It still lacks explicit antennal-contact mechanics and lane-discipline calibration from crowded trail experiments."
     },
     {
       "index": 10,
@@ -170,11 +169,11 @@
       "url": "https://arxiv.org/abs/2202.01808",
       "categories": "misleading_negative_pheromone;pheromone_trail_foraging",
       "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
       "matched_condition": "misleading_pheromone_attack_and_caution",
       "evidence_paper_id": "aswale_2022",
-      "gap": "The current attack is a static fake trail rather than active detractor agents, and the avoid field is only a proxy for cautionary pheromone."
+      "gap": "The probe now uses sustained external fake-pheromone perturbation and generic avoid learning, but still lacks explicit attacker agents and calibrated attack/defense effect sizes."
     },
     {
       "index": 12,
@@ -198,11 +197,11 @@
       "url": "https://arxiv.org/abs/1201.5827",
       "categories": "pheromone_trail_foraging",
       "scope": "exact_paper_condition",
-      "status": "partial",
-      "verdict": "partial_alignment",
+      "status": "pass",
+      "verdict": "aligned_qualitative",
       "matched_condition": "single_food_trail",
       "evidence_paper_id": "perna_2012",
-      "gap": "Matches trail reinforcement qualitatively, but the model does not yet export turn-angle vs. local left/right pheromone samples, so Weber-law response cannot be quantitatively tested."
+      "gap": "Trail reinforcement, local gradient-turn logging and segment-level traffic metrics are now available; Weber-law curve fitting still needs digitized reference curves before quantitative fitting can be claimed."
     },
     {
       "index": 14,
@@ -300,7 +299,7 @@
       "verdict": "aligned_qualitative",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "The model has response-threshold-like task switching, but does not yet estimate worker-worker contact matrices or explicit task-switching rates."
+      "gap": "The model has response-threshold-like task switching and exports switch rates/contact summaries, but it still lacks calibrated worker-worker contact matrices."
     },
     {
       "index": 21,
@@ -566,7 +565,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "index": 40,
@@ -706,7 +705,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "index": 50,
@@ -860,7 +859,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "index": 61,
@@ -986,7 +985,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "index": 70,
@@ -1140,7 +1139,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "index": 81,
@@ -1238,7 +1237,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "index": 88,
@@ -1532,7 +1531,7 @@
       "verdict": "covered_by_generic_proxy",
       "matched_condition": "task_demand_reallocation",
       "evidence_paper_id": "kang_theraulaz_2015",
-      "gap": "Task-demand switching is covered, but network/contact matrices and task-switching rates are not yet exported."
+      "gap": "Task-demand switching and switch-rate summaries are covered, but worker-contact matrices and network calibration are not yet available."
     },
     {
       "index": 109,
