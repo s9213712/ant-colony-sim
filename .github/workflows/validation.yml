@@ -30,6 +30,8 @@ jobs:
         run: |
           python -m py_compile \
             behavior_probe.py \
+            experiments/actual_biology_simulation.py \
+            experiments/actual_biology_sensitivity.py \
             experiments/batch_runner.py \
             experiments/build_literature_corpus.py \
             experiments/check_validation_boundaries.py \
@@ -64,6 +66,23 @@ jobs:
 
       - name: Script API and UI QA
         run: python experiments/qa_report_probe.py
+
+      - name: Actual biology smoke probe
+        run: |
+          python experiments/actual_biology_simulation.py \
+            --quick \
+            --output outputs/ci_actual_biology_smoke.csv \
+            --json-output outputs/ci_actual_biology_smoke.json \
+            --report-output outputs/ci_actual_biology_smoke.md
+
+      - name: Actual biology sensitivity smoke probe
+        run: |
+          python experiments/actual_biology_sensitivity.py \
+            --quick \
+            --output outputs/ci_actual_biology_sensitivity_smoke.csv \
+            --effects-output outputs/ci_actual_biology_sensitivity_smoke_effects.csv \
+            --json-output outputs/ci_actual_biology_sensitivity_smoke.json \
+            --report-output outputs/ci_actual_biology_sensitivity_smoke.md
 
       - name: Literature alignment probe
         run: python experiments/literature_alignment_probe.py
@@ -102,6 +121,13 @@ jobs:
             outputs/ci_stochasticity_smoke.csv
             outputs/ci_stochasticity_smoke.json
             outputs/ci_stochasticity_smoke_summary.csv
+            outputs/ci_actual_biology_smoke.csv
+            outputs/ci_actual_biology_smoke.json
+            outputs/ci_actual_biology_smoke.md
+            outputs/ci_actual_biology_sensitivity_smoke.csv
+            outputs/ci_actual_biology_sensitivity_smoke_effects.csv
+            outputs/ci_actual_biology_sensitivity_smoke.json
+            outputs/ci_actual_biology_sensitivity_smoke.md
             outputs/ci_paper_conditions_smoke.csv
             outputs/ci_paper_conditions_smoke.json
             outputs/ci_paper_conditions_smoke.md

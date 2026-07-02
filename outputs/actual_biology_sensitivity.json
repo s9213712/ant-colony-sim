@@ -1,0 +1,66 @@
+{
+  "suite": "actual_biology_sensitivity_v1",
+  "generated_at": "2026-07-02T13:55:32Z",
+  "claim_level": "parameter_sensitivity_screen_not_parameter_fit",
+  "rules": [
+    "Treatments use the same simulator decision rules.",
+    "Treatments change only public scriptable parameters through antSim.setParam.",
+    "Effects are measured relative to the baseline treatment within each scenario."
+  ],
+  "parameters": {
+    "seeds": [
+      101,
+      102,
+      103
+    ],
+    "scenarios": [
+      "stable_mature",
+      "resource_stress",
+      "heat_dry_stress"
+    ],
+    "days": 4,
+    "sample_days": 0.25,
+    "dt": 9
+  },
+  "treatments": [
+    {
+      "name": "baseline",
+      "description": "Current default behavior-level parameterization.",
+      "set": []
+    },
+    {
+      "name": "fast_pheromone_loss",
+      "description": "Higher evaporation and higher sensing threshold; tests trail fragility.",
+      "set": [
+        "evaporationRate=130",
+        "senseThreshold=16"
+      ]
+    },
+    {
+      "name": "persistent_pheromone",
+      "description": "Lower evaporation and lower sensing threshold; tests trail persistence and possible over-commitment.",
+      "set": [
+        "evaporationRate=55",
+        "senseThreshold=7"
+      ]
+    },
+    {
+      "name": "high_diffusion",
+      "description": "Higher diffusion; tests whether broadened gradients reduce trail precision.",
+      "set": [
+        "diffusionRate=170"
+      ]
+    },
+    {
+      "name": "brood_demand_high",
+      "description": "Higher brood-demand pressure; tests foraging versus brood-care tradeoff.",
+      "set": [
+        "broodDemand=85"
+      ]
+    }
+  ],
+  "time_series_csv": "outputs/actual_biology_sensitivity.csv",
+  "effects_csv": "outputs/actual_biology_sensitivity_effects.csv",
+  "time_series_rows": 765,
+  "effect_rows": 15
+}

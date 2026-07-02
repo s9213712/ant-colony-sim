@@ -54,6 +54,24 @@ def parse_scenarios(text):
     return scenarios or list(DEFAULT_SCENARIOS)
 
 
+def parse_params(pairs):
+    params = {}
+    for pair in pairs:
+        if "=" not in pair:
+            raise ValueError(f"parameter override must be name=value, got {pair!r}")
+        key, raw = pair.split("=", 1)
+        raw = raw.strip()
+        if raw.lower() in {"true", "false"}:
+            value = raw.lower() == "true"
+        else:
+            try:
+                value = int(raw) if raw.isdigit() else float(raw)
+            except ValueError:
+                value = raw
+        params[key.strip()] = value
+    return params
+
+
 def mean(values):
     values = [float(value) for value in values if value is not None]
     return sum(values) / len(values) if values else None
@@ -139,6 +157,12 @@ ACTUAL_BIOLOGY_JS = """
     antSim.setParam('broodDemand', 55);
     antSim.setParam('soldierRatio', 12);
   };
+  const applyOverrides = () => {
+    const overrides = config.overrides || {};
+    for (const [name, value] of Object.entries(overrides)) {
+      antSim.setParam(name, value);
+    }
+  };
   const queenSummary = () => {
     const queens = antSim.world.queens;
     const avg = (field) => queens.length
@@ -168,6 +192,7 @@ ACTUAL_BIOLOGY_JS = """
       antSim.world.waterStore = 95;
       antSim.world.eggs = Math.max(antSim.world.eggs, 12);
       addExplicitResources(120, 120);
+      applyOverrides();
       return;
     }
     antSim.setupMatureColony();
@@ -179,6 +204,7 @@ ACTUAL_BIOLOGY_JS = """
       antSim.setParam('broodDemand', 45);
       antSim.addFood(980, 540, 210, { quality: 1.0, label: 'standard_quality' });
       antSim.addWater(970, 190, 190);
+      applyOverrides();
       return;
     }
     if (config.scenario === 'heat_dry_stress') {
@@ -187,18 +213,22 @@ ACTUAL_BIOLOGY_JS = """
       antSim.world.foodStore = 150;
       antSim.world.waterStore = 35;
       addExplicitResources(650, 900);
+      applyOverrides();
       return;
     }
     antSim.world.foodStore = 70;
     antSim.world.waterStore = 70;
     antSim.setParam('hunger', 84);
     addExplicitResources(900, 900);
+    applyOverrides();
   };
   const sample = (sampleIndex, phase) => {
     const stats = antSim.collectStatsSnapshot();
     return {
       suite: 'actual_biology_simulation_v1',
+      treatment: config.treatment,
       scenario: config.scenario,
+      condition_id: `${config.treatment}:${config.scenario}`,
       seed: config.seed,
       sample_index: sampleIndex,
       phase,
@@ -227,10 +257,12 @@ ACTUAL_BIOLOGY_JS = """
 def scenario_payload(scenario, seed, args):
     return {
         "scenario": scenario,
+        "treatment": args.treatment,
         "seed": seed,
         "days": args.days,
         "sampleDays": args.sample_days,
         "dt": args.dt,
+        "overrides": parse_params(args.set),
     }
 
 
@@ -266,20 +298,22 @@ def run_suite(args):
 def final_rows_by_replicate(rows):
     grouped = {}
     for row in rows:
-        grouped[(row["scenario"], row["seed"])] = row
+        grouped[(row.get("treatment", "baseline"), row["scenario"], row["seed"])] = row
     return list(grouped.values())
 
 
 def summarize(rows):
     by_scenario = defaultdict(list)
     for row in final_rows_by_replicate(rows):
-        by_scenario[row["scenario"]].append(row)
+        by_scenario[(row.get("treatment", "baseline"), row["scenario"])].append(row)
 
     summaries = {}
-    for scenario, scenario_rows in sorted(by_scenario.items()):
+    for (treatment, scenario), scenario_rows in sorted(by_scenario.items()):
         initial_rows = [
             row for row in rows
-            if row["scenario"] == scenario and row["phase"] == "initial"
+            if row.get("treatment", "baseline") == treatment
+            and row["scenario"] == scenario
+            and row["phase"] == "initial"
         ]
         initial_ants = mean(row["ants"] for row in initial_rows)
         final_ants = mean(row["ants"] for row in scenario_rows)
@@ -287,6 +321,8 @@ def summarize(rows):
         final_brood = mean(row["brood_total"] for row in scenario_rows)
         summary = {
             "replicates": len(scenario_rows),
+            "treatment": treatment,
+            "scenario": scenario,
             "initial_ants_mean": round(initial_ants or 0, 3),
             "final_ants_mean": round(final_ants or 0, 3),
             "survival_fraction_mean": round((final_ants / initial_ants) if initial_ants else 1.0, 4),
@@ -303,7 +339,13 @@ def summarize(rows):
             "dead_mean": round(mean(row["dead"] for row in scenario_rows) or 0, 3),
             "food_pheromone_peak_mean": round(
                 mean(
-                    max(item["food_pheromone"] for item in rows if item["scenario"] == scenario and item["seed"] == row["seed"])
+                    max(
+                        item["food_pheromone"]
+                        for item in rows
+                        if item.get("treatment", "baseline") == treatment
+                        and item["scenario"] == scenario
+                        and item["seed"] == row["seed"]
+                    )
                     for row in scenario_rows
                 )
                 or 0,
@@ -312,10 +354,16 @@ def summarize(rows):
             "queen_health_mean": round(mean(row["queen_health_mean"] for row in scenario_rows) or 0, 3),
             "queen_hydration_mean": round(mean(row["queen_hydration_mean"] for row in scenario_rows) or 0, 3),
         }
-        summaries[scenario] = summary
+        summaries[f"{treatment}:{scenario}"] = summary
 
-    stable = summaries.get("stable_mature", {})
-    for scenario, summary in summaries.items():
+    stable_by_treatment = {
+        summary["treatment"]: summary
+        for summary in summaries.values()
+        if summary["scenario"] == "stable_mature"
+    }
+    for key, summary in summaries.items():
+        scenario = summary["scenario"]
+        stable = stable_by_treatment.get(summary["treatment"], {})
         if scenario == "stable_mature":
             summary["comparison_to_stable"] = "baseline"
             continue
@@ -335,10 +383,15 @@ def summarize(rows):
 
 
 def interpret(summaries):
-    stable = summaries.get("stable_mature", {})
-    resource = summaries.get("resource_stress", {})
-    heat = summaries.get("heat_dry_stress", {})
-    founding = summaries.get("founding_colony", {})
+    baseline = {
+        summary["scenario"]: summary
+        for summary in summaries.values()
+        if summary.get("treatment") == "baseline"
+    }
+    stable = baseline.get("stable_mature", {})
+    resource = baseline.get("resource_stress", {})
+    heat = baseline.get("heat_dry_stress", {})
+    founding = baseline.get("founding_colony", {})
     checks = []
     checks.append({
         "check": "stable_mature_foraging",
@@ -396,6 +449,8 @@ def write_json(path, rows, summaries, checks, args):
             "days": args.days,
             "sample_days": args.sample_days,
             "dt": args.dt,
+            "treatment": args.treatment,
+            "overrides": parse_params(args.set),
         },
         "time_series_csv": csv_path,
         "time_series_rows": len(rows),
@@ -426,21 +481,23 @@ def write_report(path, summaries, checks, args):
         "",
         f"- Seeds: `{args.seeds}`",
         f"- Scenarios: `{args.scenarios}`",
+        f"- Treatment: `{args.treatment}`",
+        f"- Parameter overrides: `{parse_params(args.set)}`",
         f"- Days per replicate: `{args.days}`",
         f"- Sample interval: `{args.sample_days}` days",
         f"- dt: `{args.dt}`",
         "",
         "## Scenario Summary",
         "",
-        "| Scenario | Replicates | Final ants | Survival | Food trips | Water trips | Energy | Hydration | Brood stress | Brood delta | Queen health |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| Treatment | Scenario | Replicates | Final ants | Survival | Food trips | Water trips | Energy | Hydration | Brood stress | Brood delta | Queen health |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
-    for scenario, summary in sorted(summaries.items()):
+    for _key, summary in sorted(summaries.items()):
         lines.append(
-            "| {scenario} | {replicates} | {final_ants_mean:.1f} | {survival_fraction_mean:.3f} | "
+            "| {treatment} | {scenario} | {replicates} | {final_ants_mean:.1f} | {survival_fraction_mean:.3f} | "
             "{food_trips_mean:.1f} | {water_trips_mean:.1f} | {avg_energy_mean:.1f} | "
             "{avg_hydration_mean:.1f} | {brood_stress_mean:.2f} | {brood_delta_mean:.1f} | "
-            "{queen_health_mean:.1f} |".format(scenario=scenario, **summary)
+            "{queen_health_mean:.1f} |".format(**summary)
         )
     lines.extend([
         "",
@@ -473,6 +530,8 @@ def main():
     parser.add_argument("--days", type=float, default=8)
     parser.add_argument("--sample-days", type=float, default=0.25)
     parser.add_argument("--dt", type=float, default=9)
+    parser.add_argument("--treatment", default="baseline", help="Label for this run when using parameter overrides.")
+    parser.add_argument("--set", action="append", default=[], help="Scriptable parameter override, e.g. --set evaporationRate=120")
     parser.add_argument("--quick", action="store_true", help="Use a short two-seed smoke configuration.")
     parser.add_argument("--output", type=Path, default=ROOT / "outputs" / "actual_biology_simulation.csv")
     parser.add_argument("--json-output", type=Path, default=ROOT / "outputs" / "actual_biology_simulation.json")

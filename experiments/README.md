@@ -77,6 +77,40 @@ Use this suite when the question is whether the simulator produces interpretable
 biological time series under controlled conditions. It is not a digitized
 paper-curve fitting suite and it is not a quantitative species predictor.
 
+## Actual Biology Sensitivity Suite
+
+Run a local parameter-sensitivity screen on the biological scenarios:
+
+```bash
+python3 ant_colony_sim/experiments/actual_biology_sensitivity.py \
+  --output ant_colony_sim/outputs/actual_biology_sensitivity.csv \
+  --effects-output ant_colony_sim/outputs/actual_biology_sensitivity_effects.csv \
+  --json-output ant_colony_sim/outputs/actual_biology_sensitivity.json \
+  --report-output ant_colony_sim/outputs/actual_biology_sensitivity.md
+```
+
+The current `v1` screen uses seeds `101-103`, 4 simulated days and three
+scenarios: `stable_mature`, `resource_stress`, `heat_dry_stress`.
+
+Treatments:
+
+- `baseline`: current behavior-level defaults.
+- `fast_pheromone_loss`: `evaporationRate=130`, `senseThreshold=16`.
+- `persistent_pheromone`: `evaporationRate=55`, `senseThreshold=7`.
+- `high_diffusion`: `diffusionRate=170`.
+- `brood_demand_high`: `broodDemand=85`.
+
+Current largest effects:
+
+- `persistent_pheromone` under `heat_dry_stress`: food trips `-0.221`, hydration `-0.026`, brood stress `+0.175`, peak food pheromone `+0.686`.
+- `persistent_pheromone` under `resource_stress`: food trips `-0.259`, hydration `-0.011`, brood stress `+0.056`.
+- `high_diffusion` under `heat_dry_stress`: food trips `+0.244`, peak food pheromone `+0.140`.
+
+Interpretation: the next biological calibration priority is pheromone
+persistence/sensing, because those parameters move foraging and brood-stress
+outputs across multiple stress scenarios. Treat this as a sensitivity screen,
+not a fitted optimum.
+
 ## Individual-Level Output
 
 Export all ants at the end of each replicate:

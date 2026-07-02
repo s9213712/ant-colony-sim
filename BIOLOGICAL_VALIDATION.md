@@ -456,7 +456,54 @@ python3 experiments/actual_biology_simulation.py \
 3. parameter sweep：只改參數與環境條件，檢查模型能否在同一規則下同時符合多個情境。
 4. individual-level validation：抽樣輸出 worker trajectory、task switching、energy/hydration 分布，對照追蹤實驗。
 
-## 12. 100+ paper triage corpus
+## 12. Advanced parameter-sensitivity screen
+
+`experiments/actual_biology_sensitivity.py` 是 actual biology suite 的進階版。它不是另寫行為規則，而是用 `antSim.setParam()` 對公開參數做 treatment，並在同一組生物情境下比較相對 baseline 的效應。
+
+執行方式：
+
+```bash
+python3 experiments/actual_biology_sensitivity.py \
+  --output outputs/actual_biology_sensitivity.csv \
+  --effects-output outputs/actual_biology_sensitivity_effects.csv \
+  --json-output outputs/actual_biology_sensitivity.json \
+  --report-output outputs/actual_biology_sensitivity.md
+```
+
+目前正式輸出：
+
+- `outputs/actual_biology_sensitivity.csv`
+- `outputs/actual_biology_sensitivity_effects.csv`
+- `outputs/actual_biology_sensitivity.json`
+- `outputs/actual_biology_sensitivity.md`
+
+`v1` 使用 seeds `101-103`、4 個模型日、每 0.25 日取樣，情境為 `stable_mature`、`resource_stress`、`heat_dry_stress`。
+
+| treatment | 參數改變 | 生物學問題 |
+| --- | --- | --- |
+| `baseline` | 無 | 目前 behavior-level 預設 |
+| `fast_pheromone_loss` | `evaporationRate=130`, `senseThreshold=16` | 較快氣味消退與較高感知門檻是否破壞路徑 |
+| `persistent_pheromone` | `evaporationRate=55`, `senseThreshold=7` | 較持久/易感知氣味是否造成過度路徑承諾 |
+| `high_diffusion` | `diffusionRate=170` | 擴散較高是否改變梯度精度與採集 |
+| `brood_demand_high` | `broodDemand=85` | 育幼需求是否改變覓食/育幼 tradeoff |
+
+最大相對效應：
+
+| treatment | scenario | food trips effect | hydration effect | brood stress effect | peak food pheromone effect |
+| --- | --- | ---: | ---: | ---: | ---: |
+| `persistent_pheromone` | `heat_dry_stress` | -0.221 | -0.026 | +0.175 | +0.686 |
+| `persistent_pheromone` | `resource_stress` | -0.259 | -0.011 | +0.056 | +0.012 |
+| `high_diffusion` | `heat_dry_stress` | +0.244 | +0.004 | -0.048 | +0.140 |
+| `brood_demand_high` | `heat_dry_stress` | -0.058 | 0.000 | -0.072 | -0.345 |
+
+科學解讀：
+
+- 目前模型對 `persistent_pheromone` 最敏感，尤其在熱乾與資源壓力下會降低 food trips，並提高或改變 brood stress / food pheromone peak。這暗示費洛蒙半衰期、感知閾值、氣味持久性是下一個最需要文獻校準的參數群。
+- `high_diffusion` 在熱乾條件下提高 food trips，表示擴散不只是視覺效果，會影響行為輸出；後續應把 diffusion/evaporation 從任意 UI 參數改成可報告的模型單位與合理範圍。
+- `brood_demand_high` 的效應較小但方向可測，適合作為 nurse/forager tradeoff 的後續校準入口。
+- 此 screen 只回答「模型對哪些參數敏感」，不回答「哪個參數是真實值」。下一步要用 digitized trail decay、food recruitment、brood survival 曲線做 parameter fitting。
+
+## 13. 100+ paper triage corpus
 
 `experiments/build_literature_corpus.py` 用 Crossref 查詢與既有 seed papers 建立 100+ 文獻候選池。輸出：
 
@@ -489,7 +536,7 @@ python3 experiments/actual_biology_simulation.py \
 - 文獻庫混合三類資料：真實螞蟻行為/生態實驗、ABM/PDE/數學模型、以及受螞蟻啟發的 swarm robotics / ACO 模型。後兩者可提供演算法與測試條件，但不能直接當作生物學真實度證據。
 - 下一批最值得轉成自動測試的主題：nest relocation quorum、brood microclimate、corpse-age/pathogen necrophoresis calibration、active misleading pheromone detractor agents、逐步感知/轉向紀錄。
 
-## 13. 120-paper sequential evaluation
+## 14. 120-paper sequential evaluation
 
 `experiments/evaluate_literature_corpus.py` 逐篇讀取 `outputs/literature_corpus_100.json`，並把每一篇對應到目前 `outputs/paper_conditions_v5.json` 的 simulation evidence。輸出：
 
@@ -519,7 +566,7 @@ python3 experiments/actual_biology_simulation.py \
 4. `necrophoresis_calibration`：在現有 corpse cleanup 基礎上加入 corpse-age chemistry、pathogen state、interaction network。
 5. `brood_relocation_calibration`：把 brood microclimate 與 nest relocation 從定性 proxy 推進到物種專屬數值校準。
 
-## 14. Gap backlog for later work
+## 15. Gap backlog for later work
 
 `experiments/generate_literature_gap_backlog.py` 會把逐篇評估中所有非 `pass` 文獻記錄成待辦清單。輸出：
 

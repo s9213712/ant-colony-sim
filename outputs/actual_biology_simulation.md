@@ -16,18 +16,20 @@ Rules held fixed:
 
 - Seeds: `101-105`
 - Scenarios: `stable_mature,resource_stress,heat_dry_stress,founding_colony`
+- Treatment: `baseline`
+- Parameter overrides: `{}`
 - Days per replicate: `8`
 - Sample interval: `0.25` days
 - dt: `9`
 
 ## Scenario Summary
 
-| Scenario | Replicates | Final ants | Survival | Food trips | Water trips | Energy | Hydration | Brood stress | Brood delta | Queen health |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| founding_colony | 5 | 0.4 | 1.000 | 0.0 | 0.0 | 90.0 | 93.5 | 0.27 | 3.6 | 100.0 |
-| heat_dry_stress | 5 | 430.0 | 1.024 | 51.0 | 78.8 | 89.0 | 90.2 | 0.60 | -7.0 | 100.0 |
-| resource_stress | 5 | 428.8 | 1.021 | 41.6 | 35.2 | 86.2 | 87.2 | 0.14 | -7.4 | 100.0 |
-| stable_mature | 5 | 430.2 | 1.024 | 68.4 | 43.6 | 88.2 | 92.0 | 0.10 | -7.0 | 100.0 |
+| Treatment | Scenario | Replicates | Final ants | Survival | Food trips | Water trips | Energy | Hydration | Brood stress | Brood delta | Queen health |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| baseline | founding_colony | 5 | 0.4 | 1.000 | 0.0 | 0.0 | 90.0 | 93.5 | 0.27 | 3.6 | 100.0 |
+| baseline | heat_dry_stress | 5 | 430.0 | 1.024 | 51.0 | 78.8 | 89.0 | 90.2 | 0.60 | -7.0 | 100.0 |
+| baseline | resource_stress | 5 | 428.8 | 1.021 | 41.6 | 35.2 | 86.2 | 87.2 | 0.14 | -7.4 | 100.0 |
+| baseline | stable_mature | 5 | 430.2 | 1.024 | 68.4 | 43.6 | 88.2 | 92.0 | 0.10 | -7.0 | 100.0 |
 
 ## Biological Checks
 

@@ -1,0 +1,16 @@
+condition_id,treatment,scenario,replicates,food_trips_mean,water_trips_mean,avg_energy_mean,avg_hydration_mean,brood_stress_mean,brood_delta_mean,food_pheromone_peak_mean,food_trips_mean_relative_effect,water_trips_mean_relative_effect,avg_energy_mean_relative_effect,avg_hydration_mean_relative_effect,brood_stress_mean_relative_effect,brood_delta_mean_relative_effect,food_pheromone_peak_mean_relative_effect,biological_sensitivity_score
+baseline:heat_dry_stress,baseline,heat_dry_stress,3,28.667,65.333,89.0,90.333,0.417,-5.667,36458.333,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+baseline:resource_stress,baseline,resource_stress,3,37.333,19.667,86.0,87.667,0.107,-5.333,36825.667,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+baseline:stable_mature,baseline,stable_mature,3,43.667,24.667,88.0,91.667,0.103,-6.0,63227.333,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+brood_demand_high:heat_dry_stress,brood_demand_high,heat_dry_stress,3,27.0,70.333,89.0,90.333,0.387,-1.0,23876.0,-0.05815,0.076531,0.0,0.0,-0.071942,0.82354,-0.345115,0.08815
+brood_demand_high:resource_stress,brood_demand_high,resource_stress,3,37.0,18.667,86.333,87.333,0.11,-5.667,36158.0,-0.00892,-0.050847,0.003872,-0.00381,0.028037,-0.062629,-0.01813,0.01573
+brood_demand_high:stable_mature,brood_demand_high,stable_mature,3,45.667,26.667,88.0,92.333,0.1,-4.0,65859.0,0.045801,0.08108,0.0,0.007265,-0.029126,0.333333,0.041622,0.056067
+fast_pheromone_loss:heat_dry_stress,fast_pheromone_loss,heat_dry_stress,3,29.0,68.0,88.667,91.0,0.387,-3.667,16190.0,0.011616,0.040822,-0.003742,0.007384,-0.071942,0.35292,-0.555931,0.049
+fast_pheromone_loss:resource_stress,fast_pheromone_loss,resource_stress,3,36.0,22.0,86.0,89.0,0.11,-2.333,23321.0,-0.035706,0.118625,0.0,0.015205,0.028037,0.562535,-0.366719,0.053911
+fast_pheromone_loss:stable_mature,fast_pheromone_loss,stable_mature,3,44.333,24.0,88.0,91.667,0.097,-2.333,38980.333,0.015252,-0.02704,0.0,0.0,-0.058252,0.611167,-0.383489,0.021252
+high_diffusion:heat_dry_stress,high_diffusion,heat_dry_stress,3,35.667,62.667,89.0,90.667,0.397,-3.333,41556.667,0.244183,-0.040806,0.0,0.003697,-0.047962,0.411858,0.13984,0.267881
+high_diffusion:resource_stress,high_diffusion,resource_stress,3,40.0,21.0,86.0,89.0,0.1,-5.0,35522.667,0.071438,0.067779,0.0,0.015205,-0.065421,0.062441,-0.035383,0.093643
+high_diffusion:stable_mature,high_diffusion,stable_mature,3,43.0,18.333,88.333,92.0,0.103,-3.667,42266.667,-0.015275,-0.25678,0.003784,0.003633,0.0,0.388833,-0.331513,0.018907
+persistent_pheromone:heat_dry_stress,persistent_pheromone,heat_dry_stress,3,22.333,66.0,88.667,88.0,0.49,-3.333,61482.333,-0.220951,0.010209,-0.003742,-0.025827,0.17506,0.411858,0.686373,0.319778
+persistent_pheromone:resource_stress,persistent_pheromone,resource_stress,3,27.667,16.0,84.667,86.667,0.113,-4.0,37261.667,-0.258913,-0.186454,-0.0155,-0.011407,0.056075,0.249953,0.01184,0.27632
+persistent_pheromone:stable_mature,persistent_pheromone,stable_mature,3,40.667,24.667,88.0,92.0,0.1,-1.667,89954.0,-0.068702,0.0,0.0,0.003633,-0.029126,0.722167,0.422707,0.075334
