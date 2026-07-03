@@ -54,6 +54,7 @@ jobs:
             experiments/quantitative_readiness_audit.py \
             experiments/stochasticity_probe.py \
             experiments/summarize_batch.py \
+            experiments/validate_necrophoresis_survival.py \
             experiments/validate_pushing_redirect.py \
             experiments/validate_traffic_holdout.py
 
@@ -165,6 +166,15 @@ jobs:
             --report-output outputs/ci_pushing_redirect_validation.md \
             --fail-on-issues
 
+      - name: Necrophoresis survival validation
+        run: |
+          python experiments/validate_necrophoresis_survival.py \
+            --model-summary outputs/ci_paper_conditions_smoke.json \
+            --csv-output outputs/ci_necrophoresis_survival_validation.csv \
+            --json-output outputs/ci_necrophoresis_survival_validation.json \
+            --report-output outputs/ci_necrophoresis_survival_validation.md \
+            --fail-on-issues
+
       - name: Level 5 external holdout synthesis
         run: |
           python experiments/level5_external_holdout_synthesis.py \
@@ -247,6 +257,9 @@ jobs:
             outputs/ci_pushing_redirect_validation.csv
             outputs/ci_pushing_redirect_validation.json
             outputs/ci_pushing_redirect_validation.md
+            outputs/ci_necrophoresis_survival_validation.csv
+            outputs/ci_necrophoresis_survival_validation.json
+            outputs/ci_necrophoresis_survival_validation.md
             outputs/ci_level5_external_holdout_synthesis.csv
             outputs/ci_level5_external_holdout_synthesis.json
             outputs/ci_level5_external_holdout_synthesis.md

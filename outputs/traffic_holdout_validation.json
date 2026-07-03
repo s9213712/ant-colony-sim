@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T20:02:32Z",
+  "generated_at": "2026-07-03T02:21:31Z",
   "target_csv": "/home/s92137/ant_colony_sim/targets/digitized_curves/john_2009_traffic_velocity_density_holdout.csv",
   "target_id": "traffic_velocity_density_holdout",
   "model_summary": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",

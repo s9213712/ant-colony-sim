@@ -2180,7 +2180,22 @@
       ant.turnNoise = clamp(adaptiveNoise, ant.baseTurnNoise * 0.72, roleNoiseLimit);
 
       const nearNest = dist(ant.x, ant.y, world.nest.x, world.nest.y) < world.nest.radius + 80;
+      const nestCorpsePressure = nearNest
+        ? world.corpses.reduce((sum, corpse) => {
+            if (corpse.disposed) return sum;
+            const corpseInNest = dist(corpse.x, corpse.y, world.nest.x, world.nest.y) < world.nest.radius + 90;
+            const chronicExposure = clamp(((corpse.age || 0) - 1800) / 3600, 0, 1);
+            return corpseInNest ? sum + chronicExposure * clamp((corpse.chemical || 100) / 120, 0.45, 1.45) : sum;
+          }, 0)
+        : 0;
       if (nearNest) {
+        if (nestCorpsePressure > 0) {
+          const immunityPressure = clamp(nestCorpsePressure / 10, 0, 1.4);
+          ant.health -= 0.06 * dt * immunityPressure;
+          if (random() < 0.000035 * dt * immunityPressure) {
+            ant.health -= rand(4, 14) * immunityPressure;
+          }
+        }
         if (ant.energy < 92 && world.foodStore > 0) {
           const feeding = Math.min(world.foodStore, 0.00018 * dt);
           world.foodStore -= feeding;
@@ -3275,10 +3290,17 @@
       const dumpX = world.nest.x + 160;
       const dumpY = world.nest.y + 130;
       const nestCorpses = world.corpses.filter(corpse => !corpse.disposed && dist(corpse.x, corpse.y, world.nest.x, world.nest.y) < world.nest.radius + 90).length;
+      const nestCorpsePressure = world.corpses.reduce((sum, corpse) => {
+        if (corpse.disposed) return sum;
+        const corpseInNest = dist(corpse.x, corpse.y, world.nest.x, world.nest.y) < world.nest.radius + 90;
+        const chronicExposure = clamp(((corpse.age || 0) - 1800) / 3600, 0, 1);
+        return corpseInNest ? sum + chronicExposure * clamp((corpse.chemical || 100) / 120, 0.45, 1.45) : sum;
+      }, 0);
       const disposedCorpses = world.corpses.filter(corpse => corpse.disposed || dist(corpse.x, corpse.y, dumpX, dumpY) < 55).length;
-      const avg = field => world.ants.length
-        ? Math.round(world.ants.reduce((sum, ant) => sum + ant[field], 0) / world.ants.length)
-        : null;
+      const avg = field => {
+        const values = world.ants.map(ant => ant[field]).filter(value => Number.isFinite(value));
+        return values.length ? Math.round(values.reduce((sum, value) => sum + value, 0) / values.length) : null;
+      };
       const avgTurnNoise = world.ants.length
         ? Number((world.ants.reduce((sum, ant) => sum + ant.turnNoise, 0) / world.ants.length).toFixed(4))
         : null;
@@ -3324,6 +3346,7 @@
         brood_total: broodTotal,
         dead: world.corpses.length,
         nest_corpses: nestCorpses,
+        nest_corpse_pressure: Number(nestCorpsePressure.toFixed(3)),
         disposed_corpses: disposedCorpses,
         food_store: Math.round(world.foodStore),
         water_store: Math.round(world.waterStore),

@@ -1,0 +1,2 @@
+status,target_delta,target_ci95_low,target_ci95_high,model_survival_delta,model_survival_ci95_low,model_survival_ci95_high,model_health_delta,model_health_ci95_low,model_health_ci95_high,model_pressure_delta,replicates
+partial,0.06599999999999995,0.0035213811505620807,0.12847861884943781,0.0,0.0,0.0,7.836666666666669,4.808000000000007,10.272999999999996,12.917,3

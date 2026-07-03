@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T20:14:05Z",
+  "generated_at": "2026-07-03T02:47:40Z",
   "individual_fit": "/home/s92137/ant_colony_sim/outputs/individual_response_curve_fit.json",
   "traffic_holdout": "/home/s92137/ant_colony_sim/outputs/traffic_holdout_validation.json",
   "replicate_statistics": "/home/s92137/ant_colony_sim/outputs/level5_replicate_statistics.json",
@@ -60,10 +60,10 @@
     },
     "replicate_uncertainty": {
       "status": "pass",
-      "condition_count": 28,
-      "summary_pass_fraction": 1.0,
-      "core_metric_count": 54,
-      "core_metric_ci_ready": 54,
+      "condition_count": 30,
+      "summary_pass_fraction": 0.9444,
+      "core_metric_count": 62,
+      "core_metric_ci_ready": 62,
       "min_n": 3,
       "underpowered_core_metrics": []
     },

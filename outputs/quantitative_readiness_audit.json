@@ -1,22 +1,22 @@
 {
   "suite": "quantitative_readiness_audit_v1",
-  "generated_at": "2026-07-02T17:31:57Z",
+  "generated_at": "2026-07-03T02:47:38Z",
   "manifest_id": "quantitative_curve_targets_v1",
   "claim_level": "readiness_manifest_for_level_4_5_calibration",
   "summary": {
     "estimated_level": 4.0,
     "level_blocker": "Level 4 prerequisites are present; Level 5 needs broader external validation, uncertainty estimates and more species-unit mappings.",
-    "total_targets": 9,
+    "total_targets": 10,
     "ready_for_fit": 1,
-    "ready_for_holdout": 2,
+    "ready_for_holdout": 3,
     "model_reference_only": 1,
     "qualitative_proxy_only": 1,
     "missing_digitized_data": 4,
     "species_mapped_ready_targets": 3,
-    "open_p0": 6,
+    "open_p0": 7,
     "open_p1": 2,
     "status_counts": {
-      "ready_for_holdout": 2,
+      "ready_for_holdout": 3,
       "ready_for_fit": 1,
       "missing_digitized_data": 4,
       "model_reference_only": 1,
@@ -140,6 +140,20 @@
       "fit_ready_curve_file": "no",
       "species_unit_mapping": "no",
       "required_data": "temperature and humidity; brood stage composition; survival or development rate; time horizon"
+    },
+    {
+      "target_id": "necrophoresis_worker_survival_endpoint",
+      "priority": "P0",
+      "status": "ready_for_holdout",
+      "manifest_status": "ready_for_holdout",
+      "readiness_level": 4.0,
+      "biological_process": "Worker survival benefit of free corpse removal versus restricted corpse removal.",
+      "current_proxy": "paper_conditions_v5 now exports free-removal and restricted-removal necrophoresis survival conditions using the shared nest-corpse social-immunity pressure rule.",
+      "next_action": "Use the endpoint as an independent social-immunity holdout, then fit raw survival time-series from the supplementary data.",
+      "source_count": 1,
+      "fit_ready_curve_file": "yes",
+      "species_unit_mapping": "no",
+      "required_data": "corpse-removal treatment; worker survival endpoint; sample size by treatment; endpoint variance"
     },
     {
       "target_id": "founding_worker_emergence_curve",

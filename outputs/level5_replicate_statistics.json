@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-02T20:02:32Z",
+  "generated_at": "2026-07-03T02:47:18Z",
   "source": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
   "summary": {
-    "condition_count": 28,
-    "summary_status_count": 17,
+    "condition_count": 30,
+    "summary_status_count": 18,
     "summary_pass_count": 17,
-    "summary_pass_fraction": 1.0,
-    "core_metric_count": 54,
-    "core_metric_ci_ready": 54,
+    "summary_pass_fraction": 0.9444,
+    "core_metric_count": 62,
+    "core_metric_ci_ready": 62,
     "underpowered_core_metrics": [],
     "min_n": 3,
     "status": "pass"
@@ -97,6 +97,16 @@
       "condition": "necrophoresis_cleanup_latency",
       "raw_rows": 3,
       "summary_status": "pass"
+    },
+    {
+      "condition": "necrophoresis_survival_free_removal",
+      "raw_rows": 3,
+      "summary_status": ""
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "raw_rows": 3,
+      "summary_status": ""
     },
     {
       "condition": "negative_pheromone_avoid",
@@ -513,6 +523,102 @@
       "ci95_low": 36.0,
       "ci95_high": 36.0,
       "summary_status": "pass",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_free_removal",
+      "metric": "avg_health",
+      "n": 3,
+      "mean": 92.480667,
+      "sd": 0.996677,
+      "sem": 0.575432,
+      "ci95_low": 91.343,
+      "ci95_high": 93.2,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_free_removal",
+      "metric": "disposed_corpses",
+      "n": 3,
+      "mean": 9.333333,
+      "sd": 1.154701,
+      "sem": 0.666667,
+      "ci95_low": 8.0,
+      "ci95_high": 10.0,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_free_removal",
+      "metric": "nest_corpse_pressure",
+      "n": 3,
+      "mean": 0.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_free_removal",
+      "metric": "survival_fraction",
+      "n": 3,
+      "mean": 1.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 1.0,
+      "ci95_high": 1.0,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "metric": "avg_health",
+      "n": 3,
+      "mean": 84.644,
+      "sd": 1.810283,
+      "sem": 1.045167,
+      "ci95_low": 82.927,
+      "ci95_high": 86.535,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "metric": "disposed_corpses",
+      "n": 3,
+      "mean": 0.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "metric": "nest_corpse_pressure",
+      "n": 3,
+      "mean": 12.917,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 12.917,
+      "ci95_high": 12.917,
+      "summary_status": "",
+      "is_core_metric": "yes"
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "metric": "survival_fraction",
+      "n": 3,
+      "mean": 1.0,
+      "sd": 0.0,
+      "sem": 0.0,
+      "ci95_low": 1.0,
+      "ci95_high": 1.0,
+      "summary_status": "",
       "is_core_metric": "yes"
     },
     {

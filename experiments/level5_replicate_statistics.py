@@ -89,6 +89,18 @@ CORE_METRICS = {
         "disposed_corpses",
         "corpse_moves",
     ],
+    "necrophoresis_survival_free_removal": [
+        "survival_fraction",
+        "avg_health",
+        "nest_corpse_pressure",
+        "disposed_corpses",
+    ],
+    "necrophoresis_survival_restricted_removal": [
+        "survival_fraction",
+        "avg_health",
+        "nest_corpse_pressure",
+        "disposed_corpses",
+    ],
     "army_ant_mill_mortality": [
         "survivor_fraction",
         "corpse_fraction",

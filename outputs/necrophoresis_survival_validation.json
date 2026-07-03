@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-07-03T02:47:18Z",
+  "target_csv": "/home/s92137/ant_colony_sim/targets/digitized_curves/diez_2014_necrophoresis_worker_survival.csv",
+  "target_id": "necrophoresis_worker_survival_endpoint",
+  "model_summary": "/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json",
+  "result": {
+    "status": "partial",
+    "checks": {
+      "target_free_survival_exceeds_restricted": true,
+      "model_free_survival_exceeds_restricted": false,
+      "model_free_health_exceeds_restricted": true,
+      "model_survival_ci_overlaps_target_ci": false
+    },
+    "target": {
+      "source_id": "diez_2014",
+      "target_id": "necrophoresis_worker_survival_endpoint",
+      "species": "Myrmica rubra",
+      "free_mean": 0.94,
+      "free_sd": 0.071,
+      "free_n": 15,
+      "restricted_mean": 0.874,
+      "restricted_sd": 0.101,
+      "restricted_n": 15,
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4126623/",
+      "figure_or_table": "Results text / Figure 1a",
+      "survival_delta_free_minus_restricted": 0.06599999999999995,
+      "survival_delta_ci95": [
+        0.0035213811505620807,
+        0.12847861884943781
+      ]
+    },
+    "model": {
+      "replicates": 3,
+      "survival_delta_free_minus_restricted": 0.0,
+      "survival_delta_ci95": [
+        0.0,
+        0.0
+      ],
+      "health_delta_free_minus_restricted": 7.836666666666669,
+      "health_delta_ci95": [
+        4.808000000000007,
+        10.272999999999996
+      ],
+      "pressure_delta_restricted_minus_free": 12.917
+    },
+    "replicate_rows": [
+      {
+        "seed": "1",
+        "free_survival": 1.0,
+        "restricted_survival": 1.0,
+        "survival_delta_free_minus_restricted": 0.0,
+        "free_avg_health": 91.343,
+        "restricted_avg_health": 86.535,
+        "health_delta_free_minus_restricted": 4.808000000000007,
+        "free_nest_corpse_pressure": 0.0,
+        "restricted_nest_corpse_pressure": 12.917,
+        "pressure_delta_restricted_minus_free": 12.917
+      },
+      {
+        "seed": "2",
+        "free_survival": 1.0,
+        "restricted_survival": 1.0,
+        "survival_delta_free_minus_restricted": 0.0,
+        "free_avg_health": 93.2,
+        "restricted_avg_health": 82.927,
+        "health_delta_free_minus_restricted": 10.272999999999996,
+        "free_nest_corpse_pressure": 0.0,
+        "restricted_nest_corpse_pressure": 12.917,
+        "pressure_delta_restricted_minus_free": 12.917
+      },
+      {
+        "seed": "3",
+        "free_survival": 1.0,
+        "restricted_survival": 1.0,
+        "survival_delta_free_minus_restricted": 0.0,
+        "free_avg_health": 92.899,
+        "restricted_avg_health": 84.47,
+        "health_delta_free_minus_restricted": 8.429000000000002,
+        "free_nest_corpse_pressure": 0.0,
+        "restricted_nest_corpse_pressure": 12.917,
+        "pressure_delta_restricted_minus_free": 12.917
+      }
+    ],
+    "interpretation": "The model reproduces a health-cost precursor under restricted corpse removal, but not yet a full worker-survival endpoint."
+  }
+}

@@ -1,14 +1,24 @@
 {
-  "generated_at": "2026-07-02T17:31:57Z",
+  "generated_at": "2026-07-03T02:47:38Z",
   "curve_dir": "/home/s92137/ant_colony_sim/targets/digitized_curves",
   "summary": {
-    "curve_files": 3,
-    "fit_ready_files": 3,
-    "target_ids_with_digitized_files": 3,
-    "source_leads": 8,
+    "curve_files": 4,
+    "fit_ready_files": 4,
+    "target_ids_with_digitized_files": 4,
+    "source_leads": 9,
     "level_4_blocker": "Level 4 curve prerequisites are present; next blocker is broader external validation and uncertainty for Level 5."
   },
   "rows": [
+    {
+      "file": "/home/s92137/ant_colony_sim/targets/digitized_curves/diez_2014_necrophoresis_worker_survival.csv",
+      "row_count": 2,
+      "target_ids": "necrophoresis_worker_survival_endpoint",
+      "digitization_methods": "article_text_numeric",
+      "missing_required_columns": "",
+      "numeric_x_rows": 2,
+      "numeric_y_rows": 2,
+      "fit_ready": "yes"
+    },
     {
       "file": "/home/s92137/ant_colony_sim/targets/digitized_curves/dussutour_2004_pushing_redirect_probability.csv",
       "row_count": 1,
@@ -112,6 +122,15 @@
       "status": "candidate_for_curve_digitization",
       "source_url": "https://doi.org/10.1103/physrevlett.102.108001",
       "notes": "Candidate independent holdout for no-jam traffic validation after Dussutour-style fitting."
+    },
+    {
+      "target_id": "necrophoresis_worker_survival_endpoint",
+      "source_id": "diez_2014_necrophoresis_survival",
+      "title": "Keep the nest clean: survival advantages of corpse removal in ants",
+      "species": "Myrmica rubra",
+      "status": "holdout_ready_curve_committed",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4126623/",
+      "notes": "Results text reports Day 50 worker survival for restricted corpse-removal and free corpse-removal treatments with SD and N=15 colonies per treatment."
     }
   ]
 }

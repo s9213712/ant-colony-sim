@@ -319,12 +319,36 @@ python3 ant_colony_sim/experiments/level5_replicate_statistics.py \
 
 Current result from `paper_conditions_v5.json`:
 
-- condition count: `28`
-- summary pass fraction: `1.0`
-- core metrics with bootstrap CI: `54 / 54`
+- condition count: `30`
+- summary pass fraction: `0.9444`
+- core metrics with bootstrap CI: `62 / 62`
 - minimum replicate count: `3`
 
 Interpretation: this moves the simulator toward Level 5 by reporting stochastic-run uncertainty for the qualitative paper-condition matrix. It does not make qualitative paper matches quantitative; paper-specific digitized curves and independent holdouts are still required for biological calibration claims.
+
+## Necrophoresis Survival Holdout
+
+Validate the generic nest-corpse social-immunity pressure against Diez et al. 2014:
+
+```bash
+python3 ant_colony_sim/experiments/validate_necrophoresis_survival.py \
+  --model-summary ant_colony_sim/outputs/paper_conditions_v5.json \
+  --csv-output ant_colony_sim/outputs/necrophoresis_survival_validation.csv \
+  --json-output ant_colony_sim/outputs/necrophoresis_survival_validation.json \
+  --report-output ant_colony_sim/outputs/necrophoresis_survival_validation.md
+```
+
+Current result:
+
+- status: `partial`
+- target survival delta free-restricted: `0.066`
+- target 95% CI: `[0.0035, 0.1285]`
+- model survival delta free-restricted: `0.0`
+- model health delta free-restricted: `7.837`
+
+Interpretation: the model now reproduces a chronic health-cost precursor under
+restricted corpse removal, but not the full 50-day worker-survival endpoint.
+This is a recorded Level 5 gap, not a passing external survival holdout.
 
 ## Individual-Level Output
 
@@ -496,6 +520,7 @@ The current `v5` matrix covers:
 - Aswale et al. 2022: misleading food pheromone attack and cautionary-pheromone defense proxy.
 - Jackson & Chaline 2007: food quality and trail-recruitment strength.
 - Avanzi, Lisart & Detrain 2024: corpse/death cue response and necrophoresis cleanup latency.
+- Diez, Lejeune & Detrain 2014: worker survival cost under restricted corpse removal.
 - Baudier et al. 2019: brood-stage-sensitive nest microclimate and heat/dry brood stress.
 - Pratt et al. 2002: nest-site quality, quorum and colony relocation.
 
@@ -511,7 +536,7 @@ Current `v5` additions show:
 - negative pheromone is qualitatively aligned through shared avoid pheromone plus short-term avoid memory, not a paper-specific exception;
 - misleading pheromone is qualitatively aligned when fake trails are sustained as an environmental perturbation and caution/avoid cues are enabled, but active attacker agents and calibrated effect sizes are still missing;
 - food-quality recruitment is now testable and qualitatively aligned, but lacks species-specific concentration calibration.
-- necrophoresis cleanup is now testable and qualitatively aligned, but lacks corpse-age chemistry, pathogen state and interaction-network validation.
+- necrophoresis cleanup is now testable and qualitatively aligned; restricted corpse removal now creates a chronic health cost, but does not yet reproduce the full Diez 2014 survival endpoint.
 - brood microclimate and nest relocation/quorum are now testable through general rules, but still need species-specific numerical calibration.
 
 Experiments may change parameters, initial conditions and environmental state only. They must not inject paper-specific behavior or force ant task/state transitions; run `python experiments/check_validation_boundaries.py` to enforce this boundary.

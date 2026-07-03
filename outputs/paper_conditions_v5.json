@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T20:02:23Z",
+  "generated_at": "2026-07-03T02:46:53Z",
   "config": {
     "seeds": [
       1,
@@ -53,6 +53,8 @@
     "foodQualityDays": 2.2,
     "corpseCount": 36,
     "necrophoresisDays": 2.0,
+    "survivalCorpseCount": 10,
+    "necrophoresisSurvivalDays": 8.0,
     "broodClimateAnts": 360,
     "broodClimateDays": 2.4,
     "relocationAnts": 280,
@@ -133,6 +135,11 @@
       "id": "avanzi_2024",
       "paper": "Avanzi, Lisart & Detrain 2024, Social organization of necrophoresis: insights into disease risk management in ant societies",
       "url": "https://doi.org/10.1098/rsos.240764"
+    },
+    {
+      "id": "diez_2014",
+      "paper": "Diez, Lejeune & Detrain 2014, Keep the nest clean: survival advantages of corpse removal in ants",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4126623/"
     },
     {
       "id": "baudier_2019",
@@ -278,6 +285,15 @@
       "gap": "Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation."
     },
     {
+      "paper_id": "diez_2014",
+      "paper": "Diez, Lejeune & Detrain 2014",
+      "condition": "necrophoresis_survival_restricted_vs_free",
+      "expected": "Restricted corpse removal should impose a chronic nest-corpse pressure and reduce worker survival or health relative to free corpse removal.",
+      "status": "partial",
+      "observed": "{\"mean_free_survival_fraction\": 1.0, \"mean_restricted_survival_fraction\": 1.0, \"mean_survival_delta_free_minus_restricted\": 0.0, \"mean_free_avg_health\": 92.481, \"mean_restricted_avg_health\": 84.644, \"mean_restricted_nest_corpse_pressure\": 12.917, \"mean_free_nest_corpse_pressure\": 0.0}",
+      "gap": "The simulator now has a generic nest-corpse social-immunity pressure. It still needs raw survival time-series fitting from the supplementary data rather than endpoint-only validation."
+    },
+    {
       "paper_id": "baudier_2019",
       "paper": "Baudier et al. 2019",
       "condition": "brood_microclimate_stage_thermoregulation",
@@ -292,7 +308,7 @@
       "condition": "army_ant_mill_mortality",
       "expected": "Army-ant-like trail-following under closed-loop chemical guidance should form a persistent mill, causing energetic exhaustion, mortality and death-cue accumulation.",
       "status": "pass",
-      "observed": "{\"mean_start_ants\": 420.0, \"mean_final_ants\": 108.0, \"mean_corpses\": 316.333, \"mean_mills\": 1.0, \"mean_survivor_fraction\": 0.2571, \"mean_corpse_fraction\": 0.7532, \"mean_death_pheromone\": 15535.0, \"mean_food_pheromone\": 0.0}",
+      "observed": "{\"mean_start_ants\": 420.0, \"mean_final_ants\": 108.0, \"mean_corpses\": 316.333, \"mean_mills\": 1.0, \"mean_survivor_fraction\": 0.2571, \"mean_corpse_fraction\": 0.7532, \"mean_death_pheromone\": 15554.333, \"mean_food_pheromone\": 0.0}",
       "gap": "This is a qualitative army-ant trail failure condition. It does not yet model raid fronts, living bridges, prey encounter geometry or species-specific field energetics."
     },
     {
@@ -857,6 +873,36 @@
       "state_carrying_corpse": 4
     },
     {
+      "condition": "necrophoresis_survival_free_removal",
+      "seed": 1,
+      "mode": "free",
+      "initial_ants": 280,
+      "final_ants": 280,
+      "final_dead": 10,
+      "survival_fraction": 1,
+      "avg_health": 91.343,
+      "nest_corpses": 0,
+      "nest_corpse_pressure": 0,
+      "disposed_corpses": 8,
+      "corpse_moves": 8,
+      "death_pheromone": 470
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "seed": 1,
+      "mode": "restricted",
+      "initial_ants": 280,
+      "final_ants": 280,
+      "final_dead": 10,
+      "survival_fraction": 1,
+      "avg_health": 86.535,
+      "nest_corpses": 10,
+      "nest_corpse_pressure": 12.917,
+      "disposed_corpses": 0,
+      "corpse_moves": 388,
+      "death_pheromone": 1286
+    },
+    {
       "condition": "brood_microclimate_stable_pupal",
       "seed": 1,
       "mode": "stable_pupal",
@@ -947,7 +993,7 @@
       "ants": 105,
       "corpses": 318,
       "mills": 1,
-      "death_pheromone": 16180,
+      "death_pheromone": 16150,
       "food_pheromone": 0,
       "survivor_fraction": 0.25,
       "corpse_fraction": 0.7571428571428571
@@ -1519,6 +1565,36 @@
       "state_carrying_corpse": 1
     },
     {
+      "condition": "necrophoresis_survival_free_removal",
+      "seed": 2,
+      "mode": "free",
+      "initial_ants": 280,
+      "final_ants": 280,
+      "final_dead": 10,
+      "survival_fraction": 1,
+      "avg_health": 93.2,
+      "nest_corpses": 0,
+      "nest_corpse_pressure": 0,
+      "disposed_corpses": 10,
+      "corpse_moves": 10,
+      "death_pheromone": 121
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "seed": 2,
+      "mode": "restricted",
+      "initial_ants": 280,
+      "final_ants": 280,
+      "final_dead": 10,
+      "survival_fraction": 1,
+      "avg_health": 82.927,
+      "nest_corpses": 10,
+      "nest_corpse_pressure": 12.917,
+      "disposed_corpses": 0,
+      "corpse_moves": 401,
+      "death_pheromone": 1383
+    },
+    {
       "condition": "brood_microclimate_stable_pupal",
       "seed": 2,
       "mode": "stable_pupal",
@@ -1609,7 +1685,7 @@
       "ants": 115,
       "corpses": 312,
       "mills": 1,
-      "death_pheromone": 15483,
+      "death_pheromone": 15540,
       "food_pheromone": 0,
       "survivor_fraction": 0.27380952380952384,
       "corpse_fraction": 0.7428571428571429
@@ -2181,6 +2257,36 @@
       "state_carrying_corpse": 2
     },
     {
+      "condition": "necrophoresis_survival_free_removal",
+      "seed": 3,
+      "mode": "free",
+      "initial_ants": 280,
+      "final_ants": 280,
+      "final_dead": 10,
+      "survival_fraction": 1,
+      "avg_health": 92.899,
+      "nest_corpses": 0,
+      "nest_corpse_pressure": 0,
+      "disposed_corpses": 10,
+      "corpse_moves": 10,
+      "death_pheromone": 123
+    },
+    {
+      "condition": "necrophoresis_survival_restricted_removal",
+      "seed": 3,
+      "mode": "restricted",
+      "initial_ants": 280,
+      "final_ants": 280,
+      "final_dead": 10,
+      "survival_fraction": 1,
+      "avg_health": 84.47,
+      "nest_corpses": 10,
+      "nest_corpse_pressure": 12.917,
+      "disposed_corpses": 0,
+      "corpse_moves": 436,
+      "death_pheromone": 1364
+    },
+    {
       "condition": "brood_microclimate_stable_pupal",
       "seed": 3,
       "mode": "stable_pupal",
@@ -2271,7 +2377,7 @@
       "ants": 104,
       "corpses": 319,
       "mills": 1,
-      "death_pheromone": 14942,
+      "death_pheromone": 14973,
       "food_pheromone": 0,
       "survivor_fraction": 0.24761904761904763,
       "corpse_fraction": 0.7595238095238095

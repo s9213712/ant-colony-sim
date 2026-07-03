@@ -4,16 +4,17 @@ This report checks whether the repository contains primary-source numeric biolog
 
 ## Summary
 
-- `curve_files`: 3
-- `fit_ready_files`: 3
-- `target_ids_with_digitized_files`: 3
-- `source_leads`: 8
+- `curve_files`: 4
+- `fit_ready_files`: 4
+- `target_ids_with_digitized_files`: 4
+- `source_leads`: 9
 - `level_4_blocker`: Level 4 curve prerequisites are present; next blocker is broader external validation and uncertainty for Level 5.
 
 ## Curve Files
 
 | Fit ready | Rows | Targets | Methods | Missing columns | File |
 |---|---:|---|---|---|---|
+| `yes` | 2 | necrophoresis_worker_survival_endpoint | article_text_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/diez_2014_necrophoresis_worker_survival.csv` |
 | `yes` | 1 | traffic_pushing_redirect_probability | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/dussutour_2004_pushing_redirect_probability.csv` |
 | `yes` | 3 | traffic_velocity_density_holdout | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/john_2009_traffic_velocity_density_holdout.csv` |
 | `yes` | 6 | individual_pheromone_response_curve | figure_legend_numeric | none | `/home/s92137/ant_colony_sim/targets/digitized_curves/perna_2012_individual_pheromone_response.csv` |
@@ -83,3 +84,11 @@ This report checks whether the repository contains primary-source numeric biolog
 - Species: Leptogenys processionalis
 - Source: https://doi.org/10.1103/physrevlett.102.108001
 - Notes: Candidate independent holdout for no-jam traffic validation after Dussutour-style fitting.
+
+### diez_2014_necrophoresis_survival
+
+- Target: `necrophoresis_worker_survival_endpoint`
+- Status: `holdout_ready_curve_committed`
+- Species: Myrmica rubra
+- Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC4126623/
+- Notes: Results text reports Day 50 worker survival for restricted corpse-removal and free corpse-removal treatments with SD and N=15 colonies per treatment.

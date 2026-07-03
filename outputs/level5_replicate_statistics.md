@@ -6,9 +6,9 @@ This report adds replicate-level uncertainty to literature-condition probes with
 
 - source: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - status: `pass`
-- condition count: `28`
-- summary pass fraction: `1.0`
-- core metrics with bootstrap CI: `54` / `54`
+- condition count: `30`
+- summary pass fraction: `0.9444`
+- core metrics with bootstrap CI: `62` / `62`
 - minimum replicate count required: `3`
 
 ## Core Metric CI
@@ -45,6 +45,14 @@ This report adds replicate-level uncertainty to literature-condition probes with
 | `necrophoresis_cleanup_latency` | `disposed_corpses` | 3 | 33.666667 | 1.527525 | [32.0, 35.0] |
 | `necrophoresis_cleanup_latency` | `final_nest_corpses` | 3 | 2.0 | 1.0 | [1.0, 3.0] |
 | `necrophoresis_cleanup_latency` | `initial_nest_corpses` | 3 | 36.0 | 0.0 | [36.0, 36.0] |
+| `necrophoresis_survival_free_removal` | `avg_health` | 3 | 92.480667 | 0.996677 | [91.343, 93.2] |
+| `necrophoresis_survival_free_removal` | `disposed_corpses` | 3 | 9.333333 | 1.154701 | [8.0, 10.0] |
+| `necrophoresis_survival_free_removal` | `nest_corpse_pressure` | 3 | 0.0 | 0.0 | [0.0, 0.0] |
+| `necrophoresis_survival_free_removal` | `survival_fraction` | 3 | 1.0 | 0.0 | [1.0, 1.0] |
+| `necrophoresis_survival_restricted_removal` | `avg_health` | 3 | 84.644 | 1.810283 | [82.927, 86.535] |
+| `necrophoresis_survival_restricted_removal` | `disposed_corpses` | 3 | 0.0 | 0.0 | [0.0, 0.0] |
+| `necrophoresis_survival_restricted_removal` | `nest_corpse_pressure` | 3 | 12.917 | 0.0 | [12.917, 12.917] |
+| `necrophoresis_survival_restricted_removal` | `survival_fraction` | 3 | 1.0 | 0.0 | [1.0, 1.0] |
 | `nest_relocation_quorum_choice` | `high_quality_site_visits` | 3 | 76.34 | 3.104497 | [74.39, 79.92] |
 | `nest_relocation_quorum_choice` | `low_quality_site_visits` | 3 | 0.0 | 0.0 | [0.0, 0.0] |
 | `nest_relocation_quorum_choice` | `nest_quorum_events` | 3 | 1.0 | 0.0 | [1.0, 1.0] |

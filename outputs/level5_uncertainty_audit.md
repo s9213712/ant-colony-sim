@@ -46,9 +46,9 @@ This audit tracks whether the Level 4 curves have enough uncertainty information
 ## Paper-Condition Replicate Uncertainty
 
 - replicate status: `pass`
-- condition count: `28`
-- summary pass fraction: `1.0`
-- core metrics with CI: `54` / `54`
+- condition count: `30`
+- summary pass fraction: `0.9444`
+- core metrics with CI: `62` / `62`
 - minimum replicate count: `3`
 - underpowered core metrics: `[]`
 

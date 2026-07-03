@@ -382,7 +382,8 @@ python3 experiments/paper_conditions_probe.py \
 | Jimenez-Romero et al. 2015 / negative pheromone | pass | avoid field 將 hazard occupancy ratio 降到 `0.8231`，且不永久阻斷覓食 | 仍不是該文 spiking-neural-controller implementation |
 | Aswale et al. 2022 / misleading pheromone attack | pass | sustained fake trail 與 caution/avoid signal 產生可測 disruption/mitigation | 缺主動 attacker agents 與定量 effect-size 校準 |
 | Jackson & Chaline 2007 / food quality recruitment | pass | counterbalanced 條件下平均採集品質 `1.334`，high-quality source pheromone `156.167` > low-quality `96.333` | 缺物種專屬蔗糖濃度校準與直接 trail-laying event counts |
-| Avanzi, Lisart & Detrain 2024 / necrophoresis cleanup | pass | 巢區屍體由 `36.0` 降到 `0.333`，平均 disposed corpses `34.333` | 缺病原狀態、屍體年齡化學曲線與 colony interaction network 驗證 |
+| Avanzi, Lisart & Detrain 2024 / necrophoresis cleanup | pass | 巢區屍體由 `36.0` 降到 `2.0`，平均 disposed corpses `33.667` | 缺病原狀態、屍體年齡化學曲線與 colony interaction network 驗證 |
+| Diez, Lejeune & Detrain 2014 / corpse-removal survival | partial | free-removal 與 restricted-removal 的 survival delta 仍為 `0.0`，但 restricted health 低 `7.837`，target survival delta 為 `0.066`、95% CI `[0.0035, 0.1285]` | 已加入慢性 nest-corpse social-immunity pressure；仍未重現 50-day worker survival endpoint |
 | Baudier et al. 2019 / brood microclimate | pass | heat-dry stress `1.8` > stable `0.0`；cold pupal brood chamber 比 cold larval 高 `1.5°C` | 缺 fitted metabolic heat budget、巢址幾何與物種專屬 brood survival curve |
 | Army-ant trail-following / death spiral | pass | 平均 start ants `420.0`、final ants `104.0`、corpse fraction `0.7595`、death pheromone `15032.667` | 仍是定性 death-spiral/closed-loop trail failure；缺 raid fronts、living bridges、prey geometry 與 species energetics |
 | Pratt et al. 2002 / nest relocation quorum | pass | high-quality site visits `73.973` > low-quality `0.0`，quorum/redeployment 完成 | 缺 tandem running、搬運軌跡、巢容積與 quorum threshold 實測校準 |
@@ -780,9 +781,9 @@ Level 4 需要至少一條 primary-source digitized biological curve，且另有
 
 | 指標 | 值 |
 | --- | ---: |
-| condition count | 28 |
-| summary pass fraction | 1.0 |
-| core metrics with bootstrap CI | 54 / 54 |
+| condition count | 30 |
+| summary pass fraction | 0.9444 |
+| core metrics with bootstrap CI | 62 / 62 |
 | minimum replicate count | 3 |
 
 解讀：這把 paper-condition matrix 從「單次/平均觀察」推進到「可報告 stochastic replicate uncertainty」。它沒有改變任何螞蟻規則，也不把 qualitative pass 升格成 quantitative reproduction；Level 5 仍需要更多 primary-source digitized curves、文獻端 sample size/raw data、獨立 holdout 與物種單位映射。

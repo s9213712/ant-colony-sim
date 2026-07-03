@@ -86,6 +86,11 @@ SOURCES = [
         "url": "https://doi.org/10.1098/rsos.240764",
     },
     {
+        "id": "diez_2014",
+        "paper": "Diez, Lejeune & Detrain 2014, Keep the nest clean: survival advantages of corpse removal in ants",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4126623/",
+    },
+    {
         "id": "baudier_2019",
         "paper": "Baudier et al. 2019, Plastic collective endothermy in army ant bivouacs",
         "url": "https://doi.org/10.1111/ecog.04064",
@@ -708,6 +713,83 @@ PAPER_CONDITIONS_JS = """
       state_carrying_corpse: snap.state_carrying_corpse || 0,
     };
   };
+  const addNestCorpses = (targetCount, firstId = 1) => {
+    const activeNestCorpses = antSim.world.corpses.filter(corpse =>
+      !corpse.disposed && Math.hypot(corpse.x - antSim.world.nest.x, corpse.y - antSim.world.nest.y) < antSim.world.nest.radius + 90
+    ).length;
+    for (let i = activeNestCorpses; i < targetCount; i++) {
+      const a = (firstId + i) / targetCount * Math.PI * 2;
+      const r = 24 + (i % 3) * 18;
+      const x = antSim.world.nest.x + Math.cos(a) * r;
+      const y = antSim.world.nest.y + Math.sin(a) * r;
+      antSim.world.corpses.push({
+        id: antSim.world.corpses.length + 1,
+        x,
+        y,
+        role: 'worker',
+        age: 0,
+        carriedBy: null,
+        disposed: false,
+        chemical: 150,
+      });
+      antSim.world.pheromones.death.add(x, y, 145);
+    }
+  };
+  const runNecrophoresisSurvival = (seed, mode) => {
+    baseMature(seed, config.ants);
+    antSim.world.food = [];
+    antSim.world.water = [];
+    antSim.world.foodStore = 900;
+    antSim.world.waterStore = 900;
+    antSim.world.corpses = [];
+    addNestCorpses(config.survivalCorpseCount, seed * 17);
+    const initial = antSim.collectStatsSnapshot();
+    const chunks = Math.max(1, Math.round(config.necrophoresisSurvivalDays / config.sampleDays));
+    for (let i = 0; i < chunks; i++) {
+      antSim.runDays(config.necrophoresisSurvivalDays / chunks, config.dt);
+      if (mode === 'restricted') {
+        for (const corpse of antSim.world.corpses) {
+          const outsideNest = Math.hypot(corpse.x - antSim.world.nest.x, corpse.y - antSim.world.nest.y) >= antSim.world.nest.radius + 90;
+          if (corpse.disposed || outsideNest) {
+            const a = (corpse.id + i) / config.survivalCorpseCount * Math.PI * 2;
+            corpse.x = antSim.world.nest.x + Math.cos(a) * (28 + (corpse.id % 3) * 16);
+            corpse.y = antSim.world.nest.y + Math.sin(a) * (28 + (corpse.id % 3) * 16);
+            corpse.carriedBy = null;
+            corpse.disposed = false;
+            corpse.chemical = 155;
+          }
+        }
+        addNestCorpses(config.survivalCorpseCount, seed * 31 + i);
+      }
+    }
+    const snap = antSim.collectStatsSnapshot();
+    const initialLiveAnts = initial.ants;
+    const liveAnts = Math.min(
+      initialLiveAnts,
+      antSim.world.ants.filter(ant => Number.isFinite(ant.health) && ant.health > 0).length
+    );
+    const finiteHealth = antSim.world.ants
+      .map(ant => ant.health)
+      .filter(value => Number.isFinite(value));
+    const avgFiniteHealth = finiteHealth.length
+      ? finiteHealth.reduce((sum, value) => sum + value, 0) / finiteHealth.length
+      : 0;
+    return {
+      condition: mode === 'restricted' ? 'necrophoresis_survival_restricted_removal' : 'necrophoresis_survival_free_removal',
+      seed,
+      mode,
+      initial_ants: initialLiveAnts,
+      final_ants: liveAnts,
+      final_dead: snap.dead,
+      survival_fraction: initialLiveAnts ? liveAnts / initialLiveAnts : 0,
+      avg_health: Number(avgFiniteHealth.toFixed(3)),
+      nest_corpses: snap.nest_corpses,
+      nest_corpse_pressure: snap.nest_corpse_pressure,
+      disposed_corpses: snap.disposed_corpses,
+      corpse_moves: snap.corpse_moves,
+      death_pheromone: snap.death_pheromone,
+    };
+  };
   const runBroodMicroclimate = (seed, mode) => {
     antSim.setSeed(seed);
     antSim.setParam('species', 'eciton');
@@ -1008,6 +1090,8 @@ PAPER_CONDITIONS_JS = """
     rows.push(runFoodQuality(seed, 'high_upper'));
     rows.push(runFoodQuality(seed, 'high_lower'));
     rows.push(runNecrophoresis(seed));
+    rows.push(runNecrophoresisSurvival(seed, 'free'));
+    rows.push(runNecrophoresisSurvival(seed, 'restricted'));
     rows.push(runBroodMicroclimate(seed, 'stable_pupal'));
     rows.push(runBroodMicroclimate(seed, 'cold_larval'));
     rows.push(runBroodMicroclimate(seed, 'cold_pupal'));
@@ -1424,6 +1508,32 @@ def aggregate(raw_rows):
         "gap": "Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation.",
     })
 
+    free_survival_rows = by_condition["necrophoresis_survival_free_removal"]
+    restricted_survival_rows = by_condition["necrophoresis_survival_restricted_removal"]
+    free_survival = mean(float(r.get("survival_fraction") or 0) for r in free_survival_rows)
+    restricted_survival = mean(float(r.get("survival_fraction") or 0) for r in restricted_survival_rows)
+    free_health = mean(float(r.get("avg_health") or 0) for r in free_survival_rows)
+    restricted_health = mean(float(r.get("avg_health") or 0) for r in restricted_survival_rows)
+    necro_survival_metrics = {
+        "mean_free_survival_fraction": round(free_survival, 4),
+        "mean_restricted_survival_fraction": round(restricted_survival, 4),
+        "mean_survival_delta_free_minus_restricted": round(free_survival - restricted_survival, 4),
+        "mean_free_avg_health": round(free_health, 3),
+        "mean_restricted_avg_health": round(restricted_health, 3),
+        "mean_restricted_nest_corpse_pressure": round(mean(float(r.get("nest_corpse_pressure") or 0) for r in restricted_survival_rows), 3),
+        "mean_free_nest_corpse_pressure": round(mean(float(r.get("nest_corpse_pressure") or 0) for r in free_survival_rows), 3),
+    }
+    necro_survival_status = "pass" if restricted_survival < free_survival and restricted_health < free_health else "partial" if restricted_health < free_health else "fail"
+    summaries.append({
+        "paper_id": "diez_2014",
+        "paper": "Diez, Lejeune & Detrain 2014",
+        "condition": "necrophoresis_survival_restricted_vs_free",
+        "expected": "Restricted corpse removal should impose a chronic nest-corpse pressure and reduce worker survival or health relative to free corpse removal.",
+        "status": necro_survival_status,
+        "observed": json.dumps(necro_survival_metrics, ensure_ascii=False),
+        "gap": "The simulator now has a generic nest-corpse social-immunity pressure. It still needs raw survival time-series fitting from the supplementary data rather than endpoint-only validation.",
+    })
+
     brood_stable = by_condition["brood_microclimate_stable_pupal"]
     brood_cold_larval = by_condition["brood_microclimate_cold_larval"]
     brood_cold_pupal = by_condition["brood_microclimate_cold_pupal"]
@@ -1607,6 +1717,8 @@ def main():
         "foodQualityDays": 1.4 if args.quick else 2.2,
         "corpseCount": 24 if args.quick else 36,
         "necrophoresisDays": 1.2 if args.quick else 2.0,
+        "survivalCorpseCount": 10,
+        "necrophoresisSurvivalDays": 8.0,
         "broodClimateAnts": 220 if args.quick else 360,
         "broodClimateDays": 1.4 if args.quick else 2.4,
         "relocationAnts": 180 if args.quick else 280,

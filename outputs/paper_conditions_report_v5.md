@@ -25,6 +25,7 @@ JSON: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - aswale_2022: Aswale et al. 2022, Hacking the Colony: On the Disruptive Effect of Misleading Pheromone and How to Defend Against It (https://arxiv.org/abs/2202.01808)
 - jackson_chaline_2007: Jackson & Chaline 2007, Modulation of pheromone trail strength with food quality in Pharaoh's ant, Monomorium pharaonis (https://doi.org/10.1016/j.anbehav.2006.11.027)
 - avanzi_2024: Avanzi, Lisart & Detrain 2024, Social organization of necrophoresis: insights into disease risk management in ant societies (https://doi.org/10.1098/rsos.240764)
+- diez_2014: Diez, Lejeune & Detrain 2014, Keep the nest clean: survival advantages of corpse removal in ants (https://pmc.ncbi.nlm.nih.gov/articles/PMC4126623/)
 - baudier_2019: Baudier et al. 2019, Plastic collective endothermy in army ant bivouacs (https://doi.org/10.1111/ecog.04064)
 - army_ant_mill_qualitative: Army-ant trail-following and death-spiral qualitative family condition (https://doi.org/10.1007/bf01065789)
 - pratt_2002: Pratt et al. 2002, Quorum sensing, recruitment, and collective decision-making during colony emigration by the ant Leptothorax albipennis (https://doi.org/10.1007/s00265-002-0487-x)
@@ -143,6 +144,14 @@ JSON: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - Observed: `{"mean_initial_nest_corpses": 36.0, "mean_final_nest_corpses": 2.0, "mean_disposed_corpses": 33.667, "mean_corpse_moves": 33.667, "mean_death_pheromone": 1373.667}`
 - Gap: Corpse relocation is represented, but the simulator still lacks pathogen state, corpse-age chemical profile calibration and colony-level interaction network validation.
 
+### diez_2014 - necrophoresis_survival_restricted_vs_free
+
+- Paper: Diez, Lejeune & Detrain 2014
+- Status: `partial`
+- Expected: Restricted corpse removal should impose a chronic nest-corpse pressure and reduce worker survival or health relative to free corpse removal.
+- Observed: `{"mean_free_survival_fraction": 1.0, "mean_restricted_survival_fraction": 1.0, "mean_survival_delta_free_minus_restricted": 0.0, "mean_free_avg_health": 92.481, "mean_restricted_avg_health": 84.644, "mean_restricted_nest_corpse_pressure": 12.917, "mean_free_nest_corpse_pressure": 0.0}`
+- Gap: The simulator now has a generic nest-corpse social-immunity pressure. It still needs raw survival time-series fitting from the supplementary data rather than endpoint-only validation.
+
 ### baudier_2019 - brood_microclimate_stage_thermoregulation
 
 - Paper: Baudier et al. 2019
@@ -156,7 +165,7 @@ JSON: `/home/s92137/ant_colony_sim/outputs/paper_conditions_v5.json`
 - Paper: Army-ant trail-following/death-spiral family
 - Status: `pass`
 - Expected: Army-ant-like trail-following under closed-loop chemical guidance should form a persistent mill, causing energetic exhaustion, mortality and death-cue accumulation.
-- Observed: `{"mean_start_ants": 420.0, "mean_final_ants": 108.0, "mean_corpses": 316.333, "mean_mills": 1.0, "mean_survivor_fraction": 0.2571, "mean_corpse_fraction": 0.7532, "mean_death_pheromone": 15535.0, "mean_food_pheromone": 0.0}`
+- Observed: `{"mean_start_ants": 420.0, "mean_final_ants": 108.0, "mean_corpses": 316.333, "mean_mills": 1.0, "mean_survivor_fraction": 0.2571, "mean_corpse_fraction": 0.7532, "mean_death_pheromone": 15554.333, "mean_food_pheromone": 0.0}`
 - Gap: This is a qualitative army-ant trail failure condition. It does not yet model raid fronts, living bridges, prey encounter geometry or species-specific field energetics.
 
 ### pratt_2002 - nest_relocation_quorum_choice
